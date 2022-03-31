@@ -32,3 +32,4 @@ yarn-error.log*
 /release
 package-lock.json
 /phpstorm/
+/dist/

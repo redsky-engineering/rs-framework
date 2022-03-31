@@ -15,4 +15,4 @@ const Label: React.FC<LabelProps> = (props) => {
 	);
 };
 
-export { Label };
+export default Label;
