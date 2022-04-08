@@ -8,4 +8,5 @@ const Button: React.FC<ButtonProps> = (props) => {
 	return <button className={'rsButton'}>{props.children}</button>;
 };
 
+console.log('test');
 export default Button;
