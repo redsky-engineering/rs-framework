@@ -5,7 +5,8 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
-import dts from 'rollup-plugin-dts';
+import visualizer from 'rollup-plugin-visualizer';
+// import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
@@ -38,9 +39,13 @@ export default [
 			commonjs(),
 			typescript({ tsconfig: './tsconfig.json' }),
 			postcss(),
-			terser()
+			terser(),
+			visualizer({
+				filename: 'bundle-analysis.html',
+				open: true
+			})
 		]
-	},
+	}
 	// {
 	// 	input: 'dist/esm/types/index.d.ts',
 	// 	output: [{ file: 'dist/index.d.ts', format: 'esm' }],
