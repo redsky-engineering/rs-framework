@@ -2,7 +2,7 @@
 	"name": "@redskytech/framework",
 	"version": "0.0.1",
 	"description": "RedSky Framework V2",
-	"module": "index.js",
+	"main": "index.js",
 	"files": [
 		"dist"
 	],
@@ -30,9 +30,10 @@
 		"lint-staged": ">=10",
 		"node-sass": "^7.0.1",
 		"postcss": "^8.4.12",
-		"prettier": "^2.6.2",
+		"prettier": "2.6.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
+		"rimraf": "^3.0.2",
 		"rollup": "^2.70.1",
 		"rollup-plugin-dts": "^4.2.0",
 		"rollup-plugin-peer-deps-external": "^2.2.4",
@@ -45,19 +46,23 @@
 		"typescript": "^4.6.3",
 		"webpack": "5"
 	},
+	"dependencies": {
+		"classnames": "^2.3.1",
+		"style-inject": "^0.3.0"
+	},
 	"peerDependencies": {
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},
-	"dependencies": {},
 	"scripts": {
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"build": "rollup -c",
+		"build": "rimraf dist && rollup -c && cp ./package.json dist/",
 		"prepare": "husky install",
 		"prettier:check": "prettier --check ./src/**/*.{ts,tsx,js,jsx,html,scss,css,md,json}",
 		"prettier:fix-all": "prettier --write ./src/**/*.{ts,tsx,js,jsx,html,scss,css,md,json}"
 	},
+	"type": "module",
 	"types": "index.d.ts",
 	"publishConfig": {
 		"access": "public"
