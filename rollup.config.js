@@ -28,6 +28,7 @@ export default {
 			declarationDir: 'dist'
 		}),
 		postcss({
+			extract: true,
 			sourceMap: 'inline'
 		}),
 		terser(),
@@ -35,5 +36,6 @@ export default {
 			filename: 'bundle-analysis.html',
 			open: true
 		})
-	]
+	],
+	external: ['classnames', 'style-inject']
 };
