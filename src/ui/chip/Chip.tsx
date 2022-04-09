@@ -30,8 +30,6 @@ const Chip: React.FC<ChipProps> = (props) => {
 		}, 600);
 	}
 
-	console.log('husky test');
-
 	function renderChipClasses() {
 		let classes = 'rsChip';
 		if (props.onClick) classes += ' onClick';
