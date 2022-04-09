@@ -28,6 +28,7 @@ export default {
 			declarationDir: 'dist'
 		}),
 		postcss({
+			minimize: true,
 			extract: true,
 			sourceMap: 'inline'
 		}),

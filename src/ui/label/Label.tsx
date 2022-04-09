@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import './label.scss';
+import './Label.scss';
 // import { Box } from '@bit/redsky.framework.rs.996';
 
 export interface LabelProps {
