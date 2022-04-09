@@ -40,7 +40,9 @@
 		"sass-loader": "^12.6.0",
 		"style-loader": "^3.3.1",
 		"typescript": "^4.6.3",
-		"webpack": "5"
+		"webpack": "5",
+		"husky": "^4.2.5",
+		"lint-staged": "^10.0.8"
 	},
 	"dependencies": {},
 	"peerDependencies": {
@@ -59,6 +61,11 @@
 	"types": "index.d.ts",
 	"publishConfig": {
 		"access": "public"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,html,scss,css,md,mdx,json}": "prettier --write"
