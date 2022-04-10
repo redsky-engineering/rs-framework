@@ -1,6 +1,6 @@
 {
 	"name": "@redskytech/framework",
-	"version": "0.0.8",
+	"version": "0.0.9-alpha.0",
 	"description": "RedSky Framework V2",
 	"main": "index.js",
 	"repository": "https://gitlab.com/redsky_public/framework",
