@@ -29,8 +29,7 @@ export default {
 		}),
 		postcss({
 			minimize: true,
-			extract: true,
-			sourceMap: 'inline'
+			extract: true
 		}),
 		terser(),
 		visualizer({
