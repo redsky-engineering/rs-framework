@@ -27,3 +27,8 @@ as well as git tag the commit and put all commit notes into the CHANGELOG.md
 Finally, publish to npmjs.org with the command
 
 `yarn build:publish`
+
+## Commit Messages
+
+Commit messages should follow guidelines specified at [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+This helps with auto changelog generated file.
