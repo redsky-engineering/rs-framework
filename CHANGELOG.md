@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.2](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.1...v0.0.9-alpha.2) (2022-04-10)
+
+### Bug Fixes
+
+-   test fix changelog generation ([d138660](https://gitlab.com/redsky_public/framework/commit/d13866043dcbabdfdccbb1a9f8cec5b7230244e4))
+
 ### [0.0.9-alpha.1](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.0...v0.0.9-alpha.1) (2022-04-10)
 
 ### [0.0.9-alpha.0](https://gitlab.com/redsky_public/framework/compare/v0.0.8...v0.0.9-alpha.0) (2022-04-10)
