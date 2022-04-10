@@ -6,10 +6,15 @@ let packageJson = require(path.join(__dirname, '../package.json'));
 // Add module type since we are using es modules as our output
 packageJson = { ...packageJson, type: 'module' };
 fs.writeFileSync(path.join(__dirname, '../dist/package.json'), JSON.stringify(packageJson, null, '\t'));
-console.log('package.json created in dist folder');
+console.log(
+	path.join(__dirname, '../', 'package.json'),
+	'->',
+	path.join(__dirname, '../dist/', 'package.json (modified)')
+);
 
 function copyFileToDist(rootPath) {
-	fs.copyFileSync(path.join(__dirname, '../', rootPath), path.join(__dirname, '../dist'));
+	fs.copyFileSync(path.join(__dirname, '../', rootPath), path.join(__dirname, '../dist/', rootPath));
+	console.log(path.join(__dirname, '../', rootPath), '->', path.join(__dirname, '../dist/', rootPath));
 }
 
 copyFileToDist('CHANGELOG.md');

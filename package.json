@@ -56,7 +56,7 @@
 		"build-storybook": "build-storybook",
 		"build": "yarn run build:prebuild && yarn run build:bundle && yarn run build:postbuild",
 		"build:local": "yarn run build && yarn pack",
-		"build:publish": "yarn run build && yarn publish",
+		"build:publish": "yarn run build && yarn publish dist",
 		"build:prebuild": "rimraf dist",
 		"build:bundle": "rollup -c",
 		"build:postbuild": "node scripts/postbuild.js",
