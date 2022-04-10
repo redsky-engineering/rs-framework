@@ -24,6 +24,8 @@
 		"babel-loader": "^8.2.4",
 		"classnames": "^2.3.1",
 		"css-loader": "^6.7.1",
+		"husky": "^4.2.5",
+		"lint-staged": "^10.0.8",
 		"node-sass": "^7.0.1",
 		"postcss": "^8.4.12",
 		"prettier": "2.6.2",
@@ -38,11 +40,10 @@
 		"rollup-plugin-visualizer": "^5.6.0",
 		"sass": "^1.49.10",
 		"sass-loader": "^12.6.0",
+		"standard-version": "^9.3.2",
 		"style-loader": "^3.3.1",
 		"typescript": "^4.6.3",
-		"webpack": "5",
-		"husky": "^4.2.5",
-		"lint-staged": "^10.0.8"
+		"webpack": "5"
 	},
 	"dependencies": {},
 	"peerDependencies": {
@@ -53,11 +54,19 @@
 	"scripts": {
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"build": "rimraf dist && rollup -c && cp ./package.json dist/",
+		"build": "yarn run build:prebuild && yarn run build:bundle && yarn run build:postbuild",
+		"build:local": "yarn run build && yarn pack",
+		"build:publish": "yarn run build && yarn publish",
+		"build:prebuild": "rimraf dist",
+		"build:bundle": "rollup -c",
+		"build:postbuild": "node scripts/postbuild.js",
 		"prettier:check": "prettier --check ./src/**/*.{ts,tsx,js,jsx,html,scss,css,md,json}",
-		"prettier:fix-all": "prettier --write ./src/**/*.{ts,tsx,js,jsx,html,scss,css,md,json}"
+		"prettier:fix-all": "prettier --write ./src/**/*.{ts,tsx,js,jsx,html,scss,css,md,json}",
+		"release:patch": "standard-version --release-as patch",
+		"release:minor": "standard-version --release-as minor",
+		"release:major": "standard-version --release-as major",
+		"release:pre:alpha": "standard-version --prerelease alpha"
 	},
-	"type": "module",
 	"types": "index.d.ts",
 	"publishConfig": {
 		"access": "public"
