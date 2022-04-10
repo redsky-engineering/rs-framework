@@ -7,7 +7,7 @@ export interface LabelProps {
 }
 
 const Label: React.FC<LabelProps> = (props) => {
-	return <div className={'rsLabel'}>Hello World - {props.variant}</div>;
+	return <div className={'rsLabel'}>Hello World {props.variant}</div>;
 };
 
 export default Label;
