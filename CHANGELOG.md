@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.3](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.2...v0.0.9-alpha.3) (2022-04-10)
+
+### Bug Fixes
+
+-   disable source map generation for css since it doesnt work and causes warnings in webpack ([95fbc0f](https://gitlab.com/redsky_public/framework/commit/95fbc0fe0db6ec0f3bfde65c08fc74fe8764e0b9))
+
 ### [0.0.9-alpha.2](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.1...v0.0.9-alpha.2) (2022-04-10)
 
 ### Bug Fixes
