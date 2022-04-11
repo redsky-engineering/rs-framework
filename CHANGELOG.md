@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.4](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.3...v0.0.9-alpha.4) (2022-04-11)
+
+### Features
+
+-   label has been updated with all props using standard interfaces ([e1db1af](https://gitlab.com/redsky_public/framework/commit/e1db1af98589fe250757cd1a635755efc4719d7c))
+
 ### [0.0.9-alpha.3](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.2...v0.0.9-alpha.3) (2022-04-10)
 
 ### Bug Fixes
