@@ -23,6 +23,8 @@ export interface LabelProps
 		| 'link2'
 		| 'subtitle1'
 		| 'subtitle2'
+		| 'subheader1'
+		| 'subheader2'
 		| 'body1'
 		| 'body2'
 		| 'caption1'
