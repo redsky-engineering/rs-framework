@@ -1,8 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { Chip } from '../ui';
 
-<Meta title="RedSky/Chip" component={Chip} argTypes={{}}/>
-
+<Meta title="RedSky/Chip" component={Chip} argTypes={{}} />
 
 # Chip Component
 
@@ -11,27 +10,35 @@ width of the component. Also, this component can either display an image or the 
 provide this component both an image and a name, it will display the image.
 
 ### Prop Interface
+
 <ArgsTable of={Chip} />
 
 <!--- This is your Story template function, shown here in React -->
 
-export const Template = (args) => <Chip {...args} />
-export const OutlinedTemplate = (args) => <div className={'inputOutlined'}><Chip {...args}/></div>
+export const Template = (args) => <Chip {...args} />;
+export const OutlinedTemplate = (args) => (
+	<div className={'inputOutlined'}>
+		<Chip {...args} />
+	</div>
+);
 
 ## STANDARD LOOK
 
-***Standard*** is one of the two properties that can be passed to the `look` prop. By default, the background color is
+**_Standard_** is one of the two properties that can be passed to the `look` prop. By default, the background color is
 `#616161` and color is `#ffffff`. These values can be changed by using the `backgroundColor` and `color` props.
 
 ### Chip
 
 <Canvas>
-	<Story name="Chip Standard" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: false,
-		onDelete: false,
-	}}>
+	<Story
+		name="Chip Standard"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: false,
+			onDelete: false
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -41,13 +48,16 @@ export const OutlinedTemplate = (args) => <div className={'inputOutlined'}><Chip
 You can disable a chip by passing through the props `disabled=true`
 
 <Canvas>
-	<Story name="Chip Standard Disabled" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: false,
-		onDelete: false,
-		disabled: true
-	}}>
+	<Story
+		name="Chip Standard Disabled"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: false,
+			onDelete: false,
+			disabled: true
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -55,12 +65,15 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Clickable
 
 <Canvas>
-	<Story name="Chip Standard Clickable" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: true,
-		onDelete: false,
-	}}>
+	<Story
+		name="Chip Standard Clickable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -68,12 +81,15 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Deletable
 
 <Canvas>
-	<Story name="Chip Standard Deletable" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: false,
-		onDelete: true,
-	}}>
+	<Story
+		name="Chip Standard Deletable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: false,
+			onDelete: true
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -81,12 +97,15 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Clickable & Deletable
 
 <Canvas>
-	<Story name="Chip Standard Deletable & Clickable" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: () => alert('Clicked'),
-		onDelete: () => alert('Deleted'),
-	}}>
+	<Story
+		name="Chip Standard Deletable & Clickable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted')
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -94,13 +113,16 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Icon & Clickable
 
 <Canvas>
-	<Story name="Chip Standard Icon" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: true,
-		onDelete: false,
-		icon: 'icon-favorite-heart-full'
-	}}>
+	<Story
+		name="Chip Standard Icon"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false,
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -108,29 +130,36 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Avatar Image & Clickable
 
 <Canvas>
-	<Story name="Chip Standard Avatar Image" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: true,
-		onDelete: false,
-		avatarImg: 'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
-	}}>
+	<Story
+		name="Chip Standard Avatar Image"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false,
+			avatarImg:
+				'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
 
 ### Chip Avatar Initials & Clickable
 
-For this one, I am passing the props, `avatarInitials` with the value: ***Alex Suess***
+For this one, I am passing the props, `avatarInitials` with the value: **_Alex Suess_**
 
 <Canvas>
-	<Story name="Chip Standard Avatar Initials" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: true,
-		onDelete: false,
-		avatarInitials: "Alex Suess"
-	}}>
+	<Story
+		name="Chip Standard Avatar Initials"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false,
+			avatarInitials: 'Alex Suess'
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -138,13 +167,16 @@ For this one, I am passing the props, `avatarInitials` with the value: ***Alex S
 ### Chip Icon & Clickable & Deletable
 
 <Canvas>
-	<Story name="Chip Standard Clickable, Icon & Deletable" args={{
-		look: 'standard',
-		label: 'Standard',
-		onClick: () => alert('Clicked'),
-		onDelete: () => alert('Deleted'),
-		icon: 'icon-favorite-heart-full'
-	}}>
+	<Story
+		name="Chip Standard Clickable, Icon & Deletable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted'),
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
 		{Template.bind({})}
 	</Story>
 </Canvas>
@@ -158,12 +190,15 @@ props.
 ### Chip
 
 <Canvas>
-	<Story name="Chip Outlined" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: false,
-		onDelete: false,
-	}}>
+	<Story
+		name="Chip Outlined"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: false,
+			onDelete: false
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -173,13 +208,16 @@ props.
 You can disable a chip by passing through the props `disabled=true`
 
 <Canvas>
-	<Story name="Chip Outlined Disabled" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: false,
-		onDelete: false,
-		disabled: true
-	}}>
+	<Story
+		name="Chip Outlined Disabled"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: false,
+			onDelete: false,
+			disabled: true
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -187,12 +225,15 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Clickable
 
 <Canvas>
-	<Story name="Chip Outlined Clickable" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: true,
-		onDelete: false,
-	}}>
+	<Story
+		name="Chip Outlined Clickable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -200,12 +241,15 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Deletable
 
 <Canvas>
-	<Story name="Chip Outlined Deletable" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: false,
-		onDelete: true,
-	}}>
+	<Story
+		name="Chip Outlined Deletable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: false,
+			onDelete: true
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -213,12 +257,15 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Clickable & Deletable
 
 <Canvas>
-	<Story name="Chip Outlined Deletable & Clickable" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: () => alert('Clicked'),
-		onDelete: () => alert('Deleted'),
-	}}>
+	<Story
+		name="Chip Outlined Deletable & Clickable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted')
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -226,13 +273,16 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Icon & Clickable
 
 <Canvas>
-	<Story name="Chip Outlined Icon" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: true,
-		onDelete: false,
-		icon: 'icon-favorite-heart-full'
-	}}>
+	<Story
+		name="Chip Outlined Icon"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false,
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -240,29 +290,36 @@ You can disable a chip by passing through the props `disabled=true`
 ### Chip Avatar Image & Clickable
 
 <Canvas>
-	<Story name="Chip Outlined Avatar Image" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: true,
-		onDelete: false,
-		avatarImg: 'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
-	}}>
+	<Story
+		name="Chip Outlined Avatar Image"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false,
+			avatarImg:
+				'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
 
 ### Chip Avatar Initials & Clickable
 
-For this one, I am passing the props, `avatarInitials` with the value: ***Alex Suess***
+For this one, I am passing the props, `avatarInitials` with the value: **_Alex Suess_**
 
 <Canvas>
-	<Story name="Chip Outlined Avatar Initials" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: true,
-		onDelete: false,
-		avatarInitials: "Alex Suess"
-	}}>
+	<Story
+		name="Chip Outlined Avatar Initials"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false,
+			avatarInitials: 'Alex Suess'
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
@@ -270,15 +327,16 @@ For this one, I am passing the props, `avatarInitials` with the value: ***Alex S
 ### Chip Icon & Clickable & Deletable
 
 <Canvas>
-	<Story name="Chip Outlined Clickable, Icon & Deletable" args={{
-		look: 'outlined',
-		label: 'Outlined',
-		onClick: () => alert('Clicked'),
-		onDelete: () => alert('Deleted'),
-		icon: 'icon-favorite-heart-full'
-	}}>
+	<Story
+		name="Chip Outlined Clickable, Icon & Deletable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted'),
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
 		{OutlinedTemplate.bind({})}
 	</Story>
 </Canvas>
-
-

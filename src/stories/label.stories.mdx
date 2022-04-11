@@ -1,0 +1,47 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Label } from '../ui';
+
+<Meta
+	title="RedSky/Label"
+	component={Label}
+	argTypes={{
+		mt: { control: { type: 'text' } }
+	}}
+/>
+
+# Label Component
+
+The Label component is the root of all typography in a RedSky application. It maintains a consistent set of typography styles
+using different variants such as: h1, h2, ... body1, button, etc. Label also maintains many additional props that get passed
+as css styles to the appropriate element. Label will use the selected h1, h2, h3, tags when necessary.
+
+### Prop Interface
+
+<ArgsTable of={Label} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <Label {...args} />;
+export const OutlinedTemplate = (args) => (
+	<div className={'inputOutlined'}>
+		<Label {...args} />
+	</div>
+);
+
+## Header Style
+
+When using variant types H1-H6, the final rendered html element will be the appropriate element.
+
+### Label
+
+<Canvas>
+	<Story
+		name="Label Header"
+		args={{
+			variant: 'h1',
+			children: 'Some header text here.'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

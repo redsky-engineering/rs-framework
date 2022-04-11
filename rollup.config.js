@@ -37,5 +37,5 @@ export default {
 			open: true
 		})
 	],
-	external: ['classnames', 'style-inject']
+	external: ['classnames']
 };
