@@ -7,11 +7,12 @@ export namespace ICommon {
 		className?: string;
 	}
 
-	export interface InteractProps {
-		onClick?: React.MouseEventHandler<any> | void;
+	export interface InteractProps<T> {
+		onClick?: React.MouseEventHandler | void;
+		elementRef?: React.RefObject<T>;
 	}
 
-	export interface SpacingProps {
+	export interface MarginProps {
 		m?: string | number;
 		mt?: string | number;
 		mr?: string | number;
@@ -19,13 +20,6 @@ export namespace ICommon {
 		ml?: string | number;
 		mx?: string | number;
 		my?: string | number;
-		p?: string | number;
-		pt?: string | number;
-		pr?: string | number;
-		pb?: string | number;
-		pl?: string | number;
-		px?: string | number;
-		py?: string | number;
 		margin?: string | number;
 		marginTop?: string | number;
 		marginRight?: string | number;
@@ -33,6 +27,16 @@ export namespace ICommon {
 		marginLeft?: string | number;
 		marginX?: string | number;
 		marginY?: string | number;
+	}
+
+	export interface PaddingProps {
+		p?: string | number;
+		pt?: string | number;
+		pr?: string | number;
+		pb?: string | number;
+		pl?: string | number;
+		px?: string | number;
+		py?: string | number;
 		padding?: string | number;
 		paddingTop?: string | number;
 		paddingRight?: string | number;
@@ -40,6 +44,56 @@ export namespace ICommon {
 		paddingLeft?: string | number;
 		paddingX?: string | number;
 		paddingY?: string | number;
+	}
+	export interface SpacingProps extends PaddingProps, MarginProps {}
+
+	export interface BorderProps {
+		border?: string | number;
+		borderTop?: string | number;
+		borderLeft?: string | number;
+		borderRight?: string | number;
+		borderBottom?: string | number;
+		borderColor?: string;
+		borderRadius?: string | number;
+	}
+
+	export interface PositionProps {
+		position?: string;
+		left?: string | number;
+		right?: string | number;
+		top?: string | number;
+		bottom?: string | number;
+	}
+
+	export interface FlexProps {
+		flexDirection?: string;
+		flexWrap?: string;
+		justifyContent?:
+			| 'flex-start'
+			| 'flex-end'
+			| 'center'
+			| 'space-between'
+			| 'space-around'
+			| 'space-evenly'
+			| 'initial'
+			| 'inherit'
+			| string;
+		alignItems?: 'stretch' | 'center' | 'flex-start' | 'flex-end' | 'baseline' | 'initial' | 'inherit' | string;
+		alignContent?: string;
+		order?: string;
+		flex?: string;
+		flexGrow?: string | number;
+		flexShrink?: string | number;
+		alignSelf?: string | number;
+		textAlign?: string | number;
+		gap?: string | number;
+	}
+
+	export interface GridProps {
+		placeContent?: string;
+		gridTemplateColumns?: string;
+		gridTemplateRows?: string;
+		gridTemplate?: string;
 	}
 
 	export interface TextProps {
@@ -72,6 +126,65 @@ export namespace ICommon {
 
 	export interface PaletteProps {
 		color?: string;
-		bgcolor?: string;
+		bgColor?: string;
 	}
+
+	export type AutoCompleteType =
+		| 'off'
+		| 'autocomplete'
+		| 'on'
+		| 'name'
+		| 'honorific-prefix'
+		| 'given-name'
+		| 'additional-name'
+		| 'family-name'
+		| 'honorific-suffix'
+		| 'nickname'
+		| 'email'
+		| 'username'
+		| 'new-password'
+		| 'current-password'
+		| 'one-time-code'
+		| 'organization-title'
+		| 'organization'
+		| 'street-address'
+		| 'address-line1'
+		| 'address-line2'
+		| 'address-line3'
+		| 'address-level4'
+		| 'address-level3'
+		| 'address-level2'
+		| 'address-level1'
+		| 'country'
+		| 'country-name'
+		| 'postal-code'
+		| 'cc-name'
+		| 'cc-given-name'
+		| 'cc-additional-name'
+		| 'cc-family-name'
+		| 'cc-number'
+		| 'cc-exp'
+		| 'cc-exp-month'
+		| 'cc-exp-year'
+		| 'cc-csc'
+		| 'cc-type'
+		| 'transaction-currency'
+		| 'transaction-amount'
+		| 'language'
+		| 'bday'
+		| 'bday-day'
+		| 'bday-month'
+		| 'bday-year'
+		| 'sex'
+		| 'tel'
+		| 'tel-country-code'
+		| 'tel-national'
+		| 'tel-area-code'
+		| 'tel-local'
+		| 'tel-local-prefix'
+		| 'tel-local-suffix'
+		| 'tel-extension'
+		| 'impp'
+		| 'url'
+		| 'photo';
 }
