@@ -3,7 +3,6 @@ import './InputText.scss';
 import { InputHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
-import AutoCompleteType = ICommon.AutoCompleteType;
 import { RsFormControlNext } from '../form';
 import { IRsFormControlNext } from '../form/FormControlNext';
 
@@ -24,7 +23,7 @@ interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'on
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	type: 'text' | 'password' | 'tel' | 'email' | 'hidden' | 'date';
 	noAutocomplete?: boolean;
-	autocompleteType?: AutoCompleteType | string; // Defaults to "on"
+	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
 	value?: string | number | readonly string[] | undefined;
 
 	//Form Control
