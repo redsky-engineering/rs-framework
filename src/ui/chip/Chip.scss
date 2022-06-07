@@ -1,26 +1,15 @@
 .rsChip {
 	position: relative;
-	color: #fff;
-	font-size: 16px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	padding: 8px;
 	border-radius: 16px;
-	height: 32px;
-	padding: 0 12px;
-	background-color: #616161;
 	width: fit-content;
-	transition: filter 300ms;
-	cursor: default;
-	overflow: hidden;
-	z-index: auto;
-
+	&.standard {
+		background: #dee2e6;
+	}
 	&.outlined {
 		border: 1px solid rgba(255, 255, 255, 0.23);
-		background-color: transparent;
-		&:hover {
-			background-color: #323232;
-		}
 	}
 
 	&.disabled {
@@ -30,35 +19,6 @@
 
 	&.onClick {
 		&:hover {
-			cursor: pointer !important;
-			filter: brightness(1.2);
-		}
-	}
-
-	.label {
-		&.mr {
-			padding-right: 12px;
-		}
-
-		&.ml {
-			padding-left: 12px;
-		}
-	}
-
-	.deleteBtn {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 22px;
-		height: 22px;
-		background-color: #8a8a8a;
-		border-radius: 50%;
-	}
-
-	.chip-x {
-		margin-right: -7px;
-		&:hover {
-			color: black !important;
 			cursor: pointer !important;
 		}
 	}

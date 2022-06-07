@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import { InputText, Label } from '../../src/ui';
+import './reset.scss';
+import { Chip, InputText, Label } from '../../src/ui';
 
 function App() {
 	return (
@@ -14,6 +15,13 @@ function App() {
 					onChange={(event) => {
 						console.log(event.target.value);
 					}}
+				/>
+
+				<Chip
+					labelVariant={'subtitle1'}
+					label={'Hello World'}
+					look={'standard'}
+					chipStyles={{ color: 'black' }}
 				/>
 			</header>
 		</div>
