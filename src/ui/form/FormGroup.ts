@@ -1,22 +1,22 @@
 import cloneDeep from 'lodash.clonedeep';
 import clone from 'lodash.clone';
-import { IRsFormControlNext, RsFormControlNext } from './FormControlNext';
+import { IRsFormControl, RsFormControl } from './FormControl';
 
 /** Tracks the value and validity state of a group of RsFormControl instances. */
-export class RsFormGroupNext {
+export class RsFormGroup {
 	/**
 	 * Creates a new `RsFormGroup` instance.
 	 * @param _controls Array of 'RsFormControl' objects.
 	 */
-	constructor(private _controls: RsFormControlNext<IRsFormControlNext>[]) {}
+	constructor(private _controls: RsFormControl<IRsFormControl>[]) {}
 
 	/**
 	 * Get one form control object by searching the key.
 	 * @param key Key of form control
-	 * @returns {RsFormControlNext}
+	 * @returns {RsFormControl}
 	 */
-	get<T extends IRsFormControlNext>(key: string): RsFormControlNext<T> {
-		return this._controls.find((c) => c.key === key) as RsFormControlNext<T>;
+	get<T extends IRsFormControl>(key: string): RsFormControl<T> {
+		return this._controls.find((c) => c.key === key) as RsFormControl<T>;
 	}
 
 	/**
@@ -33,26 +33,26 @@ export class RsFormGroupNext {
 	/**
 	 * Get a shallow clone of one form control object by searching the key.
 	 * @param key Key of form control
-	 * @returns {RsFormControlNext}
+	 * @returns {RsFormControl}
 	 */
-	getClone<T extends IRsFormControlNext>(key: string): RsFormControlNext<T> {
-		return clone(this._controls.find((c) => c.key === key) as RsFormControlNext<T>);
+	getClone<T extends IRsFormControl>(key: string): RsFormControl<T> {
+		return clone(this._controls.find((c) => c.key === key) as RsFormControl<T>);
 	}
 
 	/**
 	 * Get a clone Deep of one form control object by searching the key.
 	 * @param key Key of form control
-	 * @returns {RsFormControlNext}
+	 * @returns {RsFormControl}
 	 */
-	getCloneDeep<T extends IRsFormControlNext>(key: string): RsFormControlNext<T> {
-		return cloneDeep(this._controls.find((c) => c.key === key) as RsFormControlNext<T>);
+	getCloneDeep<T extends IRsFormControl>(key: string): RsFormControl<T> {
+		return cloneDeep(this._controls.find((c) => c.key === key) as RsFormControl<T>);
 	}
 
 	/**
 	 * Update one form control object in current array.
 	 * @param updated
 	 */
-	update(updated: RsFormControlNext<IRsFormControlNext>): RsFormGroupNext {
+	update(updated: RsFormControl<IRsFormControl>): RsFormGroup {
 		const index = this._controls.findIndex((c) => c.key === updated.key);
 		this._controls.splice(index, 1, updated);
 		return this;
@@ -76,14 +76,14 @@ export class RsFormGroupNext {
 	}
 
 	/** Clone current form group object.
-	 * @returns {RsFormGroupNext}
+	 * @returns {RsFormGroup}
 	 */
 	clone() {
 		return clone(this);
 	}
 
 	/** Clone Deep current form group object.
-	 * @returns {RsFormGroupNext}
+	 * @returns {RsFormGroup}
 	 */
 	cloneDeep() {
 		return cloneDeep(this);
@@ -105,7 +105,7 @@ export class RsFormGroupNext {
 	/**
 	 * Resets all controls of the group to their initial values
 	 */
-	resetToInitialValue(): RsFormGroupNext {
+	resetToInitialValue(): RsFormGroup {
 		for (let control of this._controls) {
 			control.resetToInitial();
 		}
@@ -139,7 +139,7 @@ export class RsFormGroupNext {
 	 * Takes all the current form values and updates the initial value to the current values, make it so no changes are
 	 * present. Thus, isModified() should return false.
 	 */
-	updateInitialValues(): RsFormGroupNext {
+	updateInitialValues(): RsFormGroup {
 		for (let control of this._controls) {
 			control.updateInitialValue();
 		}

@@ -1,5 +1,5 @@
-import { RsValidatorNext, RsValidatorNextEnum } from './ValidatorNext';
-import { RsFormControlNext } from './FormControlNext';
-import { RsFormGroupNext } from './FormGroupNext';
+import { RsValidator, RsValidatorEnum } from './Validator';
+import { RsFormControl } from './FormControl';
+import { RsFormGroup } from './FormGroup';
 
-export { RsValidatorNext, RsValidatorNextEnum, RsFormControlNext, RsFormGroupNext };
+export { RsValidator, RsValidatorEnum, RsFormControl, RsFormGroup };

@@ -1,10 +1,10 @@
-import { RsValidatorNext, RsValidatorNextEnum } from './ValidatorNext';
+import { RsValidator, RsValidatorEnum } from './Validator';
 import { StringUtils } from '../../utils';
 
-export type IRsFormControlNext = string | number | boolean | string[] | number[];
+export type IRsFormControl = string | number | boolean | string[] | number[];
 
 /** Tracks the value and validation status of an individual form control. */
-export class RsFormControlNext<T extends IRsFormControlNext> {
+export class RsFormControl<T extends IRsFormControl> {
 	/** @internal */
 	private _errors: number[] = [];
 	private _initialValue: T;
@@ -14,7 +14,7 @@ export class RsFormControlNext<T extends IRsFormControlNext> {
 	 * @param _value Initializes the control with an initial value.
 	 * @param _validators Array of validators applied to this form control
 	 */
-	constructor(private _key: string, private _value: T, private _validators?: RsValidatorNext[]) {
+	constructor(private _key: string, private _value: T, private _validators?: RsValidator[]) {
 		this._initialValue = _value;
 	}
 
@@ -74,10 +74,10 @@ export class RsFormControlNext<T extends IRsFormControlNext> {
 		this._errors = [];
 		if (this._validators) {
 			for (let index = 0; index < this._validators.length; index++) {
-				const validator: RsValidatorNext = this._validators[index];
+				const validator: RsValidator = this._validators[index];
 				const validatorRule = validator.validator;
 				switch (validatorRule) {
-					case RsValidatorNextEnum.REQ:
+					case RsValidatorEnum.REQ:
 						if (this._value === undefined || this._value === null) {
 							this._errors.push(index);
 							continue;
@@ -93,27 +93,27 @@ export class RsFormControlNext<T extends IRsFormControlNext> {
 							continue;
 						}
 						break;
-					case RsValidatorNextEnum.MIN:
+					case RsValidatorEnum.MIN:
 						const min = parseInt(validator.value as string) || 0;
 						if ((this._value as string).length < min) {
 							this._errors.push(index);
 							continue;
 						}
 						break;
-					case RsValidatorNextEnum.MAX:
+					case RsValidatorEnum.MAX:
 						const max = parseInt(validator.value as string) || 0;
 						if ((this._value as string).length > max) {
 							this._errors.push(index);
 							continue;
 						}
 						break;
-					case RsValidatorNextEnum.NUM:
+					case RsValidatorEnum.NUM:
 						if (isNaN(Number(this._value))) {
 							this._errors.push(index);
 							continue;
 						}
 						break;
-					case RsValidatorNextEnum.EMAIL:
+					case RsValidatorEnum.EMAIL:
 						// Although you can technically have a number of other characters according to RFC, they can
 						// be considered dangerous. See this site for recommended values to allow.
 						// https://www.jochentopf.com/email/chars.html
@@ -124,15 +124,15 @@ export class RsFormControlNext<T extends IRsFormControlNext> {
 							continue;
 						}
 						break;
-					case RsValidatorNextEnum.REG:
+					case RsValidatorEnum.REG:
 						if (!(validator.value as RegExp).test(this._value as string)) {
 							this._errors.push(index);
 							continue;
 						}
 						break;
-					case RsValidatorNextEnum.CUSTOM:
+					case RsValidatorEnum.CUSTOM:
 						const result = await (
-							validator.value as (control: RsFormControlNext<T>) => boolean | Promise<boolean>
+							validator.value as (control: RsFormControl<T>) => boolean | Promise<boolean>
 						)(this);
 						if (!result) {
 							this._errors.push(index);

@@ -89,6 +89,10 @@ export function transformProps(props: PropsWithChildren<any>): CSSProperties {
 			}
 		} else if (i === 'bgColor') {
 			filtered['backgroundColor'] = props[i];
+		} else if (i === 'cursorPointer') {
+			filtered['cursor'] = props[i];
+		} else if (i === 'fontSize') {
+			filtered[i] = props[i] + 'px';
 		} else {
 			filtered[i] = props[i];
 		}

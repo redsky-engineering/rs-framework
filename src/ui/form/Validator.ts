@@ -1,7 +1,7 @@
-import { IRsFormControlNext, RsFormControlNext } from './FormControlNext';
+import { IRsFormControl, RsFormControl } from './FormControl';
 
 /** Validator enumeration */
-export enum RsValidatorNextEnum {
+export enum RsValidatorEnum {
 	REQ = 'required',
 	MIN = 'minLength',
 	MAX = 'maxLength',
@@ -12,7 +12,7 @@ export enum RsValidatorNextEnum {
 }
 
 /** Supports form control validation. */
-export class RsValidatorNext {
+export class RsValidator {
 	/**
 	 * Creates a new `RsValidator` instance.
 	 * @param _validator Validator enumeration from `RsValidatorEnum`.
@@ -21,13 +21,13 @@ export class RsValidatorNext {
 	 * if putting a value of 3 here, validator will validate if the value lenght is smaller or greater than 3.
 	 */
 	constructor(
-		private _validator: RsValidatorNextEnum,
+		private _validator: RsValidatorEnum,
 		private _errorMessage: string,
 		private _value?:
 			| string
 			| number
 			| RegExp
-			| ((control: RsFormControlNext<IRsFormControlNext>) => boolean | Promise<boolean>)
+			| ((control: RsFormControl<IRsFormControl>) => boolean | Promise<boolean>)
 	) {}
 
 	get validator() {

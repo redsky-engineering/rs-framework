@@ -3,8 +3,8 @@ import './InputText.scss';
 import { InputHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
-import { RsFormControlNext } from '../form';
-import { IRsFormControlNext } from '../form/FormControlNext';
+import { RsFormControl } from '../form';
+import { IRsFormControl } from '../form/FormControl';
 
 import Box from '../box/Box';
 import clone from 'lodash.clone';
@@ -27,8 +27,8 @@ interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'on
 	value?: string | number | readonly string[] | undefined;
 
 	//Form Control
-	control?: RsFormControlNext<string | string[] | number>;
-	updateControl?: (control: RsFormControlNext<string | string[] | number>) => void;
+	control?: RsFormControl<string | string[] | number>;
+	updateControl?: (control: RsFormControl<string | string[] | number>) => void;
 
 	//Css
 	color?: string;
@@ -49,7 +49,7 @@ interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'on
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	onChange?: (
 		event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-		control?: RsFormControlNext<IRsFormControlNext>
+		control?: RsFormControl<IRsFormControl>
 	) => void;
 }
 
@@ -76,7 +76,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 	} = props;
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const [formControl, setFormControl] = React.useState<RsFormControlNext<string | string[] | number> | undefined>(
+	const [formControl, setFormControl] = React.useState<RsFormControl<string | string[] | number> | undefined>(
 		control
 	);
 
