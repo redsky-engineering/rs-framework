@@ -1,4 +1,5 @@
 import { CSSProperties, PropsWithChildren } from 'react';
+import * as React from 'react';
 
 const properties = {
 	m: 'margin',
@@ -37,7 +38,7 @@ export const getSpacingProperties = (prop: string) => {
 	return Array.isArray(direction) ? direction.map((dir) => property + dir) : [property + direction];
 };
 
-const spacingKeys = [
+export const spacingKeys = [
 	'm',
 	'mt',
 	'mr',
@@ -86,12 +87,59 @@ export function transformProps(props: PropsWithChildren<any>): CSSProperties {
 			for (let propName of stylePropNames) {
 				filtered[propName] = props[i];
 			}
-		} else if (i === 'bgcolor') {
+		} else if (i === 'bgColor') {
 			filtered['backgroundColor'] = props[i];
+		} else if (i === 'cursorPointer') {
+			filtered['cursor'] = props[i];
+		} else if (i === 'fontSize') {
+			filtered[i] = props[i] + 'px';
 		} else {
 			filtered[i] = props[i];
 		}
 	}
 
 	return filtered;
+}
+
+/**
+ * This function will add ripple effects to where the mouse is clicked inside an element.
+ * You will need the following css on the component:
+ *
+ * .parentComponent{
+ * 		position: relative;
+ *   > .ripple {
+ * 		position: absolute;
+ * 		background: #fff;
+ * 		transform: translate(-50%, -50%);
+ * 		pointer-events: none;
+ * 		border-radius: 50%;
+ * 		animation: ripples 0.6s linear infinite;
+ * 	}
+ *  @keyframes ripples {
+ * 		0% {
+ * 			width: 0;
+ * 			height: 0;
+ * 			opacity: 0.5;
+ * 		}
+ * 		100% {
+ * 			width: 500px;
+ * 			height: 500px;
+ * 			opacity: 0;
+ * 		}
+ * 	}
+ * }
+ * @param event
+ */
+export function rippleEffect(event: React.MouseEvent<HTMLElement>) {
+	let targetBoundingRect = event.currentTarget.getBoundingClientRect();
+	let x = event.clientX - targetBoundingRect.x;
+	let y = event.clientY - targetBoundingRect.y;
+	let ripples = document.createElement('span');
+	ripples.style.left = `${x}px`;
+	ripples.style.top = `${y}px`;
+	ripples.classList.add('ripple');
+	event.currentTarget.appendChild(ripples);
+	setTimeout(() => {
+		ripples.remove();
+	}, 600);
 }

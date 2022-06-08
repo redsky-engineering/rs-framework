@@ -20,7 +20,7 @@
 		"@storybook/preset-scss": "^1.0.3",
 		"@storybook/react": "^6.5.0-alpha.51",
 		"@storybook/testing-library": "^0.0.9",
-		"@types/lodash.clonedeep": "^4.5.6",
+		"@types/lodash.clonedeep": "^4.5.7",
 		"@types/react": "^17.0.43",
 		"@types/react-dom": "^17.0.11",
 		"babel-loader": "^8.2.4",
@@ -28,7 +28,9 @@
 		"css-loader": "^6.7.1",
 		"husky": "^4.2.5",
 		"lint-staged": "^10.0.8",
+		"lodash.clone": "^4.5.0",
 		"lodash.clonedeep": "^4.5.0",
+		"lodash.debounce": "^4.0.8",
 		"node-sass": "^7.0.1",
 		"postcss": "^8.4.12",
 		"prettier": "2.6.2",
@@ -45,10 +47,9 @@
 		"sass-loader": "^12.6.0",
 		"standard-version": "^9.3.2",
 		"style-loader": "^3.3.1",
-		"typescript": "^4.6.3",
+		"typescript": "^4.7.2",
 		"webpack": "5"
 	},
-	"dependencies": {},
 	"peerDependencies": {
 		"classnames": "^2.3.1",
 		"lodash.clonedeep": "^4.5.0",
@@ -82,5 +83,8 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,html,scss,css,md,mdx,json}": "prettier --write"
+	},
+	"dependencies": {
+		"@types/lodash.clone": "^4.5.7"
 	}
 }

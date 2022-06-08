@@ -1,85 +1,78 @@
 import * as React from 'react';
 import './Chip.scss';
+import { rippleEffect, transformProps } from '../../utils/internal';
+import { Icon, IconProps } from '../icon/Icon';
+import classNames from 'classnames';
+import Box from '../box/Box';
+import Label, { LabelProps } from '../label/Label';
+import { ICommon } from '../../common/Interfaces';
+
+interface ChipStyles extends ICommon.BorderProps, ICommon.PaddingProps, ICommon.MarginProps, ICommon.PaletteProps {}
+
+export interface NewIconProps extends IconProps {
+	position: 'LEFT' | 'RIGHT';
+	isHidden?: boolean;
+}
 
 export interface ChipProps {
+	labelVariant: LabelProps['variant'];
 	label: string;
-	look: 'standard' | 'outlined';
-	color?: string;
-	backgroundColor?: string;
+	look: 'outlined' | 'standard';
+
+	icon?: NewIconProps[];
+	chipStyles?: ChipStyles;
+
 	disabled?: boolean;
-	icon?: string;
 	avatarImg?: string;
 	avatarInitials?: string;
 	onClick?: (event?: React.MouseEvent) => void;
-	onDelete?: (event?: React.MouseEvent) => void;
 	className?: string;
 }
 
 const Chip: React.FC<ChipProps> = (props) => {
-	function rippleEffect(event: React.MouseEvent<HTMLElement>) {
-		let targetBoundingRect = event.currentTarget.getBoundingClientRect();
-		let x = event.clientX - targetBoundingRect.x;
-		let y = event.clientY - targetBoundingRect.y;
-		let ripples = document.createElement('span');
-		ripples.style.left = `${x}px`;
-		ripples.style.top = `${y}px`;
-		ripples.classList.add('ripple');
-		event.currentTarget.appendChild(ripples);
-		setTimeout(() => {
-			ripples.remove();
-		}, 600);
-	}
+	let cssProperties = transformProps(props.chipStyles);
 
-	function renderChipClasses() {
-		let classes = 'rsChip';
-		if (props.onClick) classes += ' onClick';
-		if (props.look === 'outlined') classes += ' outlined';
-		if (props.disabled) classes += ' disabled';
-		if (props.className) classes += ` ${props.className}`;
-		return classes;
-	}
+	function renderIcons() {
+		let label = [<Label variant={props.labelVariant}>{props.label}</Label>];
 
-	function renderLabelClasses() {
-		let classes = 'label';
-		if (props.icon || props.avatarImg || props.avatarInitials) classes += ' ml';
-		if (props.onDelete) classes += ' mr';
-		return classes;
+		if (!props.icon) return label;
+
+		props.icon.forEach((item, index) => {
+			const { position, isHidden, onClick, ...iconProps } = item;
+
+			if (isHidden) return;
+			const icon = (
+				<Icon
+					key={`${item.iconImg}${index}`}
+					{...iconProps}
+					onClick={(event) => {
+						if (onClick) onClick(event);
+						event?.stopPropagation();
+					}}
+				/>
+			);
+
+			if (position === 'LEFT') {
+				label = [icon, ...label];
+			} else {
+				label = [...label, icon];
+			}
+		});
+		return label;
 	}
 
 	return (
 		<span
-			className={renderChipClasses()}
+			className={classNames('rsChip', props.look, props.disabled, props.className, { onClick: !!props.onClick })}
+			style={cssProperties}
 			onClick={(event) => {
 				if (props.onClick) {
-					rippleEffect(event);
+					rippleEffect(event as React.MouseEvent<HTMLElement>);
 					props.onClick(event);
 				}
 			}}
-			style={props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}}
 		>
-			{(props.icon || props.avatarImg || props.avatarInitials) && (
-				<>
-					{/*{!!props.icon && !props.avatarImg && !props.avatarInitials && <Icon iconImg={props.icon} />}*/}
-					{/*{!!props.avatarImg && !props.icon && !props.avatarInitials && (*/}
-					{/*	// <Avatar widthHeight={25} backgroundColor={'#8a8a8a'} image={props.avatarImg} />*/}
-					{/*)}*/}
-					{/*{!!props.avatarInitials && !props.icon && !props.avatarImg && (*/}
-					{/*	<Avatar widthHeight={25} backgroundColor={'#8a8a8a'} name={props.avatarInitials} />*/}
-					{/*)}*/}
-				</>
-			)}
-			<div className={renderLabelClasses()}>{props.label}</div>
-			{/*{props.onDelete && (*/}
-			{/*	// <Icon*/}
-			{/*	// 	iconImg={'chip-x'}*/}
-			{/*	// 	size={22}*/}
-			{/*	// 	color={'#8a8a8a'}*/}
-			{/*	// 	onClick={(event) => {*/}
-			{/*	// 		if (props.onDelete) props.onDelete(event);*/}
-			{/*	// 		event?.stopPropagation();*/}
-			{/*	// 	}}*/}
-			{/*	// />*/}
-			{/*)}*/}
+			{renderIcons()}
 		</span>
 	);
 };

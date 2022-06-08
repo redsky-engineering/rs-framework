@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import Avatar from './Avatar';
+
+<Meta title="RedSky/Avatar" component={Avatar} argTypes={{}} />
+
+# Avatar Component
+
+The Avatar component requires one prop: `widthHeight`, which takes a `number`. This value will turn into the height and
+width of the component. Also, this component can either display an image or the initials of a person's name. If you
+provide this component both an image and a name, it will display the image.
+
+### Prop Interface
+
+<ArgsTable of={Avatar} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <Avatar {...args} />;
+
+## Avatar With Initials
+
+In this example the `Avatar` component has the props, {name: 'Alex Suess', backgroundColor: '#333333', color: '#fff'}.
+The outcome is what is displayed below. The component takes in the full name: 'Alex Suess' and returns just the Initials.
+
+<Canvas>
+	<Story
+		name="Avatar Using Initials"
+		args={{
+			widthHeight: 100,
+			name: 'alex L suess',
+			backgroundColor: '#333333',
+			color: '#fff'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Avatar With Image
+
+{' '}
+<Canvas>
+	<Story
+		name="Avatar Using Image"
+		args={{
+			widthHeight: 100,
+			image: 'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

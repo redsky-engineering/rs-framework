@@ -10,7 +10,7 @@ export interface LabelProps
 		ICommon.DimensionProps,
 		ICommon.HtmlElementProps,
 		ICommon.PaletteProps,
-		Pick<ICommon.InteractProps, 'onClick'> {
+		Pick<ICommon.InteractProps<HTMLElement>, 'onClick'> {
 	variant:
 		| 'display1'
 		| 'h1'

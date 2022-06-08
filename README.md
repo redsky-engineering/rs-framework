@@ -32,3 +32,12 @@ Finally, publish to npmjs.org with the command
 
 Commit messages should follow guidelines specified at [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 This helps with auto changelog generated file.
+
+## Usage in projects
+
+In order to be able to use this framework in your projects you will need to install the peer dependencies. This includes
+
+-   classnames
+-   react@17
+-   react-dom@17
+-   lodash.clonedeep
