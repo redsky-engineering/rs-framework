@@ -1,0 +1,345 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { inputTextarea } from '../index';
+<!-- Based off of chip, will change values to new values here. -->
+<Meta title="RedSky/inputTextarea" component={inputTextarea} argTypes={{}} />
+
+# inputTextarea Component
+
+The inputTextarea component does not require any props. The props that are optional and unique to textarea are rows and cols. The defaults for this is
+
+`widthHeight`, which takes a `number`. This value will turn into the height and
+width of the component. Also, this component can either display an image or the initials of a person's name. If you
+provide this component both an image and a name, it will display the image.
+
+### Prop Interface
+
+<ArgsTable of={inputTextarea} />
+
+<!--- This is your Story template function, shown here in React -->
+
+<!-- export const Template = (args) => <Chip {...args} />;
+export const OutlinedTemplate = (args) => (
+	<div className={'inputOutlined'}>
+		<Chip {...args} />
+	</div>
+);
+-->
+
+<!-- ## STANDARD LOOK
+
+**_Standard_** is one of the two properties that can be passed to the `look` prop. By default, the background color is
+`#616161` and color is `#ffffff`. These values can be changed by using the `backgroundColor` and `color` props.
+
+### Chip
+
+<Canvas>
+	<Story
+		name="Chip Standard"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: false,
+			onDelete: false
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Disabled
+
+You can disable a chip by passing through the props `disabled=true`
+
+<Canvas>
+	<Story
+		name="Chip Standard Disabled"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: false,
+			onDelete: false,
+			disabled: true
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Clickable
+
+<Canvas>
+	<Story
+		name="Chip Standard Clickable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Deletable
+
+<Canvas>
+	<Story
+		name="Chip Standard Deletable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: false,
+			onDelete: true
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Clickable & Deletable
+
+<Canvas>
+	<Story
+		name="Chip Standard Deletable & Clickable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted')
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Icon & Clickable
+
+<Canvas>
+	<Story
+		name="Chip Standard Icon"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false,
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Avatar Image & Clickable
+
+<Canvas>
+	<Story
+		name="Chip Standard Avatar Image"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false,
+			avatarImg:
+				'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Avatar Initials & Clickable
+
+For this one, I am passing the props, `avatarInitials` with the value: **_Alex Suess_**
+
+<Canvas>
+	<Story
+		name="Chip Standard Avatar Initials"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: true,
+			onDelete: false,
+			avatarInitials: 'Alex Suess'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Icon & Clickable & Deletable
+
+<Canvas>
+	<Story
+		name="Chip Standard Clickable, Icon & Deletable"
+		args={{
+			look: 'standard',
+			label: 'Standard',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted'),
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## OUTLINED LOOK
+
+Outlined is one of the two properties that can be passed to the `look` prop. By default, they will have a transparent
+background with a `1px solid rgba(255,255,255 0.23)` border. The border **CANNOT** be changed with any of the existing
+props.
+
+### Chip
+
+<Canvas>
+	<Story
+		name="Chip Outlined"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: false,
+			onDelete: false
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Disabled
+
+You can disable a chip by passing through the props `disabled=true`
+
+<Canvas>
+	<Story
+		name="Chip Outlined Disabled"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: false,
+			onDelete: false,
+			disabled: true
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Clickable
+
+<Canvas>
+	<Story
+		name="Chip Outlined Clickable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Deletable
+
+<Canvas>
+	<Story
+		name="Chip Outlined Deletable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: false,
+			onDelete: true
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Clickable & Deletable
+
+<Canvas>
+	<Story
+		name="Chip Outlined Deletable & Clickable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted')
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Icon & Clickable
+
+<Canvas>
+	<Story
+		name="Chip Outlined Icon"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false,
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Avatar Image & Clickable
+
+<Canvas>
+	<Story
+		name="Chip Outlined Avatar Image"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false,
+			avatarImg:
+				'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Avatar Initials & Clickable
+
+For this one, I am passing the props, `avatarInitials` with the value: **_Alex Suess_**
+
+<Canvas>
+	<Story
+		name="Chip Outlined Avatar Initials"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: true,
+			onDelete: false,
+			avatarInitials: 'Alex Suess'
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas>
+
+### Chip Icon & Clickable & Deletable
+
+<Canvas>
+	<Story
+		name="Chip Outlined Clickable, Icon & Deletable"
+		args={{
+			look: 'outlined',
+			label: 'Outlined',
+			onClick: () => alert('Clicked'),
+			onDelete: () => alert('Deleted'),
+			icon: 'icon-favorite-heart-full'
+		}}
+	>
+		{OutlinedTemplate.bind({})}
+	</Story>
+</Canvas> -->
