@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './InputTextarea.scss';
-import { InputHTMLAttributes, TextareaHTMLAttributes, useEffect, useRef } from 'react';
+import { TextareaHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
 import { RsFormControl } from '../form';
@@ -10,12 +10,7 @@ import Box from '../box/Box';
 import clone from 'lodash.clone';
 import { Icon, IconProps } from '../icon/Icon';
 
-export interface NewIconProps extends IconProps {
-	position: 'LEFT' | 'RIGHT';
-	isHidden?: boolean;
-}
-
-interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange' | 'rows' | 'cols'> {
+interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
 	//TextInput Props
 	id?: string;
 	className?: string;
@@ -23,12 +18,12 @@ interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaEle
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
-	value?: string | number | readonly string[] | undefined;
+	value?: string | readonly string[] | undefined;
 
 	//Textarea properties
-	rows?: number;
-	cols?: number;
 	autoResize?: boolean;
+	minLength?: number;
+	maxLength?: number;
 
 	//Form Control
 	control?: RsFormControl<string | string[] | number>;
@@ -37,12 +32,7 @@ interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaEle
 	//Css
 	color?: string;
 	backgroundColor?: string;
-	borderColor?: string;
 	useFloatingPlaceholder?: boolean;
-
-	icon?: NewIconProps[];
-
-	errorProps?: {};
 
 	onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 	onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
@@ -52,27 +42,22 @@ interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaEle
 const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	const {
 		id,
-		look, // Doesn't work, not sure if needed.
-		boxRef, // Ask about boxRef. not sure how it works.
+		look,
+		boxRef,
 		control,
 		updateControl,
-		icon,
 		noAutocomplete,
 		autocompleteType,
 		onChange,
 		className,
-		backgroundColor, //WORKS
-		borderColor, // Doesn't work
-		color, // Not seeing if it works
-		placeholder, // Works
+		backgroundColor,
+		color,
+		placeholder,
 		value,
-
-		// This is the props specific to textarea
-		rows,
-		cols,
 		autoResize,
-
-		useFloatingPlaceholder, // It works, just looks ugly.
+		minLength,
+		maxLength,
+		useFloatingPlaceholder,
 		...textareaProps
 	} = props;
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -112,18 +97,14 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		return 'on';
 	}
 
-	function getTextareaStyle() {
+	function renderTextarea() {
 		let textArea = (
 			<textarea
 				ref={textareaRef}
 				onChange={changeHandler}
 				value={!!formControl ? formControl.value : value}
 				autoComplete={getAutocompleteType()}
-				onFocus={props.onFocus}
-				onBlur={props.onBlur}
 				placeholder={useFloatingPlaceholder ? ' ' : placeholder}
-				rows={!!rows ? rows : 3}
-				cols={!!cols ? cols : 25}
 				{...textareaProps}
 			/>
 		);
@@ -136,27 +117,6 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 				<label>{placeholder}</label>
 			</Box>
 		);
-	}
-
-	function renderTextarea() {
-		let inputStyled = getTextareaStyle();
-
-		if (!icon) {
-			return inputStyled;
-		}
-
-		let iconInput = [inputStyled];
-
-		icon.forEach((item, index) => {
-			const { position, isHidden, ...iconProps } = item;
-			if (isHidden) return;
-			if (position === 'LEFT') {
-				iconInput = [<Icon key={`${item.iconImg}${index}`} {...iconProps} />, ...iconInput];
-			} else {
-				iconInput = [...iconInput, <Icon key={`${item.iconImg}${index}`} {...iconProps} />];
-			}
-		});
-		return iconInput;
 	}
 
 	function renderErrors() {
@@ -174,11 +134,6 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		return errorNodes;
 	}
 
-	function hasError(): boolean {
-		if (!control) return false;
-		return control.errors.length > 0;
-	}
-
 	function focusInput() {
 		if (textareaRef && textareaRef.current) textareaRef.current.focus();
 	}
@@ -186,10 +141,9 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	return (
 		<Box
 			id={id}
-			className={classNames('rsInputTextarea', className, look, { error: hasError() })}
+			className={classNames('rsInputTextarea', className, look)}
 			bgColor={backgroundColor}
 			color={color}
-			borderColor={borderColor}
 			elementRef={boxRef}
 		>
 			<Box className={'inputTextareaContainer'} onClick={focusInput}>
