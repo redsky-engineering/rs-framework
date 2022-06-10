@@ -8,17 +8,12 @@ import { IRsFormControl } from '../form/FormControl';
 
 import Box from '../box/Box';
 import clone from 'lodash.clone';
-import { Icon, IconProps } from '../icon/Icon';
+import { Icon } from '../icon/Icon';
 
-export interface NewIconProps extends IconProps {
-	position: 'LEFT' | 'RIGHT';
-	isHidden?: boolean;
-}
-
-interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'> {
+interface InputTextProps
+	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'>,
+		Omit<ICommon.HtmlElementProps, 'display'> {
 	//TextInput Props
-	id?: string;
-	className?: string;
 	boxRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	type: 'text' | 'password' | 'tel' | 'email' | 'hidden' | 'date';
@@ -36,7 +31,7 @@ interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'on
 	borderColor?: string;
 	useFloatingPlaceholder?: boolean;
 
-	icon?: NewIconProps[];
+	icon?: ICommon.NewIconProps[];
 
 	errorProps?: {};
 

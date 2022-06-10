@@ -1,4 +1,6 @@
 import React from 'react';
+import { IconProps } from '../ui/icon/Icon';
+import { AvatarProps } from '../ui/avatar/Avatar';
 
 export namespace ICommon {
 	export interface HtmlElementProps {
@@ -127,6 +129,16 @@ export namespace ICommon {
 	export interface PaletteProps {
 		color?: string;
 		bgColor?: string;
+	}
+
+	export interface NewIconProps extends IconProps {
+		position: 'LEFT' | 'RIGHT';
+		isHidden?: boolean;
+	}
+
+	export interface NewAvatarProps extends AvatarProps {
+		position: 'LEFT' | 'RIGHT';
+		isHidden?: boolean;
 	}
 
 	export type AutoCompleteType =
