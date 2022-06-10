@@ -85,8 +85,5 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,html,scss,css,md,mdx,json}": "prettier --write"
-	},
-	"dependencies": {
-		"@types/lodash.clone": "^4.5.7"
 	}
 }
