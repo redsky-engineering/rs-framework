@@ -1,6 +1,6 @@
 {
 	"name": "@redskytech/framework",
-	"version": "0.0.9-alpha.7",
+	"version": "0.0.9-alpha.8",
 	"description": "RedSky Framework V2",
 	"main": "index.js",
 	"repository": "https://gitlab.com/redsky_public/framework",
@@ -20,6 +20,7 @@
 		"@storybook/preset-scss": "^1.0.3",
 		"@storybook/react": "^6.5.8",
 		"@storybook/testing-library": "^0.0.12",
+		"@types/lodash.clone": "^4.5.7",
 		"@types/lodash.clonedeep": "^4.5.7",
 		"@types/react": "^17.0.43",
 		"@types/react-dom": "^17.0.11",
