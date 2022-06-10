@@ -2,6 +2,23 @@
 
 A UI component kit for building React projects. Includes React components, custom hooks, and utilities functions.
 
+## Usage
+
+In order to be able to use this framework in your projects you will need to install the peer dependencies. This includes
+
+-   classnames
+-   react@17
+-   react-dom@17
+-   lodash.clonedeep
+
+In addition to peer dependencies you will also need to import the compiled CSS used throughout the framework into your project just once.
+You can do this by putting the following in your App.tsx
+
+`import "@redskytech/framework/index.css"`
+
+Some components might require extra integration. For example if you make use of the popupController you will need to add the
+`popupController.instance` to your App.tsx. See the individual stories for examples.
+
 ## Demo
 
 RedSky Framework utilizes storybook to demonstrate available components
@@ -32,12 +49,3 @@ Finally, publish to npmjs.org with the command
 
 Commit messages should follow guidelines specified at [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 This helps with auto changelog generated file.
-
-## Usage in projects
-
-In order to be able to use this framework in your projects you will need to install the peer dependencies. This includes
-
--   classnames
--   react@17
--   react-dom@17
--   lodash.clonedeep

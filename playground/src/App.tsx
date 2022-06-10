@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import './reset.scss';
-import { Chip, InputText, Label } from '../../src/ui';
+import { Chip, InputText, Label, popupController } from '../../src/ui';
 
 function App() {
 	return (
@@ -24,6 +24,7 @@ function App() {
 					chipStyles={{ color: 'black' }}
 				/>
 			</header>
+			{popupController.instance}
 		</div>
 	);
 }

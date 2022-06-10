@@ -31,7 +31,7 @@ export default {
 			minimize: true,
 			extract: true
 		}),
-		terser(),
+		// terser(),
 		visualizer({
 			filename: 'bundle-analysis.html',
 			open: true

@@ -3,8 +3,7 @@ import './Chip.scss';
 import { rippleEffect, transformProps } from '../../utils/internal';
 import { Icon, IconProps } from '../icon/Icon';
 import classNames from 'classnames';
-import Box from '../box/Box';
-import Label, { LabelProps } from '../label/Label';
+import { Label, LabelProps } from '../label/Label';
 import { ICommon } from '../../common/Interfaces';
 
 interface ChipStyles extends ICommon.BorderProps, ICommon.PaddingProps, ICommon.MarginProps, ICommon.PaletteProps {}
@@ -33,7 +32,11 @@ const Chip: React.FC<ChipProps> = (props) => {
 	let cssProperties = transformProps(props.chipStyles);
 
 	function renderIcons() {
-		let label = [<Label variant={props.labelVariant}>{props.label}</Label>];
+		let label = [
+			<Label key={'icon-label'} variant={props.labelVariant}>
+				{props.label}
+			</Label>
+		];
 
 		if (!props.icon) return label;
 

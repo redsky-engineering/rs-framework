@@ -6,7 +6,7 @@ import { ICommon } from '../../common/Interfaces';
 import { RsFormControl } from '../form';
 import { IRsFormControl } from '../form/FormControl';
 
-import Box from '../box/Box';
+import { Box } from '../box/Box';
 import clone from 'lodash.clone';
 import { Icon, IconProps } from '../icon/Icon';
 
@@ -15,7 +15,7 @@ export interface NewIconProps extends IconProps {
 	isHidden?: boolean;
 }
 
-interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'> {
+export interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'> {
 	//TextInput Props
 	id?: string;
 	className?: string;
