@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.5](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.4...v0.0.9-alpha.5) (2022-06-10)
+
+### Features
+
+-   add more variant types ([e26516a](https://gitlab.com/redsky_public/framework/commit/e26516adcd339159e4682cdff81147fb7011904b))
+-   added playground ([4ee6b22](https://gitlab.com/redsky_public/framework/commit/4ee6b22b224543368fe2af2a2f754f543a617a0a))
+-   exported all props individually ([9b22079](https://gitlab.com/redsky_public/framework/commit/9b22079d9225269494177c1f046242729243f230))
+
+### Bug Fixes
+
+-   **Avatar:** recursive import through index ([fdc71fc](https://gitlab.com/redsky_public/framework/commit/fdc71fc07911dc524c6d6ab0cd82fc181b4ff41b))
+
 ### [0.0.9-alpha.4](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.3...v0.0.9-alpha.4) (2022-04-11)
 
 ### Features
