@@ -2,9 +2,9 @@ import * as React from 'react';
 import './Avatar.scss';
 import { CSSProperties, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Box } from '../index';
 import { ICommon } from '../../common/Interfaces';
 import { transformProps } from '../../utils/internal';
+import { Box } from '../box/Box';
 const AvatarImage = './image/default-avatar.png';
 
 export interface AvatarProps extends ICommon.SpacingProps, ICommon.PaletteProps, ICommon.InteractProps<HTMLDivElement> {

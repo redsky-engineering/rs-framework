@@ -10,7 +10,7 @@ import { Box } from '../box/Box';
 import clone from 'lodash.clone';
 import { Icon } from '../icon/Icon';
 
-interface InputTextProps
+export interface InputTextProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'>,
 		Omit<ICommon.HtmlElementProps, 'display'> {
 	//TextInput Props

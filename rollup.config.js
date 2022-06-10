@@ -7,7 +7,7 @@ import typescript from '@rollup/plugin-typescript';
 import peerDeps from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import visualizer from 'rollup-plugin-visualizer';
-import { terser } from 'rollup-plugin-terser';
+// import { terser } from 'rollup-plugin-terser';
 
 export default {
 	input: './src/index.ts',
