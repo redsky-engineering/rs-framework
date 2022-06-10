@@ -33,6 +33,8 @@ This will output a self-contained publishable folder in the root/dist folder.
 
 ## Publishing
 
+**_Make sure to build first_**
+
 You first need to be a member of the @redskytech organization with publishing capability. Then you need to run the
 following command:
 
