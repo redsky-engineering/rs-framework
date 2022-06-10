@@ -1,7 +1,9 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import Avatar from './Avatar';
 
-<Meta title="RedSky/Avatar" component={Avatar} argTypes={{}} />
+<Meta title="RedSky/Avatar" component={Avatar} />
+
+export const Template = (args) => <Avatar {...args} />;
 
 # Avatar Component
 
@@ -13,10 +15,6 @@ provide this component both an image and a name, it will display the image.
 
 <ArgsTable of={Avatar} />
 
-<!--- This is your Story template function, shown here in React -->
-
-export const Template = (args) => <Avatar {...args} />;
-
 ## Avatar With Initials
 
 In this example the `Avatar` component has the props, {name: 'Alex Suess', backgroundColor: '#333333', color: '#fff'}.
@@ -26,27 +24,28 @@ The outcome is what is displayed below. The component takes in the full name: 'A
 	<Story
 		name="Avatar Using Initials"
 		args={{
-			widthHeight: 100,
-			name: 'alex L suess',
-			backgroundColor: '#333333',
-			color: '#fff'
+			widthHeight: '150',
+			name: 'Alex Suess',
+			color: 'white',
+			bgColor: '#323232'
 		}}
 	>
-		{Template.bind({})}
+		{Template.bind()}
 	</Story>
 </Canvas>
 
 ## Avatar With Image
 
-{' '}
 <Canvas>
 	<Story
-		name="Avatar Using Image"
+		name="Avatar Using an Image"
 		args={{
-			widthHeight: 100,
-			image: 'https://img1.looper.com/img/gallery/lines-in-the-matrix-movies-that-mean-more-than-you-realized/intro-1564174093.jpg'
+			widthHeight: '150',
+			image: 'https://cdn.travelversed.co/travelversed/wp-content/uploads/2015/08/F-eature6.jpg',
+			color: 'white',
+			bgColor: '#323232'
 		}}
 	>
-		{Template.bind({})}
+		{Template.bind()}
 	</Story>
 </Canvas>
