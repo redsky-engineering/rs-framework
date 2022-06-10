@@ -1,24 +1,21 @@
 import * as React from 'react';
 import './Chip.scss';
 import { rippleEffect, transformProps } from '../../utils/internal';
-import { Icon, IconProps } from '../icon/Icon';
+import { Icon } from '../icon/Icon';
 import classNames from 'classnames';
 import { Label, LabelProps } from '../label/Label';
 import { ICommon } from '../../common/Interfaces';
+import Avatar from '../avatar/Avatar';
 
 interface ChipStyles extends ICommon.BorderProps, ICommon.PaddingProps, ICommon.MarginProps, ICommon.PaletteProps {}
-
-export interface NewIconProps extends IconProps {
-	position: 'LEFT' | 'RIGHT';
-	isHidden?: boolean;
-}
 
 export interface ChipProps {
 	labelVariant: LabelProps['variant'];
 	label: string;
 	look: 'outlined' | 'standard';
 
-	icon?: NewIconProps[];
+	icon?: ICommon.NewIconProps[];
+	avatar?: ICommon.NewAvatarProps[];
 	chipStyles?: ChipStyles;
 
 	disabled?: boolean;
@@ -38,29 +35,54 @@ const Chip: React.FC<ChipProps> = (props) => {
 			</Label>
 		];
 
-		if (!props.icon) return label;
+		if (props.icon) {
+			props.icon.forEach((item, index) => {
+				const { position, isHidden, onClick, ...iconProps } = item;
+				if (isHidden) return;
 
-		props.icon.forEach((item, index) => {
-			const { position, isHidden, onClick, ...iconProps } = item;
+				const icon = (
+					<Icon
+						key={`${item.iconImg}${index}`}
+						{...iconProps}
+						onClick={(event) => {
+							if (onClick) onClick(event);
+							event?.stopPropagation();
+						}}
+					/>
+				);
 
-			if (isHidden) return;
-			const icon = (
-				<Icon
-					key={`${item.iconImg}${index}`}
-					{...iconProps}
-					onClick={(event) => {
-						if (onClick) onClick(event);
-						event?.stopPropagation();
-					}}
-				/>
-			);
+				if (position === 'LEFT') {
+					label = [icon, ...label];
+				} else {
+					label = [...label, icon];
+				}
+			});
+		}
 
-			if (position === 'LEFT') {
-				label = [icon, ...label];
-			} else {
-				label = [...label, icon];
-			}
-		});
+		if (props.avatar) {
+			props.avatar.forEach((item, index) => {
+				const { position, isHidden, onClick, ...avatarProps } = item;
+				if (isHidden) return;
+
+				const avatar = (
+					<Avatar
+						key={`${avatarProps.name || avatarProps.image} ${index}`}
+						onClick={(event) => {
+							if (onClick) onClick(event);
+							event?.stopPropagation();
+						}}
+						{...avatarProps}
+					/>
+				);
+
+				if (position === 'LEFT') {
+					label = [avatar, ...label];
+				} else {
+					label = [...label, avatar];
+				}
+			});
+		}
+
 		return label;
 	}
 
