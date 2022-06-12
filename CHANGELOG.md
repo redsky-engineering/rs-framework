@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.10](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.9...v0.0.9-alpha.10) (2022-06-12)
+
+### Bug Fixes
+
+-   classnames as external dependency ([93a8eb6](https://gitlab.com/redsky_public/framework/commit/93a8eb6fc6d5c85679a261646b61311d0ed10b39))
+
 ### [0.0.9-alpha.9](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.7...v0.0.9-alpha.9) (2022-06-12)
 
 ### Bug Fixes
