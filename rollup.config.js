@@ -37,5 +37,5 @@ export default {
 			open: true
 		})
 	],
-	external: ['classnames']
+	external: ['classnames', 'tslib', 'lodash.clonedeep', 'lodash.clone']
 };
