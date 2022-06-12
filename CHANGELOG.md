@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.11](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.10...v0.0.9-alpha.11) (2022-06-12)
+
+### Bug Fixes
+
+-   **rollup:** moved dependencies as external so they get included properly ([0f73901](https://gitlab.com/redsky_public/framework/commit/0f739018f395dc148e2a6a904551f362ff1018b9))
+
 ### [0.0.9-alpha.10](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.9...v0.0.9-alpha.10) (2022-06-12)
 
 ### Bug Fixes
