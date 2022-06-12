@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9-alpha.9](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.7...v0.0.9-alpha.9) (2022-06-12)
+
+### Bug Fixes
+
+-   moved types for lodash.clone to devDependencies ([b3f5674](https://gitlab.com/redsky_public/framework/commit/b3f5674741008984a0297fa6385f2abc6edd77cb))
+
 ### [0.0.9-alpha.8](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.7...v0.0.9-alpha.8) (2022-06-10)
 
 ### [0.0.9-alpha.7](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.6...v0.0.9-alpha.7) (2022-06-10)
