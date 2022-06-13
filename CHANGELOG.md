@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.11...v0.1.0) (2022-06-13)
+
+### Bug Fixes
+
+-   Adjusted InputText to use form direct path ([179ff02](https://gitlab.com/redsky_public/framework/commit/179ff0252ba9e4fbcda5b6bf4f13df11b37de2e6))
+-   **form:** Issue with returning valid when there were clearly errors. ([fc510cb](https://gitlab.com/redsky_public/framework/commit/fc510cb6d3a68804b7864308e23bed1b9a4b3279))
+-   Renamed App.css to App.scss ([9c21948](https://gitlab.com/redsky_public/framework/commit/9c219480bd11e8e8dc11c95c8c6a0508db1c595c))
+
 ### [0.0.9-alpha.11](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.10...v0.0.9-alpha.11) (2022-06-12)
 
 ### Bug Fixes
