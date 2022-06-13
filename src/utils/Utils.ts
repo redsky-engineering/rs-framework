@@ -928,6 +928,25 @@ export class ObjectUtils {
 	static includes<T extends U, U>(arrayToRead: ReadonlyArray<T>, valueToLookFor: U): valueToLookFor is T {
 		return arrayToRead.includes(valueToLookFor as T);
 	}
+
+	/**
+	 * Find key difference between two objects
+	 * @param obj1
+	 * @param obj2
+	 * @returns
+	 */
+	static findDiffKeys(obj1: any, obj2: any) {
+		if (!obj1 || !obj2) {
+			return {};
+		}
+
+		return Object.keys(obj1)
+			.filter((key) => !obj2.hasOwnProperty(key))
+			.reduce((result: any, current) => {
+				result[current] = obj1[current];
+				return result;
+			}, {});
+	}
 }
 
 /** Region utilities */
