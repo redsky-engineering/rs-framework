@@ -3,8 +3,7 @@ import './InputText.scss';
 import { InputHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
-import { RsFormControl } from '../form';
-import { IRsFormControl } from '../form/FormControl';
+import { RsFormControl, IRsFormControl } from '../form/FormControl';
 
 import { Box } from '../box/Box';
 import clone from 'lodash.clone';
