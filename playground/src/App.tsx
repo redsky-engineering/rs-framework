@@ -1,15 +1,18 @@
 import logo from './logo.svg';
 import './App.scss';
 import './reset.scss';
+import '../icons/style.css';
 import {
 	Chip,
 	InputText,
 	Label,
+	Button,
 	popupController,
 	RsFormControl,
 	RsFormGroup,
 	RsValidator,
-	RsValidatorEnum
+	RsValidatorEnum,
+	Icon
 } from '../../src/ui';
 import { useState } from 'react';
 
@@ -48,6 +51,9 @@ function App() {
 					look={'standard'}
 					chipStyles={{ color: 'black' }}
 				/>
+				<Button mt={20} look={'containedPrimary'}>
+					<Icon iconImg={'icon-close'} />I am a button
+				</Button>
 			</header>
 			{popupController.instance}
 		</div>

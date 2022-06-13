@@ -37,6 +37,28 @@
 	}
 }
 
-button {
-	font-size: calc(10px + 2vmin);
+.rsButton {
+	padding: 8px 16px;
+	border-radius: 20px;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 24px;
+
+	&.containedPrimary {
+		background: #f18da0;
+		color: white;
+		&:hover {
+		}
+		&:active {
+			background: linear-gradient(90deg, #f498ab 0%, #f8d2d9 100%);
+		}
+		&:focus {
+		}
+		&.small {
+		}
+		&:disabled {
+			background-color: #d4d0d7;
+			cursor: not-allowed;
+		}
+	}
 }
