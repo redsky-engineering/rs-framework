@@ -3,14 +3,13 @@ import './InputTextarea.scss';
 import { TextareaHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
-import { RsFormControl } from '../form';
+import { RsFormControl } from '../form/FormControl';
 import { IRsFormControl } from '../form/FormControl';
 
-import Box from '../box/Box';
+import { Box } from '../box/Box';
 import clone from 'lodash.clone';
-import { Icon, IconProps } from '../icon/Icon';
 
-interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
+export interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
 	//TextInput Props
 	id?: string;
 	className?: string;
@@ -21,7 +20,6 @@ interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaEle
 	value?: string | readonly string[] | undefined;
 
 	//Textarea properties
-	autoResize?: boolean;
 	minLength?: number;
 	maxLength?: number;
 
@@ -33,6 +31,8 @@ interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaEle
 	color?: string;
 	backgroundColor?: string;
 	useFloatingPlaceholder?: boolean;
+
+	errorProps?: {};
 
 	onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 	onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
@@ -54,7 +54,6 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		color,
 		placeholder,
 		value,
-		autoResize,
 		minLength,
 		maxLength,
 		useFloatingPlaceholder,
@@ -104,6 +103,8 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 				onChange={changeHandler}
 				value={!!formControl ? formControl.value : value}
 				autoComplete={getAutocompleteType()}
+				onFocus={props.onFocus}
+				onBlur={props.onBlur}
 				placeholder={useFloatingPlaceholder ? ' ' : placeholder}
 				{...textareaProps}
 			/>
