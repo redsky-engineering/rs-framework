@@ -3,16 +3,17 @@ import './App.scss';
 import './reset.scss';
 import '../icons/style.css';
 import {
-	Chip,
-	InputText,
-	Label,
 	Button,
+	Chip,
+	Icon,
+	InputText,
+	InputTextarea,
+	Label,
 	popupController,
 	RsFormControl,
 	RsFormGroup,
 	RsValidator,
-	RsValidatorEnum,
-	Icon
+	RsValidatorEnum
 } from '../../src/ui';
 import { useState } from 'react';
 
@@ -54,6 +55,12 @@ function App() {
 				<Button mt={20} look={'containedPrimary'}>
 					<Icon iconImg={'icon-close'} />I am a button
 				</Button>
+				<InputTextarea
+					minLength={2}
+					placeholder={'Type your text here'}
+					updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
+					// useFloatingPlaceholder
+				/>
 			</header>
 			{popupController.instance}
 		</div>
