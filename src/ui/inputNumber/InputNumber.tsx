@@ -5,10 +5,10 @@ import { ObjectUtils } from '../../utils/Utils';
 import './InputNumber.scss';
 
 interface InputNumberProps {
-	id?: string;
-	name?: string;
+	id?: string | null;
+	name?: string | null;
 	showButtons?: boolean;
-	inputMode?: 'decimal' | 'numeric';
+	inputMode?: 'decimal' | 'numeric' | null;
 	buttonLayout?: string;
 	mode?: string;
 	minFractionDigits?: number;
@@ -17,40 +17,42 @@ interface InputNumberProps {
 	currency?: string;
 	currencyDisplay?: string;
 	allowEmpty?: boolean;
-	min?: number;
-	max?: number;
+	min?: number | null;
+	max?: number | null;
 	disabled?: boolean;
 	readOnly?: boolean;
-	className?: string;
-	inputClassName?: string;
+	className?: string | null;
+	inputClassName?: string | null;
 	localeMatcher?: any;
 	useGrouping?: boolean;
 	format?: boolean;
 	autoFocus?: boolean;
-	value?: number;
-	prefix?: string;
-	suffix?: string;
-	ariaLabelledBy?: string;
-	decrementButtonClassName?: string;
+	value?: number | null;
+	prefix?: string | null;
+	suffix?: string | null;
+	ariaLabelledBy?: string | null;
+	decrementButtonClassName?: string | null;
 	decrementButtonIcon?: string;
-	incrementButtonClassName?: string;
+	incrementButtonClassName?: string | null;
 	incrementButtonIcon?: string;
 	step?: number;
-	onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-	onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
-	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-	onChange?: (data: { originalEvent: React.UIEvent; value: number }) => void;
-	onValueChange?: (data: {
-		originalEvent: React.UIEvent | null;
-		value: string | number | null;
-		stopPropagation: () => void;
-		preventDefault: () => void;
-		target: {
-			name: string;
-			id: string;
-			value: number;
-		};
-	}) => void;
+	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
+	onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
+	onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
+	onChange?: ((data: { originalEvent: React.UIEvent; value: number }) => void) | null;
+	onValueChange?:
+		| ((data: {
+				originalEvent: React.UIEvent | null;
+				value: string | number | null;
+				stopPropagation: () => void;
+				preventDefault: () => void;
+				target: {
+					name: string;
+					id: string;
+					value: number;
+				};
+		  }) => void)
+		| null;
 }
 
 interface InputNumberFormatOptions extends Intl.NumberFormatOptions {
@@ -1106,14 +1108,14 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return (
 			<input
 				ref={inputRef}
-				id={props.id}
+				id={props.id as string}
 				role="spinbutton"
 				className={className}
 				defaultValue={valueToRender}
 				inputMode={inputMode}
 				disabled={props.disabled}
 				readOnly={props.readOnly}
-				name={props.name}
+				name={props.name as string}
 				autoFocus={props.autoFocus}
 				onKeyDown={onInputKeyDown}
 				onKeyPress={onInputKeyPress}
@@ -1122,12 +1124,12 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 				onBlur={onInputBlur}
 				onFocus={onInputFocus}
 				onPaste={onPaste}
-				min={props.min}
-				max={props.max}
-				aria-valuemin={props.min}
-				aria-valuemax={props.max}
-				aria-valuenow={props.value}
-				aria-labelledby={props.ariaLabelledBy}
+				min={props.min as number}
+				max={props.max as number}
+				aria-valuemin={props.min as number}
+				aria-valuemax={props.max as number}
+				aria-valuenow={props.value as number}
+				aria-labelledby={props.ariaLabelledBy as string}
 			/>
 		);
 	}
@@ -1222,6 +1224,46 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 			</span>
 		</>
 	);
+};
+
+InputNumber.displayName = 'InputNumber';
+InputNumber.defaultProps = {
+	value: null,
+	format: true,
+	showButtons: false,
+	buttonLayout: 'stacked',
+	incrementButtonClassName: null,
+	decrementButtonClassName: null,
+	incrementButtonIcon: 'pi pi-angle-up',
+	decrementButtonIcon: 'pi pi-angle-down',
+	locale: undefined,
+	localeMatcher: undefined,
+	mode: 'decimal',
+	suffix: null,
+	prefix: null,
+	currency: undefined,
+	currencyDisplay: undefined,
+	useGrouping: true,
+	minFractionDigits: undefined,
+	maxFractionDigits: undefined,
+	id: null,
+	name: null,
+	allowEmpty: true,
+	step: 1,
+	min: null,
+	max: null,
+	disabled: false,
+	inputMode: null,
+	readOnly: false,
+	className: null,
+	autoFocus: false,
+	inputClassName: null,
+	ariaLabelledBy: null,
+	onValueChange: null,
+	onChange: null,
+	onBlur: null,
+	onFocus: null,
+	onKeyDown: null
 };
 
 export { InputNumber };
