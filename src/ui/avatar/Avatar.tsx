@@ -1,56 +1,47 @@
 import * as React from 'react';
 import './Avatar.scss';
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { ICommon } from '../../common/Interfaces';
+import { transformProps } from '../../utils/internal';
+import { Box } from '../box/Box';
 const AvatarImage = './image/default-avatar.png';
 
-export interface AvatarProps {
+export interface AvatarProps extends ICommon.SpacingProps, ICommon.PaletteProps, ICommon.InteractProps<HTMLDivElement> {
 	widthHeight: number;
 	image?: string;
 	name?: string;
-	color?: string;
-	backgroundColor?: string;
-	boxShadow?: boolean;
-	onClick?: () => void;
 	className?: string;
 }
 
 const Avatar: React.FC<AvatarProps> = (props) => {
-	const [avatarImage, setAvatarImage] = useState<string | undefined>(props.image);
+	const { widthHeight, image, name, onClick, elementRef, className, ...styleProps } = props;
+
+	const [avatarImage, setAvatarImage] = useState<string | undefined>(image);
 
 	useEffect(() => {
-		setAvatarImage(props.image);
-	}, [props.image]);
+		setAvatarImage(image);
+	}, [image]);
 
 	function renderStyles() {
-		let styles: any = {};
-		styles['height'] = `${props.widthHeight}px`;
-		styles['width'] = `${props.widthHeight}px`;
-		styles['fontSize'] = `calc(${props.widthHeight}px * .50)`;
-		styles['color'] = props.color;
-
-		if (props.backgroundColor) styles['backgroundColor'] = props.backgroundColor;
-		if (props.boxShadow)
-			styles['boxShadow'] =
-				'0 1px 3px 0px rgba(0,0,0, 0.2), 0 2px 1px -1px rgba(0,0,0, 0.12), 0 1px 1px 0 rgba(0,0,0,0.14)';
-		return styles;
-	}
-
-	function renderClasses() {
-		let classes = 'rsAvatar ';
-		if (props.className) classes += props.className;
-		return classes;
+		let styles: Partial<CSSProperties> = {};
+		styles['height'] = `${widthHeight}px`;
+		styles['width'] = `${widthHeight}px`;
+		styles['fontSize'] = `calc(${widthHeight}px * .50)`;
+		let transformedStyles = transformProps(styleProps);
+		return { ...styles, ...transformedStyles };
 	}
 
 	function formatName() {
-		if (!props.name) return '';
-		let name = props.name.split(' ');
-		let filteredName = name.filter((item) => {
+		if (!name) return '';
+		let newName = name.split(' ');
+		let filteredName = newName.filter((item) => {
 			return item.length > 0;
 		});
 		if (filteredName.length > 1) {
-			return filteredName[0][0].toLowerCase() + filteredName[1][0].toUpperCase();
+			return filteredName[0][0].toUpperCase() + filteredName[1][0].toUpperCase();
 		} else if (filteredName.length === 1) {
-			return filteredName[0][0].toLowerCase();
+			return filteredName[0][0].toUpperCase();
 		} else {
 			return '';
 		}
@@ -63,19 +54,30 @@ const Avatar: React.FC<AvatarProps> = (props) => {
 		}
 	}
 
-	return (
-		<div className={renderClasses()} style={renderStyles()} onClick={props.onClick}>
-			{!!avatarImage && (
+	function renderAvatar() {
+		if (!!image)
+			return (
 				<img
 					src={avatarImage}
 					onError={() => {
 						imageToUndefined();
 					}}
-					alt={''}
+					alt={'Avatar'}
 				/>
-			)}
-			{!avatarImage && props.name && <div className={'nameInitial'}>{formatName()}</div>}
-		</div>
+			);
+
+		return <Box className={'nameInitial'}>{formatName()}</Box>;
+	}
+
+	return (
+		<Box
+			className={classNames('rsAvatar', className)}
+			elementRef={elementRef}
+			style={renderStyles()}
+			onClick={onClick}
+		>
+			{renderAvatar()}
+		</Box>
 	);
 };
 

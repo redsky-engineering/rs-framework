@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { RefObject } from 'react';
 import './Label.scss';
 import { ICommon } from '../../common/Interfaces';
 import { transformProps } from '../../utils/internal';
@@ -10,7 +10,7 @@ export interface LabelProps
 		ICommon.DimensionProps,
 		ICommon.HtmlElementProps,
 		ICommon.PaletteProps,
-		Pick<ICommon.InteractProps<HTMLElement>, 'onClick'> {
+		ICommon.InteractProps<HTMLElement> {
 	variant:
 		| 'display1'
 		| 'h1'
@@ -37,8 +37,8 @@ export interface LabelProps
 type TagType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
-const Label = forwardRef<HTMLDivElement, LabelProps>((props, ref) => {
-	const { className, onClick, variant, id, ...other } = props;
+const Label: React.FC<LabelProps> = (props) => {
+	const { className, onClick, variant, id, elementRef, ...other } = props;
 	let styleValues = transformProps(other);
 
 	let ElementType: TagType = 'p';
@@ -48,13 +48,13 @@ const Label = forwardRef<HTMLDivElement, LabelProps>((props, ref) => {
 		<ElementType
 			id={id}
 			onClick={onClick || undefined}
-			ref={ref}
+			ref={elementRef as RefObject<HTMLParagraphElement>}
 			style={styleValues}
 			className={classNames('rsLabel', props.className, props.variant)}
 		>
 			{props.children}
 		</ElementType>
 	);
-});
+};
 
-export default Label;
+export { Label };

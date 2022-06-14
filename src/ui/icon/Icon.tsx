@@ -14,7 +14,7 @@ export interface IconProps extends ICommon.MarginProps {
 }
 
 const Icon: React.FC<IconProps> = (props) => {
-	const { iconImg, color, className, onClick, ...styleProps } = props;
+	const { iconImg, className, onClick, ...styleProps } = props;
 	const [iconImgSrc, setIconImgSrc] = useState<string>(iconImg);
 
 	useEffect(() => {
