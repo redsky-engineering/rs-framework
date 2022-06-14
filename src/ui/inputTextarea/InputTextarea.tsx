@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './InputTextarea.scss';
-import { TextareaHTMLAttributes, useEffect, useRef } from 'react';
+import { TextareaHTMLAttributes, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
 import { RsFormControl } from '../form/FormControl';
@@ -24,8 +24,8 @@ export interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLText
 	maxLength?: number;
 
 	//Form Control
-	control?: RsFormControl<string | string[] | number>;
-	updateControl?: (control: RsFormControl<string | string[] | number>) => void;
+	control?: RsFormControl<string>;
+	updateControl?: (control: RsFormControl<string>) => void;
 
 	//Css
 	color?: string;
@@ -61,9 +61,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	} = props;
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-	const [formControl, setFormControl] = React.useState<RsFormControl<string | string[] | number> | undefined>(
-		control
-	);
+	const [formControl, setFormControl] = useState<RsFormControl<string> | undefined>(control);
 
 	useEffect(() => {
 		setFormControl(control);

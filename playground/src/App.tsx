@@ -19,7 +19,10 @@ import { useState } from 'react';
 
 function App() {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
-		new RsFormGroup([new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')])])
+		new RsFormGroup([
+			new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
+			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')])
+		])
 	);
 
 	return (
@@ -58,8 +61,10 @@ function App() {
 				<InputTextarea
 					minLength={2}
 					placeholder={'Type your text here'}
-					updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
-					// useFloatingPlaceholder
+					updateControl={(control) => {
+						setFormGroup(formGroup.clone().update(control));
+					}}
+					control={formGroup.get<string>('testAreaText')}
 				/>
 			</header>
 			{popupController.instance}
