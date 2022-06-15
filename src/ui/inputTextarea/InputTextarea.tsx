@@ -66,6 +66,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	useEffect(() => {
 		setFormControl(control);
 	}, [control]);
+
 	async function changeHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
 		event.persist();
 		const target = event.target;
