@@ -6,6 +6,7 @@
 	border-radius: 16px;
 	width: fit-content;
 	overflow: hidden;
+	-webkit-tap-highlight-color: transparent;
 	&.standard {
 		background: #dee2e6;
 	}

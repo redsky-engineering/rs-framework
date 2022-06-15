@@ -1,5 +1,8 @@
 // We have to separate the Props and Component into different exports see this issue:
 // https://github.com/vitejs/vite/issues/2117
+export { Accordion } from './accordion/Accordion';
+export type { AccordionProps } from './accordion/Accordion';
+
 export { Label } from './label/Label';
 export type { LabelProps } from './label/Label';
 
@@ -17,6 +20,9 @@ export type { InputTextProps } from './inputText/InputText';
 
 export { Chip } from './chip/Chip';
 export type { ChipProps } from './chip/Chip';
+
+export { Select } from './select/Select';
+export type { SelectProps } from './select/Select';
 
 export { popupController } from './popupController/popupController';
 
