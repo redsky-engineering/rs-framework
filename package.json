@@ -27,7 +27,7 @@
 		"babel-loader": "^8.2.4",
 		"classnames": "^2.3.1",
 		"css-loader": "^6.7.1",
-		"husky": "^4.2.5",
+		"husky": "^8.0.0",
 		"lint-staged": "^10.0.8",
 		"lodash.clone": "^4.5.0",
 		"lodash.clonedeep": "^4.5.0",
@@ -57,9 +57,9 @@
 	},
 	"dependencies": {
 		"classnames": "^2.3.1",
-		"tslib": "^2.4.0",
+		"lodash.clone": "^4.5.0",
 		"lodash.clonedeep": "^4.5.0",
-		"lodash.clone": "^4.5.0"
+		"tslib": "^2.4.0"
 	},
 	"scripts": {
 		"storybook": "start-storybook -p 6006",
@@ -75,16 +75,12 @@
 		"release:patch": "standard-version --release-as patch",
 		"release:minor": "standard-version --release-as minor",
 		"release:major": "standard-version --release-as major",
-		"release:pre:alpha": "standard-version --prerelease alpha"
+		"release:pre:alpha": "standard-version --prerelease alpha",
+		"prepare": "husky install"
 	},
 	"types": "index.d.ts",
 	"publishConfig": {
 		"access": "public"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,html,scss,css,md,mdx,json}": "prettier --write"
