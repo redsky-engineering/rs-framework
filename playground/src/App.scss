@@ -1,0 +1,15 @@
+@import 'themes/reset';
+@import 'themes/button';
+
+.rsView {
+	height: 100%;
+	background-color: #ffffff;
+	overflow: unset !important;
+	.rsPage {
+		padding: 24px;
+		background-color: inherit;
+		color: inherit;
+		position: relative;
+		overflow-y: visible;
+	}
+}

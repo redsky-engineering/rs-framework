@@ -48,4 +48,4 @@ const Box: React.FC<BoxProps> = (props) => {
 		</div>
 	);
 };
-export default Box;
+export { Box };

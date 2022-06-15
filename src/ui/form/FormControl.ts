@@ -142,6 +142,6 @@ export class RsFormControl<T extends IRsFormControl> {
 				}
 			}
 		}
-		return true;
+		return this._errors.length === 0;
 	}
 }
