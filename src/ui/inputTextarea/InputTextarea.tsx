@@ -9,7 +9,9 @@ import { IRsFormControl } from '../form/FormControl';
 import { Box } from '../box/Box';
 import clone from 'lodash.clone';
 
-export interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
+export interface InputTextareaProps
+	extends ICommon.PaletteProps,
+		Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
 	//TextInput Props
 	id?: string;
 	className?: string;
@@ -27,9 +29,6 @@ export interface InputTextareaProps extends Omit<TextareaHTMLAttributes<HTMLText
 	control?: RsFormControl<string>;
 	updateControl?: (control: RsFormControl<string>) => void;
 
-	//Css
-	color?: string;
-	backgroundColor?: string;
 	useFloatingPlaceholder?: boolean;
 
 	errorProps?: {};
@@ -50,8 +49,6 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		autocompleteType,
 		onChange,
 		className,
-		backgroundColor,
-		color,
 		placeholder,
 		value,
 		minLength,
@@ -142,9 +139,9 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		<Box
 			id={id}
 			className={classNames('rsInputTextarea', className, look)}
-			bgColor={backgroundColor}
-			color={color}
 			elementRef={boxRef}
+			color={props.color}
+			bgColor={props.bgColor}
 		>
 			<Box className={'inputTextareaContainer'} onClick={focusInput}>
 				{renderTextarea()}

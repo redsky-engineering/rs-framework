@@ -55,14 +55,6 @@ function App() {
 			{/*		control={formGroup.get('test')}*/}
 			{/*		updateControl={(control) => setFormGroup(formGroup.clone().update(control))}*/}
 			{/*	/>*/}
-			<InputTextarea
-				minLength={2}
-				placeholder={'Type your text here'}
-				updateControl={(control) => {
-					setFormGroup(formGroup.clone().update(control));
-				}}
-				control={formGroup.get<string>('testAreaText')}
-			/>
 			<Chip labelVariant={'subtitle1'} label={'Hello World'} look={'standard'} chipStyles={{ color: 'black' }} />
 			<Button mt={20} look={'containedPrimary'}>
 				<Icon iconImg={'icon-close'} />I am a button
