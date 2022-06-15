@@ -1,0 +1,338 @@
+import { useState } from 'react';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { InputNumber } from '../index';
+
+<Meta title="RedSky/InputNumber" component={InputNumber} argTypes={{}} />
+
+# InputNumber Component
+
+### Prop Interface
+
+<ArgsTable of={InputNumber} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <InputNumber {...args} />;
+export const OutlinedTemplate = (args) => (
+	<div className={'inputOutlined'}>
+		<InputNumber {...args} />
+	</div>
+);
+
+## Numerals
+
+### Integer Only
+
+<Canvas>
+	<Story name="Integer Only">
+		{() => {
+            const [value1, setValue1] = useState(12345);
+            return (
+                <InputNumber
+                    id="integeronly"
+                    value={value1}
+                    onValueChange={(e) => setValue1(e.value)}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Without Grouping
+
+<Canvas>
+	<Story name="Without Grouping">
+		{() => {
+	        const [value2, setValue2] = useState(12345);
+            return (
+                <InputNumber
+                    id="withoutgrouping"
+                    value={value2}
+                    onValueChange={(e) => setValue2(e.value)}
+                    mode="decimal"
+                    useGrouping={false}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Min-Max Fraction Digits
+
+<Canvas>
+	<Story name="Min-Max Fraction Digits">
+		{() => {
+	        const [value3, setValue3] = useState(1234.56);
+            return (
+                <InputNumber
+                    id="minmaxfraction"
+                    value={value3}
+                    onValueChange={(e) => setValue3(e.value)}
+                    mode="decimal"
+                    minFractionDigits={2}
+                    maxFractionDigits={5}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Min-Max Boundaries
+
+<Canvas>
+	<Story name="Min-Max Boundaries">
+		{() => {
+	        const [value4, setValue4] = useState(50);
+            return (
+                <InputNumber
+                    id="minmax"
+                    value={value4}
+                    onValueChange={(e) => setValue4(e.value)}
+                    mode="decimal"
+                    min={0}
+                    max={100}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### User Locale
+
+<Canvas>
+	<Story name="User Locale">
+		{() => {
+	        const [value5, setValue5] = useState(123456);
+            return (
+                <InputNumber
+                    id="locale-user"
+                    value={value5}
+                    onValueChange={(e) => setValue5(e.value)}
+                    mode="decimal"
+                    minFractionDigits={2}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### US Locale
+
+<Canvas>
+	<Story name="US Locale">
+		{() => {
+	        const [value6, setValue6] = useState(123456);
+            return (
+                <InputNumber
+                    id="locale-us"
+                    value={value6}
+                    onValueChange={(e) => setValue6(e.value)}
+                    mode="decimal"
+                    locale="en-US"
+                    minFractionDigits={2}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### German Locale
+
+<Canvas>
+	<Story name="German Locale">
+		{() => {
+	        const [value7, setValue7] = useState(123456);
+            return (
+                <InputNumber
+                    id="locale-german"
+                    value={value7}
+                    onValueChange={(e) => setValue7(e.value)}
+                    mode="decimal"
+                    locale="de-DE"
+                    minFractionDigits={2}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Indian Locale
+
+<Canvas>
+	<Story name="Indian Locale">
+		{() => {
+	        const [value8, setValue8] = useState(123456);
+            return (
+                <InputNumber
+                    id="locale-indian"
+                    value={value8}
+                    onValueChange={(e) => setValue8(e.value)}
+                    mode="decimal"
+                    locale="en-IN"
+                    minFractionDigits={2}
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+## Currency
+
+### United States
+
+<Canvas>
+	<Story name="United States">
+		{() => {
+	        const [value9, setValue9] = useState(123456);
+            return (
+                <InputNumber
+                    id="currency-us"
+                    value={value9}
+                    onValueChange={(e) => setValue9(e.value)}
+                    mode="currency"
+                    currency="USD"
+                    locale="en-US"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Germany
+
+<Canvas>
+	<Story name="Germany">
+		{() => {
+	        const [value10, setValue10] = useState(123456);
+            return (
+                <InputNumber
+                    id="currency-germany"
+                    value={value10}
+                    onValueChange={(e) => setValue10(e.value)}
+                    mode="currency"
+                    currency="EUR"
+                    locale="de-DE"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### India
+
+<Canvas>
+	<Story name="India">
+		{() => {
+	        const [value11, setValue11] = useState(123456);
+            return (
+                <InputNumber
+                    id="currency-india"
+                    value={value11}
+                    onValueChange={(e) => setValue11(e.value)}
+                    mode="currency"
+                    currency="INR"
+                    currencyDisplay="code"
+                    locale="en-IN"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Japan
+
+<Canvas>
+	<Story name="Japan">
+		{() => {
+	        const [value12, setValue12] = useState(123456);
+            return (
+                <InputNumber
+                    id="currency-japan"
+                    value={value12}
+                    onValueChange={(e) => setValue12(e.value)}
+                    mode="currency"
+                    currency="JPY"
+                    locale="jp-JP"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+## Prefix and Suffix
+
+### Mile
+
+<Canvas>
+	<Story name="Mile">
+		{() => {
+	        const [value13, setValue13] = useState(20);
+            return (
+                <InputNumber
+                    id="mile"
+                    value={value13}
+                    onValueChange={(e) => setValue13(e.value)}
+                    suffix=" mi"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Percent
+
+<Canvas>
+	<Story name="Percent">
+		{() => {
+	        const [value14, setValue14] = useState(30);
+            return (
+                <InputNumber
+                    id="percent"
+                    value={value14}
+                    onValueChange={(e) => setValue14(e.value)}
+                    prefix="%"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Expiry
+
+<Canvas>
+	<Story name="Expiry">
+		{() => {
+	        const [value15, setValue15] = useState(10);
+            return (
+                <InputNumber
+                    id="expiry"
+                    value={value15}
+                    onValueChange={(e) => setValue15(e.value)}
+                    prefix="Expires in "
+                    suffix=" days"
+                />
+            );
+        }}
+	</Story>
+</Canvas>
+
+### Temperature
+
+<Canvas>
+	<Story name="Temperature">
+		{() => {
+	        const [value16, setValue16] = useState(40);
+            return (
+                <InputNumber
+                    id="temperature"
+                    value={value16}
+                    onValueChange={(e) => setValue16(e.value)}
+                    prefix="&uarr; "
+                    suffix="℃"
+                    min={0}
+                    max={40}
+                />
+            );
+        }}
+	</Story>
+</Canvas>

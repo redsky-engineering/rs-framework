@@ -27,6 +27,7 @@ interface InputNumberProps {
 	useGrouping?: boolean;
 	format?: boolean;
 	autoFocus?: boolean;
+	step?: number;
 	value?: number | null;
 	prefix?: string | null;
 	suffix?: string | null;
@@ -35,7 +36,6 @@ interface InputNumberProps {
 	decrementButtonIcon?: string;
 	incrementButtonClassName?: string | null;
 	incrementButtonIcon?: string;
-	step?: number;
 	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
 	onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
 	onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
