@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://gitlab.com/redsky_public/framework/compare/v0.1.1...v0.1.2) (2022-06-14)
+
+### [0.1.1](https://gitlab.com/redsky_public/framework/compare/v0.1.0...v0.1.1) (2022-06-14)
+
+### Features
+
+-   **Button:** Imported and updated the Button component to match new framework rules. ([165a262](https://gitlab.com/redsky_public/framework/commit/165a2623abe1b8550193e2ba78b265b15e34c78e))
+
 ## [0.1.0](https://gitlab.com/redsky_public/framework/compare/v0.0.9-alpha.11...v0.1.0) (2022-06-13)
 
 ### Bug Fixes

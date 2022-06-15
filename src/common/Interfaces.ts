@@ -1,6 +1,24 @@
 import React from 'react';
-import { IconProps } from '../ui/icon/Icon';
+import { IconProps } from '../ui';
 import { AvatarProps } from '../ui/avatar/Avatar';
+
+export namespace I996 {
+	export interface NavigateOptions {
+		view?: string | string[]; // The view in which to load the new page into. This would override the router' definition. If no view is specified in either then it loads in current view
+	}
+
+	/**
+	 * Return true on accept navigation, false or an error string if failed
+	 */
+	export type RouteGuard = (path: string) => boolean | string;
+
+	export interface RouteDetails<T> {
+		path: T; // The path to be used when loading the page component, '*' is any page not found 404
+		page: React.ReactNode;
+		routeGuard?: RouteGuard;
+		options?: I996.NavigateOptions; // Options for the route. Most common will be view to default load page into
+	}
+}
 
 export namespace ICommon {
 	export interface HtmlElementProps {

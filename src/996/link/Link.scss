@@ -1,0 +1,9 @@
+.rsLink {
+	text-decoration: inherit;
+	color: inherit;
+	cursor: pointer;
+
+	&.noPointer {
+		cursor: inherit;
+	}
+}
