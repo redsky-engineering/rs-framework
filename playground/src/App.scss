@@ -1,64 +1,15 @@
-.App {
-	text-align: center;
-}
+@import 'themes/reset';
+@import 'themes/button';
 
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
-}
-
-.App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-.rsButton {
-	padding: 8px 16px;
-	border-radius: 20px;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 24px;
-
-	&.containedPrimary {
-		background: #f18da0;
-		color: white;
-		&:hover {
-		}
-		&:active {
-			background: linear-gradient(90deg, #f498ab 0%, #f8d2d9 100%);
-		}
-		&:focus {
-		}
-		&.small {
-		}
-		&:disabled {
-			background-color: #d4d0d7;
-			cursor: not-allowed;
-		}
+.rsView {
+	height: 100%;
+	background-color: #ffffff;
+	overflow: unset !important;
+	.rsPage {
+		padding: 24px;
+		background-color: inherit;
+		color: inherit;
+		position: relative;
+		overflow-y: visible;
 	}
 }
