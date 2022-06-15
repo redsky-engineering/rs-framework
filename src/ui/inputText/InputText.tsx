@@ -32,8 +32,6 @@ export interface InputTextProps
 
 	icon?: ICommon.NewIconProps[];
 
-	errorProps?: {};
-
 	// searchIcon?: boolean;
 	maxLength?: number; // Only works with text inputText type
 	minLength?: number; // Only works with text inputText type

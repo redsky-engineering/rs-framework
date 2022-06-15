@@ -31,8 +31,6 @@ export interface InputTextareaProps
 
 	useFloatingPlaceholder?: boolean;
 
-	errorProps?: {};
-
 	onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 	onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 	onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, control?: RsFormControl<IRsFormControl>) => void;
