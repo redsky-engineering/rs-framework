@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://gitlab.com/redsky_public/framework/compare/v0.1.2...v0.1.3) (2022-06-16)
+
+### Features
+
+-   **toastify:** Imported and updated the Toastify component to match new framework rules. ([93a35e6](https://gitlab.com/redsky_public/framework/commit/93a35e69f99d077fafc6473dda250b68eed59c3d))
+-   updated husky to the latest version ([790432f](https://gitlab.com/redsky_public/framework/commit/790432f9ca183a6656b048968f1e60dc0f90b101))
+
 ### [0.1.2](https://gitlab.com/redsky_public/framework/compare/v0.1.1...v0.1.2) (2022-06-14)
 
 ### [0.1.1](https://gitlab.com/redsky_public/framework/compare/v0.1.0...v0.1.1) (2022-06-14)
