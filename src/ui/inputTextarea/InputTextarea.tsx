@@ -11,10 +11,9 @@ import clone from 'lodash.clone';
 
 export interface InputTextareaProps
 	extends ICommon.PaletteProps,
+		Omit<ICommon.HtmlElementProps, 'display'>,
 		Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
 	//TextInput Props
-	id?: string;
-	className?: string;
 	boxRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	noAutocomplete?: boolean;
