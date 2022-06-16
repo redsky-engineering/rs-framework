@@ -1135,14 +1135,8 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	}
 
 	function createUpButton() {
-		const className = classNames(
-			'p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component',
-			{
-				'p-disabled': props.disabled
-			},
-			props.incrementButtonClassName
-		);
-		const icon = classNames('p-button-icon', props.incrementButtonIcon);
+		const className = classNames('', props.incrementButtonClassName);
+		const icon = classNames('', props.incrementButtonIcon);
 
 		return (
 			<button
@@ -1165,7 +1159,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 	function createDownButton() {
 		const className = '';
-		const icon = classNames('p-button-icon', props.decrementButtonIcon);
+		const icon = classNames('', props.decrementButtonIcon);
 
 		return (
 			<button
@@ -1192,7 +1186,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 		if (stacked) {
 			return (
-				<span className="p-inputnumber-button-group">
+				<span className="rsInputnumberButtonGroup">
 					{upButton}
 					{downButton}
 				</span>
@@ -1234,8 +1228,8 @@ InputNumber.defaultProps = {
 	buttonLayout: 'stacked',
 	incrementButtonClassName: null,
 	decrementButtonClassName: null,
-	incrementButtonIcon: 'pi pi-angle-up',
-	decrementButtonIcon: 'pi pi-angle-down',
+	incrementButtonIcon: '',
+	decrementButtonIcon: '',
 	locale: undefined,
 	localeMatcher: undefined,
 	mode: 'decimal',
