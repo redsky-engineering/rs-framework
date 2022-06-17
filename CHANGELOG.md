@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://gitlab.com/redsky_public/framework/compare/v0.1.6...v0.1.7) (2022-06-17)
+
+### Bug Fixes
+
+-   **Toastify:** Changed to required dependency ([16b0ec7](https://gitlab.com/redsky_public/framework/commit/16b0ec72803c27b639ad7e989143f5298fce68f9))
+
 ### [0.1.6](https://gitlab.com/redsky_public/framework/compare/v0.1.5...v0.1.6) (2022-06-17)
 
 ### Bug Fixes
