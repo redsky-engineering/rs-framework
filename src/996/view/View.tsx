@@ -100,7 +100,7 @@ export class View extends Component<ViewProps, ViewState> {
 
 	render() {
 		return (
-			<div id={this.props.id} className="rs-view rsView " ref={this.viewElement}>
+			<div id={this.props.id} className="rsView" ref={this.viewElement}>
 				{this.renderPages()}
 			</div>
 		);

@@ -8,7 +8,7 @@ export interface PageProps {
 }
 
 const Page: React.FC<PageProps> = (props) => {
-	return <Box className={classNames('rsPage')}>{props.children}</Box>;
+	return <Box className={classNames('rsPage', props.className)}>{props.children}</Box>;
 };
 
 export { Page };
