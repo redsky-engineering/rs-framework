@@ -1,11 +1,13 @@
 import classNames from 'classnames';
+import clone from 'lodash.clone';
 import React, { MouseEvent } from 'react';
+import { ICommon } from '../../common/Interfaces';
 import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { ObjectUtils } from '../../utils/Utils';
+import { RsFormControl } from '../form/FormControl';
 import './InputNumber.scss';
 
-interface InputNumberProps {
-	id?: string | null;
+interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'> {
 	name?: string | null;
 	showButtons?: boolean;
 	inputMode?: 'decimal' | 'numeric' | null;
@@ -21,7 +23,6 @@ interface InputNumberProps {
 	max?: number | null;
 	disabled?: boolean;
 	readOnly?: boolean;
-	className?: string | null;
 	inputClassName?: string | null;
 	localeMatcher?: any;
 	useGrouping?: boolean;
@@ -32,10 +33,12 @@ interface InputNumberProps {
 	prefix?: string | null;
 	suffix?: string | null;
 	ariaLabelledBy?: string | null;
-	decrementButtonClassName?: string | null;
-	decrementButtonIcon?: string;
-	incrementButtonClassName?: string | null;
-	incrementButtonIcon?: string;
+
+	//Form Control
+	control?: RsFormControl<number> | null;
+	updateControl?: ((control: RsFormControl<number>) => void) | null;
+
+	//Event Handlers
 	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
 	onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
 	onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
@@ -84,6 +87,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		disabled,
 		readOnly,
 		className: _className,
+		inputClassName,
 		localeMatcher,
 		useGrouping,
 		format,
@@ -92,8 +96,9 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		prefix,
 		suffix,
 		ariaLabelledBy,
-		decrementButtonIcon,
 		step,
+		control,
+		updateControl,
 		onKeyDown,
 		onFocus,
 		onBlur,
@@ -122,9 +127,11 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	const _index = React.useRef<Function | null>(null);
 
 	const stacked = props.showButtons && props.buttonLayout === 'stacked';
-	const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
-	const vertical = props.showButtons && props.buttonLayout === 'vertical';
 	const inputMode = _inputMode || (props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal');
+
+	const [formControl, setFormControl] = React.useState<RsFormControl<number> | undefined>(
+		control as RsFormControl<number>
+	);
 
 	function getOptions(): InputNumberFormatOptions {
 		return {
@@ -845,13 +852,30 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		(_minusSign.current as RegExp).lastIndex = 0;
 	}
 
-	function updateValue(event: React.UIEvent, valueStr: string, insertedValueStr: string | null, operation: string) {
+	async function updateValue(
+		event: React.UIEvent,
+		valueStr: string,
+		insertedValueStr: string | null,
+		operation: string
+	) {
 		let currentValue = inputRef.current?.value as string;
 		let newValue = null;
 
 		if (valueStr != null) {
 			newValue = evaluateEmpty(parseValue(valueStr) as number);
 			updateInput(newValue, insertedValueStr as string, operation, valueStr);
+
+			const updated = clone(formControl);
+			if (updated) {
+				updated.value = newValue;
+				if ((updated.value + '').length === 0) {
+					updated.clearErrors();
+				} else {
+					await updated.validate();
+				}
+				setFormControl(updated);
+				if (updateControl) updateControl(updated);
+			}
 
 			handleOnChange(event, currentValue, newValue);
 		}
@@ -1072,6 +1096,21 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return numberFormat.current;
 	}
 
+	function renderErrors() {
+		if (!formControl) return;
+		const errorNodes: React.ReactNode[] = [];
+		const errors = formControl.errors;
+		for (let index = 0; index < errors.length; index++) {
+			const errorMessage = formControl.getErrorMessage(errors[index]);
+			errorNodes.push(
+				<div key={`${index}Error`} className={'rsInputErrorMessage'}>
+					{errorMessage}
+				</div>
+			);
+		}
+		return errorNodes;
+	}
+
 	React.useEffect(() => {
 		constructParser();
 
@@ -1130,18 +1169,15 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 				aria-valuemax={props.max as number}
 				aria-valuenow={props.value as number}
 				aria-labelledby={props.ariaLabelledBy as string}
+				{...inputProps}
 			/>
 		);
 	}
 
 	function createUpButton() {
-		const className = classNames('', props.incrementButtonClassName);
-		const icon = classNames('', props.incrementButtonIcon);
-
 		return (
 			<button
 				type="button"
-				className={className}
 				onMouseLeave={onUpButtonMouseLeave}
 				onMouseDown={onUpButtonMouseDown}
 				onMouseUp={onUpButtonMouseUp}
@@ -1152,19 +1188,15 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 				disabled={props.disabled}
 				tabIndex={-1}
 			>
-				<span className={icon}></span>
+				<span></span>
 			</button>
 		);
 	}
 
 	function createDownButton() {
-		const className = '';
-		const icon = classNames('', props.decrementButtonIcon);
-
 		return (
 			<button
 				type="button"
-				className={className}
 				onMouseLeave={onDownButtonMouseLeave}
 				onMouseDown={onDownButtonMouseDown}
 				onMouseUp={onDownButtonMouseUp}
@@ -1175,7 +1207,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 				disabled={props.disabled}
 				tabIndex={-1}
 			>
-				<span className={icon}></span>
+				<span></span>
 			</button>
 		);
 	}
@@ -1206,16 +1238,17 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	};
 
 	const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
-	const className = _className;
 	const inputElement = createInputElement();
 	const buttonGroup = createButtonGroup();
+	const errors = renderErrors();
 
 	return (
 		<>
-			<span ref={elementRef} id={props.id} className={className} {...otherProps}>
+			<span ref={elementRef} id={props.id} className={_className} {...otherProps}>
 				{inputElement}
 				{buttonGroup}
 			</span>
+			{errors}
 		</>
 	);
 };
@@ -1226,10 +1259,6 @@ InputNumber.defaultProps = {
 	format: true,
 	showButtons: false,
 	buttonLayout: 'stacked',
-	incrementButtonClassName: null,
-	decrementButtonClassName: null,
-	incrementButtonIcon: '',
-	decrementButtonIcon: '',
 	locale: undefined,
 	localeMatcher: undefined,
 	mode: 'decimal',
@@ -1240,7 +1269,7 @@ InputNumber.defaultProps = {
 	useGrouping: true,
 	minFractionDigits: undefined,
 	maxFractionDigits: undefined,
-	id: null,
+	id: '',
 	name: null,
 	allowEmpty: true,
 	step: 1,
@@ -1249,10 +1278,12 @@ InputNumber.defaultProps = {
 	disabled: false,
 	inputMode: null,
 	readOnly: false,
-	className: null,
+	className: '',
 	autoFocus: false,
 	inputClassName: null,
 	ariaLabelledBy: null,
+	control: null,
+	updateControl: null,
 	onValueChange: null,
 	onChange: null,
 	onBlur: null,
