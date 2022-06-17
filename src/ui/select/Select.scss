@@ -1,0 +1,48 @@
+.rsSelect {
+	[class*='container'] {
+		//Use to target container css
+	}
+	[class*='control'] {
+		//Use to target Control css
+		cursor: pointer;
+		&.error {
+			border-color: #f44336;
+		}
+	}
+	[class*='ValueContainer'] {
+		//Use to target ValueContainer css
+	}
+	[class*='menu'] {
+		//Use to target Menu css
+	}
+	[class*='option'] {
+		//Use to target Menu css
+		cursor: pointer;
+		&[class*='9gakcf-option'] {
+			//Use to target Selected Option
+		}
+	}
+	[class*='placeholder'] {
+		//Use to target Placeholder css
+		&.error {
+			color: #f44336;
+		}
+	}
+	[class*='input'] {
+		//Use to target Input css
+	}
+	[class*='IndicatorsContainer'] {
+		//Use to target the container wrapping the separator and chevron
+	}
+	[class*='indicatorSeparator'] {
+		//Use to target the separator between the chevron and Select
+	}
+	[class*='indicatorContainer'] {
+		//Use to target the chevron css
+	}
+	.rsInputErrorMessage {
+		text-align: left;
+
+		color: #f44336;
+	}
+}

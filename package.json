@@ -19,7 +19,6 @@
 		"@storybook/manager-webpack5": "^6.5.8",
 		"@storybook/preset-scss": "^1.0.3",
 		"@storybook/react": "^6.5.8",
-		"@types/react-toastify": "^4.1.0",
 		"@storybook/testing-library": "^0.0.12",
 		"@types/lodash.clone": "^4.5.7",
 		"@types/lodash.clonedeep": "^4.5.7",
