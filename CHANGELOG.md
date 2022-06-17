@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://gitlab.com/redsky_public/framework/compare/v0.1.7...v0.1.8) (2022-06-17)
+
+### Bug Fixes
+
+-   **toastify): Cleaned up the Toastify file and changed the label color back to nothing. fix(button:** Small classname was re-added. ([9693419](https://gitlab.com/redsky_public/framework/commit/9693419659e7e002eafd0ad25705a9e15d287563))
+
+### [0.1.7](https://gitlab.com/redsky_public/framework/compare/v0.1.6...v0.1.7) (2022-06-17)
+
+### Bug Fixes
+
+-   **Toastify:** Changed to required dependency ([16b0ec7](https://gitlab.com/redsky_public/framework/commit/16b0ec72803c27b639ad7e989143f5298fce68f9))
+
+### [0.1.6](https://gitlab.com/redsky_public/framework/compare/v0.1.5...v0.1.6) (2022-06-17)
+
+### Bug Fixes
+
+-   **F996:** Exported namespace ([1fb7892](https://gitlab.com/redsky_public/framework/commit/1fb7892117739ff6208442e09c7207579d9bbdf1))
+
+### [0.1.5](https://gitlab.com/redsky_public/framework/compare/v0.1.4...v0.1.5) (2022-06-17)
+
+### Bug Fixes
+
+-   **Link:** Updated import for Router ([9b600df](https://gitlab.com/redsky_public/framework/commit/9b600dfdd972f6a6f7782cd09e473204dfe54fa9))
+
+### [0.1.4](https://gitlab.com/redsky_public/framework/compare/v0.1.3...v0.1.4) (2022-06-17)
+
+### Features
+
+-   Removed css inputs and extened ICommon.PaletteProps instead. Tested and still works. ([939a123](https://gitlab.com/redsky_public/framework/commit/939a12385ecfc0a16c51e7404430b5632ac84540))
+
+### Bug Fixes
+
+-   **996:** Imported and updated the 996 component to match new framework rules. ([3e52719](https://gitlab.com/redsky_public/framework/commit/3e52719634e7889f0c8d02f321eba1fa365e4217))
+-   **996:** Imported and updated the 996 component to match new framework rules. ([7e58536](https://gitlab.com/redsky_public/framework/commit/7e585368b17a693293fa5244bb530af49f95b527))
+-   Added space between lines ([b0e5532](https://gitlab.com/redsky_public/framework/commit/b0e5532b14556800afcc93a7ee3d0fc522c3e037))
+
 ### [0.1.3](https://gitlab.com/redsky_public/framework/compare/v0.1.2...v0.1.3) (2022-06-16)
 
 ### Features
