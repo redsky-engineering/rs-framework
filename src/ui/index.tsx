@@ -19,12 +19,17 @@ export { InputText } from './inputText/InputText';
 export type { InputTextProps } from './inputText/InputText';
 
 export { InputTextarea } from './inputTextarea/InputTextarea';
+export type { InputTextareaProps } from './inputTextarea/InputTextarea';
 
 export { Chip } from './chip/Chip';
 export type { ChipProps } from './chip/Chip';
 
-export { Select } from './select/Select';
-export type { SelectProps } from './select/Select';
+// Not ready yet
+// export { Select } from './select/Select';
+// export type { SelectProps } from './select/Select';
+
+export { Avatar } from './avatar/Avatar';
+export type { AvatarProps } from './avatar/Avatar';
 
 export { popupController } from './popupController/popupController';
 
