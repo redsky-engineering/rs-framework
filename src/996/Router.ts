@@ -1,5 +1,5 @@
 import events from './events';
-import View from './view/View';
+import { View } from './view/View';
 import BrowserNavigation, { NavigationHistoryState } from './BrowserNavigation';
 import { I996 } from '../common/Interfaces';
 
@@ -686,4 +686,4 @@ class Router {
 	}
 }
 
-export default Router;
+export { Router };
