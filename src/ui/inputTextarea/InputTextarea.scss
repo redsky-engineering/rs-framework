@@ -1,0 +1,47 @@
+.rsInputTextarea {
+	.inputTextareaContainer {
+		display: flex;
+		align-items: center;
+		border: inherit;
+		bordercolor: inherit;
+
+		textarea {
+			width: 100%;
+			height: 100%;
+			background-color: inherit;
+			color: inherit;
+			border: none;
+		}
+
+		.floatingPlaceholder {
+			margin-bottom: -5px;
+			height: 100%;
+			width: 100%;
+			position: relative;
+			border: inherit;
+			bordercolor: inherit;
+			label {
+				display: block;
+				position: absolute;
+				top: 50%;
+				transition: all 300ms;
+				transform: translateY(-130%);
+				pointer-events: none;
+				font-size: 12px;
+			}
+			&:focus-within label,
+			textarea:not(:placeholder-shown) + label {
+				transform: scale(1) translateY(-32px);
+				opacity: 1;
+				z-index: 1;
+				font-size: 10px;
+			}
+		}
+	}
+
+	.rsInputTextareaErrorMessage {
+		text-align: left;
+		color: #f44336;
+		margin-top: 8px;
+	}
+}

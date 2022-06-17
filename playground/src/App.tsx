@@ -2,16 +2,17 @@ import './App.scss';
 import './themes/reset.scss';
 import '../icons/style.css';
 import {
-	Chip,
-	InputText,
-	Label,
 	Button,
+	Chip,
+	Icon,
+	InputText,
+	InputTextarea,
+	Label,
 	popupController,
 	RsFormControl,
 	RsFormGroup,
 	RsValidator,
-	RsValidatorEnum,
-	Icon
+	RsValidatorEnum
 } from '../../src/ui';
 import { useEffect, useState } from 'react';
 import { View } from '../../src/996';
@@ -19,7 +20,10 @@ import router from './router';
 
 function App() {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
-		new RsFormGroup([new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')])])
+		new RsFormGroup([
+			new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
+			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')])
+		])
 	);
 
 	useEffect(() => {
@@ -46,13 +50,19 @@ function App() {
 			{/*	>*/}
 			{/*		H3 Label*/}
 			{/*	</Label>*/}
-			{/*	<InputText*/}
-			{/*		type={'text'}*/}
-			{/*		control={formGroup.get('test')}*/}
-			{/*		updateControl={(control) => setFormGroup(formGroup.clone().update(control))}*/}
-			{/*	/>*/}
+			<InputText
+				type={'text'}
+				control={formGroup.get('test')}
+				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
+			/>
 			<Chip labelVariant={'subtitle1'} label={'Hello World'} look={'standard'} chipStyles={{ color: 'black' }} />
-			<Button mt={20} look={'containedPrimary'}>
+			<Button
+				mt={20}
+				look={'containedPrimary'}
+				onClick={async () => {
+					console.log(await formGroup.isValid());
+				}}
+			>
 				<Icon iconImg={'icon-close'} />I am a button
 			</Button>
 			{/*</header>*/}

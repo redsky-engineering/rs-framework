@@ -15,6 +15,8 @@ export type { IconProps } from './icon/Icon';
 export { InputText } from './inputText/InputText';
 export type { InputTextProps } from './inputText/InputText';
 
+export { InputTextarea } from './inputTextarea/InputTextarea';
+
 export { Chip } from './chip/Chip';
 export type { ChipProps } from './chip/Chip';
 

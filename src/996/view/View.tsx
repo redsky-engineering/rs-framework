@@ -16,7 +16,7 @@ interface ViewState {
 	path: string;
 }
 
-export default class View extends Component<ViewProps, ViewState> {
+export class View extends Component<ViewProps, ViewState> {
 	constructor(props: ViewProps) {
 		super(props);
 		this.state = {
