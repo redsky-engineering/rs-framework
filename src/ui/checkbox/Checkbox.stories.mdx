@@ -8,6 +8,7 @@ import { Checkbox } from '../index';
 The `Checkbox` component requires the user to create a themes/checkbox.scss file and style the checkbox there.
 You can follow the scss layout for the checkbox to get the correct checkbox styles.
 The checkbox component uses the Label component as the label text. If label is not desired, then leave the labelText field blank.
+The checkbox also utilizes RsFormControl. To see an example of this being utilized, Look at the ComponentDemoPage for more information.
 
 ### Prop Interface
 
@@ -19,16 +20,68 @@ export const Template = (args) => <Checkbox {...args} />;
 
 ## Checkbox Position Right
 
-This is the default labelPosition when using the checkbox. W
+This is the default labelPosition when using the checkbox. You can also set it with the prop `labelPosition: 'RIGHT'` as well.
 
 <Canvas>
 	<Story
 		name="Checkbox Position Right"
 		args={{
 			look: 'containedPrimary',
-			labelText: 'This is my label to the right',
-			labelVariant: 'H1',
+			labelText: 'This is the label to the right',
+			labelVariant: 'subtitle1',
 			labelPosition: 'RIGHT'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Checkbox Position Top
+
+This is the labelPosition being set to Top when using the checkbox.
+
+<Canvas>
+	<Story
+		name="Checkbox Position Top"
+		args={{
+			look: 'containedPrimary',
+			labelText: 'This is the label to the top',
+			labelVariant: 'subtitle1',
+			labelPosition: 'TOP'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Checkbox Default No Label
+
+This is an example of the checkbox not having a label initiated.
+
+<Canvas>
+	<Story
+		name="Checkbox Default No Label"
+		args={{
+			look: 'containedPrimary'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Checkbox Disabled
+
+This is an example of the checkbox being disabled.
+
+<Canvas>
+	<Story
+		name="Checkbox Disabled"
+		args={{
+			look: 'containedPrimary',
+			labelText: 'This is the button disabled',
+			labelVariant: 'subtitle1',
+			labelPosition: 'RIGHT',
+			disabled: true
 		}}
 	>
 		{Template.bind({})}

@@ -66,6 +66,7 @@ export interface CheckboxProps
 const Checkbox: React.FC<CheckboxProps> = (props) => {
 	const {
 		id,
+		boxRef,
 		elementRef,
 		control,
 		updateControl,
@@ -80,8 +81,6 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 
 		...checkboxProps
 	} = props;
-
-	const checkboxRef = useRef<HTMLInputElement | null>(null);
 
 	const [formControl, setFormControl] = React.useState<RsFormControl<boolean> | undefined>(control);
 	useEffect(() => {
@@ -103,28 +102,24 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 		if (onChange) onChange(event, updated);
 	}
 
-	function getCheckboxStyle() {
+	function renderCheckbox() {
 		let checkbox = (
 			<input
 				type={'checkbox'}
 				className={classNames('checkbox', className)}
-				ref={checkboxRef}
+				ref={elementRef}
 				onChange={changeHandler}
 				checked={!!formControl ? formControl.value : checked}
 				disabled={disabled}
 				{...checkboxProps}
 			/>
 		);
-		return <Box className={'checkboxContainer'}>{checkbox}</Box>;
-	}
-
-	function renderCheckboxLabel() {
-		let label = <Label variant={labelVariant || 'h1'}>{labelText}</Label>;
+		let label = <Label variant={labelVariant || 'subtitle1'}>{labelText}</Label>;
 		let labelPlaced;
 		if (!labelPosition || labelPosition === 'RIGHT') {
 			labelPlaced = (
 				<Box className={'checkboxContainer'}>
-					{getCheckboxStyle()}
+					{checkbox}
 					{label}
 				</Box>
 			);
@@ -132,7 +127,7 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 			labelPlaced = (
 				<Box className={'checkboxContainer'}>
 					{label}
-					{getCheckboxStyle()}
+					{checkbox}
 				</Box>
 			);
 		}
@@ -140,8 +135,14 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 	}
 
 	return (
-		<Box id={id} className={classNames('rsCheckbox', className, look)} color={props.color} bgColor={props.bgColor}>
-			{renderCheckboxLabel()}
+		<Box
+			id={id}
+			className={classNames('rsCheckbox', className, look)}
+			color={props.color}
+			bgColor={props.bgColor}
+			elementRef={boxRef}
+		>
+			{renderCheckbox()}
 		</Box>
 	);
 };
