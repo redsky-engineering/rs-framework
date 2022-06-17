@@ -18,13 +18,13 @@ The checkbox also utilizes RsFormControl. To see an example of this being utiliz
 
 export const Template = (args) => <Checkbox {...args} />;
 
-## Checkbox Position Right
+## Checkbox Position Right - look: containedPrimary - label size: subtitle1
 
 This is the default labelPosition when using the checkbox. You can also set it with the prop `labelPosition: 'RIGHT'` as well.
 
 <Canvas>
 	<Story
-		name="Checkbox Position Right"
+		name="Checkbox Position Right - look containedPrimary = label size subtitle1"
 		args={{
 			look: 'containedPrimary',
 			labelText: 'This is the label to the right',
@@ -36,17 +36,17 @@ This is the default labelPosition when using the checkbox. You can also set it w
 	</Story>
 </Canvas>
 
-## Checkbox Position Top
+## Checkbox Position Top - look: containedSecondary - label size: h6
 
-This is the labelPosition being set to Top when using the checkbox.
+This is the labelPosition being set to Top when using the checkbox. This is also an example of changing the theme to a different look. In this case its containedSecondary.
 
 <Canvas>
 	<Story
-		name="Checkbox Position Top"
+		name="Checkbox Position Top - look: containedSecondary - label size: h6"
 		args={{
-			look: 'containedPrimary',
+			look: 'containedSecondary',
 			labelText: 'This is the label to the top',
-			labelVariant: 'subtitle1',
+			labelVariant: 'h6',
 			labelPosition: 'TOP'
 		}}
 	>
