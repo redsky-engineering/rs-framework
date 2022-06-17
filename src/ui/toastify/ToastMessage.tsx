@@ -5,15 +5,17 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify';
 import { Icon } from '../icon/Icon';
 import { Box } from '../box/Box';
-import { Label } from '../label/Label';
+import { Label, LabelProps } from '../label/Label';
 import { ToastProps } from 'react-toastify/dist/types';
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 
 export enum ToastifyType {
-	ERROR,
-	SUCCESS,
-	INFO,
-	WARNING,
-	CUSTOM
+	ERROR = 'error',
+	SUCCESS = 'success',
+	INFO = 'info',
+	WARNING = 'warning',
+	CUSTOM = 'custom'
 }
 
 export interface ToastMessageProps {
@@ -31,39 +33,52 @@ let icons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: strin
 	custom: 'icon-flag'
 };
 
-const ToastMessage: React.FC<ToastMessageProps> = (props) => {
-	function getClasses() {
-		let classes = ['rsToastMessage'];
-		if (props.type === ToastifyType.SUCCESS) classes.push('success');
-		else if (props.type === ToastifyType.ERROR) classes.push('error');
-		else if (props.type === ToastifyType.INFO) classes.push('info');
-		else if (props.type === ToastifyType.WARNING) classes.push('warning');
-		else classes.push('custom');
-		return classes;
-	}
-	function renderIcon() {
-		if (props.type === ToastifyType.ERROR) return <Icon iconImg={icons.error} fontSize={21} />;
-		else if (props.type === ToastifyType.SUCCESS) return <Icon iconImg={icons.success} fontSize={21} />;
-		else if (props.type === ToastifyType.INFO) return <Icon iconImg={icons.info} fontSize={21} />;
-		else if (props.type === ToastifyType.WARNING) return <Icon iconImg={icons.warning} fontSize={21} />;
-		else return <Icon iconImg={icons.custom} fontSize={21} />;
-	}
+let labelVariants = {
+	title: 'subtitle1',
+	message: 'body1'
+};
 
-	function getTitleFromType(): string {
-		if (props.type === ToastifyType.ERROR) return 'Uh oh, something went wrong.';
-		else if (props.type === ToastifyType.SUCCESS) return 'Success!';
-		else if (props.type === ToastifyType.INFO) return 'Did you know?';
-		else if (props.type === ToastifyType.WARNING) return 'Warning';
-		return '';
+const ToastMessage: React.FC<ToastMessageProps> = (props) => {
+	function renderIconAndTitle() {
+		let icon: React.ReactNode;
+		let messageTitle = '';
+
+		switch (props.type) {
+			case ToastifyType.ERROR:
+				icon = <Icon iconImg={icons.error} fontSize={21} />;
+				messageTitle = 'Uh oh, something went wrong.';
+				break;
+			case ToastifyType.SUCCESS:
+				icon = <Icon iconImg={icons.success} fontSize={21} />;
+				messageTitle = 'Success!';
+				break;
+			case ToastifyType.INFO:
+				icon = <Icon iconImg={icons.info} fontSize={21} />;
+				messageTitle = 'Did you know?';
+				break;
+			case ToastifyType.WARNING:
+				icon = <Icon iconImg={icons.warning} fontSize={21} />;
+				messageTitle = 'Warning';
+				break;
+			default:
+				icon = <Icon iconImg={icons.custom} fontSize={21} />;
+				break;
+		}
+		const { title, message } = labelVariants;
+		return (
+			<>
+				{icon}
+				<Box marginLeft={16}>
+					<Label variant={title}>{props.title || messageTitle}</Label>
+					<Label variant={message}>{props.message}</Label>
+				</Box>
+			</>
+		);
 	}
 
 	return (
-		<Box className={getClasses().join(' ')} display={'flex'} alignItems={'center'}>
-			{renderIcon()}
-			<Box marginLeft={16}>
-				<Label variant={'title1'}>{props.title || getTitleFromType()}</Label>
-				<Label variant={'body2'}>{props.message}</Label>
-			</Box>
+		<Box className={classNames('rsToastMessage', props.type)} display={'flex'} alignItems={'center'}>
+			{renderIconAndTitle()}
 		</Box>
 	);
 };
@@ -87,6 +102,10 @@ export const rsToastify = {
 	},
 	setIcons: (newIcons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: string }) => {
 		icons = newIcons;
+	},
+	setLabelVariants: (title: LabelProps['variant'], message: LabelProps['variant']) => {
+		labelVariants.title = title;
+		labelVariants.message = message;
 	}
 };
 
