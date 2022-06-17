@@ -13,7 +13,8 @@ import {
 	RsFormControl,
 	RsFormGroup,
 	RsValidator,
-	RsValidatorEnum
+	RsValidatorEnum,
+	ToastContainer
 } from '../../src/ui';
 import { useEffect, useState } from 'react';
 import { View } from '../../src/996';
@@ -65,6 +66,7 @@ function App() {
 			</Button>
 			{/*</header>*/}
 			{popupController.instance}
+			<ToastContainer />
 		</div>
 	);
 }

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://gitlab.com/redsky_public/framework/compare/v0.1.7...v0.1.8) (2022-06-17)
+
+### Bug Fixes
+
+-   **toastify): Cleaned up the Toastify file and changed the label color back to nothing. fix(button:** Small classname was re-added. ([9693419](https://gitlab.com/redsky_public/framework/commit/9693419659e7e002eafd0ad25705a9e15d287563))
+
+### [0.1.7](https://gitlab.com/redsky_public/framework/compare/v0.1.6...v0.1.7) (2022-06-17)
+
+### Bug Fixes
+
+-   **Toastify:** Changed to required dependency ([16b0ec7](https://gitlab.com/redsky_public/framework/commit/16b0ec72803c27b639ad7e989143f5298fce68f9))
+
 ### [0.1.6](https://gitlab.com/redsky_public/framework/compare/v0.1.5...v0.1.6) (2022-06-17)
 
 ### Bug Fixes

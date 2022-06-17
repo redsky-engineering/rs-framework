@@ -5,7 +5,7 @@ import { Icon } from '../icon/Icon';
 import classNames from 'classnames';
 import { Label, LabelProps } from '../label/Label';
 import { ICommon } from '../../common/Interfaces';
-import Avatar from '../avatar/Avatar';
+import { Avatar } from '../avatar/Avatar';
 
 interface ChipStyles extends ICommon.BorderProps, ICommon.PaddingProps, ICommon.MarginProps, ICommon.PaletteProps {}
 

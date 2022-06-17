@@ -25,8 +25,8 @@ export interface BoxProps
 	whiteSpace?: string;
 
 	// Events
-	onMouseEnter?: (e: MouseEvent) => void;
-	onMouseLeave?: (e: MouseEvent) => void;
+	onMouseEnter?: (event: MouseEvent) => void;
+	onMouseLeave?: (event: MouseEvent) => void;
 }
 
 const Box: React.FC<BoxProps> = (props) => {

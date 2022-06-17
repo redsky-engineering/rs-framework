@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import Accordion from './Accordion';
+
+<Meta title="RedSky/Accordion" component={Accordion} argTypes={{}} />
+
+# Accordion Component
+
+The `Accordion` component is a very custom component where you can pass it jsx elements for both the `title` and `children`
+or a `string`.
+
+<ArgsTable of={Accordion} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <Accordion {...args} />;
+
+## Accordion
+
+This is a basic example of an `accordion` with a `backgroundColor` of `#5c5c5c` and `color` of `#fff`.
+
+<Canvas>
+	<Story
+		name="Accordion"
+		args={{
+			title: <h1>Hello</h1>,
+			children:
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam assumenda, dicta dolorem illo itaque iusto, mollitia nisi numquam, officia optio quia sit ullam. Animi blanditiis ipsum placeat sunt tempora.'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
