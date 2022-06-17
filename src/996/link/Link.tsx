@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import Router from '../Router';
+import { Router } from '../Router';
 import classNames from 'classnames';
 import './Link.scss';
 
