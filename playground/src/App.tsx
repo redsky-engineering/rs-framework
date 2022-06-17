@@ -50,13 +50,19 @@ function App() {
 			{/*	>*/}
 			{/*		H3 Label*/}
 			{/*	</Label>*/}
-			{/*	<InputText*/}
-			{/*		type={'text'}*/}
-			{/*		control={formGroup.get('test')}*/}
-			{/*		updateControl={(control) => setFormGroup(formGroup.clone().update(control))}*/}
-			{/*	/>*/}
+			<InputText
+				type={'text'}
+				control={formGroup.get('test')}
+				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
+			/>
 			<Chip labelVariant={'subtitle1'} label={'Hello World'} look={'standard'} chipStyles={{ color: 'black' }} />
-			<Button mt={20} look={'containedPrimary'}>
+			<Button
+				mt={20}
+				look={'containedPrimary'}
+				onClick={async () => {
+					console.log(await formGroup.isValid());
+				}}
+			>
 				<Icon iconImg={'icon-close'} />I am a button
 			</Button>
 			{/*</header>*/}
