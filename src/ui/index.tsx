@@ -20,6 +20,9 @@ export { InputTextarea } from './inputTextarea/InputTextarea';
 export { Chip } from './chip/Chip';
 export type { ChipProps } from './chip/Chip';
 
+export { Checkbox } from './checkbox/Checkbox';
+export type { CheckboxProps } from './checkbox/Checkbox';
+
 export { popupController } from './popupController/popupController';
 
 export { Popup } from './popupController/Popup';

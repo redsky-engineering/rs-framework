@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Checkbox } from '../index';
+
+<Meta title="RedSky/Checkbox" component={Checkbox} argTypes={{}} />
+
+# Checkbox Component
+
+The `Checkbox` component requires the user to create a themes/checkbox.scss file and style the checkbox there.
+You can follow the scss layout for the checkbox to get the correct checkbox styles.
+The checkbox component uses the Label component as the label text. If label is not desired, then leave the labelText field blank.
+
+### Prop Interface
+
+<ArgsTable of={Checkbox} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <Checkbox {...args} />;
+
+## Checkbox Position Right
+
+This is the default labelPosition when using the checkbox. W
+
+<Canvas>
+	<Story
+		name="Checkbox Position Right"
+		args={{
+			look: 'containedPrimary',
+			labelText: 'This is my label to the right',
+			labelVariant: 'H1',
+			labelPosition: 'RIGHT'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

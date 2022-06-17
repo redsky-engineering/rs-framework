@@ -1,9 +1,26 @@
 import * as React from 'react';
 import { Page } from '../../../../src/996';
-import { Button, Chip, Icon } from '../../../../src/ui';
+import {
+	Button,
+	Chip,
+	Icon,
+	Checkbox,
+	RsFormGroup,
+	RsFormControl,
+	RsValidator,
+	RsValidatorEnum
+} from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
+import { useState } from 'react';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
+	const [formGroup, setFormGroup] = useState<RsFormGroup>(
+		new RsFormGroup([
+			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
+			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')])
+		])
+	);
+
 	return (
 		<Page className={'rsComponentDemoPage'}>
 			<Chip
@@ -18,6 +35,15 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Button mt={20} look={'containedPrimary'}>
 				<Icon iconImg={'icon-close'} />I am a button
 			</Button>
+
+			<Checkbox
+				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
+				control={formGroup.get('checkedKey')}
+				checked={formGroup.get('checkedKey').value as boolean}
+				labelVariant={'h1'}
+				labelText={'This is a checkbox'}
+				look={'containedPrimary'}
+			/>
 		</Page>
 	);
 };
