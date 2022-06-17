@@ -1,7 +1,10 @@
-import View from './view/View';
-import Page from './page/Page';
-import Router, { RouterConfig as RouteConfig_ } from './Router';
-import Link from './link/Link';
+export { Page } from './page/Page';
+export type { PageProps } from './page/Page';
 
-export type RouteConfig = RouteConfig_;
-export { View, Page, Router, Link };
+export { Link } from './link/Link';
+export type { LinkProps } from './link/Link';
+
+export { View } from './view/View';
+
+export { Router } from './Router';
+export type { RouterConfig } from './Router';

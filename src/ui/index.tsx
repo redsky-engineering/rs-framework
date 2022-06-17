@@ -18,6 +18,8 @@ export type { IconProps } from './icon/Icon';
 export { InputText } from './inputText/InputText';
 export type { InputTextProps } from './inputText/InputText';
 
+export { InputTextarea } from './inputTextarea/InputTextarea';
+
 export { Chip } from './chip/Chip';
 export type { ChipProps } from './chip/Chip';
 
@@ -28,6 +30,8 @@ export { popupController } from './popupController/popupController';
 
 export { Popup } from './popupController/Popup';
 export type { PopupProps } from './popupController/Popup';
+
+export { ToastContainer, rsToastify } from './toastify';
 
 export { RsFormControl } from './form/FormControl';
 export { RsFormGroup } from './form/FormGroup';

@@ -41,4 +41,4 @@ const Link: React.FC<LinkProps> = (props) => {
 	);
 };
 
-export default Link;
+export { Link };
