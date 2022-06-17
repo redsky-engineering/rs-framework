@@ -65,7 +65,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 	return (
 		<button
 			id={id}
-			className={classNames('rsButton', className, look, small)}
+			className={classNames('rsButton', className, look, { small })}
 			type={type || 'button'}
 			onClick={(event) => {
 				if (!disableRipple) rippleEffect(event);
