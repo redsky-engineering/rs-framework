@@ -1,0 +1,56 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { InputTextarea } from '../index';
+
+<Meta title="RedSky/InputTextarea" component={InputTextarea} argTypes={{}} />
+
+# InputTextarea Component
+
+The inputTextarea component does not require any props. Most props are extended from HTMLTextAreaAttributes, but the floatingPlaceholder is a key feature for this textarea.
+
+### Prop Interface
+
+<ArgsTable of={InputTextarea} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <InputTextarea {...args} />;
+export const OutlinedTemplate = (args) => (
+	<div className={'inputOutlined'}>
+		<InputTextarea {...args} />
+	</div>
+);
+
+## INPUT TEXT AREA - DEFAULT
+
+Textarea at defaults. Noted behavior here: when using `color`, this will alter color for the text as well as the border. `backgroundColor` should work
+
+### InputTextarea - no floating placeholder
+
+<Canvas>
+	<Story
+		name="InputTextarea Default"
+		args={{
+			placeholder: 'placeholder example'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## INPUT TEXT AREA - FLOATING PLACEHOLDER
+
+Textarea while using `useFloatingPlaceholder`. The placeholder will go above the text area when it is `onFocus` since the text area text will overlap the entered text.
+
+### InputTextarea - with floating placeholder
+
+<Canvas>
+	<Story
+		name="InputTextarea FloatingPlaceholder"
+		args={{
+			placeholder: 'placeholder example',
+			useFloatingPlaceholder: true
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
