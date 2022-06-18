@@ -35,5 +35,5 @@ export default {
 			open: true
 		})
 	],
-	external: ['classnames', 'tslib', 'lodash.clonedeep', 'lodash.clone', 'react-select', 'react-toastify']
+	external: ['classnames', 'tslib', 'lodash.clonedeep', 'lodash.clone', 'react-select', 'react-toastify', 'axios']
 };
