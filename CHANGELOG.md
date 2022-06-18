@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://gitlab.com/redsky_public/framework/compare/v0.1.10...v0.1.11) (2022-06-18)
+
 ### [0.1.10](https://gitlab.com/redsky_public/framework/compare/v0.1.9...v0.1.10) (2022-06-17)
 
 ### Bug Fixes
