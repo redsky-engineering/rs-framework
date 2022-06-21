@@ -22,6 +22,7 @@ export { InputTextarea } from './inputTextarea/InputTextarea';
 export type { InputTextareaProps } from './inputTextarea/InputTextarea';
 
 export { Chip } from './chip/Chip';
+export { InputNumber } from './inputNumber/InputNumber';
 export type { ChipProps } from './chip/Chip';
 
 // Not ready yet
