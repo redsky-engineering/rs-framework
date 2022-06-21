@@ -25,6 +25,9 @@ export { Chip } from './chip/Chip';
 export { InputNumber } from './inputNumber/InputNumber';
 export type { ChipProps } from './chip/Chip';
 
+export { Checkbox } from './checkbox/Checkbox';
+export type { CheckboxProps } from './checkbox/Checkbox';
+
 // Not ready yet
 // export { Select } from './select/Select';
 // export type { SelectProps } from './select/Select';

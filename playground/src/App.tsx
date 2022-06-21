@@ -1,12 +1,13 @@
 import './App.scss';
 import './themes/reset.scss';
 import '../icons/style.css';
+import './themes/checkbox.scss';
+
 import {
 	Button,
 	Chip,
 	Icon,
 	InputText,
-	InputTextarea,
 	Label,
 	popupController,
 	RsFormControl,
@@ -21,10 +22,7 @@ import router from './router';
 
 function App() {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
-		new RsFormGroup([
-			new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
-			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')])
-		])
+		new RsFormGroup([new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')])])
 	);
 
 	useEffect(() => {
