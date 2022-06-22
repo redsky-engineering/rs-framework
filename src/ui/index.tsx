@@ -42,6 +42,9 @@ export type { PopupProps } from './popupController/Popup';
 
 export { ToastContainer, rsToastify } from './toastify';
 
+export { Img } from './img/Img';
+export type { ImgProps } from './img/Img';
+
 export { RsFormControl } from './form/FormControl';
 export { RsFormGroup } from './form/FormGroup';
 export { RsValidator, RsValidatorEnum } from './form/Validator';

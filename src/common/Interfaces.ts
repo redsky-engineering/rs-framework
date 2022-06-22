@@ -1,6 +1,5 @@
 import React from 'react';
-import { IconProps } from '../ui';
-import { AvatarProps } from '../ui/avatar/Avatar';
+import { IconProps, AvatarProps } from '../ui';
 
 export namespace I996 {
 	export interface NavigateOptions {
@@ -21,6 +20,8 @@ export namespace I996 {
 }
 
 export namespace ICommon {
+	export type GlobalCSSValues = 'inherit' | 'initial' | 'revert' | 'unset';
+
 	export interface HtmlElementProps {
 		id?: string;
 		display?: 'initial' | 'block' | 'inline' | string;
@@ -28,7 +29,7 @@ export namespace ICommon {
 	}
 
 	export interface InteractProps<T> {
-		onClick?: React.MouseEventHandler | void;
+		onClick?: React.MouseEventHandler;
 		elementRef?: React.RefObject<T>;
 	}
 

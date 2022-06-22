@@ -1,0 +1,61 @@
+// These variables are mostly for making auto complete better
+
+/* Font Weights */
+$fwThin: 100;
+$fwExtraThin: 200;
+$fwLight: 300;
+$fwRegular: 400;
+$fwMedium: 500;
+$fwSemiBold: 600;
+$fwBold: 700;
+$fwExtraBold: 800;
+$fwBlack: 900;
+$fwExtraBlack: 950;
+
+/* Global's used in calculations (page offsets, etc) */
+$menuExpandedWidth: 250px;
+$menuCollapsedWidth: 50px;
+
+// Map SCSS theme variables to CSS variables
+
+//Primary, Secondary
+$primaryColor: --primaryColor;
+$secondaryColor: --secondaryColor;
+
+// Gray Palette
+$white: --white;
+$ivory: --ivory;
+$lightestGray: --lighestGray;
+$lighterGray: --lighterGray;
+$lightGray: --lightGray;
+$mediumGray: --mediumGray;
+$darkGray: --darkGray;
+$lightBlack: --lightBlack;
+$mediumBlack: --mediumBlack;
+$darkestBlack: --darkestBlack;
+
+//Success
+$successColor: --successLightColor;
+
+//Error
+$errorColor: --errorColor;
+
+//Text
+$primaryTextColor: --primaryTextColor;
+$secondaryTextColor: --secondaryTextColor;
+$warningContrast: --warningContrast;
+
+//Misc
+$transitionTime: --transitionTime;
+
+//Z-Index
+$mobileStepperZIndex: --mobileStepperZIndex;
+$appBarZIndex: --appBarZIndex;
+$tooltipZIndex: --tooltipZIndex;
+$drawerZIndex: --drawerZIndex;
+$modalZIndex: --modalZIndex;
+$toastZIndex: --toastZIndex;
+
+// Sizes
+$appBarHeight: 80px;
+$pageHeaderHeight: 64px;

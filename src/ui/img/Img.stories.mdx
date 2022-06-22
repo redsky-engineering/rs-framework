@@ -1,0 +1,99 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Img } from '../index';
+
+<Meta title="RedSky/Img" component={Img} argTypes={{}} />
+
+# Image (Img) Component
+
+The `Img` component has a number of nice features that add to the standard `<img>` tag. For example,
+it adds the capability of doing lazy loading in a browser-agnostic way. Another key feature is that
+the img component will generate the correct query for use with ImageKit.io in requesting the optimal
+sized image.
+
+### Prop Interface
+
+<ArgsTable of={Img} />
+
+export const Template = (args) => <Img {...args} />;
+
+## Img using imagekit.io query
+
+By default, the provided width / height will generate a query string on the image src request that is accepted and used by
+imagekit.io
+
+<Canvas>
+	<Story
+		name="Image Kit Request"
+		args={{
+			src: 'https://image.redskytech.io/vendoti/1642004088056-254883307.jpg',
+			alt: 'Vendoti Image',
+			width: 533,
+			height: 300
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Img with disabled imagekit.io query
+
+In some cases you want to disable the extra query parameters when providing a src to the Img. This is useful if your source
+is a base64 encoded image, or any other site that is not use imagekit.io
+
+<Canvas>
+	<Story
+		name="Disabled Image Kit Request"
+		args={{
+			src: 'https://www.placecage.com/128/128',
+			alt: 'Nic Cage',
+			width: 128,
+			height: 128,
+			disableImageKit: true
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Img with fallback image NOT FOUND
+
+Built into the Img component is a not found image. If for example the source is an invalid url or a 404 is returned, the
+img component will detect this error and disable an OK looking not found image
+
+<Canvas>
+	<Story
+		name="Not Found Image"
+		args={{
+			src: 'https://some.badurlforerrortesting.com',
+			alt: 'Error Image',
+			width: 128,
+			height: 128,
+			onError: (event) => {}
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Alternate Not Found Img
+
+If the default not found image is not to your liking you can override this by providing a new src url on the `onError` function
+return.
+
+<Canvas>
+	<Story
+		name="Not Found Alternate Image"
+		args={{
+			src: 'https://some.badurlforerrortesting.com',
+			alt: 'Error Image',
+			width: 128,
+			height: 128,
+			onError: (event) => {
+				console.log('Error loading image', event);
+				return 'https://www.placecage.com/200/200';
+			}
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

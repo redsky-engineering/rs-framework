@@ -91,12 +91,15 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 	function renderIcon() {
 		if (props.hideExpandIcon) return;
 		if (!props.expandIcon)
-			return <Icon className={isOpened ? 'iconSpinUp' : 'iconSpinDown'} iconImg={'icon-chevron-up'} />;
+			return (
+				<Icon key={'icon'} className={isOpened ? 'iconSpinUp' : 'iconSpinDown'} iconImg={'icon-chevron-up'} />
+			);
 		const { openedIcon, closedIcon, defaultIcon } = props.expandIcon;
 
 		if (defaultIcon) {
 			return (
 				<Icon
+					key={'icon'}
 					className={isOpened ? 'iconSpinUp' : 'iconSpinDown'}
 					iconImg={'icon-chevron-up'}
 					{...defaultIcon}
@@ -104,8 +107,8 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 			);
 		}
 		if (openedIcon && closedIcon) {
-			if (isOpened) return <Icon {...openedIcon} />;
-			else return <Icon {...closedIcon} />;
+			if (isOpened) return <Icon key={'icon'} {...openedIcon} />;
+			else return <Icon key={'icon'} {...closedIcon} />;
 		}
 	}
 
@@ -113,10 +116,10 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 		let icon = [renderIcon()];
 
 		if (isLabel(props.title)) {
-			return [<Label {...props.title} />, ...icon];
+			return [<Label key={'title'} {...props.title} />, ...icon];
 		}
 
-		return [props.title, ...icon];
+		return [<React.Fragment key={'title'}>{props.title}</React.Fragment>, ...icon];
 	}
 
 	return (
