@@ -17,6 +17,7 @@ import {
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
+import RadioButtonGroup from '../../../../src/ui/radioButtonGroup/RadioButtonGroup';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
@@ -24,6 +25,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
 			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')])
 		])
+	);
+
+	const [radioButtonFormGroup, setRadioButtonFormGroup] = useState<RsFormGroup>(
+		new RsFormGroup([new RsFormControl<string>('radioGroup', 'apple', [])])
 	);
 
 	return (
@@ -164,6 +169,36 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					quis sapiente.
 				</div>
 			</Accordion>
+
+			<RadioButtonGroup
+				control={radioButtonFormGroup.get('radioGroup')}
+				updateControl={(control) => {
+					setRadioButtonFormGroup(radioButtonFormGroup.clone().update(control));
+				}}
+				onChange={(value) => {
+					console.log(value);
+				}}
+				bgColor={'green'}
+				m={20}
+				display={'grid'}
+				gap={20}
+				groupName={'food'}
+				options={[
+					{
+						value: 'apple',
+						label: 'Apple'
+					},
+					{
+						value: 'banana',
+						label: 'Banana'
+					},
+					{
+						value: 'orange',
+						label: 'Orange'
+					}
+				]}
+				labelStyles={{ variant: 'subtitle1', position: 'RIGHT' }}
+			/>
 		</Page>
 	);
 };

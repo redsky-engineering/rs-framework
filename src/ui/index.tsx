@@ -45,6 +45,12 @@ export { ToastContainer, rsToastify } from './toastify';
 export { Img } from './img/Img';
 export type { ImgProps } from './img/Img';
 
+export { LabelRadioButton } from './labelRadioButton/LabelRadioButton';
+export type { LabelRadioButtonProps } from './labelRadioButton/LabelRadioButton';
+
+export { RadioButtonGroup } from './radioButtonGroup/RadioButtonGroup';
+export type { RadioButtonGroupProps } from './radioButtonGroup/RadioButtonGroup';
+
 export { RsFormControl } from './form/FormControl';
 export { RsFormGroup } from './form/FormGroup';
 export { RsValidator, RsValidatorEnum } from './form/Validator';
