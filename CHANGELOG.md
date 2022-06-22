@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://gitlab.com/redsky_public/framework/compare/v0.1.11...v0.2.0) (2022-06-22)
+
+### Features
+
+-   Added HttpClient. Requires axios dependency ([17ed4e3](https://gitlab.com/redsky_public/framework/commit/17ed4e30c5effd37f87963dfa8488395e6e65f7c))
+-   Adding in Checkbox Component. ([72f09c5](https://gitlab.com/redsky_public/framework/commit/72f09c54eb951685219428113fca6690decf6aef))
+-   **Img:** Added Image Component, updated more playground. Moved stories ([24d7de4](https://gitlab.com/redsky_public/framework/commit/24d7de40619f35158d87cf19cae7a227a3908e79))
+
+### Bug Fixes
+
+-   **Accordion:** Fixed missing key on array of react nodes ([a4d5bf3](https://gitlab.com/redsky_public/framework/commit/a4d5bf3c2887ce2598e3b1b85a0649b5a1100731))
+-   Fixes based on Alex's comments ([23ee033](https://gitlab.com/redsky_public/framework/commit/23ee033fa5a13ece8aa9ffeca1b16e476912af37))
+-   remove class names ([1c3de96](https://gitlab.com/redsky_public/framework/commit/1c3de969b346741b5fedd65b803319635136691d))
+
 ### [0.1.11](https://gitlab.com/redsky_public/framework/compare/v0.1.10...v0.1.11) (2022-06-18)
 
 ### [0.1.10](https://gitlab.com/redsky_public/framework/compare/v0.1.9...v0.1.10) (2022-06-17)
