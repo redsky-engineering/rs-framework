@@ -3,8 +3,8 @@ import { IRsFormControl, RsFormControl } from './FormControl';
 /** Validator enumeration */
 export enum RsValidatorEnum {
 	REQ = 'required',
-	MIN = 'minLength',
-	MAX = 'maxLength',
+	MIN_LENGTH = 'minLength',
+	MAX_LENGTH = 'maxLength',
 	EMAIL = 'email',
 	NUM = 'numeric',
 	REG = 'regexp',

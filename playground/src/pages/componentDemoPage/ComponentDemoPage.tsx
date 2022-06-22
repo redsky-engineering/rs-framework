@@ -13,7 +13,10 @@ import {
 	RsFormControl,
 	RsValidator,
 	RsValidatorEnum,
-	Img
+	Img,
+	Select,
+	InputText,
+	InputNumber
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
@@ -22,7 +25,21 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
 		new RsFormGroup([
 			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
-			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')])
+			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
+			new RsFormControl<string>('email', '', [
+				new RsValidator(RsValidatorEnum.REQ, 'Required'),
+				new RsValidator(RsValidatorEnum.EMAIL, 'Invalid Email')
+			]),
+			new RsFormControl<number>('number', 0, [
+				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Number', (control) => {
+					return control.value == 3;
+				})
+			]),
+			new RsFormControl<number>('select', 3, [
+				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Selection', (control) => {
+					return control.value == 2;
+				})
+			])
 		])
 	);
 
@@ -164,6 +181,104 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					quis sapiente.
 				</div>
 			</Accordion>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Select Component
+			</Label>
+			<Label variant={'h6'}>(NOT using FormControl)</Label>
+			<Select
+				mt={8}
+				mb={16}
+				value={{
+					label: 'Option 2',
+					value: 2
+				}}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				onChange={(newValue, actionMeta) => {
+					console.log(newValue, actionMeta);
+				}}
+				isClearable
+			/>
+			<Label variant={'h6'}>(Using FormControl)</Label>
+			<Select
+				mt={8}
+				control={formGroup.get<string>('select')}
+				updateControl={(control) => {
+					console.log(control);
+					setFormGroup(formGroup.clone().update(control));
+				}}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				isClearable
+			/>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Text
+			</Label>
+			<Label variant={'h6'}>Email</Label>
+			<InputText
+				icon={[
+					{
+						iconImg: 'icon-check',
+						position: 'LEFT',
+						marginRight: 5
+					}
+				]}
+				inputMode={'email'}
+				placeholder={'email'}
+				control={formGroup.get('email')}
+				updateControl={(control) => {
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
+			<Label variant={'h6'} mt={8}>
+				Phone
+			</Label>
+			<InputText
+				prefix={'Tel: '}
+				inputMode={'tel'}
+				placeholder={'(###) ###-####'}
+				onChange={(event) => {
+					console.log(event.target.value);
+				}}
+			/>
+			<Label variant={'h6'} mt={8}>
+				Password
+			</Label>
+			<InputText
+				type={'password'}
+				inputMode={'text'}
+				onChange={(event) => {
+					console.log(event.target.value);
+				}}
+			/>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Number
+			</Label>
+			<InputNumber
+				control={formGroup.get('number')}
+				updateControl={(control) => {
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
 		</Page>
 	);
 };

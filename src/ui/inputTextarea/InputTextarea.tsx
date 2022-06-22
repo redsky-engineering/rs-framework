@@ -8,13 +8,13 @@ import { IRsFormControl } from '../form/FormControl';
 
 import { Box } from '../box/Box';
 import clone from 'lodash.clone';
+import { renderErrors } from '../../utils/internal';
 
 export interface InputTextareaProps
 	extends ICommon.PaletteProps,
 		Omit<ICommon.HtmlElementProps, 'display'>,
 		Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
-	//TextInput Props
-	boxRef?: React.RefObject<HTMLDivElement>;
+	elementRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
@@ -39,7 +39,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	const {
 		id,
 		look,
-		boxRef,
+		elementRef,
 		control,
 		updateControl,
 		noAutocomplete,
@@ -113,21 +113,6 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		);
 	}
 
-	function renderErrors() {
-		if (!control) return;
-		const errorNodes: React.ReactNode[] = [];
-		const errors = control.errors;
-		for (let index = 0; index < errors.length; index++) {
-			const errorMessage = control.getErrorMessage(errors[index]);
-			errorNodes.push(
-				<div key={`${index}Error`} className={'rsInputTextareaErrorMessage'}>
-					{errorMessage}
-				</div>
-			);
-		}
-		return errorNodes;
-	}
-
 	function focusInput() {
 		if (textareaRef && textareaRef.current) textareaRef.current.focus();
 	}
@@ -136,14 +121,14 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		<Box
 			id={id}
 			className={classNames('rsInputTextarea', className, look)}
-			elementRef={boxRef}
+			elementRef={elementRef}
 			color={props.color}
 			bgColor={props.bgColor}
 		>
 			<Box className={'inputTextareaContainer'} onClick={focusInput}>
 				{renderTextarea()}
 			</Box>
-			{renderErrors()}
+			{renderErrors(props.control)}
 		</Box>
 	);
 };

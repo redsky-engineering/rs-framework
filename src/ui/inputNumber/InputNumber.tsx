@@ -6,6 +6,8 @@ import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { ObjectUtils } from '../../utils/Utils';
 import { RsFormControl } from '../form/FormControl';
 import './InputNumber.scss';
+import { renderErrors } from '../../utils/internal';
+import { Box } from '../box/Box';
 
 interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'> {
 	name?: string | null;
@@ -35,8 +37,8 @@ interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'> {
 	ariaLabelledBy?: string | null;
 
 	//Form Control
-	control?: RsFormControl<number> | null;
-	updateControl?: ((control: RsFormControl<number>) => void) | null;
+	control?: RsFormControl<number>;
+	updateControl?: (control: RsFormControl<number>) => void;
 
 	//Event Handlers
 	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
@@ -86,7 +88,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		max,
 		disabled,
 		readOnly,
-		className: _className,
+		className,
 		inputClassName,
 		localeMatcher,
 		useGrouping,
@@ -1096,21 +1098,6 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return numberFormat.current;
 	}
 
-	function renderErrors() {
-		if (!formControl) return;
-		const errorNodes: React.ReactNode[] = [];
-		const errors = formControl.errors;
-		for (let index = 0; index < errors.length; index++) {
-			const errorMessage = formControl.getErrorMessage(errors[index]);
-			errorNodes.push(
-				<div key={`${index}Error`} className={'rsInputErrorMessage'}>
-					{errorMessage}
-				</div>
-			);
-		}
-		return errorNodes;
-	}
-
 	React.useEffect(() => {
 		constructParser();
 
@@ -1240,16 +1227,16 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
 	const inputElement = createInputElement();
 	const buttonGroup = createButtonGroup();
-	const errors = renderErrors();
+	const errors = renderErrors(props.control);
 
 	return (
-		<>
-			<span ref={elementRef} id={props.id} className={_className} {...otherProps}>
+		<Box className={classNames('rsInputNumber', className)}>
+			<span ref={elementRef} id={props.id} {...otherProps}>
 				{inputElement}
 				{buttonGroup}
 			</span>
 			{errors}
-		</>
+		</Box>
 	);
 };
 
@@ -1282,8 +1269,8 @@ InputNumber.defaultProps = {
 	autoFocus: false,
 	inputClassName: null,
 	ariaLabelledBy: null,
-	control: null,
-	updateControl: null,
+	control: undefined,
+	updateControl: undefined,
 	onValueChange: null,
 	onChange: null,
 	onBlur: null,

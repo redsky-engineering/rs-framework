@@ -93,14 +93,14 @@ export class RsFormControl<T extends IRsFormControl> {
 							continue;
 						}
 						break;
-					case RsValidatorEnum.MIN:
+					case RsValidatorEnum.MIN_LENGTH:
 						const min = parseInt(validator.value as string) || 0;
 						if ((this._value as string).length < min) {
 							this._errors.push(index);
 							continue;
 						}
 						break;
-					case RsValidatorEnum.MAX:
+					case RsValidatorEnum.MAX_LENGTH:
 						const max = parseInt(validator.value as string) || 0;
 						if ((this._value as string).length > max) {
 							this._errors.push(index);
