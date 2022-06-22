@@ -12,13 +12,13 @@ import {
 	RsFormGroup,
 	RsFormControl,
 	RsValidator,
-	RsValidatorEnum
+	RsValidatorEnum,
+	Img
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
-	// rsToastify.setLabelVariants('h1', 'h2');
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
 		new RsFormGroup([
 			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
@@ -28,6 +28,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 
 	return (
 		<Page className={'rsComponentDemoPage'}>
+			<Label variant={'h5'} mb={16} bgColor={'#099109'} color={'white'} p={16}>
+				Chip Component
+			</Label>
 			<Chip
 				labelVariant={'subtitle1'}
 				label={'Click To Go Back'}
@@ -37,16 +40,19 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					router.navigate<RoutePaths>('/').catch(console.error);
 				}}
 			/>
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Button Component
+			</Label>
 			<Button
 				mt={20}
 				look={'containedPrimary'}
 				small
 				onClick={() => {
-					rsToastify.error('Hello Bitches');
-					rsToastify.success('success Hello Bitches');
-					rsToastify.custom('custom Hello Bitches');
-					rsToastify.warning('warning Hello Bitches', 'Cheese');
-					rsToastify.info('info Bitches', 'Cheese', { autoClose: false });
+					rsToastify.error('error Hello Friend');
+					rsToastify.success('success Hello Friend');
+					rsToastify.custom('custom Hello Friend');
+					rsToastify.warning('warning Hello Friend', 'Cheese');
+					rsToastify.info('info Friend', 'Cheese', { autoClose: false });
 				}}
 			>
 				<Box display={'flex'} alignItems={'center'}>
@@ -55,15 +61,62 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				</Box>
 			</Button>
 
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Checkbox Component
+			</Label>
 			<Checkbox
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 				control={formGroup.get('checkedKey')}
 				checked={formGroup.get<boolean>('checkedKey').value}
-				labelVariant={'h1'}
 				labelText={'This is a checkbox'}
 				look={'containedPrimary'}
 			/>
 
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Img Component
+			</Label>
+			<Label variant={'subtitle1'} mb={16} mt={32}>
+				ImageKit Resize (16:9)
+			</Label>
+			<Img
+				src={'https://image.redskytech.io/vendoti/1642004088056-254883307.jpg'}
+				alt={'Vendoti Image'}
+				width={533}
+				height={300}
+			/>
+			<Label variant={'subtitle1'} mb={16} mt={32}>
+				External Disabled ImageKit
+			</Label>
+			<Img src={'https://www.placecage.com/128/128'} alt={'Nic Cage'} width={128} height={128} disableImageKit />
+			<Label variant={'subtitle1'} mb={16} mt={32}>
+				Error loading image (show default missing image)
+			</Label>
+			<Img
+				src={'https://some.badurlforerrortesting.com'}
+				alt={'Error Image'}
+				width={128}
+				height={128}
+				onError={(event) => {
+					console.log('Error loading image', event);
+				}}
+			/>
+			<Label variant={'subtitle1'} mb={16} mt={32}>
+				Error loading image (show alternative Nic Cage Image)
+			</Label>
+			<Img
+				src={'https://some.badurlforerrortesting23.com'}
+				alt={'Error Image'}
+				width={128}
+				height={128}
+				onError={(event) => {
+					console.log('Error loading image', event);
+					return 'https://www.placecage.com/200/200';
+				}}
+			/>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Accordion Component
+			</Label>
 			<Accordion
 				title={<h3>Click Me!</h3>}
 				containerStyles={{ width: 'fit-content', maxWidth: '500px', mt: 20 }}
