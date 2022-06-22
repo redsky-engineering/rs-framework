@@ -22,7 +22,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
 		new RsFormGroup([
 			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
-			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')])
+			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
+			new RsFormControl<boolean>('checkedKey2', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')])
 		])
 	);
 
@@ -56,12 +57,28 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			</Button>
 
 			<Checkbox
+				checkboxId={'check1'}
+				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
+				control={formGroup.get('checkedKey2')}
+				checked={formGroup.get<boolean>('checkedKey2').value}
+				labelText={'This is another checkbox'}
+				look={'containedPrimary'}
+			/>
+			<Checkbox
+				checkboxId={'check2'}
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 				control={formGroup.get('checkedKey')}
 				checked={formGroup.get<boolean>('checkedKey').value}
-				labelVariant={'h1'}
 				labelText={'This is a checkbox'}
+				look={'containedSecondary'}
+				labelPosition={'TOP'}
+			/>
+			<Checkbox
+				checkboxId={'check3'}
+				checked={true}
+				labelText={'This is a checkbox disabled'}
 				look={'containedPrimary'}
+				disabled
 			/>
 
 			<Accordion
