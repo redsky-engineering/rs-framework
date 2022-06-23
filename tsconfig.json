@@ -15,6 +15,7 @@
 		"sourceMap": true,
 		"outDir": "dist",
 		"moduleResolution": "node",
+		"declaration": true,
 		"emitDeclarationOnly": true,
 		"inlineSources": true
 	},

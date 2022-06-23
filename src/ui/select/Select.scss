@@ -8,12 +8,17 @@
 		&.error {
 			border-color: #f44336;
 		}
+		&:focus-within {
+		}
 	}
 	[class*='ValueContainer'] {
 		//Use to target ValueContainer css
 	}
 	[class*='menu'] {
 		//Use to target Menu css
+		[class*='NoOptionsMessage'] {
+			//Use to style no options menu in select
+		}
 	}
 	[class*='option'] {
 		//Use to target Menu css
@@ -28,7 +33,7 @@
 			color: #f44336;
 		}
 	}
-	[class*='input'] {
+	[class*='Input'] {
 		//Use to target Input css
 	}
 	[class*='IndicatorsContainer'] {

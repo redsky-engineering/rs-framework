@@ -13,22 +13,45 @@ import {
 	RsFormControl,
 	RsValidator,
 	RsValidatorEnum,
-	Img
+	Img,
+	Select,
+	InputText,
+	InputNumber,
+	InputTextarea
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
-import RadioButtonGroup from '../../../../src/ui/radioButtonGroup/RadioButtonGroup';
+import { IRsFormControl } from '../../../../src/ui/form/FormControl';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
 		new RsFormGroup([
 			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
-			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')])
+			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
+			new RsFormControl<string>('email', '', [
+				new RsValidator(RsValidatorEnum.REQ, 'Required'),
+				new RsValidator(RsValidatorEnum.EMAIL, 'Invalid Email')
+			]),
+			new RsFormControl<number>('number', 0, [
+				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Number', (control) => {
+					return control.value == 3;
+				})
+			]),
+			new RsFormControl<number>('select', 3, [
+				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Selection', (control) => {
+					return control.value == 2;
+				})
+			]),
+			new RsFormControl<number[]>(
+				'select2',
+				[1, 2],
+				[
+					new RsValidator(RsValidatorEnum.CUSTOM, 'Less than 2 selections', (control) => {
+						return (control.value as number[]).length > 1;
+					})
+				]
+			)
 		])
-	);
-
-	const [radioButtonFormGroup, setRadioButtonFormGroup] = useState<RsFormGroup>(
-		new RsFormGroup([new RsFormControl<string>('radioGroup', 'apple', [])])
 	);
 
 	return (
@@ -109,6 +132,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				Error loading image (show alternative Nic Cage Image)
 			</Label>
 			<Img
+				mb={200}
 				src={'https://some.badurlforerrortesting23.com'}
 				alt={'Error Image'}
 				width={128}
@@ -170,34 +194,183 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				</div>
 			</Accordion>
 
-			<RadioButtonGroup
-				control={radioButtonFormGroup.get('radioGroup')}
-				updateControl={(control) => {
-					setRadioButtonFormGroup(radioButtonFormGroup.clone().update(control));
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Select Component
+			</Label>
+			<Label variant={'h6'}>(NOT using FormControl)</Label>
+			<Select
+				mt={8}
+				mb={16}
+				value={{
+					label: 'Option 2',
+					value: 2
 				}}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				onChange={(newValue, actionMeta) => {
+					console.log(newValue, actionMeta);
+				}}
+				isClearable
+			/>
+			<Label variant={'h6'}>(Using FormControl)</Label>
+			<Select
+				mt={8}
+				mb={16}
+				control={formGroup.get<string>('select')}
+				updateControl={(control) => {
+					console.log(control);
+					setFormGroup(formGroup.clone().update(control));
+				}}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				isClearable
+			/>
+			<Label variant={'h6'}>Creatable Select</Label>
+			<Select
+				mt={8}
+				mb={16}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				isCreatable
+				onChange={(newValue) => {
+					console.log(newValue);
+				}}
+				onCreateOption={(newValue) => {
+					console.log('create: ', newValue);
+				}}
+			/>
+			<Label variant={'h6'}>Multi Option Select (No Form Control)</Label>
+			<Select
+				isMulti
+				mt={8}
+				mb={16}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				isClearable
+				onChange={(newValue) => {
+					console.log(newValue);
+				}}
+			/>
+			<Label variant={'h6'}>Multi Option Select (With Form Control)</Label>
+			<Select
+				isMulti
+				mt={8}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				isClearable
+				control={formGroup.get<number[]>('select2')}
+				updateControl={(control) => {
+					console.log(control);
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Textarea
+			</Label>
+			<InputTextarea
+				mb={16}
+				placeholder={'Biography Here'}
 				onChange={(value) => {
 					console.log(value);
 				}}
-				bgColor={'green'}
-				m={20}
-				display={'grid'}
-				gap={20}
-				groupName={'food'}
-				options={[
+			/>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Text
+			</Label>
+			<Label variant={'h6'}>Email</Label>
+			<InputText
+				mb={16}
+				icon={[
 					{
-						value: 'apple',
-						label: 'Apple'
-					},
-					{
-						value: 'banana',
-						label: 'Banana'
-					},
-					{
-						value: 'orange',
-						label: 'Orange'
+						iconImg: 'icon-check',
+						position: 'LEFT',
+						marginRight: 5
 					}
 				]}
-				labelStyles={{ variant: 'subtitle1', position: 'RIGHT' }}
+				inputMode={'email'}
+				placeholder={'email'}
+				control={formGroup.get('email')}
+				updateControl={(control) => {
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
+			<Label variant={'h6'}>Phone</Label>
+			<InputText
+				mb={16}
+				prefix={'Tel: '}
+				inputMode={'tel'}
+				placeholder={'(###) ###-####'}
+				onChange={(value) => {
+					console.log(value);
+				}}
+			/>
+			<Label variant={'h6'}>Password</Label>
+			<InputText
+				type={'password'}
+				inputMode={'text'}
+				onChange={(value) => {
+					console.log(value);
+				}}
+			/>
+
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Number
+			</Label>
+			<Label variant={'h6'}>Simple Number</Label>
+			<InputNumber
+				control={formGroup.get('number')}
+				updateControl={(control) => {
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
+			<Label variant={'h6'}>No separators</Label>
+			<InputNumber
+				useGrouping={false}
+				onChange={(value) => {
+					console.log(value);
+				}}
 			/>
 		</Page>
 	);

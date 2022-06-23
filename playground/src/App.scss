@@ -2,15 +2,25 @@
 @import 'themes/button';
 @import 'themes/label';
 
+// The following is needed to have pages fit 100% and fill all available screen area
+// This is important for pages that might have a background color different than the view
+#root,
+.App {
+	height: 100%;
+}
+
 .rsView {
 	height: 100%;
+	min-height: 100vh;
 	background-color: #ffffff;
 	overflow: unset !important;
 	.rsPage {
+		height: 100%;
+		min-height: 100vh;
 		padding: 24px;
 		background-color: inherit;
 		color: inherit;
 		position: relative;
-		overflow-y: visible;
+		overflow-y: auto;
 	}
 }
