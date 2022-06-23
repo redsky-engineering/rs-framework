@@ -28,9 +28,8 @@ export type { ChipProps } from './chip/Chip';
 export { Checkbox } from './checkbox/Checkbox';
 export type { CheckboxProps } from './checkbox/Checkbox';
 
-// Not ready yet
-// export { Select } from './select/Select';
-// export type { SelectProps } from './select/Select';
+export { Select } from './select/Select';
+export type { SelectProps } from './select/Select';
 
 export { Avatar } from './avatar/Avatar';
 export type { AvatarProps } from './avatar/Avatar';

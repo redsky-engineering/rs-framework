@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://gitlab.com/redsky_public/framework/compare/v0.2.0...v0.3.0) (2022-06-23)
+
+### Features
+
+-   **InputNumber:** Added Margin properties, changed order of onChange arguments. ([cb2173f](https://gitlab.com/redsky_public/framework/commit/cb2173f017f7f56402c9f2804c1e0191c464b375))
+-   **InputTextarea:** Added Margin Props, adjusted onChange argument positions ([3f56720](https://gitlab.com/redsky_public/framework/commit/3f5672033fcf7d40b820725f96a955f7df504329))
+-   **Select:** Added Select component ([a74ff9e](https://gitlab.com/redsky_public/framework/commit/a74ff9e947133eaa7ac7cc9c5526498d5310b495))
+-   **Select:** working select with multi and create ([a1dc63a](https://gitlab.com/redsky_public/framework/commit/a1dc63abf4272eb2141c4c28a281a0d64d3f0a7e))
+
+### Bug Fixes
+
+-   **Img:** Added Margin properties ([635f437](https://gitlab.com/redsky_public/framework/commit/635f437f7823584835dff4971d0777017ca47dfe))
+-   **InputText:** Made props more consistent. Added Margin and palette props ([737bb9a](https://gitlab.com/redsky_public/framework/commit/737bb9a5d2dbd2607bacab3627edde46dac70984))
+
 ## [0.2.0](https://gitlab.com/redsky_public/framework/compare/v0.1.11...v0.2.0) (2022-06-22)
 
 ### Features

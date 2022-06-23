@@ -3,10 +3,12 @@ import './Img.scss';
 import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
+import { transformProps } from '../../utils/internal';
 
 export interface ImgProps
 	extends Omit<ICommon.InteractProps<HTMLImageElement>, 'elementRef'>,
-		Omit<ICommon.HtmlElementProps, 'display'> {
+		Omit<ICommon.HtmlElementProps, 'display'>,
+		ICommon.MarginProps {
 	src: string;
 	alt: string;
 	width: string | number;
@@ -126,7 +128,26 @@ const Img: React.FC<ImgProps> = (props) => {
 		let styles: React.CSSProperties = {};
 		if (props.objectFit) styles.objectFit = props.objectFit;
 		if (props.objectPosition) styles.objectPosition = props.objectPosition;
-		return styles;
+
+		const marginProps = {
+			...(props.m && { m: props.m }),
+			...(props.mt && { mt: props.mt }),
+			...(props.mr && { mr: props.mr }),
+			...(props.mb && { mb: props.mb }),
+			...(props.ml && { ml: props.ml }),
+			...(props.mx && { mx: props.mx }),
+			...(props.my && { my: props.my }),
+			...(props.margin && { margin: props.margin }),
+			...(props.marginTop && { marginTop: props.marginTop }),
+			...(props.marginRight && { marginRight: props.marginRight }),
+			...(props.marginBottom && { marginBottom: props.marginBottom }),
+			...(props.marginLeft && { marginLeft: props.marginLeft }),
+			...(props.marginX && { marginX: props.marginX }),
+			...(props.marginY && { marginY: props.marginY })
+		};
+
+		let cssProperties = transformProps(marginProps);
+		return { ...styles, ...cssProperties };
 	}
 
 	return (

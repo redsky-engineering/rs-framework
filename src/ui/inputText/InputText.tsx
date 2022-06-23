@@ -3,19 +3,22 @@ import './InputText.scss';
 import { InputHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
-import { RsFormControl, IRsFormControl } from '../form/FormControl';
+import { RsFormControl } from '../form/FormControl';
 
 import { Box } from '../box/Box';
 import clone from 'lodash.clone';
 import { Icon } from '../icon/Icon';
+import { renderErrors } from '../../utils/internal';
 
 export interface InputTextProps
-	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'>,
-		Omit<ICommon.HtmlElementProps, 'display'> {
-	//TextInput Props
-	boxRef?: React.RefObject<HTMLDivElement>;
+	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type' | 'inputMode'>,
+		Omit<ICommon.HtmlElementProps, 'display'>,
+		ICommon.MarginProps,
+		ICommon.PaletteProps {
+	inputMode: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+	elementRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
-	type: 'text' | 'password' | 'tel' | 'email' | 'hidden' | 'date';
+	type?: 'text' | 'password' | 'tel' | 'hidden' | 'date';
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
 	value?: string | number | readonly string[] | undefined;
@@ -25,8 +28,6 @@ export interface InputTextProps
 	updateControl?: (control: RsFormControl<string | string[] | number>) => void;
 
 	//Css
-	color?: string;
-	backgroundColor?: string;
 	borderColor?: string;
 	useFloatingPlaceholder?: boolean;
 
@@ -39,17 +40,14 @@ export interface InputTextProps
 	maxValue?: number; // Only works with number, range, date, datetime-local, month, time and week.
 	onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-	onChange?: (
-		event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-		control?: RsFormControl<IRsFormControl>
-	) => void;
+	onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputText: React.FC<InputTextProps> = (props) => {
 	const {
 		id,
 		look,
-		boxRef,
+		elementRef,
 		control,
 		updateControl,
 		icon,
@@ -57,15 +55,48 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		autocompleteType,
 		onChange,
 		className,
-		backgroundColor,
+		bgColor,
 		borderColor,
 		color,
 		placeholder,
 		type,
+		inputMode,
 		value,
 		useFloatingPlaceholder,
+		m,
+		mt,
+		mr,
+		mb,
+		ml,
+		mx,
+		my,
+		margin,
+		marginTop,
+		marginRight,
+		marginBottom,
+		marginLeft,
+		marginX,
+		marginY,
 		...inputProps
 	} = props;
+
+	const boxMarginProps = {
+		...(m && { m }),
+		...(mt && { mt }),
+		...(mr && { mr }),
+		...(mb && { mb }),
+		...(ml && { ml }),
+		...(mx && { mx }),
+		...(my && { my }),
+		...(margin && { margin }),
+		...(marginTop && { marginTop }),
+		...(marginRight && { marginRight }),
+		...(marginBottom && { marginBottom }),
+		...(marginLeft && { marginLeft }),
+		...(marginX && { marginX }),
+		...(marginY && { marginY })
+	};
+
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const [formControl, setFormControl] = React.useState<RsFormControl<string | string[] | number> | undefined>(
@@ -76,27 +107,29 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(control);
 	}, [control]);
 
-	async function changeHandler(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
+	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
 		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
 		event.persist();
+
+		if (onChange) onChange(event.target.value, event);
+		if (!control) return;
+
 		const target = event.target;
 
 		const startPosition = target.selectionStart || 0;
 		const endPosition = target.selectionEnd || 0;
 		const updated = clone(control);
-		if (updated) {
-			updated.value = target.value;
-			if (updated.value.length === 0) {
-				updated.clearErrors();
-			} else {
-				await updated.validate();
-			}
-			setFormControl(updated);
-			if (updateControl) updateControl(updated);
+
+		updated.value = target.value;
+		if (updated.value.length === 0) {
+			updated.clearErrors();
+		} else {
+			await updated.validate();
 		}
+		setFormControl(updated);
+		if (updateControl) updateControl(updated);
 
 		target.setSelectionRange(startPosition, endPosition);
-		if (onChange) onChange(event, updated);
 	}
 
 	function getAutocompleteType(): string {
@@ -108,7 +141,9 @@ const InputText: React.FC<InputTextProps> = (props) => {
 	function getInputStyle() {
 		let input = (
 			<input
+				key={'input'}
 				type={type}
+				inputMode={inputMode}
 				ref={inputRef}
 				onChange={changeHandler}
 				value={!!formControl ? formControl.value : value}
@@ -123,7 +158,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		if (!useFloatingPlaceholder) return input;
 
 		return (
-			<Box className={'floatingPlaceholder'}>
+			<Box className={'floatingPlaceholder'} key={'floating'}>
 				{input}
 				<label>{placeholder}</label>
 			</Box>
@@ -151,21 +186,6 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		return iconInput;
 	}
 
-	function renderErrors() {
-		if (!control) return;
-		const errorNodes: React.ReactNode[] = [];
-		const errors = control.errors;
-		for (let index = 0; index < errors.length; index++) {
-			const errorMessage = control.getErrorMessage(errors[index]);
-			errorNodes.push(
-				<div key={`${index}Error`} className={'rsInputErrorMessage'}>
-					{errorMessage}
-				</div>
-			);
-		}
-		return errorNodes;
-	}
-
 	function hasError(): boolean {
 		if (!control) return false;
 		return control.errors.length > 0;
@@ -179,15 +199,16 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		<Box
 			id={id}
 			className={classNames('rsInputText', className, look, { error: hasError() })}
-			bgColor={backgroundColor}
+			bgColor={bgColor}
 			color={color}
 			borderColor={borderColor}
-			elementRef={boxRef}
+			elementRef={elementRef}
+			{...boxMarginProps}
 		>
 			<Box className={'inputContainer'} onClick={focusInput}>
 				{renderInput()}
 			</Box>
-			{renderErrors()}
+			{renderErrors(props.control)}
 		</Box>
 	);
 };

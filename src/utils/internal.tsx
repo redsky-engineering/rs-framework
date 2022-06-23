@@ -1,5 +1,6 @@
 import { CSSProperties, PropsWithChildren } from 'react';
 import * as React from 'react';
+import { RsFormControl } from '../ui';
 
 const properties = {
 	m: 'margin',
@@ -142,4 +143,23 @@ export function rippleEffect(event: React.MouseEvent<HTMLElement>) {
 	setTimeout(() => {
 		ripples.remove();
 	}, 600);
+}
+
+/**
+ * Renders out our standard errors used with the form control
+ * @param control
+ */
+export function renderErrors(control: RsFormControl<any> | undefined): React.ReactNode | React.ReactNode[] {
+	if (!control) return null;
+	const errorNodes: React.ReactNode[] = [];
+	const errors = control.errors;
+	for (let index = 0; index < errors.length; index++) {
+		const errorMessage = control.getErrorMessage(errors[index]);
+		errorNodes.push(
+			<div key={`${index}Error`} className={'rsInputErrorMessage'}>
+				{errorMessage}
+			</div>
+		);
+	}
+	return errorNodes;
 }
