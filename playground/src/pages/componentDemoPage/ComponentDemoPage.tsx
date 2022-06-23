@@ -93,7 +93,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				Checkbox Component
 			</Label>
 			<Checkbox
-				checkboxId={'check1'}
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 				control={formGroup.get('checkedKey')}
 				checked={formGroup.get<boolean>('checkedKey2').value}

@@ -36,7 +36,6 @@ export interface CheckboxProps
 		| string;
 
 	//Form Control
-	checkboxId: string;
 	control?: RsFormControl<boolean>;
 	updateControl?: (control: RsFormControl<boolean>) => void;
 	checked?: boolean | undefined;
@@ -48,7 +47,6 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 		id,
 		boxRef,
 		elementRef,
-		checkboxId,
 		control,
 		updateControl,
 		className,
@@ -83,6 +81,7 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 	}
 
 	function renderCheckbox() {
+		const checkboxId = 'Checkbox-' + Math.random().toString(36).slice(-6);
 		let checkbox = (
 			<input
 				id={checkboxId}

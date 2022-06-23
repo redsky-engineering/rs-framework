@@ -7,9 +7,7 @@ import { Checkbox } from '../index';
 
 The `Checkbox` component requires the user to create a themes/checkbox.scss file and style the checkbox there.
 You can follow the scss layout for the checkbox to get the correct checkbox styles.
-The checkbox component uses the native label tag to use Reacts htmlFor.
-This requires the id for the input to be set so the label can use that id to connect it using the htmlFor react prop.
-This is done by setting the input id with the props `checkboxId`. This id needs to be unique to each checkbox and label so that the label and checkbox click events will link up properly.
+The checkbox component uses the native label tag to use Reacts htmlFor. The id associated with the fields is automatically generated.
 If for some reason a label is not desired, then leave the labelText prop field blank.
 The checkbox also utilizes RsFormControl. To see an example of this being utilized, Look at the ComponentDemoPage for more information.
 
@@ -29,7 +27,6 @@ This is the default labelPosition when using the checkbox. You can also set it w
 	<Story
 		name="Checkbox Position Right - look containedPrimary"
 		args={{
-			checkboxId: 'exampleId1',
 			look: 'containedPrimary',
 			labelText: 'This is the label to the right',
 			labelPosition: 'RIGHT'
@@ -47,7 +44,6 @@ This is the labelPosition being set to Top when using the checkbox. This is also
 	<Story
 		name="Checkbox Position Top - look: containedSecondary"
 		args={{
-			checkboxId: 'exampleId2',
 			look: 'containedSecondary',
 			labelText: 'This is the label to the top',
 			labelPosition: 'TOP'
@@ -65,7 +61,6 @@ This is an example of the checkbox not having a label initiated.
 	<Story
 		name="Checkbox Default No Label"
 		args={{
-			id: 'exampleId3',
 			look: 'containedPrimary'
 		}}
 	>
@@ -81,7 +76,6 @@ This is an example of the checkbox being disabled.
 	<Story
 		name="Checkbox Disabled"
 		args={{
-			checkboxId: 'exampleId4',
 			look: 'containedPrimary',
 			labelText: 'This is the button disabled',
 			labelVariant: 'subtitle1',
