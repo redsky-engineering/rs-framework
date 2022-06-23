@@ -3,7 +3,7 @@ import './InputText.scss';
 import { InputHTMLAttributes, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
-import { RsFormControl, IRsFormControl } from '../form/FormControl';
+import { RsFormControl } from '../form/FormControl';
 
 import { Box } from '../box/Box';
 import clone from 'lodash.clone';
@@ -12,9 +12,11 @@ import { renderErrors } from '../../utils/internal';
 
 export interface InputTextProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type' | 'inputMode'>,
-		Omit<ICommon.HtmlElementProps, 'display'> {
+		Omit<ICommon.HtmlElementProps, 'display'>,
+		ICommon.MarginProps,
+		ICommon.PaletteProps {
 	inputMode: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
-	boxRef?: React.RefObject<HTMLDivElement>;
+	elementRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	type?: 'text' | 'password' | 'tel' | 'hidden' | 'date';
 	noAutocomplete?: boolean;
@@ -26,8 +28,6 @@ export interface InputTextProps
 	updateControl?: (control: RsFormControl<string | string[] | number>) => void;
 
 	//Css
-	color?: string;
-	backgroundColor?: string;
 	borderColor?: string;
 	useFloatingPlaceholder?: boolean;
 
@@ -40,14 +40,14 @@ export interface InputTextProps
 	maxValue?: number; // Only works with number, range, date, datetime-local, month, time and week.
 	onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputText: React.FC<InputTextProps> = (props) => {
 	const {
 		id,
 		look,
-		boxRef,
+		elementRef,
 		control,
 		updateControl,
 		icon,
@@ -55,7 +55,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		autocompleteType,
 		onChange,
 		className,
-		backgroundColor,
+		bgColor,
 		borderColor,
 		color,
 		placeholder,
@@ -63,8 +63,40 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		inputMode,
 		value,
 		useFloatingPlaceholder,
+		m,
+		mt,
+		mr,
+		mb,
+		ml,
+		mx,
+		my,
+		margin,
+		marginTop,
+		marginRight,
+		marginBottom,
+		marginLeft,
+		marginX,
+		marginY,
 		...inputProps
 	} = props;
+
+	const boxMarginProps = {
+		...(m && { m }),
+		...(mt && { mt }),
+		...(mr && { mr }),
+		...(mb && { mb }),
+		...(ml && { ml }),
+		...(mx && { mx }),
+		...(my && { my }),
+		...(margin && { margin }),
+		...(marginTop && { marginTop }),
+		...(marginRight && { marginRight }),
+		...(marginBottom && { marginBottom }),
+		...(marginLeft && { marginLeft }),
+		...(marginX && { marginX }),
+		...(marginY && { marginY })
+	};
+
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const [formControl, setFormControl] = React.useState<RsFormControl<string | string[] | number> | undefined>(
@@ -79,7 +111,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
 		event.persist();
 
-		if (onChange) onChange(event);
+		if (onChange) onChange(event.target.value, event);
 		if (!control) return;
 
 		const target = event.target;
@@ -167,10 +199,11 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		<Box
 			id={id}
 			className={classNames('rsInputText', className, look, { error: hasError() })}
-			bgColor={backgroundColor}
+			bgColor={bgColor}
 			color={color}
 			borderColor={borderColor}
-			elementRef={boxRef}
+			elementRef={elementRef}
+			{...boxMarginProps}
 		>
 			<Box className={'inputContainer'} onClick={focusInput}>
 				{renderInput()}
