@@ -3,13 +3,13 @@ import clone from 'lodash.clone';
 import React, { MouseEvent } from 'react';
 import { ICommon } from '../../common/Interfaces';
 import { useUpdateEffect } from '../../hooks/useUpdateEffect';
-import { ObjectUtils } from '../../utils/Utils';
+import { ObjectUtils } from '../../utils';
 import { RsFormControl } from '../form/FormControl';
 import './InputNumber.scss';
 import { renderErrors } from '../../utils/internal';
 import { Box } from '../box/Box';
 
-interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'> {
+interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'>, ICommon.MarginProps {
 	name?: string | null;
 	showButtons?: boolean;
 	inputMode?: 'decimal' | 'numeric' | null;
@@ -44,7 +44,7 @@ interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'> {
 	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
 	onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
 	onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
-	onChange?: ((data: { originalEvent: React.UIEvent; value: number }) => void) | null;
+	onChange?: ((value: number, event: React.UIEvent) => void) | null;
 	onValueChange?:
 		| ((data: {
 				originalEvent: React.UIEvent | null;
@@ -106,8 +106,40 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		onBlur,
 		onChange,
 		onValueChange,
+		m,
+		mt,
+		mr,
+		mb,
+		ml,
+		mx,
+		my,
+		margin,
+		marginTop,
+		marginRight,
+		marginBottom,
+		marginLeft,
+		marginX,
+		marginY,
 		...inputProps
 	} = props;
+
+	const boxMarginProps = {
+		...(m && { m }),
+		...(mt && { mt }),
+		...(mr && { mr }),
+		...(mb && { mb }),
+		...(ml && { ml }),
+		...(mx && { mx }),
+		...(my && { my }),
+		...(margin && { margin }),
+		...(marginTop && { marginTop }),
+		...(marginRight && { marginRight }),
+		...(marginBottom && { marginBottom }),
+		...(marginLeft && { marginLeft }),
+		...(marginX && { marginX }),
+		...(marginY && { marginY })
+	};
+
 	const [focusedState, setFocusedState] = React.useState(false);
 	const elementRef = React.useRef(null);
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -889,10 +921,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 	function handleOnChange(event: React.UIEvent, currentValue: string, newValue: number) {
 		if (props.onChange && isValueChanged(currentValue, newValue)) {
-			props.onChange({
-				originalEvent: event,
-				value: newValue
-			});
+			props.onChange(newValue, event);
 		}
 	}
 
@@ -1230,7 +1259,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	const errors = renderErrors(props.control);
 
 	return (
-		<Box className={classNames('rsInputNumber', className)}>
+		<Box className={classNames('rsInputNumber', className)} {...boxMarginProps}>
 			<span ref={elementRef} id={props.id} {...otherProps}>
 				{inputElement}
 				{buttonGroup}
