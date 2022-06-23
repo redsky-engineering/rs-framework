@@ -13,7 +13,8 @@ import { renderErrors } from '../../utils/internal';
 export interface InputTextareaProps
 	extends ICommon.PaletteProps,
 		Omit<ICommon.HtmlElementProps, 'display'>,
-		Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
+		Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'>,
+		ICommon.MarginProps {
 	elementRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
 	noAutocomplete?: boolean;
@@ -32,7 +33,7 @@ export interface InputTextareaProps
 
 	onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 	onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
-	onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, control?: RsFormControl<IRsFormControl>) => void;
+	onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const InputTextarea: React.FC<InputTextareaProps> = (props) => {
@@ -51,8 +52,40 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		minLength,
 		maxLength,
 		useFloatingPlaceholder,
+		m,
+		mt,
+		mr,
+		mb,
+		ml,
+		mx,
+		my,
+		margin,
+		marginTop,
+		marginRight,
+		marginBottom,
+		marginLeft,
+		marginX,
+		marginY,
 		...textareaProps
 	} = props;
+
+	const boxMarginProps = {
+		...(m && { m }),
+		...(mt && { mt }),
+		...(mr && { mr }),
+		...(mb && { mb }),
+		...(ml && { ml }),
+		...(mx && { mx }),
+		...(my && { my }),
+		...(margin && { margin }),
+		...(marginTop && { marginTop }),
+		...(marginRight && { marginRight }),
+		...(marginBottom && { marginBottom }),
+		...(marginLeft && { marginLeft }),
+		...(marginX && { marginX }),
+		...(marginY && { marginY })
+	};
+
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
 	const [formControl, setFormControl] = useState<RsFormControl<string> | undefined>(control);
@@ -62,25 +95,28 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	}, [control]);
 
 	async function changeHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
+		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
 		event.persist();
+
+		if (onChange) onChange(event.target.value, event);
+		if (!control) return;
+
 		const target = event.target;
 
 		const startPosition = target.selectionStart || 0;
 		const endPosition = target.selectionEnd || 0;
 		const updated = clone(control);
-		if (updated) {
-			updated.value = target.value;
-			if (updated.value.length === 0) {
-				updated.clearErrors();
-			} else {
-				await updated.validate();
-			}
-			setFormControl(updated);
-			if (updateControl) updateControl(updated);
+
+		updated.value = target.value;
+		if (updated.value.length === 0) {
+			updated.clearErrors();
+		} else {
+			await updated.validate();
 		}
+		setFormControl(updated);
+		if (updateControl) updateControl(updated);
 
 		target.setSelectionRange(startPosition, endPosition);
-		if (onChange) onChange(event, updated);
 	}
 
 	function getAutocompleteType(): string {
@@ -124,6 +160,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 			elementRef={elementRef}
 			color={props.color}
 			bgColor={props.bgColor}
+			{...boxMarginProps}
 		>
 			<Box className={'inputTextareaContainer'} onClick={focusInput}>
 				{renderTextarea()}
