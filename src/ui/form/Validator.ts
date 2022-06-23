@@ -17,8 +17,7 @@ export class RsValidator {
 	 * Creates a new `RsValidator` instance.
 	 * @param _validator Validator enumeration from `RsValidatorEnum`.
 	 * @param _errorMessage Error message for invalid state.
-	 * @param _value Value for comparison validator, e.g. min, max,
-	 * if putting a value of 3 here, validator will validate if the value lenght is smaller or greater than 3.
+	 * @param _value Value for comparison validator, e.g. minLength, maxLength,
 	 */
 	constructor(
 		private _validator: RsValidatorEnum,
