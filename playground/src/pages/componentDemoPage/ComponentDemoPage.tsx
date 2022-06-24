@@ -95,8 +95,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Checkbox
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 				control={formGroup.get('checkedKey')}
-				checked={formGroup.get<boolean>('checkedKey').value}
-				labelText={'This is a checkbox'}
+				checked={formGroup.get<boolean>('checkedKey2').value}
+				labelText={'This is another checkbox'}
 				look={'containedPrimary'}
 			/>
 
