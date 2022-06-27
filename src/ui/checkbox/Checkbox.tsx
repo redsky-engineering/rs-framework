@@ -20,27 +20,6 @@ export interface CheckboxProps
 
 	disabled?: boolean;
 
-	//Checkbox Label properties, brings in and uses RS Label Component
-	labelVariant?:
-		| 'display1'
-		| 'h1'
-		| 'h2'
-		| 'h3'
-		| 'h4'
-		| 'h5'
-		| 'h6'
-		| 'link1'
-		| 'link2'
-		| 'subtitle1'
-		| 'subtitle2'
-		| 'subheader1'
-		| 'subheader2'
-		| 'body1'
-		| 'body2'
-		| 'caption1'
-		| 'button'
-		| 'overline'
-		| string;
 	labelText: string;
 	labelPosition?: 'TOP' | 'RIGHT';
 
@@ -73,7 +52,6 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 		className,
 		disabled,
 		checked,
-		labelVariant,
 		labelText,
 		labelPosition,
 		look,
@@ -103,8 +81,10 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 	}
 
 	function renderCheckbox() {
+		const checkboxId = 'Checkbox-' + Math.random().toString(36).slice(-6);
 		let checkbox = (
 			<input
+				id={checkboxId}
 				type={'checkbox'}
 				className={classNames('checkbox', className)}
 				ref={elementRef}
@@ -114,7 +94,11 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 				{...checkboxProps}
 			/>
 		);
-		let label = <Label variant={labelVariant || 'subtitle1'}>{labelText}</Label>;
+		let label = (
+			<label htmlFor={checkboxId} className={'checkboxLabel'}>
+				{labelText}
+			</label>
+		);
 		let labelPlaced;
 		if (!labelPosition || labelPosition === 'RIGHT') {
 			labelPlaced = (

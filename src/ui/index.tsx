@@ -44,6 +44,12 @@ export { ToastContainer, rsToastify } from './toastify';
 export { Img } from './img/Img';
 export type { ImgProps } from './img/Img';
 
+export { LabelRadioButton } from './labelRadioButton/LabelRadioButton';
+export type { LabelRadioButtonProps } from './labelRadioButton/LabelRadioButton';
+
+export { RadioButtonGroup } from './radioButtonGroup/RadioButtonGroup';
+export type { RadioButtonGroupProps } from './radioButtonGroup/RadioButtonGroup';
+
 export { StarRating } from './starRating/StarRating';
 export type { StarRatingProps } from './starRating/StarRating';
 

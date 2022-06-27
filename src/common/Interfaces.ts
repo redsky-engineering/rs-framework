@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconProps, AvatarProps } from '../ui';
+import { IconProps, AvatarProps, LabelProps } from '../ui';
 
 export namespace I996 {
 	export interface NavigateOptions {
@@ -24,7 +24,7 @@ export namespace ICommon {
 
 	export interface HtmlElementProps {
 		id?: string;
-		display?: 'initial' | 'block' | 'inline' | string;
+		display?: 'initial' | 'block' | 'inline' | 'flex' | 'grid' | string;
 		className?: string;
 	}
 
@@ -158,6 +158,10 @@ export namespace ICommon {
 	export interface NewAvatarProps extends AvatarProps {
 		position: 'LEFT' | 'RIGHT';
 		isHidden?: boolean;
+	}
+
+	export interface NewLabelProps extends LabelProps {
+		position: 'LEFT' | 'RIGHT';
 	}
 
 	export type AutoCompleteType =

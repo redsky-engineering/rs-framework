@@ -7,7 +7,8 @@ import { Checkbox } from '../index';
 
 The `Checkbox` component requires the user to create a themes/checkbox.scss file and style the checkbox there.
 You can follow the scss layout for the checkbox to get the correct checkbox styles.
-The checkbox component uses the Label component as the label text. If label is not desired, then leave the labelText field blank.
+The checkbox component uses the native label tag to use Reacts htmlFor. The id associated with the fields is automatically generated.
+If for some reason a label is not desired, then leave the labelText prop field blank.
 The checkbox also utilizes RsFormControl. To see an example of this being utilized, Look at the ComponentDemoPage for more information.
 
 ### Prop Interface
@@ -18,17 +19,16 @@ The checkbox also utilizes RsFormControl. To see an example of this being utiliz
 
 export const Template = (args) => <Checkbox {...args} />;
 
-## Checkbox Position Right - look: containedPrimary - label size: subtitle1
+## Checkbox Position Right - look: containedPrimary
 
 This is the default labelPosition when using the checkbox. You can also set it with the prop `labelPosition: 'RIGHT'` as well.
 
 <Canvas>
 	<Story
-		name="Checkbox Position Right - look containedPrimary = label size subtitle1"
+		name="Checkbox Position Right - look containedPrimary"
 		args={{
 			look: 'containedPrimary',
 			labelText: 'This is the label to the right',
-			labelVariant: 'subtitle1',
 			labelPosition: 'RIGHT'
 		}}
 	>
@@ -36,17 +36,16 @@ This is the default labelPosition when using the checkbox. You can also set it w
 	</Story>
 </Canvas>
 
-## Checkbox Position Top - look: containedSecondary - label size: h6
+## Checkbox Position Top - look: containedSecondary
 
 This is the labelPosition being set to Top when using the checkbox. This is also an example of changing the theme to a different look. In this case its containedSecondary.
 
 <Canvas>
 	<Story
-		name="Checkbox Position Top - look: containedSecondary - label size: h6"
+		name="Checkbox Position Top - look: containedSecondary"
 		args={{
 			look: 'containedSecondary',
 			labelText: 'This is the label to the top',
-			labelVariant: 'h6',
 			labelPosition: 'TOP'
 		}}
 	>
