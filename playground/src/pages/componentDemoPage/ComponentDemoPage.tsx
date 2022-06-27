@@ -17,7 +17,8 @@ import {
 	Select,
 	InputText,
 	InputNumber,
-	InputTextarea
+	InputTextarea,
+	StarRating
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
@@ -372,6 +373,22 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Star Rating
+			</Label>
+			<StarRating
+				numStars={3}
+				starSize={16}
+				customIcon={{
+					fullStarIcon: {
+						iconImg: 'icon-star'
+					},
+					noStarIcon: {
+						iconImg: 'icon-star-outline'
+					}
+				}}
+			/>
+			<StarRating numStars={2.2} starSize={16} starColor={'green'} />
 		</Page>
 	);
 };

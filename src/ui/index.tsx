@@ -44,6 +44,9 @@ export { ToastContainer, rsToastify } from './toastify';
 export { Img } from './img/Img';
 export type { ImgProps } from './img/Img';
 
+export { StarRating } from './starRating/StarRating';
+export type { StarRatingProps } from './starRating/StarRating';
+
 export { RsFormControl } from './form/FormControl';
 export { RsFormGroup } from './form/FormGroup';
 export { RsValidator, RsValidatorEnum } from './form/Validator';
