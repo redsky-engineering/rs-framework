@@ -376,6 +376,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Star Rating
 			</Label>
+			<Label variant={'subtitle1'}>Custom Icon Examples, 1st is not clicked, second is clickable</Label>
 			<StarRating
 				numStars={3}
 				starSize={16}
@@ -388,7 +389,30 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					}
 				}}
 			/>
+			<Label variant={'subtitle1'}>Default Icon Examples, 1st is not clicked, second is clickable</Label>
+			<StarRating
+				numStars={0}
+				starSize={16}
+				customIcon={{
+					fullStarIcon: {
+						iconImg: 'icon-star'
+					},
+					noStarIcon: {
+						iconImg: 'icon-star-outline'
+					}
+				}}
+				onStarClicked={() => console.log('You clicked on the default star rating')}
+				isClickable
+			/>
+
 			<StarRating numStars={2.2} starSize={16} starColor={'green'} />
+			<StarRating
+				numStars={0}
+				starSize={16}
+				starColor={'purple'}
+				onStarClicked={() => console.log('You clicked on the default star rating')}
+				isClickable
+			/>
 		</Page>
 	);
 };

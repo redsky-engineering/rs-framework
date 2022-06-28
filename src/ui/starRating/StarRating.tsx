@@ -3,14 +3,6 @@ import { Icon, IconProps } from '../icon/Icon';
 import { Box } from '../box/Box';
 import './StarRating.scss';
 import classNames from 'classnames';
-import { ICommon } from '../../common/Interfaces';
-import { transformProps } from '../../utils/internal';
-
-export interface MixedStyleProps
-	extends ICommon.SpacingProps,
-		ICommon.SpacingProps,
-		ICommon.DimensionProps,
-		ICommon.PaletteProps {}
 
 export interface IStarIconProps {
 	fullStarIcon?: IconProps;
@@ -25,9 +17,8 @@ export interface StarRatingProps {
 	customIcon?: IStarIconProps;
 	starColor?: string;
 	className?: string;
-	clickable?: boolean;
+	isClickable?: boolean;
 	onStarClicked?: (starCount: number) => void;
-	starStyles?: MixedStyleProps;
 }
 
 const StarRating: React.FC<StarRatingProps> = (props) => {
@@ -37,7 +28,7 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 	let borderClassName;
 
 	useEffect(() => {
-		if (props.clickable) {
+		if (props.isClickable) {
 			setRating(0);
 		} else {
 			setRating(props.numStars);
@@ -45,7 +36,7 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 	}, [props.numStars]);
 
 	function handleClick(stars: number) {
-		if (props.clickable) {
+		if (props.isClickable) {
 			setHoverMovement(false);
 			setRating(stars);
 			if (props.onStarClicked) {
@@ -56,7 +47,7 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 
 	// Handling the hover here. isHoverType will be true for hover in and false for hover out
 	function handleHover(isHoverType: boolean, stars: number) {
-		if (props.clickable) {
+		if (props.isClickable) {
 			if (hoverMovement) {
 				if (isHoverType) {
 					setRating(stars);
@@ -71,15 +62,16 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 	function getBackgroundSizeClassName() {
 		let backgroundClassName;
 		if (props.starSize <= 16) borderClassName = 'smallStarBackground';
-		else if (props.starSize >= 17) borderClassName = 'medStarBackground';
-		else backgroundClassName = 'largeStarBackground';
+		else if (props.starSize >= 17 && props.starSize <= 24) borderClassName = 'medStarBackground';
+		else if (props.starSize > 24) backgroundClassName = 'largeStarBackground';
 		return backgroundClassName;
 	}
+
 	function getBorderSizeClassName() {
 		let borderClassName;
 		if (props.starSize <= 16) borderClassName = 'smallStarBorder';
-		else if (props.starSize >= 17) borderClassName = 'medStarBorder';
-		else borderClassName = 'largeStarBorder';
+		else if (props.starSize >= 17 && props.starSize <= 24) borderClassName = 'medStarBorder';
+		else if (props.starSize > 24) borderClassName = 'largeStarBorder';
 		return borderClassName;
 	}
 
@@ -97,6 +89,7 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 			return <Icon key={'icon'} {...fullStarIcon} />;
 		}
 	}
+
 	function renderHalfOrNoStarIcon(starNumber: number) {
 		if (!props.customIcon) {
 			const borderClassName = getBorderSizeClassName();
@@ -105,20 +98,21 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 			if (starNumber - rating - 1 >= 0) {
 				return (
 					<>
-						<Box className={`starRatingBorder ${borderClassName}`} bgColor={'white'} />
-						<Box className={`starRatingBackground ${backgroundClassName}`} bgColor={'purple'} />
+						<Box className={`starRatingBorder ${borderClassName} emptyStar`} bgColor={'lightgray'} />
+						<Box className={`starRatingBackground ${backgroundClassName}`} bgColor={'white'} />
 					</>
 				);
 			} else {
 				return (
 					<>
-						<Box className={`starRatingBorder ${borderClassName}`} bgColor={'white'} />
+						<Box className={`starRatingBorder ${borderClassName} emptyStar`} bgColor={'lightgrey'} />
 						<Box className={`starRatingBackground ${backgroundClassName}`} />
 						<Box className={`halfStar ${borderClassName}`} bgColor={props.starColor || 'black'} />
 					</>
 				);
 			}
 		}
+
 		const { halfStarIcon, noStarIcon } = props.customIcon;
 
 		if (starNumber - rating - 1 >= 0) {
@@ -185,13 +179,13 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 				);
 			}
 		}
+
 		return (
 			<Box
 				className={classNames('rsStarRating', {
-					dim: !props.numStars && !props.clickable,
-					isClickable: props.clickable
+					dim: !props.numStars && !props.isClickable,
+					isClickable: props.isClickable
 				})}
-				style={transformProps(props.starStyles)}
 			>
 				{stars}
 			</Box>
