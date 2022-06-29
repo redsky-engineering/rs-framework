@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://gitlab.com/redsky_public/framework/compare/v0.3.0...v0.4.0) (2022-06-29)
+
+### Features
+
+-   adding starRating component ([c7acf7b](https://gitlab.com/redsky_public/framework/commit/c7acf7b7c86c25590e228d2e60de80b63fbb2d53))
+-   **LabelRadioButton:** - Added in the Label radio button. ([d59059f](https://gitlab.com/redsky_public/framework/commit/d59059f9398d6dded2e520c30c0169aa5a128295))
+
+### Bug Fixes
+
+-   **InputTextarea:** Removed inherits on border and border color. Removed negative margin ([11b9bd4](https://gitlab.com/redsky_public/framework/commit/11b9bd4b818d4b08174f7c4ac7fa8b31782b4c6a))
+-   Made adjustment to the checkbox id being generated from the component and not required. ([29dd673](https://gitlab.com/redsky_public/framework/commit/29dd673f96e06c928f93720a79a12d1ff3f47772))
+-   **RadioButtonGroup:** Properly import label radio button ([8b1da94](https://gitlab.com/redsky_public/framework/commit/8b1da94a1d891a5bc7a8036dcd72391d45feeee8))
+-   Removed Label Component, replaced with label field so htmlFor is used for increased click area. ([4655235](https://gitlab.com/redsky_public/framework/commit/4655235a4d88d908b54f7437af5f63def4dfca37))
+
 ## [0.3.0](https://gitlab.com/redsky_public/framework/compare/v0.2.0...v0.3.0) (2022-06-23)
 
 ### Features
