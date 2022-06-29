@@ -1,6 +1,7 @@
 import { CSSProperties, PropsWithChildren } from 'react';
 import * as React from 'react';
 import { RsFormControl } from '../ui';
+import { ICommon } from '../common/Interfaces';
 
 const properties = {
 	m: 'margin',
@@ -162,4 +163,43 @@ export function renderErrors(control: RsFormControl<any> | undefined): React.Rea
 		);
 	}
 	return errorNodes;
+}
+
+export function extractMarginProps(props: ICommon.MarginProps): { marginProps: ICommon.MarginProps; remaining: any } {
+	const {
+		m,
+		mt,
+		mr,
+		mb,
+		ml,
+		mx,
+		my,
+		margin,
+		marginTop,
+		marginRight,
+		marginBottom,
+		marginLeft,
+		marginX,
+		marginY,
+		...remaining
+	} = props;
+
+	const marginProps: ICommon.MarginProps = {
+		...(m && { m }),
+		...(mt && { mt }),
+		...(mr && { mr }),
+		...(mb && { mb }),
+		...(ml && { ml }),
+		...(mx && { mx }),
+		...(my && { my }),
+		...(margin && { margin }),
+		...(marginTop && { marginTop }),
+		...(marginRight && { marginRight }),
+		...(marginBottom && { marginBottom }),
+		...(marginLeft && { marginLeft }),
+		...(marginX && { marginX }),
+		...(marginY && { marginY })
+	};
+
+	return { marginProps, remaining };
 }

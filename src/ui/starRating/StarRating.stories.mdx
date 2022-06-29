@@ -1,0 +1,75 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { StarRating } from '../index';
+
+<Meta title="RedSky/StarRating" component={StarRating} argTypes={{}} />
+
+# Star Rating Component
+
+The `Star Rating` component comes built in with a default stars to use when not using an icomoon icon.
+When not using a custom icon it will look like the example shown in storybook.
+
+### Prop Interface
+
+<ArgsTable of={StarRating} />
+
+<!--- This is your Story template function, shown here in React -->
+
+export const Template = (args) => <StarRating {...args} />;
+
+## Star Rating Component Default
+
+This is an example of the star rating component at 4 and a half stars using a custom color. when not clickable, the value is set and does not move.
+
+<Canvas>
+	<Story
+		name="Star Rating Component Default"
+		args={{
+			rating: 4.5,
+			starSize: 16,
+			starColor: 'purple'
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Star Rating Component Clickable
+
+This is an example of the star rating being clickable. To make this work, you set the boolean isClickable to true and if there is a state reference that needs to change, then using the onStarClicked callback will allow that rating data to be passed back.
+
+<Canvas>
+	<Story
+		name="Star Rating Component Clickable"
+		args={{
+			rating: 0,
+			starSize: 24,
+			starColor: 'yellow',
+			onStarClicked: (rating) => console.log('changed the star rating: ', rating),
+			isClickable: true
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Star Rating Component Default Largest Size
+
+If using the default icons, the star rating is being made through CSS and not icomoon. There are three different sizes to choose from. Each example has shown the small, medium and large sizes.
+This is the logic used to calculate this on the starSize prop: 16 or below is small, between 17 and 24 is medium, and 25 and above is the large size.
+If using custom icons, then the starSize props will be act like the fontSize setting on the icons in icomoon and can be set at any level with that props.
+Also to note, to set rating to be set by a state instead of a number.
+
+<Canvas>
+	<Story
+		name="Star Rating Component Default Largest Size"
+		args={{
+			rating: 0,
+			starSize: 26,
+			starColor: 'green',
+			onStarClicked: (rating) => console.log('changed the star rating: ', rating),
+			isClickable: true
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

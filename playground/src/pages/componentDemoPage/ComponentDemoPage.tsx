@@ -17,11 +17,11 @@ import {
 	Select,
 	InputText,
 	InputNumber,
-	InputTextarea
+	InputTextarea,
+	StarRating
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
-import { IRsFormControl } from '../../../../src/ui/form/FormControl';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
@@ -95,7 +95,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Checkbox
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 				control={formGroup.get('checkedKey')}
-				checked={formGroup.get<boolean>('checkedKey2').value}
 				labelText={'This is another checkbox'}
 				look={'containedPrimary'}
 			/>
@@ -371,6 +370,49 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				onChange={(value) => {
 					console.log(value);
 				}}
+			/>
+			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Star Rating
+			</Label>
+			<Label variant={'subtitle1'}>Custom Icon Example using icomoon. Non-clickable</Label>
+			<StarRating
+				mb={16}
+				rating={3}
+				starSize={16}
+				customIcon={{
+					fullStarIcon: {
+						iconImg: 'icon-star'
+					},
+					noStarIcon: {
+						iconImg: 'icon-star-outline'
+					}
+				}}
+			/>
+			<Label variant={'subtitle1'}>Custom Icon - Clickable</Label>
+			<StarRating
+				mb={16}
+				rating={0}
+				starSize={16}
+				customIcon={{
+					fullStarIcon: {
+						iconImg: 'icon-star'
+					},
+					noStarIcon: {
+						iconImg: 'icon-star-outline'
+					}
+				}}
+				onStarClicked={() => console.log('You clicked on the default star rating')}
+				isClickable
+			/>
+			<Label variant={'subtitle1'}>2.2 Rating, Non-clickable</Label>
+			<StarRating rating={2.2} starSize={16} starColor={'green'} mb={16} />
+			<Label variant={'subtitle1'}>Large Stars, Clickable - Initial rating 3</Label>
+			<StarRating
+				rating={3}
+				starSize={30}
+				starColor={'purple'}
+				onStarClicked={(rating) => console.log('You clicked on the default star rating: ', rating)}
+				isClickable
 			/>
 		</Page>
 	);

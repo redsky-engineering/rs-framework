@@ -2,24 +2,22 @@
 	.inputTextareaContainer {
 		display: flex;
 		align-items: center;
-		border: inherit;
-		bordercolor: inherit;
 
 		textarea {
 			width: 100%;
 			height: 100%;
-			background-color: inherit;
-			color: inherit;
 			border: none;
+
+			&:focus-visible {
+				border: unset;
+				outline: unset;
+			}
 		}
 
 		.floatingPlaceholder {
-			margin-bottom: -5px;
 			height: 100%;
 			width: 100%;
 			position: relative;
-			border: inherit;
-			bordercolor: inherit;
 			label {
 				display: block;
 				position: absolute;
