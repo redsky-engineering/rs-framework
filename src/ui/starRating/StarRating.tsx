@@ -3,6 +3,8 @@ import { Icon, IconProps } from '../icon/Icon';
 import { Box } from '../box/Box';
 import './StarRating.scss';
 import classNames from 'classnames';
+import { ICommon } from '../../common/Interfaces';
+import { extractMarginProps, transformProps } from '../../utils/internal';
 
 export interface IStarIconProps {
 	fullStarIcon?: IconProps;
@@ -11,29 +13,29 @@ export interface IStarIconProps {
 	defaultIcon?: Omit<IconProps, 'iconImg' | 'className' | 'onClick'>;
 }
 
-export interface StarRatingProps {
-	numStars: number;
+export interface StarRatingProps extends ICommon.MarginProps {
 	starSize: number;
+	rating?: number;
 	customIcon?: IStarIconProps;
 	starColor?: string;
 	className?: string;
 	isClickable?: boolean;
-	onStarClicked?: (starCount: number) => void;
+	onStarClicked?: (rating: number) => void;
 }
 
 const StarRating: React.FC<StarRatingProps> = (props) => {
-	const [rating, setRating] = useState(0);
+	const [rating, setRating] = useState(props.rating || 0);
 	const [hoverMovement, setHoverMovement] = useState(true);
+
+	const { marginProps } = extractMarginProps(props);
+	const containerStyle = transformProps(marginProps);
 
 	let borderClassName;
 
 	useEffect(() => {
-		if (props.isClickable) {
-			setRating(0);
-		} else {
-			setRating(props.numStars);
-		}
-	}, [props.numStars]);
+		if (props.rating === undefined) return;
+		setRating(props.rating);
+	}, [props.rating]);
 
 	function handleClick(stars: number) {
 		if (props.isClickable) {
@@ -75,14 +77,10 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 		return borderClassName;
 	}
 
-	function renderFullStarIcon(starNumber: number) {
+	function renderFullStarIcon() {
 		if (!props.customIcon) {
 			const borderClassName = getBorderSizeClassName();
-			return (
-				<>
-					<Box className={`starRatingBorder ${borderClassName}`} bgColor={props.starColor || 'black'} />
-				</>
-			);
+			return <Box className={`starRatingBorder ${borderClassName}`} bgColor={props.starColor || 'black'} />;
 		}
 		const { fullStarIcon } = props.customIcon;
 		if (fullStarIcon) {
@@ -156,7 +154,7 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 							handleHover(false, i);
 						}}
 					>
-						{renderFullStarIcon(i)}
+						{renderFullStarIcon()}
 					</div>
 				);
 			} else {
@@ -182,8 +180,9 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
 
 		return (
 			<Box
+				style={containerStyle}
 				className={classNames('rsStarRating', {
-					dim: !props.numStars && !props.isClickable,
+					dim: !props.rating && !props.isClickable,
 					isClickable: props.isClickable
 				})}
 			>

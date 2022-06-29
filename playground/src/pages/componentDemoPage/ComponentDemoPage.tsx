@@ -22,7 +22,6 @@ import {
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
-import { IRsFormControl } from '../../../../src/ui/form/FormControl';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
@@ -96,7 +95,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Checkbox
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 				control={formGroup.get('checkedKey')}
-				checked={formGroup.get<boolean>('checkedKey2').value}
 				labelText={'This is another checkbox'}
 				look={'containedPrimary'}
 			/>
@@ -376,9 +374,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Star Rating
 			</Label>
-			<Label variant={'subtitle1'}>Custom Icon Examples, 1st is not clicked, second is clickable</Label>
+			<Label variant={'subtitle1'}>Custom Icon Example using icomoon. Non-clickable</Label>
 			<StarRating
-				numStars={3}
+				mb={16}
+				rating={3}
 				starSize={16}
 				customIcon={{
 					fullStarIcon: {
@@ -389,9 +388,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					}
 				}}
 			/>
-			<Label variant={'subtitle1'}>Default Icon Examples, 1st is not clicked, second is clickable</Label>
+			<Label variant={'subtitle1'}>Custom Icon - Clickable</Label>
 			<StarRating
-				numStars={0}
+				mb={16}
+				rating={0}
 				starSize={16}
 				customIcon={{
 					fullStarIcon: {
@@ -404,13 +404,14 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				onStarClicked={() => console.log('You clicked on the default star rating')}
 				isClickable
 			/>
-
-			<StarRating numStars={2.2} starSize={16} starColor={'green'} />
+			<Label variant={'subtitle1'}>2.2 Rating, Non-clickable</Label>
+			<StarRating rating={2.2} starSize={16} starColor={'green'} mb={16} />
+			<Label variant={'subtitle1'}>Large Stars, Clickable - Initial rating 3</Label>
 			<StarRating
-				numStars={0}
-				starSize={16}
+				rating={3}
+				starSize={30}
 				starColor={'purple'}
-				onStarClicked={() => console.log('You clicked on the default star rating')}
+				onStarClicked={(rating) => console.log('You clicked on the default star rating: ', rating)}
 				isClickable
 			/>
 		</Page>

@@ -24,7 +24,7 @@ This is an example of the star rating component at 4 and a half stars using a cu
 	<Story
 		name="Star Rating Component Default"
 		args={{
-			numStars: 4.5,
+			rating: 4.5,
 			starSize: 16,
 			starColor: 'purple'
 		}}
@@ -41,10 +41,10 @@ This is an example of the star rating being clickable. To make this work, you se
 	<Story
 		name="Star Rating Component Clickable"
 		args={{
-			numStars: 0,
+			rating: 0,
 			starSize: 24,
 			starColor: 'yellow',
-			onStarClicked: () => console.log('changed the star rating'),
+			onStarClicked: (rating) => console.log('changed the star rating: ', rating),
 			isClickable: true
 		}}
 	>
@@ -57,16 +57,16 @@ This is an example of the star rating being clickable. To make this work, you se
 If using the default icons, the star rating is being made through CSS and not icomoon. There are three different sizes to choose from. Each example has shown the small, medium and large sizes.
 This is the logic used to calculate this on the starSize prop: 16 or below is small, between 17 and 24 is medium, and 25 and above is the large size.
 If using custom icons, then the starSize props will be act like the fontSize setting on the icons in icomoon and can be set at any level with that props.
-Also to note, to set numStars to be set by a state instead of a number.
+Also to note, to set rating to be set by a state instead of a number.
 
 <Canvas>
 	<Story
 		name="Star Rating Component Default Largest Size"
 		args={{
-			numStars: 0,
+			rating: 0,
 			starSize: 26,
 			starColor: 'green',
-			onStarClicked: () => console.log('changed the star rating'),
+			onStarClicked: (rating) => console.log('changed the star rating: ', rating),
 			isClickable: true
 		}}
 	>
