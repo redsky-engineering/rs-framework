@@ -2,9 +2,8 @@ import * as React from 'react';
 import './RadioButtonGroup.scss';
 import { Box } from '../box/Box';
 import { ICommon } from '../../common/Interfaces';
-import LabelRadioButton from '../labelRadioButton/LabelRadioButton';
+import { LabelRadioButton } from '../labelRadioButton/LabelRadioButton';
 import { RsFormControl } from '../form/FormControl';
-import classNames from 'classnames';
 
 type IValueOptions = string | number;
 
