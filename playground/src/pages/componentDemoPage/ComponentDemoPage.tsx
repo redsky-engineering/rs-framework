@@ -56,7 +56,15 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 
 	return (
 		<Page className={'rsComponentDemoPage'}>
-			<Label variant={'h5'} mb={16} bgColor={'#099109'} color={'white'} p={16}>
+			<Label
+				elementType={'p'}
+				variant={'h5'}
+				weight={'regular'}
+				mb={16}
+				bgColor={'#099109'}
+				color={'white'}
+				p={16}
+			>
 				Chip Component
 			</Label>
 			<Chip
@@ -68,7 +76,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					router.navigate<RoutePaths>('/').catch(console.error);
 				}}
 			/>
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Button Component
 			</Label>
 			<Button
@@ -89,7 +97,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				</Box>
 			</Button>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Checkbox Component
 			</Label>
 			<Checkbox
@@ -99,10 +107,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				look={'containedPrimary'}
 			/>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Img Component
 			</Label>
-			<Label variant={'subtitle1'} mb={16} mt={32}>
+			<Label variant={'subtitle1'} weight={'regular'} mb={16} mt={32}>
 				ImageKit Resize (16:9)
 			</Label>
 			<Img
@@ -111,11 +119,11 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				width={533}
 				height={300}
 			/>
-			<Label variant={'subtitle1'} mb={16} mt={32}>
+			<Label variant={'subtitle1'} weight={'regular'} mb={16} mt={32}>
 				External Disabled ImageKit
 			</Label>
 			<Img src={'https://www.placecage.com/128/128'} alt={'Nic Cage'} width={128} height={128} disableImageKit />
-			<Label variant={'subtitle1'} mb={16} mt={32}>
+			<Label variant={'subtitle1'} weight={'regular'} mb={16} mt={32}>
 				Error loading image (show default missing image)
 			</Label>
 			<Img
@@ -127,7 +135,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log('Error loading image', event);
 				}}
 			/>
-			<Label variant={'subtitle1'} mb={16} mt={32}>
+			<Label variant={'subtitle1'} weight={'regular'} mb={16} mt={32}>
 				Error loading image (show alternative Nic Cage Image)
 			</Label>
 			<Img
@@ -142,7 +150,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Accordion Component
 			</Label>
 			<Accordion
@@ -193,10 +201,12 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				</div>
 			</Accordion>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Select Component
 			</Label>
-			<Label variant={'h6'}>(NOT using FormControl)</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				(NOT using FormControl)
+			</Label>
 			<Select
 				mt={8}
 				mb={16}
@@ -219,7 +229,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 				isClearable
 			/>
-			<Label variant={'h6'}>(Using FormControl)</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				(Using FormControl)
+			</Label>
 			<Select
 				mt={8}
 				mb={16}
@@ -240,7 +252,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				isClearable
 			/>
-			<Label variant={'h6'}>Creatable Select</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Creatable Select
+			</Label>
 			<Select
 				mt={8}
 				mb={16}
@@ -262,7 +276,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log('create: ', newValue);
 				}}
 			/>
-			<Label variant={'h6'}>Multi Option Select (No Form Control)</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Multi Option Select (No Form Control)
+			</Label>
 			<Select
 				isMulti
 				mt={8}
@@ -282,7 +298,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(newValue);
 				}}
 			/>
-			<Label variant={'h6'}>Multi Option Select (With Form Control)</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Multi Option Select (With Form Control)
+			</Label>
 			<Select
 				isMulti
 				mt={8}
@@ -304,7 +322,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Textarea
 			</Label>
 			<InputTextarea
@@ -315,10 +333,12 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Text
 			</Label>
-			<Label variant={'h6'}>Email</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Email
+			</Label>
 			<InputText
 				mb={16}
 				icon={[
@@ -335,7 +355,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					setFormGroup(formGroup.clone().update(control));
 				}}
 			/>
-			<Label variant={'h6'}>Phone</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Phone
+			</Label>
 			<InputText
 				mb={16}
 				prefix={'Tel: '}
@@ -345,7 +367,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-			<Label variant={'h6'}>Password</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Password
+			</Label>
 			<InputText
 				type={'password'}
 				inputMode={'text'}
@@ -354,27 +378,33 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Number
 			</Label>
-			<Label variant={'h6'}>Simple Number</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				Simple Number
+			</Label>
 			<InputNumber
 				control={formGroup.get('number')}
 				updateControl={(control) => {
 					setFormGroup(formGroup.clone().update(control));
 				}}
 			/>
-			<Label variant={'h6'}>No separators</Label>
+			<Label variant={'h6'} weight={'regular'}>
+				No separators
+			</Label>
 			<InputNumber
 				useGrouping={false}
 				onChange={(value) => {
 					console.log(value);
 				}}
 			/>
-			<Label variant={'h5'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Star Rating
 			</Label>
-			<Label variant={'subtitle1'}>Custom Icon Example using icomoon. Non-clickable</Label>
+			<Label variant={'subtitle1'} weight={'regular'}>
+				Custom Icon Example using icomoon. Non-clickable
+			</Label>
 			<StarRating
 				mb={16}
 				rating={3}
@@ -388,7 +418,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					}
 				}}
 			/>
-			<Label variant={'subtitle1'}>Custom Icon - Clickable</Label>
+			<Label variant={'subtitle1'} weight={'regular'}>
+				Custom Icon - Clickable
+			</Label>
 			<StarRating
 				mb={16}
 				rating={0}
@@ -404,9 +436,13 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				onStarClicked={() => console.log('You clicked on the default star rating')}
 				isClickable
 			/>
-			<Label variant={'subtitle1'}>2.2 Rating, Non-clickable</Label>
+			<Label variant={'subtitle1'} weight={'regular'}>
+				2.2 Rating, Non-clickable
+			</Label>
 			<StarRating rating={2.2} starSize={16} starColor={'green'} mb={16} />
-			<Label variant={'subtitle1'}>Large Stars, Clickable - Initial rating 3</Label>
+			<Label variant={'subtitle1'} weight={'regular'}>
+				Large Stars, Clickable - Initial rating 3
+			</Label>
 			<StarRating
 				rating={3}
 				starSize={30}

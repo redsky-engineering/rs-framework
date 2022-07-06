@@ -11,80 +11,67 @@ html {
 	&.h1 {
 		font-size: clamp(56px, 8vw, 96px);
 		line-height: clamp(70px, 8vw, 112px);
-		font-weight: $fwRegular;
 		letter-spacing: -1.5px;
 	}
 	&.h2 {
 		font-size: clamp(36px, 8vw, 60px);
 		line-height: clamp(43px, 8vw, 72px);
-		font-weight: $fwRegular;
 		letter-spacing: -0.5px;
 	}
 	&.h3 {
 		font-size: clamp(32px, 6vw, 48px);
 		line-height: clamp(38px, 6vw, 58px);
-		font-weight: $fwRegular;
 		letter-spacing: 0;
 	}
 	&.h4 {
 		font-size: clamp(24px, 6vw, 34px);
 		line-height: clamp(29px, 6vw, 41px);
-		font-weight: $fwRegular;
 		letter-spacing: 0.25px;
 	}
 	&.h5 {
 		font-size: clamp(20px, 5vw, 24px);
 		line-height: clamp(24px, 5vw, 29px);
-		font-weight: $fwRegular;
 		letter-spacing: 0;
 	}
 	&.h6 {
 		font-size: clamp(18px, 4vw, 20px);
 		line-height: clamp(21px, 4vw, 24px);
-		font-weight: $fwMedium;
 		letter-spacing: 0.15px;
 	}
 	&.subtitle1 {
 		font-size: 15px;
 		line-height: 18px;
-		font-weight: $fwRegular;
 		letter-spacing: 0.15px;
 	}
 	&.subtitle2 {
 		font-size: 13px;
 		line-height: 16px;
-		font-weight: $fwRegular;
 		letter-spacing: 0.1px;
 	}
 	&.body1 {
 		font-size: 15px;
 		line-height: 18px;
-		font-weight: $fwLight;
 		letter-spacing: 0.15px;
 	}
 	&.body2 {
 		font-size: 13px;
 		line-height: 16px;
-		font-weight: $fwLight;
 		letter-spacing: 0.15px;
 	}
 	&.button {
 		font-size: 15px;
 		line-height: 16px;
-		font-weight: $fwMedium;
 		letter-spacing: 0.4px;
 		text-transform: uppercase;
 	}
 	&.caption {
 		font-size: 11px;
 		line-height: 14px;
-		font-weight: $fwRegular;
 		letter-spacing: 0.4px;
 	}
 	&.overline {
 		font-size: 11px;
 		line-height: 14px;
-		font-weight: $fwRegular;
 		letter-spacing: 1px;
 		text-transform: uppercase;
 	}
@@ -92,7 +79,6 @@ html {
 		font-style: italic;
 		font-size: 18px;
 		line-height: 22px;
-		font-weight: $fwRegular;
 		letter-spacing: 0.15px;
 		text-transform: capitalize;
 		color: theme-var($darkGray);
@@ -101,7 +87,6 @@ html {
 		font-style: italic;
 		font-size: 15px;
 		line-height: 18px;
-		font-weight: $fwRegular;
 		letter-spacing: 0.15px;
 		color: theme-var($darkGray);
 	}

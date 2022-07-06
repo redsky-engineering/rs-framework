@@ -30,7 +30,7 @@ const Chip: React.FC<ChipProps> = (props) => {
 
 	function renderIcons() {
 		let label = [
-			<Label key={'icon-label'} variant={props.labelVariant}>
+			<Label key={'icon-label'} weight={'regular'} variant={props.labelVariant}>
 				{props.label}
 			</Label>
 		];

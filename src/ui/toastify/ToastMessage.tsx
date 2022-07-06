@@ -69,8 +69,12 @@ const ToastMessage: React.FC<ToastMessageProps> = (props) => {
 			<>
 				{icon}
 				<Box marginLeft={16}>
-					<Label variant={title}>{props.title || messageTitle}</Label>
-					<Label variant={message}>{props.message}</Label>
+					<Label variant={title} weight={'regular'}>
+						{props.title || messageTitle}
+					</Label>
+					<Label variant={message} weight={'regular'}>
+						{props.message}
+					</Label>
 				</Box>
 			</>
 		);

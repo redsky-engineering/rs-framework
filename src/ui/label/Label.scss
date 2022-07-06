@@ -1,2 +1,49 @@
 .rsLabel {
+	&.fwThin {
+		font-weight: 100;
+	}
+
+	&.fwExtraLight {
+		font-weight: 200;
+	}
+
+	&.fwLight {
+		font-weight: 300;
+	}
+
+	&.fwRegular {
+		font-weight: 400;
+	}
+
+	&.fwMedium {
+		font-weight: 500;
+	}
+
+	&.fwSemiBold {
+		font-weight: 600;
+	}
+
+	&.fwBold {
+		font-weight: 700;
+	}
+
+	&.fwExtraBold {
+		font-weight: 800;
+	}
+
+	&.fwBlack {
+		font-weight: 900;
+	}
+
+	&.fwExtraBlack {
+		font-weight: 950;
+	}
+
+	&.strikethrough {
+		text-decoration: line-through;
+	}
+
+	&.underline {
+		text-decoration: underline;
+	}
 }
