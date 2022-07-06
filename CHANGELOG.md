@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://gitlab.com/redsky_public/framework/compare/v0.5.0...v0.5.1) (2022-07-06)
+
+### Bug Fixes
+
+-   **labelRadiobutton:** Fixed the classNames from not showing up. ([70bb076](https://gitlab.com/redsky_public/framework/commit/70bb076e169dadb7ecccfd78bfc925783d4b2a2b))
+
 ## [0.5.0](https://gitlab.com/redsky_public/framework/compare/v0.4.0...v0.5.0) (2022-07-06)
 
 ### Features
