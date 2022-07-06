@@ -18,10 +18,12 @@ import {
 	InputText,
 	InputNumber,
 	InputTextarea,
-	StarRating
+	StarRating,
+	LabelRadioButton
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
@@ -449,6 +451,23 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				starColor={'purple'}
 				onStarClicked={(rating) => console.log('You clicked on the default star rating: ', rating)}
 				isClickable
+			/>
+			<Label variant={'subtitle1'} weight={'regular'}>
+				Label Radio Button
+			</Label>
+			<LabelRadioButton
+				className={classNames({ test: true })}
+				radioName={'test'}
+				value={'test'}
+				onSelect={(value) => {
+					console.log(value);
+				}}
+				label={{
+					variant: 'subheader1',
+					position: 'RIGHT',
+					children: 'I am a radio button thing.',
+					weight: 'regular'
+				}}
 			/>
 		</Page>
 	);
