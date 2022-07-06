@@ -452,7 +452,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				onStarClicked={(rating) => console.log('You clicked on the default star rating: ', rating)}
 				isClickable
 			/>
-			<Label variant={'subtitle1'} weight={'regular'}>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Radio Button
 			</Label>
 			<LabelRadioButton
