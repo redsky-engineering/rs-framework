@@ -15,7 +15,7 @@ export interface LabelRadioButtonProps extends Omit<ICommon.HtmlElementProps, 'd
 }
 
 const LabelRadioButton: React.FC<LabelRadioButtonProps> = (props) => {
-	const { radioName, value, isChecked, onSelect, label, ...marginProps } = props;
+	const { className, radioName, value, isChecked, onSelect, label, ...marginProps } = props;
 	const radioLabelRef = useRef<HTMLLabelElement>(null);
 
 	function renderLabelPosition() {
@@ -57,7 +57,7 @@ const LabelRadioButton: React.FC<LabelRadioButtonProps> = (props) => {
 	return (
 		<Box
 			id={props.id}
-			className={classNames('rsLabelRadioButton', props.className)}
+			className={classNames('rsLabelRadioButton', className)}
 			onClick={(event) => {
 				event.stopPropagation();
 			}}
