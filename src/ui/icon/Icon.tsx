@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { CSSProperties, MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { getSpacingProperties, spacingKeys, transformProps } from '../../utils/internal';
+import { transformProps } from '../../utils/internal';
 import { ICommon } from '../../common/Interfaces';
 
-export interface IconProps extends ICommon.MarginProps {
+export interface IconProps extends ICommon.SpacingProps {
 	iconImg: string;
 	color?: string;
 	fontSize?: number;

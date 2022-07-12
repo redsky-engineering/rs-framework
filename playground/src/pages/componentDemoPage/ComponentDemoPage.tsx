@@ -95,7 +95,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			>
 				<Box display={'flex'} alignItems={'center'}>
 					<p>Hello World</p>
-					<Icon iconImg={'icon-close'} />
+					<Icon iconImg={'icon-close'} p={10} />
 				</Box>
 			</Button>
 

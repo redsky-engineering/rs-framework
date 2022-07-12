@@ -7,6 +7,7 @@ const properties = {
 	m: 'margin',
 	p: 'padding'
 };
+
 const directions = {
 	t: 'Top',
 	r: 'Right',
@@ -15,13 +16,19 @@ const directions = {
 	x: ['Left', 'Right'],
 	y: ['Top', 'Bottom']
 };
+
 const aliases = {
 	marginX: 'mx',
 	marginY: 'my',
 	paddingX: 'px',
 	paddingY: 'py'
 };
-export const getSpacingProperties = (prop: string) => {
+
+/**
+ * Returns spacing properties that could include margin and props. Used by transformProps
+ * @param prop
+ */
+const getSpacingProperties = (prop: string) => {
 	// It's not a shorthand notation.
 	if (prop.length > 2) {
 		// @ts-ignore
@@ -40,7 +47,7 @@ export const getSpacingProperties = (prop: string) => {
 	return Array.isArray(direction) ? direction.map((dir) => property + dir) : [property + direction];
 };
 
-export const spacingKeys = [
+const spacingKeys = [
 	'm',
 	'mt',
 	'mr',
@@ -165,6 +172,11 @@ export function renderErrors(control: RsFormControl<any> | undefined): React.Rea
 	return errorNodes;
 }
 
+/**
+ * This function will remove the standard margin props, returning the margin props seperated from the remaining props
+ * @param props that includes MarginProps
+ * @returns returns an object that has marginProps seperated from remaining
+ */
 export function extractMarginProps(props: ICommon.MarginProps): { marginProps: ICommon.MarginProps; remaining: any } {
 	const {
 		m,
