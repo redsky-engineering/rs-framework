@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.3](https://gitlab.com/redsky_public/framework/compare/v0.5.2...v0.5.3) (2022-07-12)
+
+### Bug Fixes
+
+-   **Icon:** Cursor Pointer ([e15715c](https://gitlab.com/redsky_public/framework/commit/e15715c3cd7212b9d329066522e73be51cdd7549))
+
 ### [0.5.2](https://gitlab.com/redsky_public/framework/compare/v0.5.1...v0.5.2) (2022-07-12)
 
 ### Features
