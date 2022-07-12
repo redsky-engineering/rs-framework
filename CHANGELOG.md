@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://gitlab.com/redsky_public/framework/compare/v0.5.1...v0.5.2) (2022-07-12)
+
+### Features
+
+-   **Icon:** Added padding props to Icon. ([235f589](https://gitlab.com/redsky_public/framework/commit/235f589361c2fccfb39f7ea692f65aa1dd27b200))
+
 ### [0.5.1](https://gitlab.com/redsky_public/framework/compare/v0.5.0...v0.5.1) (2022-07-06)
 
 ### Bug Fixes
