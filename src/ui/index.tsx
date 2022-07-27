@@ -56,3 +56,6 @@ export type { StarRatingProps } from './starRating/StarRating';
 export { RsFormControl } from './form/FormControl';
 export { RsFormGroup } from './form/FormGroup';
 export { RsValidator, RsValidatorEnum } from './form/Validator';
+
+export { AnimateOnScroll, useInitAnimateOnScroll } from './animateOnScroll/AnimateOnScroll';
+export type { AnimateOnScrollProps } from './animateOnScroll/AnimateOnScroll';

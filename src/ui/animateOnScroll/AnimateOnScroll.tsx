@@ -31,7 +31,7 @@ type ZoomAnimations =
 	| 'zoom-out-left'
 	| 'zoom-out-right';
 
-interface AnimateOnScrollProps {
+export interface AnimateOnScrollProps {
 	animationType: FadeAnimations | FlipAnimations | SlideAnimations | ZoomAnimations;
 	offset?: number; // Change offset to trigger animations sooner or later (px)
 	duration?: number; // Change offset to trigger animations sooner or later (px)
@@ -43,7 +43,7 @@ interface AnimateOnScrollProps {
 	style?: React.CSSProperties;
 }
 
-const AnimateOnScroll: React.FC<AnimateOnScrollProps> = (props) => {
+export const AnimateOnScroll: React.FC<AnimateOnScrollProps> = (props) => {
 	let dataOptions = {
 		'data-aos': props.animationType,
 		...(props.offset && { 'data-aos-offset': props.offset }),
@@ -60,8 +60,6 @@ const AnimateOnScroll: React.FC<AnimateOnScrollProps> = (props) => {
 		</div>
 	);
 };
-
-export default AnimateOnScroll;
 
 export function useInitAnimateOnScroll(options?: Aos.AosOptions) {
 	useEffect(() => {

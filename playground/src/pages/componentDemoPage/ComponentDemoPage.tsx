@@ -19,13 +19,13 @@ import {
 	InputNumber,
 	InputTextarea,
 	StarRating,
-	LabelRadioButton
+	LabelRadioButton,
+	AnimateOnScroll
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
-import AnimateOnScroll from '../../../../src/ui/animateOnScroll/AnimateOnScroll';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
