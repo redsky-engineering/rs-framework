@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://gitlab.com/redsky_public/framework/compare/v0.6.0...v0.6.1) (2022-07-27)
+
+### Bug Fixes
+
+-   **AnimateOnScroll:** Fixed exporting animate for ui ([5e6537a](https://gitlab.com/redsky_public/framework/commit/5e6537aa0161d109c96686cac0dee6ee975e5239))
+
 ## [0.6.0](https://gitlab.com/redsky_public/framework/compare/v0.5.3...v0.6.0) (2022-07-27)
 
 ### Features
