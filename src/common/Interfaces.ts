@@ -87,8 +87,8 @@ export namespace ICommon {
 	}
 
 	export interface FlexProps {
-		flexDirection?: string;
-		flexWrap?: string;
+		flexDirection?: 'row' | ' row-reverse' | 'column' | 'column-reverse' | 'initial' | 'inherit' | string;
+		flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse' | 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
 		justifyContent?:
 			| 'flex-start'
 			| 'flex-end'
@@ -100,7 +100,7 @@ export namespace ICommon {
 			| 'inherit'
 			| string;
 		alignItems?: 'stretch' | 'center' | 'flex-start' | 'flex-end' | 'baseline' | 'initial' | 'inherit' | string;
-		alignContent?: string;
+		alignContent?: 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | string;
 		order?: string;
 		flex?: string;
 		flexGrow?: string | number;
