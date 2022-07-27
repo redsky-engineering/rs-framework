@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://gitlab.com/redsky_public/framework/compare/v0.5.3...v0.6.0) (2022-07-27)
+
+### Features
+
+-   **996:** Page components now have title and description and open graph tags ([285fd8c](https://gitlab.com/redsky_public/framework/commit/285fd8cb93385551b3f36eef792d848b89de1645))
+-   **AnimateOnScroll:** Added animate on scroll ([5334910](https://gitlab.com/redsky_public/framework/commit/5334910186cf0e52e02e8233dc9cec88dff9269d))
+
+### Bug Fixes
+
+-   Improved interfaces ([714e160](https://gitlab.com/redsky_public/framework/commit/714e160afb2a0fd80fdbbb031e5ff68455173c67))
+-   **InputNumber:** Fixed duplicate ids when using InputNumber ([c502441](https://gitlab.com/redsky_public/framework/commit/c502441ab41544cdf91b48007fd7fa31ae54d438))
+-   **LabelRadioButton:** Fixed missing keys on LabelRadioButton ([6b01dcb](https://gitlab.com/redsky_public/framework/commit/6b01dcbece7a131a7e1704b621d154b9b5bab493))
+-   **useOnClickOutsideRef:** Fixed type definitions on callback function. ([12ef43f](https://gitlab.com/redsky_public/framework/commit/12ef43fc85e583e1fb3adb0633a7ce793d78291b))
+
 ### [0.5.3](https://gitlab.com/redsky_public/framework/compare/v0.5.2...v0.5.3) (2022-07-12)
 
 ### Bug Fixes
