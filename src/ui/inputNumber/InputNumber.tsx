@@ -1285,7 +1285,7 @@ InputNumber.defaultProps = {
 	useGrouping: true,
 	minFractionDigits: undefined,
 	maxFractionDigits: undefined,
-	id: '',
+	id: undefined,
 	name: null,
 	allowEmpty: true,
 	step: 1,
