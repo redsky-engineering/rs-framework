@@ -43,6 +43,7 @@ export default {
 		'react-select',
 		'react-toastify',
 		'axios',
+		'aos',
 		'react-select',
 		'react-select/creatable/dist/react-select.esm.js',
 		'@lottiefiles/lottie-player'

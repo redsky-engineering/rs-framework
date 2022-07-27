@@ -14,11 +14,14 @@ import {
 import { useEffect, useState } from 'react';
 import { View } from '../../src/996';
 import router from './router';
+import { useInitAnimateOnScroll } from '../../src/ui/animateOnScroll/AnimateOnScroll';
 
 function App() {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
 		new RsFormGroup([new RsFormControl<string>('test', '', [new RsValidator(RsValidatorEnum.REQ, 'Required')])])
 	);
+
+	useInitAnimateOnScroll();
 
 	useEffect(() => {
 		router.tryToLoadInitialPath().catch(console.error);

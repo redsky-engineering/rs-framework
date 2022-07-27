@@ -17,6 +17,10 @@ You can do this by putting the following in your App.tsx
 Some components might require extra integration. For example if you make use of the popupController you will need to add the
 `popupController.instance` to your App.tsx. See the individual stories for examples.
 
+### Animate on scroll
+
+To initialize AoS component you need to import the custom hook useInitAnimateOnScroll and call it once in App.tsx
+
 ## Demo
 
 RedSky Framework utilizes storybook to demonstrate available components. Please make sure to adequately document your components

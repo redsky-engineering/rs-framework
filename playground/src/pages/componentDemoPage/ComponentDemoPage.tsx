@@ -24,6 +24,8 @@ import {
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
 import classNames from 'classnames';
+import { componentDemoPageData } from './ComponentDemoPage.data';
+import AnimateOnScroll from '../../../../src/ui/animateOnScroll/AnimateOnScroll';
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
@@ -57,7 +59,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 	);
 
 	return (
-		<Page className={'rsComponentDemoPage'}>
+		<Page className={'rsComponentDemoPage'} {...componentDemoPageData}>
 			<Label
 				elementType={'p'}
 				variant={'h5'}
@@ -469,6 +471,21 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					weight: 'regular'
 				}}
 			/>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Animate On Scroll
+			</Label>
+			<Label variant={'h6'} weight={'medium'}>
+				Fade Up
+			</Label>
+			<AnimateOnScroll animationType={'fade-up'}>
+				<Box bgColor={'green'} width={200} height={200} mb={200} />
+			</AnimateOnScroll>
+			<Label variant={'h6'} weight={'medium'}>
+				Fade Down
+			</Label>
+			<AnimateOnScroll animationType={'fade-down'}>
+				<Box bgColor={'green'} width={200} height={200} mb={200} />
+			</AnimateOnScroll>
 		</Page>
 	);
 };

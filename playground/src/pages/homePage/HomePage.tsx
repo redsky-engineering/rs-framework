@@ -5,8 +5,17 @@ import { Label } from '../../../../src/ui';
 
 const HomePage: React.FC<{}> = (props) => {
 	return (
-		<Page className={'rsHomePage'}>
-			<Label variant={'h3'}>Click a button to go to the sandbox pages</Label>
+		<Page
+			className={'rsHomePage'}
+			title={'Framework - Home Page'}
+			description={'A nice long SEO description about this page specific page.'}
+			ogTitle={'Fancy Title'}
+			ogDescription={'A nice description'}
+			ogImage={'https://www.placecage.com/c/200/200'}
+		>
+			<Label variant={'h3'} weight={'medium'}>
+				Click a button to go to the sandbox pages
+			</Label>
 			<Link path={'/component-demo'}>
 				<Button mt={24} look={'containedPrimary'}>
 					Components Sandbox

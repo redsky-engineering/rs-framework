@@ -30,9 +30,12 @@ export interface RouterConfig {
 	allowSwipeBack: boolean; // (TRUE) By default when not specified do we animate?
 }
 
-let routerInstance: Router | undefined = undefined;
+let routerInstance: Router;
 
 class Router {
+	public initialSiteTitle = '';
+	public initialSiteDescription = '';
+
 	private views: { [key: string]: View } = {};
 	private routes: I996.RouteDetails<string>[] = [];
 	private notFoundRoute: I996.RouteDetails<string> | undefined;
@@ -76,6 +79,15 @@ class Router {
 		path = path.replace(/^(.+?)\/*?$/, '$1'); // Remove trailing slash
 		path += window.location.search;
 		this.initialStartPathQuery = path;
+
+		this.initialSiteTitle = document.title;
+
+		const metaTags = document.getElementsByTagName('meta');
+		for (let i = 0; i < metaTags.length; i++) {
+			if (!metaTags[i].getAttributeNames().includes('name')) continue;
+			if (metaTags[i].getAttribute('name') !== 'description') continue;
+			this.initialSiteDescription = metaTags[i].getAttribute('content') || '';
+		}
 
 		// events.on('pageDidMount', (pageElement: HTMLElement) => {
 		// 	setTimeout(() => {
@@ -176,7 +188,7 @@ class Router {
 		});
 	}
 
-	static getInstance() {
+	static getInstance(): Router {
 		return routerInstance;
 	}
 
