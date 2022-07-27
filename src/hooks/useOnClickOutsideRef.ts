@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export function useOnClickOutsideRef(callback: any, initialValue = null) {
+export function useOnClickOutsideRef(callback: () => void, initialValue = null) {
 	const elementRef = useRef<HTMLElement>(initialValue);
 	useEffect(() => {
 		function handler(event: any) {
