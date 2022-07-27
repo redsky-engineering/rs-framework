@@ -20,7 +20,7 @@ const LabelRadioButton: React.FC<LabelRadioButtonProps> = (props) => {
 
 	function renderLabelPosition() {
 		let radioButton = (
-			<label className={'radioButtonContainer'} ref={radioLabelRef}>
+			<label key={'radioButton'} className={'radioButtonContainer'} ref={radioLabelRef}>
 				<input
 					type={'radio'}
 					name={radioName}
@@ -38,6 +38,7 @@ const LabelRadioButton: React.FC<LabelRadioButtonProps> = (props) => {
 		);
 		let radioLabel = (
 			<Label
+				key={'radioLabel'}
 				{...label}
 				onClick={(event) => {
 					if (radioLabelRef.current) {
