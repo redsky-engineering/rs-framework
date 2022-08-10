@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-export function useOnClickOutsideRef(callback: () => void, initialValue = null) {
-	const elementRef = useRef<HTMLElement>(initialValue);
+export function useOnClickOutsideRef<T extends HTMLElement = HTMLElement>(callback: () => void, initialValue = null) {
+	const elementRef = useRef<T>(initialValue);
 	useEffect(() => {
 		function handler(event: any) {
 			if (!elementRef.current?.contains(event.target)) {
