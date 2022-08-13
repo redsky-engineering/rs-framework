@@ -28,6 +28,7 @@ export interface InputTextareaProps
 	//Form Control
 	control?: RsFormControl<string>;
 	updateControl?: (control: RsFormControl<string>) => void;
+	immediateValidate?: boolean; // Begins checking the input as soon as it changes
 
 	useFloatingPlaceholder?: boolean;
 
@@ -66,6 +67,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		marginLeft,
 		marginX,
 		marginY,
+		immediateValidate,
 		...textareaProps
 	} = props;
 
@@ -88,11 +90,31 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+	const [hasBeenBlurred, setHasBeenBlurred] = useState<boolean>(immediateValidate || false);
 	const [formControl, setFormControl] = useState<RsFormControl<string> | undefined>(control);
 
 	useEffect(() => {
 		setFormControl(control);
 	}, [control]);
+
+	async function validateTarget(target: HTMLTextAreaElement, forceValidate: boolean = false) {
+		if (!control) return;
+		const startPosition = target.selectionStart || 0;
+		const endPosition = target.selectionEnd || 0;
+		const updated = clone(control);
+
+		updated.value = target.value;
+		if (updated.value.length === 0) {
+			updated.clearErrors();
+		} else if (hasBeenBlurred || forceValidate) {
+			await updated.validate();
+		}
+
+		setFormControl(updated);
+		if (updateControl) updateControl(updated);
+
+		target.setSelectionRange(startPosition, endPosition);
+	}
 
 	async function changeHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
 		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
@@ -101,22 +123,14 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		if (onChange) onChange(event.target.value, event);
 		if (!control) return;
 
-		const target = event.target;
+		validateTarget(event.target).catch(console.error);
+	}
 
-		const startPosition = target.selectionStart || 0;
-		const endPosition = target.selectionEnd || 0;
-		const updated = clone(control);
+	function handleBlur(event: React.FocusEvent<HTMLTextAreaElement>) {
+		setHasBeenBlurred(true);
 
-		updated.value = target.value;
-		if (updated.value.length === 0) {
-			updated.clearErrors();
-		} else {
-			await updated.validate();
-		}
-		setFormControl(updated);
-		if (updateControl) updateControl(updated);
-
-		target.setSelectionRange(startPosition, endPosition);
+		validateTarget(event.target, true).catch(console.error);
+		if (props.onBlur) props.onBlur(event);
 	}
 
 	function getAutocompleteType(): string {
@@ -133,7 +147,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 				value={!!formControl ? formControl.value : value}
 				autoComplete={getAutocompleteType()}
 				onFocus={props.onFocus}
-				onBlur={props.onBlur}
+				onBlur={handleBlur}
 				placeholder={useFloatingPlaceholder ? ' ' : placeholder}
 				{...textareaProps}
 			/>

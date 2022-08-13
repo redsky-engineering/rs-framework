@@ -27,27 +27,43 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 
+enum FormKeys {
+	TEXT_AREA_TEST = 'textAreaTest',
+	CHECKED_KEY = 'checkedKey',
+	EMAIL = 'email',
+	EMAIL_IMMEDIATE_CHECK = 'emailImmediateCheck',
+	NUMBER = 'number',
+	SELECT = 'select',
+	SELECT2 = 'select2'
+}
+
 const ComponentDemoPage: React.FC<{}> = (props) => {
 	const [formGroup, setFormGroup] = useState<RsFormGroup>(
 		new RsFormGroup([
-			new RsFormControl<string>('textAreaTest', '', [new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')]),
-			new RsFormControl<boolean>('checkedKey', true, [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
-			new RsFormControl<string>('email', '', [
+			new RsFormControl<string>(FormKeys.TEXT_AREA_TEST, '', [
+				new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')
+			]),
+			new RsFormControl<boolean>(FormKeys.CHECKED_KEY, true, [new RsValidator(RsValidatorEnum.REQ, 'Required')]),
+			new RsFormControl<string>(FormKeys.EMAIL, '', [
 				new RsValidator(RsValidatorEnum.REQ, 'Required'),
 				new RsValidator(RsValidatorEnum.EMAIL, 'Invalid Email')
 			]),
-			new RsFormControl<number>('number', 0, [
+			new RsFormControl<string>(FormKeys.EMAIL_IMMEDIATE_CHECK, '', [
+				new RsValidator(RsValidatorEnum.REQ, 'Required'),
+				new RsValidator(RsValidatorEnum.EMAIL, 'Invalid Email')
+			]),
+			new RsFormControl<number>(FormKeys.NUMBER, 0, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Number', (control) => {
 					return control.value == 3;
 				})
 			]),
-			new RsFormControl<number>('select', 3, [
+			new RsFormControl<number>(FormKeys.SELECT, 3, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Selection', (control) => {
 					return control.value == 2;
 				})
 			]),
 			new RsFormControl<number[]>(
-				'select2',
+				FormKeys.SELECT2,
 				[1, 2],
 				[
 					new RsValidator(RsValidatorEnum.CUSTOM, 'Less than 2 selections', (control) => {
@@ -106,7 +122,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			</Label>
 			<Checkbox
 				updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
-				control={formGroup.get('checkedKey')}
+				control={formGroup.get(FormKeys.CHECKED_KEY)}
 				labelText={'This is another checkbox'}
 				look={'containedPrimary'}
 			/>
@@ -239,7 +255,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Select
 				mt={8}
 				mb={16}
-				control={formGroup.get<string>('select')}
+				control={formGroup.get<string>(FormKeys.SELECT)}
 				updateControl={(control) => {
 					console.log(control);
 					setFormGroup(formGroup.clone().update(control));
@@ -319,7 +335,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					}
 				]}
 				isClearable
-				control={formGroup.get<number[]>('select2')}
+				control={formGroup.get<number[]>(FormKeys.SELECT2)}
 				updateControl={(control) => {
 					console.log(control);
 					setFormGroup(formGroup.clone().update(control));
@@ -354,7 +370,27 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				inputMode={'email'}
 				placeholder={'email'}
-				control={formGroup.get('email')}
+				control={formGroup.get(FormKeys.EMAIL)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
+			<Label variant={'h6'} weight={'regular'}>
+				Email Immediate Validate
+			</Label>
+			<InputText
+				mb={16}
+				icon={[
+					{
+						iconImg: 'icon-check',
+						position: 'LEFT',
+						marginRight: 5
+					}
+				]}
+				immediateValidate
+				inputMode={'email'}
+				placeholder={'email immediate'}
+				control={formGroup.get(FormKeys.EMAIL_IMMEDIATE_CHECK)}
 				updateControl={(control) => {
 					setFormGroup(formGroup.clone().update(control));
 				}}
@@ -389,7 +425,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				Simple Number
 			</Label>
 			<InputNumber
-				control={formGroup.get('number')}
+				control={formGroup.get(FormKeys.NUMBER)}
 				updateControl={(control) => {
 					setFormGroup(formGroup.clone().update(control));
 				}}

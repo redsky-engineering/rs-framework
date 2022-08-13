@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import clone from 'lodash.clone';
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { ICommon } from '../../common/Interfaces';
 import { useUpdateEffect } from '../../hooks/useUpdateEffect';
 import { ObjectUtils } from '../../utils';
@@ -39,6 +39,7 @@ interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'>, IC
 	//Form Control
 	control?: RsFormControl<number>;
 	updateControl?: (control: RsFormControl<number>) => void;
+	immediateValidate?: boolean; // Begins checking the input as soon as it changes
 
 	//Event Handlers
 	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
@@ -120,6 +121,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		marginLeft,
 		marginX,
 		marginY,
+		immediateValidate,
 		...inputProps
 	} = props;
 
@@ -140,7 +142,6 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
-	const [focusedState, setFocusedState] = React.useState(false);
 	const elementRef = React.useRef(null);
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const timer = React.useRef<NodeJS.Timeout | null>(null);
@@ -163,9 +164,15 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	const stacked = props.showButtons && props.buttonLayout === 'stacked';
 	const inputMode = _inputMode || (props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal');
 
+	const [hasBeenBlurred, setHasBeenBlurred] = useState<boolean>(immediateValidate || false);
+
 	const [formControl, setFormControl] = React.useState<RsFormControl<number> | undefined>(
 		control as RsFormControl<number>
 	);
+
+	useEffect(() => {
+		setFormControl(control);
+	}, [control]);
 
 	function getOptions(): InputNumberFormatOptions {
 		return {
@@ -901,10 +908,10 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 			const updated = clone(formControl);
 			if (updated) {
-				updated.value = newValue;
-				if ((updated.value + '').length === 0) {
+				updated.value = newValue || 0;
+				if (!updated.value) {
 					updated.clearErrors();
-				} else {
+				} else if (hasBeenBlurred) {
 					await updated.validate();
 				}
 				setFormControl(updated);
@@ -1089,20 +1096,35 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	}
 
 	function onInputFocus(event: React.FocusEvent<HTMLInputElement>) {
-		setFocusedState(true);
 		props.onFocus && props.onFocus(event);
 	}
 
-	function onInputBlur(event: React.FocusEvent<HTMLInputElement>) {
-		setFocusedState(false);
+	async function onInputBlur(event: React.FocusEvent<HTMLInputElement>) {
+		setHasBeenBlurred(true);
+
+		let finalValue = 0;
 
 		if (inputRef.current) {
 			let currentValue = inputRef.current.value;
+			finalValue = parseValue(currentValue) as number;
 			if (isValueChanged(currentValue, props.value as number)) {
 				let newValue = validateValue(parseValue(currentValue) as number) as number;
+				finalValue = newValue;
 				updateInputValue(newValue);
 				updateModel(event as any, newValue);
 			}
+		}
+
+		const updated = clone(formControl);
+		if (updated) {
+			updated.value = finalValue || 0;
+			if (!updated.value) {
+				updated.clearErrors();
+			} else {
+				await updated.validate();
+			}
+			setFormControl(updated);
+			if (updateControl) updateControl(updated);
 		}
 
 		props.onBlur && props.onBlur(event);
@@ -1158,7 +1180,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 	function createInputElement() {
 		const className = classNames('rsInputNumber', props.inputClassName);
-		const valueToRender = formattedValue(props.value as number);
+		const valueToRender = formattedValue(!!formControl ? formControl.value : (props.value as number));
 
 		return (
 			<input

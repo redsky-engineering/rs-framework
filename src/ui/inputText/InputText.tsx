@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './InputText.scss';
-import { InputHTMLAttributes, useEffect, useRef } from 'react';
+import { InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
 import { RsFormControl } from '../form/FormControl';
@@ -26,6 +26,7 @@ export interface InputTextProps
 	//Form Control
 	control?: RsFormControl<string | string[] | number>;
 	updateControl?: (control: RsFormControl<string | string[] | number>) => void;
+	immediateValidate?: boolean; // Begins checking the input as soon as it changes
 
 	//Css
 	borderColor?: string;
@@ -33,7 +34,6 @@ export interface InputTextProps
 
 	icon?: ICommon.NewIconProps[];
 
-	// searchIcon?: boolean;
 	maxLength?: number; // Only works with text inputText type
 	minLength?: number; // Only works with text inputText type
 	minValue?: number; // Only works with number, range, date, datetime-local, month, time and week.
@@ -77,6 +77,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		marginLeft,
 		marginX,
 		marginY,
+		immediateValidate,
 		...inputProps
 	} = props;
 
@@ -97,6 +98,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
+	const [hasBeenBlurred, setHasBeenBlurred] = useState<boolean>(immediateValidate || false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const [formControl, setFormControl] = React.useState<RsFormControl<string | string[] | number> | undefined>(
@@ -107,15 +109,8 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(control);
 	}, [control]);
 
-	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
-		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
-		event.persist();
-
-		if (onChange) onChange(event.target.value, event);
+	async function validateTarget(target: HTMLInputElement, forceValidate: boolean = false) {
 		if (!control) return;
-
-		const target = event.target;
-
 		const startPosition = target.selectionStart || 0;
 		const endPosition = target.selectionEnd || 0;
 		const updated = clone(control);
@@ -123,13 +118,31 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		updated.value = target.value;
 		if (updated.value.length === 0) {
 			updated.clearErrors();
-		} else {
+		} else if (hasBeenBlurred || forceValidate) {
 			await updated.validate();
 		}
+
 		setFormControl(updated);
 		if (updateControl) updateControl(updated);
 
 		target.setSelectionRange(startPosition, endPosition);
+	}
+
+	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
+		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
+		event.persist();
+
+		if (onChange) onChange(event.target.value, event);
+		if (!control) return;
+
+		validateTarget(event.target).catch(console.error);
+	}
+
+	function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+		setHasBeenBlurred(true);
+
+		validateTarget(event.target, true).catch(console.error);
+		if (props.onBlur) props.onBlur(event);
 	}
 
 	function getAutocompleteType(): string {
@@ -149,7 +162,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 				value={!!formControl ? formControl.value : value}
 				autoComplete={getAutocompleteType()}
 				onFocus={props.onFocus}
-				onBlur={props.onBlur}
+				onBlur={handleBlur}
 				placeholder={useFloatingPlaceholder ? ' ' : placeholder}
 				{...inputProps}
 			/>
