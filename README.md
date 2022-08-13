@@ -51,6 +51,10 @@ following command:
 This uses the npm package standard-version which will automatically increment the package.json version
 as well as git tag the commit and put all commit notes into the CHANGELOG.md
 
+Push up the changes and tags to master branch on remote, make sure to include tags
+
+`git push --follow-tags origin master`
+
 Finally, publish to npmjs.org with the command
 
 `yarn build:publish`
