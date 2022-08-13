@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://gitlab.com/redsky_public/framework/compare/v0.6.1...v0.7.0) (2022-08-13)
+
+### Features
+
+-   **Hook:** Added generic to onclickoutsideref ([b644bbb](https://gitlab.com/redsky_public/framework/commit/b644bbbf7eec85d2f5582a3702eb74ef91f8503e))
+-   **input:** Inputs no longer validate until first blur, this can be overwritten with a prop ([4b2206f](https://gitlab.com/redsky_public/framework/commit/4b2206fddd303409491cdef567acd0605b3fd47b))
+
 ### [0.6.1](https://gitlab.com/redsky_public/framework/compare/v0.6.0...v0.6.1) (2022-07-27)
 
 ### Bug Fixes
