@@ -14,6 +14,7 @@ export interface PopupProps {
 	animateDirection?: PopupAnimateDirection;
 	backgroundColor?: string;
 	enableBodyScrollLock?: boolean;
+	onRemoved?: () => void;
 }
 
 export interface FullPopupProps extends PopupProps {
@@ -72,6 +73,7 @@ const Popup: React.FC<PopupProps> = (props) => {
 		// Delay calling onHidden until animateDuration has expired
 		setTimeout(() => {
 			if (fullProps.onDestroyed) fullProps.onDestroyed(fullProps.popupId);
+			if (fullProps.onRemoved) fullProps.onRemoved();
 		}, fullProps.animateDurationMs || 0);
 	}, [fullProps, fullProps.destroy]);
 
