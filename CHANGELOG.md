@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://gitlab.com/redsky_public/framework/compare/v0.7.0...v0.7.1) (2022-08-16)
+
+### Features
+
+-   **popup:** Added onRemoved callback ([c4281dc](https://gitlab.com/redsky_public/framework/commit/c4281dcfee52c142f964c0123dd52534f5966528))
+
 ## [0.7.0](https://gitlab.com/redsky_public/framework/compare/v0.6.1...v0.7.0) (2022-08-13)
 
 ### Features
