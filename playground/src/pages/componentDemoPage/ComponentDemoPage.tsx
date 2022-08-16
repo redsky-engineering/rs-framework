@@ -20,12 +20,14 @@ import {
 	InputTextarea,
 	StarRating,
 	LabelRadioButton,
-	AnimateOnScroll
+	AnimateOnScroll,
+	popupController
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
+import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
 
 enum FormKeys {
 	TEXT_AREA_TEST = 'textAreaTest',
@@ -522,6 +524,23 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<AnimateOnScroll animationType={'fade-down'}>
 				<Box bgColor={'green'} width={200} height={200} mb={200} />
 			</AnimateOnScroll>
+
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Popup Test
+			</Label>
+			<Button
+				look={'containedPrimary'}
+				onClick={() => {
+					popupController.open<TestPopupProps>(TestPopup, {
+						animateDurationMs: 3000,
+						onRemoved: () => {
+							console.log('I am gone!!!');
+						}
+					});
+				}}
+			>
+				Click Me for popup
+			</Button>
 		</Page>
 	);
 };

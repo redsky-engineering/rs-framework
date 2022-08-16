@@ -51,15 +51,15 @@ export class PopupController extends Component<{}, PopupControllerState> {
 	};
 
 	/**
-	 * Closes popup by ID
-	 * @param popupId - ID of popup to close
+	 * Closes popups by ID
+	 * @param popupId - ID of popups to close
 	 */
 	closeById = (popupId: number) => {
 		this.destroyPopupById(popupId);
 	};
 
 	/**
-	 * Closes the last opened popup
+	 * Closes the last opened popups
 	 */
 	closeLast = () => {
 		let { popups } = this.state;
@@ -110,7 +110,7 @@ export class PopupController extends Component<{}, PopupControllerState> {
 	};
 
 	/**
-	 * Changes popup props to destroy: true, this starts it's animation cycle and when it is
+	 * Changes popups props to destroy: true, this starts it's animation cycle and when it is
 	 * finished it will call us back where we will remove it
 	 * @param popupId
 	 */
