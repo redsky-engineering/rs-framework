@@ -845,10 +845,10 @@ export class ObjectUtils {
 	/**
 	 * Returns a boolean to determine if the value is an array and that array contains data
 	 * @name isArrayWithData
-	 * @param {any}
+	 * @param {Array<any>}
 	 * @returns {boolean} - Returns a boolean value
 	 * */
-	static isArrayWithData(possibleArray: any) {
+	static isArrayWithData(possibleArray: Array<any> | undefined): possibleArray is Array<any> {
 		return !!(possibleArray && Array.isArray(possibleArray) && possibleArray.length > 0);
 	}
 
