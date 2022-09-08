@@ -1,4 +1,6 @@
 import cloneDeep from 'lodash.clonedeep';
+import { Capacitor } from '@capacitor/core';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 declare const window: any;
 declare global {
@@ -438,6 +440,24 @@ export class StringUtils {
 
 /** Number related utilities */
 export class NumberUtils {
+	/**
+	 * Convert Degrees to Radians
+	 * @param degrees: number
+	 * @return number
+	 */
+	static deg2Rad(degrees: number): number {
+		return (degrees * Math.PI) / 180;
+	}
+
+	/**
+	 * Convert Radians to degrees
+	 * @param radians: number
+	 * @return number
+	 */
+	static rad2Deg(radians: number): number {
+		return (radians * 180) / Math.PI;
+	}
+
 	/**
 	 * @name dollarsToCents
 	 * @param {dollars} The floating point dollar value
@@ -1457,6 +1477,28 @@ export class DateUtils {
 		} catch {
 			return null;
 		}
+	}
+}
+
+export class AppUtils {
+	/**
+	 * Checks to see if the device is either IOS or Android, If so, will return success function, else return fallback
+	 * function or false.
+	 * @param success void function
+	 * @param fallback void function
+	 */
+	static isMobileDevice(success?: () => void, fallback?: () => void) {
+		if (Capacitor.isNativePlatform() && success) success();
+		else if (fallback) fallback();
+		else return false;
+	}
+
+	/**
+	 * Use to provide haptic feed back on the
+	 * @param intensity: "Light" | 'Medium' | 'Heavy'
+	 */
+	static hapticFeedBack(intensity: 'Light' | 'Medium' | 'Heavy') {
+		Haptics.impact({ style: ImpactStyle[intensity] });
 	}
 }
 
