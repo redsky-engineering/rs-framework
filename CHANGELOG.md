@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://gitlab.com/redsky_public/framework/compare/v0.7.1...v0.8.0) (2022-09-08)
+
+### Features
+
+-   **Utils:** Added AppUtils class to utils file. ([f03e2ca](https://gitlab.com/redsky_public/framework/commit/f03e2ca61264104ea15c1aca10ebbeda3aa2c47e))
+-   **Utils:** Added AppUtils class to utils file. ([a5ded1a](https://gitlab.com/redsky_public/framework/commit/a5ded1a7033d48dba4d31d9232cf674e7795afd0))
+-   **Utils:** made the ObjectUtils method, isArrayWithData return the value passed into it so you can use it with If checks better. ([10fd20e](https://gitlab.com/redsky_public/framework/commit/10fd20e3f72bbb485b99a9cb12b6dc9cc911cc1b))
+
 ### [0.7.1](https://gitlab.com/redsky_public/framework/compare/v0.7.0...v0.7.1) (2022-08-16)
 
 ### Features
