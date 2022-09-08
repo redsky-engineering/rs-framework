@@ -46,6 +46,8 @@ export default {
 		'aos',
 		'react-select',
 		'react-select/creatable/dist/react-select.esm.js',
-		'@lottiefiles/lottie-player'
+		'@lottiefiles/lottie-player',
+		'@capacitor/core',
+		'@capacitor/haptics'
 	]
 };
