@@ -78,6 +78,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		marginX,
 		marginY,
 		immediateValidate,
+		onBlur,
 		...inputProps
 	} = props;
 
@@ -142,7 +143,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setHasBeenBlurred(true);
 
 		validateTarget(event.target, true).catch(console.error);
-		if (props.onBlur) props.onBlur(event);
+		if (onBlur) onBlur(event);
 	}
 
 	function getAutocompleteType(): string {
