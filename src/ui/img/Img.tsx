@@ -120,7 +120,7 @@ const Img: React.FC<ImgProps> = (props) => {
 
 	function checkForExistingQuery(src: string) {
 		if (props.disableImageKit) return '';
-		if (src.includes('?')) return '&';
+		if (!!src && src.includes('?')) return '&';
 		else return '?';
 	}
 
