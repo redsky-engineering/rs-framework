@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://gitlab.com/redsky_public/framework/compare/v0.8.0...v0.9.0) (2022-09-21)
+
+### Bug Fixes
+
+-   **img:** when undefined gets pass into the src props. It throws an error during the checkForExistingQuery() method. ([4c7faf8](https://gitlab.com/redsky_public/framework/commit/4c7faf8f836e902eacddb601a2e6aafa9791d9b3))
+-   **inputText:** On blur wasn't working as expected. We forgot to spread out props.onBlur from the inputProps. ([928d408](https://gitlab.com/redsky_public/framework/commit/928d408de4e76a5d27947b27887fc5dc51617b13))
+
 ## [0.8.0](https://gitlab.com/redsky_public/framework/compare/v0.7.1...v0.8.0) (2022-09-08)
 
 ### Features
