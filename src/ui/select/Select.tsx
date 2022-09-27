@@ -102,7 +102,8 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 				// @ts-ignore
 				return item.value === control.value;
 			}) as Option;
-			if (!optionFound) setValue(undefined);
+
+			if (!optionFound) setValue(null);
 			else setValue(optionFound);
 		}
 	}, [control]);

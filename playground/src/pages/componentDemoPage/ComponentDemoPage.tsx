@@ -274,6 +274,14 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				isClearable
 			/>
+			<Button
+				look={'containedPrimary'}
+				onClick={() => {
+					setFormGroup(formGroup.cloneDeep().resetToInitialValue());
+				}}
+			>
+				Clear
+			</Button>
 			<Label variant={'h6'} weight={'regular'}>
 				Creatable Select
 			</Label>
