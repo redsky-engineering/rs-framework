@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.1](https://gitlab.com/redsky_public/framework/compare/v0.9.0...v0.9.1) (2022-09-27)
+
+### Bug Fixes
+
+-   **select:** When using formControl, and you set the control back to default or back to an empty string. It wasn't actually clearing the form. This is because the form doesn't like undefined. You need to set it to null. ([838af12](https://gitlab.com/redsky_public/framework/commit/838af121f3288fbe40b48a1354e33615117b1e71))
+
 ## [0.9.0](https://gitlab.com/redsky_public/framework/compare/v0.8.0...v0.9.0) (2022-09-21)
 
 ### Bug Fixes
