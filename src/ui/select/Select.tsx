@@ -85,6 +85,21 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 	const [value, setValue] = useState<PropsValue<Option> | undefined>(props.value);
 
 	useEffect(() => {
+		if (!props.value) return;
+		setValue(props.value);
+	}, [props.value]);
+
+	// We only want to handle either a controlled component with value, onChange or using our form control.
+	// Check if they provided both.
+	if (props.value && props.control) {
+		console.error(
+			'You cannot use both value and control on a Select component. Please use either value or control.'
+		);
+	} else if (props.onChange && props.updateControl) {
+		console.error('You should not use both onChange and updateControl on the same Select component.');
+	}
+
+	useEffect(() => {
 		if (!control || !props.options) return;
 
 		// Todo: We don't handle groups at this time, if we were to we would recurse through all groups selecting the options
