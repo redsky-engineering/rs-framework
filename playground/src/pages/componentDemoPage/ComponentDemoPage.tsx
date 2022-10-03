@@ -59,7 +59,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					return control.value == 3;
 				})
 			]),
-			new RsFormControl<number>(FormKeys.SELECT, 3, [
+			new RsFormControl<number>(FormKeys.SELECT, 2, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Selection', (control) => {
 					return control.value == 2;
 				})
@@ -232,7 +232,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Select
 				mt={8}
 				mb={16}
-				value={{
+				defaultValue={{
 					label: 'Option 2',
 					value: 2
 				}}
@@ -279,8 +279,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				onClick={() => {
 					setFormGroup(formGroup.cloneDeep().resetToInitialValue());
 				}}
+				mb={16}
 			>
-				Clear
+				Reset Form To Option 2
 			</Button>
 			<Label variant={'h6'} weight={'regular'}>
 				Creatable Select

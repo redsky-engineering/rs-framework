@@ -82,7 +82,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 		...(marginY && { marginY })
 	};
 
-	const [value, setValue] = useState<PropsValue<Option>>();
+	const [value, setValue] = useState<PropsValue<Option> | undefined>(props.value);
 
 	useEffect(() => {
 		if (!control || !props.options) return;
