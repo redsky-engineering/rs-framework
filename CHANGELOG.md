@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.2](https://gitlab.com/redsky_public/framework/compare/v0.9.1...v0.9.2) (2022-10-03)
+
+### Bug Fixes
+
+-   **select:** issue with giving a default value on a controlled input not using form ([99842b6](https://gitlab.com/redsky_public/framework/commit/99842b690c8e9a3ec7eedbbbaecd3e65f61335cc))
+
 ### [0.9.1](https://gitlab.com/redsky_public/framework/compare/v0.9.0...v0.9.1) (2022-09-27)
 
 ### Bug Fixes
