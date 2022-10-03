@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.3](https://gitlab.com/redsky_public/framework/compare/v0.9.2...v0.9.3) (2022-10-03)
+
+### Bug Fixes
+
+-   **select:** when changing value dynamically, select would not update appropriately. ([b1d1764](https://gitlab.com/redsky_public/framework/commit/b1d17649d8810a07409ccc8e78aba8771b8f2e38))
+
 ### [0.9.2](https://gitlab.com/redsky_public/framework/compare/v0.9.1...v0.9.2) (2022-10-03)
 
 ### Bug Fixes
