@@ -102,6 +102,8 @@ export function transformProps(props: PropsWithChildren<any>): CSSProperties {
 			filtered['cursor'] = 'pointer';
 		} else if (i === 'fontSize') {
 			filtered[i] = props[i] + 'px';
+		} else if (i === 'fullWidth') {
+			filtered['width'] = '100%';
 		} else {
 			filtered[i] = props[i];
 		}

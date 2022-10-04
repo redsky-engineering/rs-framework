@@ -3,6 +3,7 @@ import './Button.scss';
 import classNames from 'classnames';
 import { rippleEffect, transformProps } from '../../utils/internal';
 import { ICommon } from '../../common/Interfaces';
+import { Icon, IconProps } from '../icon/Icon';
 
 export interface ButtonProps
 	extends ICommon.PaletteProps,
@@ -21,8 +22,12 @@ export interface ButtonProps
 		| 'textPrimary'
 		| 'textSecondary'
 		| 'textTertiary'
+		| 'iconPrimary'
+		| 'iconSecondary'
 		| string;
+	icon?: Omit<IconProps, 'onClick'>;
 	small?: boolean;
+	fullWidth?: boolean;
 	disableRipple?: boolean;
 }
 
@@ -46,6 +51,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 		name,
 		type,
 		value,
+		icon,
 		...styleProps
 	} = props;
 
@@ -62,6 +68,12 @@ const Button: React.FC<ButtonProps> = (props) => {
 		value
 	};
 
+	function renderChildren() {
+		if (props.look.includes('icon') && icon) return <Icon {...icon} />;
+
+		return props.children;
+	}
+
 	return (
 		<button
 			id={id}
@@ -75,7 +87,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 			style={transformProps(styleProps)}
 			{...buttonProps}
 		>
-			{props.children}
+			{renderChildren()}
 		</button>
 	);
 };

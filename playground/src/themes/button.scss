@@ -22,4 +22,21 @@
 			cursor: not-allowed;
 		}
 	}
+	&.iconPrimary {
+		padding: 8px;
+		border-radius: 50%;
+		background-color: #3c3c3c;
+		color: #4f6367;
+		&:hover {
+		}
+		&:active {
+		}
+		&:focus {
+		}
+		&.small {
+		}
+		&:disabled {
+			cursor: not-allowed;
+		}
+	}
 }

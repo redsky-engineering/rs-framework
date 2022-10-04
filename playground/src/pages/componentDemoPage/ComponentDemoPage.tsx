@@ -118,6 +118,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					<Icon iconImg={'icon-close'} p={10} />
 				</Box>
 			</Button>
+			<Label variant={'h4'} weight={'regular'}>
+				Icon Button
+			</Label>
+			<Button look={'iconPrimary'} icon={{ iconImg: 'icon-star' }} />
 
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Checkbox Component
