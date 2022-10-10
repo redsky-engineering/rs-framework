@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://gitlab.com/redsky_public/framework/compare/v0.9.3...v0.10.0) (2022-10-10)
+
+### Features
+
+-   **button:** Added the props fullWidth. Added to the look options to now use an iconPrimary or iconSecondary. This will be used for iconButtons only. _YOU CANNOT ADD TEXT TO AN ICON BUTTON. USE ALL OTHER LOOK OPTIONS TO DO THIS._ ([1cb508c](https://gitlab.com/redsky_public/framework/commit/1cb508c2b5cb8d9945704ead2d0448c3065cc916))
+-   **button:** Added the props fullWidth. Added to the look options to now use an iconPrimary or iconSecondary. This will be used for iconButtons only. _YOU CANNOT ADD TEXT TO AN ICON BUTTON. USE ALL OTHER LOOK OPTIONS TO DO THIS._ Added the Icon props; this allows the user to pass in an array of icons to attach to the icon. ([1f3b921](https://gitlab.com/redsky_public/framework/commit/1f3b921579411ee761dd96c80d13ac7ed5f3275d))
+
 ### [0.9.3](https://gitlab.com/redsky_public/framework/compare/v0.9.2...v0.9.3) (2022-10-03)
 
 ### Bug Fixes
