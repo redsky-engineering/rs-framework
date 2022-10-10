@@ -112,16 +112,17 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					rsToastify.warning('warning Hello Friend', 'Cheese');
 					rsToastify.info('info Friend', 'Cheese', { autoClose: false });
 				}}
+				icon={[{ iconImg: 'icon-close', position: 'RIGHT', ml: 8 }]}
 			>
-				<Box display={'flex'} alignItems={'center'}>
-					<p>Hello World</p>
-					<Icon iconImg={'icon-close'} p={10} />
-				</Box>
+				<p>Hello World</p>
 			</Button>
 			<Label variant={'h4'} weight={'regular'}>
 				Icon Button
 			</Label>
-			<Button look={'iconPrimary'} icon={{ iconImg: 'icon-star' }} />
+			<Button look={'iconPrimary'} icon={[{ iconImg: 'icon-star', position: 'LEFT' }]} mb={16} />
+			<Button look={'containedPrimary'} icon={[{ iconImg: 'icon-edit', position: 'RIGHT', ml: 8 }]}>
+				Click to Edit
+			</Button>
 
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Checkbox Component

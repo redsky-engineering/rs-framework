@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { rippleEffect, transformProps } from '../../utils/internal';
 import { ICommon } from '../../common/Interfaces';
 import { Icon, IconProps } from '../icon/Icon';
+import { ObjectUtils } from '../../utils';
 
 export interface ButtonProps
 	extends ICommon.PaletteProps,
@@ -25,7 +26,7 @@ export interface ButtonProps
 		| 'iconPrimary'
 		| 'iconSecondary'
 		| string;
-	icon?: Omit<IconProps, 'onClick'>;
+	icon?: Omit<ICommon.NewIconProps, 'onClick'>[];
 	small?: boolean;
 	fullWidth?: boolean;
 	disableRipple?: boolean;
@@ -69,9 +70,24 @@ const Button: React.FC<ButtonProps> = (props) => {
 	};
 
 	function renderChildren() {
-		if (props.look.includes('icon') && icon) return <Icon {...icon} />;
+		let children = props.children;
 
-		return props.children;
+		if (!ObjectUtils.isArrayWithData(icon)) {
+			return children;
+		}
+
+		let iconButton = props.look.includes('icon') ? [] : [children];
+
+		icon.forEach((item, index) => {
+			const { position, isHidden, ...iconProps } = item;
+			if (isHidden) return;
+			if (position === 'LEFT') {
+				iconButton = [<Icon key={`${item.iconImg}${index}`} {...iconProps} />, ...iconButton];
+			} else {
+				iconButton = [...iconButton, <Icon key={`${item.iconImg}${index}`} {...iconProps} />];
+			}
+		});
+		return iconButton;
 	}
 
 	return (
