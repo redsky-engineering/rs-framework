@@ -125,6 +125,32 @@
 			cursor: not-allowed;
 		}
 	}
+	&.iconPrimary {
+		&:hover {
+		}
+		&:active {
+		}
+		&:focus {
+		}
+		&.small {
+		}
+		&:disabled {
+			cursor: not-allowed;
+		}
+	}
+	&.iconSecondary {
+		&:hover {
+		}
+		&:active {
+		}
+		&:focus {
+		}
+		&.small {
+		}
+		&:disabled {
+			cursor: not-allowed;
+		}
+	}
 
 	> .ripple {
 		position: absolute;
