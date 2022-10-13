@@ -48,6 +48,10 @@ export default {
 		'react-select/creatable/dist/react-select.esm.js',
 		'@lottiefiles/lottie-player',
 		'@capacitor/core',
-		'@capacitor/haptics'
+		'@capacitor/haptics',
+		'primereact',
+		'primeicons',
+		'chart.js',
+		'quill'
 	]
 };

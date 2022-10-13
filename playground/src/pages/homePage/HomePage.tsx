@@ -26,6 +26,11 @@ const HomePage: React.FC<{}> = (props) => {
 					Router (996) Sandbox
 				</Button>
 			</Link>
+			<Link path={'/data-table'}>
+				<Button mt={24} look={'containedPrimary'}>
+					RsDataTable
+				</Button>
+			</Link>
 		</Page>
 	);
 };
