@@ -39,6 +39,9 @@ export class RsFormControl<T extends IRsFormControl> {
 	}
 
 	isAtInitialValue(): boolean {
+		if (Array.isArray(this._value) && Array.isArray(this._initialValue))
+			return JSON.stringify(this._value) === JSON.stringify(this._initialValue);
+
 		return this._value === this._initialValue;
 	}
 

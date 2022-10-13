@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://gitlab.com/redsky_public/framework/compare/v0.10.0...v0.10.1) (2022-10-13)
+
+### Features
+
+-   **formControl:** Added the ability to detect whether an empty array is equal to the default value of an empty array. ([d645f6a](https://gitlab.com/redsky_public/framework/commit/d645f6a657f5f7821c8b171d0fe7e4c2fd6478e6))
+
 ## [0.10.0](https://gitlab.com/redsky_public/framework/compare/v0.9.3...v0.10.0) (2022-10-10)
 
 ### Features
