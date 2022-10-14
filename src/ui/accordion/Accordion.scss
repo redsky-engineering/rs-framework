@@ -64,36 +64,13 @@
 		}
 	}
 
-	.iconSpinUp {
-		animation-name: spinUp;
-		animation-duration: 0.4s;
-		transform: rotate(0deg);
+	.chevron {
 		margin-left: auto;
+		transition: transform 300ms;
 	}
 
 	.iconSpinDown {
-		animation-name: spinDown;
-		animation-duration: 0.4s;
 		transform: rotate(-180deg);
-		margin-left: auto;
-	}
-
-	@keyframes spinDown {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(-180deg);
-		}
-	}
-
-	@keyframes spinUp {
-		0% {
-			transform: rotate(-180deg);
-		}
-		100% {
-			transform: rotate(0deg);
-		}
 	}
 
 	.drawer {
