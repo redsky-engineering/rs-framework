@@ -184,10 +184,11 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				title={<h3>Click Me!</h3>}
 				containerStyles={{ width: 'fit-content', maxWidth: '500px', mt: 20 }}
 				headerStyles={{ bgColor: '#323232', padding: '8px 16px', color: 'white' }}
-				drawerStyles={{ bgColor: 'grey', padding: '0 24px' }}
+				drawerStyles={{ bgColor: 'grey' }}
 				expandIcon={{ defaultIcon: { color: 'red' } }}
+				isOpen={false}
 			>
-				<div>
+				<div style={{ marginTop: '50px' }}>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi doloribus eaque et id in itaque
 					magnam rem. Animi dolor esse inventore ipsa iste itaque minus mollitia sapiente sed sit?
 				</div>
@@ -226,8 +227,42 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					hic illo, ipsum magni neque porro rerum saepe sequi similique vitae. Excepturi laboriosam non nulla
 					quis sapiente.
 				</div>
+				<Accordion
+					title={'Child Accordion'}
+					containerStyles={{ width: 'fit-content', maxWidth: '500px' }}
+					headerStyles={{ bgColor: '#323232', padding: '8px 16px', color: 'white' }}
+					drawerStyles={{ bgColor: 'grey' }}
+					expandIcon={{ defaultIcon: { color: 'red' } }}
+				>
+					<Box padding={32}>
+						<div>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium est id itaque laborum
+							officia veritatis voluptate voluptatibus. Ab adipisci, dolorum eaque enim eum illo iste iure
+							iusto, nemo nostrum vel.
+						</div>
+						<div>
+							Ad aliquid amet autem deserunt dolor, eligendi, eveniet laborum libero maiores maxime minima
+							mollitia nihil, odit omnis perferendis qui quia quidem quo suscipit voluptatibus! Corporis
+							magni quae quas tempora tempore!
+						</div>
+						<div>
+							A accusantium ad aspernatur, cumque dignissimos eveniet hic incidunt iusto maxime nesciunt
+							possimus repellat sapiente sequi similique sit tempore vel. Aperiam dolorem eius inventore
+							molestias perspiciatis temporibus veritatis? Dolorum, quas.
+						</div>
+						<div>
+							A amet eaque exercitationem fugit unde. Dolor ea laudantium, magni nam nemo nesciunt nobis
+							nulla perspiciatis provident quam quas quisquam reiciendis rem repudiandae saepe soluta,
+							vero. Accusantium aspernatur corporis necessitatibus.
+						</div>
+						<div>
+							Accusamus accusantium dignissimos in modi odio quae rerum. Ab corporis doloribus ea
+							inventore laborum vitae. Beatae doloribus ducimus, facilis illo laudantium magni, nam
+							pariatur quas quasi quo quos totam ullam!
+						</div>
+					</Box>
+				</Accordion>
 			</Accordion>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Select Component
 			</Label>

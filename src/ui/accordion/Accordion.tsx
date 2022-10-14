@@ -8,8 +8,14 @@ import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
 import { Label, LabelProps } from '../label/Label';
 
-export interface MixedStyleProps
+export interface HeaderStyleProps
 	extends ICommon.SpacingProps,
+		ICommon.BorderProps,
+		ICommon.DimensionProps,
+		ICommon.PaletteProps {}
+
+export interface DrawerStyleProps
+	extends ICommon.MarginProps,
 		ICommon.BorderProps,
 		ICommon.DimensionProps,
 		ICommon.PaletteProps {}
@@ -29,8 +35,8 @@ export interface AccordionProps extends Omit<ICommon.HtmlElementProps, 'display'
 	title: LabelProps | React.ReactNode;
 	children?: React.ReactNode;
 	onClick?: (event: React.MouseEvent<HTMLElement>, isOpen: boolean) => void;
-	headerStyles?: MixedStyleProps;
-	drawerStyles?: MixedStyleProps;
+	headerStyles?: HeaderStyleProps;
+	drawerStyles?: DrawerStyleProps;
 	containerStyles?: IContainerStyleProps;
 	expandIcon?: IExpandIconProps;
 	disableRipple?: boolean;
@@ -42,9 +48,10 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 	const [isOpened, setIsOpened] = useState<boolean>(props.isOpen || false);
 	const containerRef = React.createRef<HTMLDivElement>();
 	const drawerRef = React.createRef<HTMLDivElement>();
+	const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
 
 	useEffect(() => {
-		accordionButtonHandler(containerRef, drawerRef);
+		accordionButtonHandler();
 	}, [isOpened]);
 
 	useEffect(() => {
@@ -52,28 +59,35 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 		else setIsOpened(false);
 	}, [props.isOpen]);
 
-	function accordionButtonHandler(
-		buttonRef: React.RefObject<HTMLDivElement>,
-		divRef: React.RefObject<HTMLDivElement>
-	) {
-		const container = buttonRef.current;
-		const drawer = divRef.current;
+	function accordionButtonHandler() {
+		const container = containerRef.current;
+		const drawer = drawerRef.current;
 		if (!container || !drawer) return;
 		if (isOpened) {
 			container.classList.add('active');
 			drawer.classList.add('opened');
+			setIsOpened(true);
 		} else {
 			container.classList.remove('active');
 			drawer.classList.remove('opened');
+			setIsOpened(false);
 		}
-		if (drawer.classList.value.includes('opened')) setIsOpened(true);
-		else setIsOpened(false);
 
-		if (drawer.style.height || !isOpened) {
+		if (isFirstLoad) {
+			setIsFirstLoad(false);
+			if (!isOpened) {
+				drawer.style.height = '0px';
+				return;
+			} else {
+				drawer.style.height = 'auto';
+			}
+		}
+
+		if (!isOpened) {
 			drawer.style.height = drawer.scrollHeight + 'px';
 			//We need to have a slight delay so that the height can have a pixel value before removing.
 			setTimeout(() => {
-				drawer.style.height = '';
+				drawer.style.height = '0px';
 			}, 50);
 		} else {
 			drawer.style.height = drawer.scrollHeight + 'px';
@@ -92,7 +106,11 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 		if (props.hideExpandIcon) return;
 		if (!props.expandIcon)
 			return (
-				<Icon key={'icon'} className={isOpened ? 'iconSpinUp' : 'iconSpinDown'} iconImg={'icon-chevron-up'} />
+				<Icon
+					key={'icon'}
+					className={classNames('chevron', { iconSpinDown: !isOpened })}
+					iconImg={'icon-chevron-up'}
+				/>
 			);
 		const { openedIcon, closedIcon, defaultIcon } = props.expandIcon;
 
@@ -100,7 +118,7 @@ const Accordion: React.FC<AccordionProps> = (props) => {
 			return (
 				<Icon
 					key={'icon'}
-					className={isOpened ? 'iconSpinUp' : 'iconSpinDown'}
+					className={classNames('chevron', { iconSpinDown: !isOpened })}
 					iconImg={'icon-chevron-up'}
 					{...defaultIcon}
 				/>
