@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.4](https://gitlab.com/redsky_public/framework/compare/v0.10.3...v0.10.4) (2022-10-14)
+
+### Bug Fixes
+
+-   **accordion:** Fixed the issue with the accordion popping open on page load/refresh ([8360448](https://gitlab.com/redsky_public/framework/commit/836044874f5c0fba3f02ebd709c3e9144a4a7ca9))
+
 ### [0.10.3](https://gitlab.com/redsky_public/framework/compare/v0.10.1...v0.10.3) (2022-10-14)
 
 ### Bug Fixes
