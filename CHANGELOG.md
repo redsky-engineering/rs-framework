@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.2](https://gitlab.com/redsky_public/framework/compare/v0.10.1...v0.10.2) (2022-10-14)
+
+### Bug Fixes
+
+-   **select:** Fixed the issue when setting the formControl.value to an empty array. We use to set it to undefined but react select requires us to set it to null. ([60a662e](https://gitlab.com/redsky_public/framework/commit/60a662e73dced296ab137bd0adb0f6d17a6f58aa))
+
 ### [0.10.1](https://gitlab.com/redsky_public/framework/compare/v0.10.0...v0.10.1) (2022-10-13)
 
 ### Features
