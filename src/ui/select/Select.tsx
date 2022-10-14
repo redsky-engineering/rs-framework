@@ -110,7 +110,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 				// @ts-ignore
 				return control.value.includes(item.value);
 			}) as Option[];
-			if (!optionsFound.length) setValue(undefined);
+			if (!optionsFound.length) setValue(null);
 			else setValue(optionsFound);
 		} else {
 			let optionFound = props.options.find((item) => {
