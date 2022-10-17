@@ -95,6 +95,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 	useEffect(() => {
 		clearTimeout(debounceTimeout);
 		if (!globalFilter) {
+			if (!tableState.filters?.global) return;
 			const { global, ...filters } = tableState.filters as any;
 			setTableState({ ...tableState, globalFilter: '', filters: filters });
 		} else {

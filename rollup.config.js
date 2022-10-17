@@ -50,7 +50,9 @@ export default {
 		'@capacitor/core',
 		'@capacitor/haptics',
 		'primereact',
-		'primeicons',
+		'primereact/datatable',
+		'primereact/resources/primereact.min.css',
+		'primeicons/primeicons.css',
 		'chart.js',
 		'quill'
 	]
