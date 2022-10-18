@@ -1,0 +1,283 @@
+import * as React from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import './DataTable.scss';
+import {
+	DataTable,
+	DataTableFilterMatchModeType,
+	DataTableFilterMeta,
+	DataTableFilterMetaData,
+	DataTableGlobalFilterType,
+	DataTableMultiSortMetaType,
+	DataTablePFSEvent,
+	DataTableProps as PrimeReactDataTableProps,
+	DataTableSortOrderType
+} from 'primereact/datatable';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
+export enum RsSortOrder {
+	'ASC' = 1,
+	'DESC' = -1,
+	'NONE' = 0
+}
+
+export type StandardOrderTypes = 'ASC' | 'DESC' | 'RAND' | 'NONE';
+
+export interface PageQuery {
+	page: number;
+	perPage: number;
+	sortBy?: string;
+	sortOrder?: StandardOrderTypes;
+	filter?: string;
+}
+
+interface TableState<T> {
+	tableData: T[];
+	total: number;
+	first: number;
+	rows: number;
+	sortField?: string;
+	sortOrder?: RsSortOrder;
+	filters?: DataTableFilterMeta;
+	multiSortMeta?: DataTableMultiSortMetaType;
+	globalFilter?: string;
+	globalFilterFields?: string[];
+}
+
+export interface RsDataTableProps<T> extends PrimeReactDataTableProps {
+	data: { data: T[]; total: number };
+	getData: (pageQuery: PageQuery) => void;
+	globalSearchPlaceholder?: string;
+	sortOrder?: RsSortOrder;
+	globalFilterDebounceMs?: number;
+	elementRef?: React.RefObject<any>;
+}
+
+let debounceTimeout: any;
+
+const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>) => {
+	const { getData, globalFilterDebounceMs, elementRef, ...baseProps } = props;
+	const [globalFilter, setGlobalFilter] = useState<DataTableGlobalFilterType>(props.globalFilter);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [tableState, setTableState] = useState<TableState<T>>({
+		tableData: props.data.data,
+		total: props.data.total || props.data.data.length,
+		first: 0,
+		rows: props.rowsPerPageOptions?.[0] || 10,
+		sortField: props.sortField,
+		sortOrder: props.sortOrder,
+		filters: props.filters,
+		multiSortMeta: props.multiSortMeta,
+		globalFilter: props.globalFilter || '',
+		globalFilterFields: props.globalFilterFields
+	});
+
+	useEffect(() => {
+		setTableState({
+			...tableState,
+			tableData: props.data.data,
+			total: props.data.total || props.data.data.length
+		});
+	}, [props.data]);
+
+	useEffect(() => {
+		handleEvent({
+			filters: { ...tableState.filters, global: { value: tableState.globalFilter, matchMode: 'contains' } }
+		} as unknown as DataTablePFSEvent);
+	}, [tableState.globalFilter]);
+
+	useEffect(() => {
+		if (globalFilter !== props.globalFilter) {
+			setGlobalFilter(props.globalFilter);
+		}
+	}, [props.globalFilter]);
+
+	useEffect(() => {
+		clearTimeout(debounceTimeout);
+		if (!globalFilter) {
+			if (!tableState.filters?.global) return;
+			const { global, ...filters } = tableState.filters as any;
+			setTableState({ ...tableState, globalFilter: '', filters: filters });
+		} else {
+			debounceTimeout = setTimeout(() => {
+				setTableState({
+					...tableState,
+					globalFilter: globalFilter,
+					filters: { ...tableState.filters, global: { value: globalFilter, matchMode: 'contains' } }
+				});
+			}, globalFilterDebounceMs || 0);
+		}
+	}, [globalFilter]);
+
+	function getSortOrder(sortOrder: DataTableSortOrderType) {
+		if (sortOrder === 1) return 'ASC';
+		if (sortOrder === -1) return 'DESC';
+		return 'NONE';
+	}
+
+	function getMatchType(matchType: DataTableFilterMatchModeType): {
+		negate: boolean;
+		matchType:
+			| 'startsWith'
+			| 'contains'
+			| 'endsWith'
+			| 'exact'
+			| 'greaterThanEqual'
+			| 'greaterThan'
+			| 'lessThanEqual'
+			| 'lessThan';
+	} {
+		switch (matchType) {
+			case 'startsWith':
+			case 'contains':
+			case 'endsWith':
+				return { negate: false, matchType };
+			case 'notContains':
+				return { negate: true, matchType: 'contains' };
+			case 'dateIsNot':
+			case 'notEquals':
+				return { negate: true, matchType: 'exact' };
+			case 'in':
+				return { negate: false, matchType: 'contains' };
+			case 'dateBefore':
+			case 'lt':
+				return { negate: false, matchType: 'lessThan' };
+			case 'lte':
+				return { negate: false, matchType: 'lessThanEqual' };
+			case 'dateAfter':
+			case 'gt':
+				return { negate: false, matchType: 'greaterThan' };
+			case 'gte':
+				return { negate: false, matchType: 'greaterThanEqual' };
+			case 'between':
+			case 'custom':
+			case 'dateIs':
+			case 'equals':
+			default:
+				return { negate: false, matchType: 'exact' };
+		}
+	}
+
+	function getGlobalFilterOperator(filterString: string, globalFilterString: string, filter: any) {
+		if (!filterString && !globalFilterString) return '';
+		if (filterString && !globalFilterString) {
+			return 'AND(';
+		}
+		return filter?.operator || 'OR';
+	}
+
+	function getFilterString(filters: DataTableFilterMeta): string {
+		let filterString = '';
+		for (let column in filters) {
+			const currentFilter: any = filters[column];
+			if (column === 'global') {
+				if (!currentFilter.value) continue;
+				let globalFilterString = '';
+				const matchType = getMatchType(currentFilter.matchMode);
+				props.globalFilterFields?.forEach((globalFilter: string) => {
+					globalFilterString += `${getGlobalFilterOperator(filterString, globalFilterString, currentFilter)}${
+						matchType.negate ? '!' : ''
+					}(column:${globalFilter},value:${currentFilter.value},type:${matchType.matchType})`;
+				});
+				filterString += `${globalFilterString}${filterString.length ? ')' : ''}`;
+				continue;
+			}
+			currentFilter.constraints.forEach((constraint: DataTableFilterMetaData) => {
+				if (!constraint.value) return;
+				const matchType = getMatchType(constraint.matchMode);
+				filterString += `${filterString.length ? currentFilter?.operator || '' : ''}${
+					matchType.negate ? '!' : ''
+				}(column:${column},value:${constraint.value},type:${matchType.matchType})`;
+			});
+		}
+		return filterString;
+	}
+
+	function handleEvent(event?: DataTablePFSEvent): void {
+		getData({
+			page: event?.page ? event.page + 1 : 1,
+			perPage: event?.rows || tableState.rows,
+			sortBy: event?.sortField || tableState.sortField || undefined,
+			sortOrder: getSortOrder(event?.sortOrder || tableState.sortOrder),
+			filter: getFilterString(event?.filters || tableState.filters || {})
+		});
+	}
+
+	function handleSort(event: DataTablePFSEvent): void {
+		setLoading(true);
+		handleEvent(event);
+		props.onSort?.(event);
+
+		setTableState({
+			...tableState,
+			sortField: event.sortField,
+			sortOrder: RsSortOrder[getSortOrder(event.sortOrder)],
+			multiSortMeta: event.multiSortMeta
+		});
+		setLoading(false);
+	}
+
+	function handleFilter(event: DataTablePFSEvent): void {
+		setLoading(true);
+		handleEvent(event);
+		props.onFilter?.(event);
+
+		setTableState({
+			...tableState,
+			filters: {
+				...props.filters,
+				...event.filters
+			}
+		});
+		setLoading(false);
+	}
+
+	function handlePage(event: DataTablePFSEvent): void {
+		setLoading(true);
+		handleEvent(event);
+		props.onPage?.(event);
+
+		setTableState({
+			...tableState,
+			rows: event.rows,
+			first: event.first
+		});
+		setLoading(false);
+	}
+
+	return (
+		<div className={'rsDataTable'}>
+			<DataTable
+				{...baseProps}
+				loading={loading}
+				value={tableState.tableData}
+				globalFilter={undefined}
+				globalFilterFields={tableState.globalFilterFields}
+				sortField={tableState.sortField}
+				sortOrder={tableState.sortOrder}
+				onSort={handleSort}
+				filters={tableState.filters}
+				onFilter={handleFilter}
+				first={tableState.first}
+				rows={tableState.rows}
+				totalRecords={tableState.total}
+				paginatorTemplate={
+					props.paginatorTemplate ||
+					'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
+				}
+				currentPageReportTemplate={
+					props.currentPageReportTemplate || 'Showing {first} to {last} of {totalRecords}'
+				}
+				rowsPerPageOptions={props.rowsPerPageOptions || [10, 25, 50, 100, 500]}
+				paginator={props.paginator || true}
+				lazy={props.lazy || true}
+				onPage={handlePage}
+				ref={elementRef}
+			>
+				{props.children}
+			</DataTable>
+		</div>
+	);
+};
+
+export { RsDataTable };

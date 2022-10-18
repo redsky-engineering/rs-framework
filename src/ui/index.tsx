@@ -59,3 +59,6 @@ export { RsValidator, RsValidatorEnum } from './form/Validator';
 
 export { AnimateOnScroll, useInitAnimateOnScroll } from './animateOnScroll/AnimateOnScroll';
 export type { AnimateOnScrollProps } from './animateOnScroll/AnimateOnScroll';
+
+export { RsDataTable } from './dataTable/DataTable';
+export type { RsDataTableProps } from './dataTable/DataTable';

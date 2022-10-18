@@ -7,5 +7,10 @@ export default defineConfig({
 	// Added by Josh
 	css: {
 		devSourcemap: true
+	},
+	server: {
+		fs: {
+			allow: ['..']
+		}
 	}
 });
