@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://gitlab.com/redsky_public/framework/compare/v0.10.4...v0.11.0) (2022-10-18)
+
+### Features
+
+-   **datatable:** adds the datatable component ([5c9d904](https://gitlab.com/redsky_public/framework/commit/5c9d9042b47723fa08ba51c574174976b6bcd605))
+-   **datatable:** up to date with master ([8e3f59a](https://gitlab.com/redsky_public/framework/commit/8e3f59a2d1bf2171856687e173a1544fb450037f))
+-   **datatable:** updates dependencies and fixes global filter ([0dfe675](https://gitlab.com/redsky_public/framework/commit/0dfe675402acbcd0b94bda16981cf0cd9d0009bd))
+-   **datatable:** updates peer dependencies ([1beb200](https://gitlab.com/redsky_public/framework/commit/1beb2006a177deb96e2913b445572a6d2ed6e7d0))
+
 ### [0.10.4](https://gitlab.com/redsky_public/framework/compare/v0.10.3...v0.10.4) (2022-10-14)
 
 ### Bug Fixes
