@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.1](https://gitlab.com/redsky_public/framework/compare/v0.11.0...v0.11.1) (2022-10-20)
+
+### Bug Fixes
+
+-   **Select:** Ability to clear a single select works now ([8179567](https://gitlab.com/redsky_public/framework/commit/8179567ee826b2ea753e1cb6eae019097cf49eb7))
+
 ## [0.11.0](https://gitlab.com/redsky_public/framework/compare/v0.10.4...v0.11.0) (2022-10-18)
 
 ### Features
