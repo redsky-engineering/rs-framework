@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.2](https://gitlab.com/redsky_public/framework/compare/v0.11.1...v0.11.2) (2022-10-20)
+
+### Bug Fixes
+
+-   **datatable:** fixes filter updating and removes default pagination ([b9d603b](https://gitlab.com/redsky_public/framework/commit/b9d603bb26960573d72fab4fe9576781eb328113))
+
 ### [0.11.1](https://gitlab.com/redsky_public/framework/compare/v0.11.0...v0.11.1) (2022-10-20)
 
 ### Bug Fixes
