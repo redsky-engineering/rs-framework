@@ -81,6 +81,16 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 	}, [props.data]);
 
 	useEffect(() => {
+		setTableState({
+			...tableState,
+			filters: { ...tableState.filters, ...props.filters }
+		});
+		handleEvent({
+			filters: { ...tableState.filters, ...props.filters }
+		} as unknown as DataTablePFSEvent);
+	}, [props.filters]);
+
+	useEffect(() => {
 		handleEvent({
 			filters: { ...tableState.filters, global: { value: tableState.globalFilter, matchMode: 'contains' } }
 		} as unknown as DataTablePFSEvent);
@@ -261,13 +271,6 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				first={tableState.first}
 				rows={tableState.rows}
 				totalRecords={tableState.total}
-				paginatorTemplate={
-					props.paginatorTemplate ||
-					'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
-				}
-				currentPageReportTemplate={
-					props.currentPageReportTemplate || 'Showing {first} to {last} of {totalRecords}'
-				}
 				rowsPerPageOptions={props.rowsPerPageOptions || [10, 25, 50, 100, 500]}
 				paginator={props.paginator || true}
 				lazy={props.lazy || true}
