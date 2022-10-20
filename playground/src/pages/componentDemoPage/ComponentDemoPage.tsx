@@ -75,6 +75,14 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			)
 		])
 	);
+	const [multiSelectValue, setMultiSelectValue] = useState<{ label: string; value: number }[]>([
+		{ label: 'Option 1', value: 1 },
+		{ label: 'Option 2', value: 2 }
+	]);
+	const [singleSelectValue, setSingleSelectValue] = useState<{ label: string; value: number } | null>({
+		label: 'Option 1',
+		value: 1
+	});
 
 	return (
 		<Page className={'rsComponentDemoPage'} {...componentDemoPageData}>
@@ -267,7 +275,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				Select Component
 			</Label>
 			<Label variant={'h6'} weight={'regular'}>
-				(NOT using FormControl)
+				(NOT using FormControl w/ Default)
 			</Label>
 			<Select
 				mt={8}
@@ -291,6 +299,32 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 				isClearable
 			/>
+			<Label variant={'h6'} weight={'regular'}>
+				(NOT using FormControl w/ controlled state)
+			</Label>
+			<Select
+				mt={8}
+				mb={16}
+				value={singleSelectValue}
+				options={[
+					{
+						label: 'Option 1',
+						value: 1
+					},
+					{
+						label: 'Option 2',
+						value: 2
+					}
+				]}
+				onChange={(newValue, actionMeta) => {
+					console.log(newValue, actionMeta);
+					setSingleSelectValue(newValue);
+				}}
+				isClearable
+			/>
+			<Button look={'containedPrimary'} onClick={() => setSingleSelectValue(null)} mb={16}>
+				Clear Single Select
+			</Button>
 			<Label variant={'h6'} weight={'regular'}>
 				(Using FormControl)
 			</Label>
@@ -354,10 +388,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				isMulti
 				mt={8}
 				mb={16}
-				value={[
-					{ label: 'Option 1', value: 1 },
-					{ label: 'Option 2', value: 2 }
-				]}
+				value={multiSelectValue}
 				options={[
 					{
 						label: 'Option 1',
@@ -374,9 +405,13 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				isClearable
 				onChange={(newValue) => {
+					setMultiSelectValue([...newValue]);
 					console.log(newValue);
 				}}
 			/>
+			<Button look={'containedPrimary'} onClick={() => setMultiSelectValue([])} mb={16}>
+				Clear Multi Select
+			</Button>
 			<Label variant={'h6'} weight={'regular'}>
 				Multi Option Select (With Form Control)
 			</Label>

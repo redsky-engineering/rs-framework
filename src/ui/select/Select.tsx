@@ -62,6 +62,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 		isCreatable,
 		createOptionPosition,
 		onCreateOption,
+		value, // Remove the value from selectProps
 		...selectProps
 	} = props;
 
@@ -82,11 +83,10 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 		...(marginY && { marginY })
 	};
 
-	const [value, setValue] = useState<PropsValue<Option> | undefined>(props.value);
+	const [internalValue, setInternalValue] = useState<PropsValue<Option> | undefined>(props.value);
 
 	useEffect(() => {
-		if (!props.value) return;
-		setValue(props.value);
+		setInternalValue(props.value);
 	}, [props.value]);
 
 	// We only want to handle either a controlled component with value, onChange or using our form control.
@@ -110,16 +110,16 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 				// @ts-ignore
 				return control.value.includes(item.value);
 			}) as Option[];
-			if (!optionsFound.length) setValue(null);
-			else setValue(optionsFound);
+			if (!optionsFound.length) setInternalValue(null);
+			else setInternalValue(optionsFound);
 		} else {
 			let optionFound = props.options.find((item) => {
 				// @ts-ignore
 				return item.value === control.value;
 			}) as Option;
 
-			if (!optionFound) setValue(null);
-			else setValue(optionFound);
+			if (!optionFound) setInternalValue(null);
+			else setInternalValue(optionFound);
 		}
 	}, [control]);
 
@@ -183,7 +183,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 					if (onChange) onChange(value, action);
 					handleChange(value, action);
 				}}
-				value={value}
+				value={internalValue}
 			/>
 		) : (
 			<CreatableSelect
@@ -194,7 +194,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 					if (onChange) onChange(value, action);
 					handleChange(value, action);
 				}}
-				value={value}
+				value={internalValue}
 			/>
 		);
 	}
