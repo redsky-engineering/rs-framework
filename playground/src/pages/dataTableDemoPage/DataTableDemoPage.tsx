@@ -9,8 +9,10 @@ import { Column, DataTable, DataTableFilterMeta, FilterMatchMode, FilterOperator
 const DataTableDemoPage: React.FC = () => {
 	const [tableData, setTableData] = useState<any>({ data: [], total: 0 });
 	const [searchTerm, setSearchTerm] = useState<string>('');
-	const [formGroup, setFormGroup] = useState<RsFormGroup>(new RsFormGroup([new RsFormControl('searchTerm', '', [])]));
-	const [filters, setFilters] = useState<DataTableFilterMeta>({
+	const [formGroup, setFormGroup] = useState<RsFormGroup>(
+		new RsFormGroup([new RsFormControl('searchTerm', '', []), new RsFormControl('role', '', [])])
+	);
+	const initialFilters = {
 		primaryEmail: {
 			operator: FilterOperator.AND,
 			constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
@@ -27,7 +29,8 @@ const DataTableDemoPage: React.FC = () => {
 			operator: FilterOperator.AND,
 			constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
 		}
-	});
+	};
+	const [filters, setFilters] = useState<DataTableFilterMeta>(initialFilters);
 	const dataTableRef = useRef<DataTable | null>(null);
 
 	const headers = {
@@ -57,6 +60,10 @@ const DataTableDemoPage: React.FC = () => {
 
 	function handleExport() {
 		dataTableRef.current?.exportCSV();
+	}
+
+	function handleClearFilters() {
+		setFilters(initialFilters);
 	}
 
 	return (
@@ -92,9 +99,14 @@ const DataTableDemoPage: React.FC = () => {
 								setSearchTerm(control.value.toString());
 							}}
 						/>
-						<Button look={'containedPrimary'} onClick={handleExport}>
-							Export
-						</Button>
+						<Box display={'flex'} gap={8}>
+							<Button look={'containedPrimary'} onClick={handleClearFilters}>
+								Clear Filters
+							</Button>
+							<Button look={'containedPrimary'} onClick={handleExport}>
+								Export
+							</Button>
+						</Box>
 					</Box>
 				}
 				globalFilter={searchTerm}
@@ -105,6 +117,10 @@ const DataTableDemoPage: React.FC = () => {
 				responsiveLayout={'scroll'}
 				globalFilterDebounceMs={600}
 				elementRef={dataTableRef}
+				paginatorTemplate={
+					'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
+				}
+				currentPageReportTemplate={'Showing {first} to {last} of {totalRecords}'}
 			>
 				<Column field={'firstName'} header={'First Name'} sortable />
 				<Column field={'lastName'} header={'Last Name'} sortable />
@@ -113,6 +129,15 @@ const DataTableDemoPage: React.FC = () => {
 					field={'role'}
 					header={'Role'}
 					filter
+					onFilterApplyClick={(e) =>
+						setFilters({
+							...filters,
+							role: {
+								...filters['role'],
+								constraints: [{ value: formGroup.get('role').value, matchMode: FilterMatchMode.EQUALS }]
+							}
+						})
+					}
 					filterElement={
 						<Select
 							options={[
@@ -121,15 +146,8 @@ const DataTableDemoPage: React.FC = () => {
 								{ label: 'Customer', value: 'customer' },
 								{ label: 'Super Admin', value: 'superAdmin' }
 							]}
-							onChange={(e) => {
-								setFilters({
-									...filters,
-									role: {
-										operator: FilterOperator.AND,
-										constraints: [{ value: e?.value, matchMode: FilterMatchMode.EQUALS }]
-									}
-								});
-							}}
+							control={formGroup.get('role')}
+							updateControl={(control) => setFormGroup(formGroup.clone().update(control))}
 							placeholder="Select a Role"
 						/>
 					}
