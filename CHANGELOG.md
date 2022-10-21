@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.3](https://gitlab.com/redsky_public/framework/compare/v0.11.2...v0.11.3) (2022-10-21)
+
+### Bug Fixes
+
+-   **datatable:** adds ability to use custom onFilter function ([c45d3e2](https://gitlab.com/redsky_public/framework/commit/c45d3e29c83a0cc752000b379e73040dac3d4241))
+
 ### [0.11.2](https://gitlab.com/redsky_public/framework/compare/v0.11.1...v0.11.2) (2022-10-20)
 
 ### Bug Fixes
