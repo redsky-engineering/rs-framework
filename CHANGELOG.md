@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.4](https://gitlab.com/redsky_public/framework/compare/v0.11.3...v0.11.4) (2022-10-24)
+
+### Bug Fixes
+
+-   **datatable:** adds option to use rows prop ([e54769c](https://gitlab.com/redsky_public/framework/commit/e54769cb24ab8e2e1ba57cb9601b583510cb91e5))
+
 ### [0.11.3](https://gitlab.com/redsky_public/framework/compare/v0.11.2...v0.11.3) (2022-10-21)
 
 ### Bug Fixes
