@@ -62,7 +62,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 	const [tableState, setTableState] = useState<TableState<T>>({
 		tableData: props.data.data,
 		total: props.data.total || props.data.data.length,
-		first: 0,
+		first: props.first || 0,
 		rows: props.rowsPerPageOptions?.[0] || 10,
 		sortField: props.sortField,
 		sortOrder: props.sortOrder,
@@ -269,7 +269,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				filters={tableState.filters}
 				onFilter={props.onFilter || handleFilter}
 				first={tableState.first}
-				rows={tableState.rows}
+				rows={props.rows || tableState.rows}
 				totalRecords={tableState.total}
 				rowsPerPageOptions={props.rowsPerPageOptions || [10, 25, 50, 100, 500]}
 				paginator={props.paginator || true}
