@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.6](https://gitlab.com/redsky_public/framework/compare/v0.11.5...v0.11.6) (2022-10-31)
+
+### Features
+
+-   **select:** Now allowing group options to be controlled with our RsFormControl. Also added a fall back when a user passes duplicate matching option values into a group select ([c2f247c](https://gitlab.com/redsky_public/framework/commit/c2f247c143969d78e40f2c5a0ae2394d66437e7a))
+-   **select:** Now allowing group options to be controlled with our RsFormControl. Also added a fall back when a user passes duplicate matching option values into a group select ([3a8ac51](https://gitlab.com/redsky_public/framework/commit/3a8ac51df3f96ec1692ef43dd21abe9e2b7a689b))
+
 ### [0.11.5](https://gitlab.com/redsky_public/framework/compare/v0.11.4...v0.11.5) (2022-10-26)
 
 ### [0.11.4](https://gitlab.com/redsky_public/framework/compare/v0.11.3...v0.11.4) (2022-10-24)
