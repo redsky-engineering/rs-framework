@@ -131,7 +131,6 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 	useEffect(() => {
 		if (!control || !props.options) return;
 
-		// Todo: We don't handle groups at this time, if we were to we would recurse through all groups selecting the options
 		if (isGroupOption(props.options)) {
 			let groupOptions: Group[] = cloneDeep(props.options);
 			let optionsFound: Option[] = [];
@@ -221,7 +220,6 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 			<ReactSelect
 				{...selectProps}
 				onChange={(value, action) => {
-					console.log(value, action);
 					if (onChange) onChange(value, action);
 					handleChange(value, action);
 				}}
@@ -233,7 +231,6 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 				createOptionPosition={createOptionPosition}
 				onCreateOption={onCreateOption}
 				onChange={(value: OnChangeValue<Option, IsMulti>, action: ActionMeta<Option>) => {
-					console.log(value, action);
 					if (onChange) onChange(value, action);
 					handleChange(value, action);
 				}}
