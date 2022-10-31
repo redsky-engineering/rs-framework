@@ -22,6 +22,8 @@ import clone from 'lodash.clone';
 // @ts-ignore
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm.js';
 import { PropsValue } from 'react-select/dist/declarations/src/types';
+import cloneDeep from 'lodash.clonedeep';
+import { Label } from '../label/Label';
 
 export interface SelectProps<
 	Option,
@@ -84,6 +86,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 	};
 
 	const [internalValue, setInternalValue] = useState<PropsValue<Option> | undefined>(props.value);
+	const [isErroredComponent, setIsErroredComponent] = useState<boolean>(false);
 
 	useEffect(() => {
 		setInternalValue(props.value);
@@ -91,19 +94,56 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 
 	// We only want to handle either a controlled component with value, onChange or using our form control.
 	// Check if they provided both.
-	if (props.value && props.control) {
-		console.error(
-			'You cannot use both value and control on a Select component. Please use either value or control.'
-		);
-	} else if (props.onChange && props.updateControl) {
-		console.error('You should not use both onChange and updateControl on the same Select component.');
+	if (!isErroredComponent) {
+		if (props.value && props.control) {
+			console.error(
+				'You cannot use both value and control on a Select component. Please use either value or control.'
+			);
+			setIsErroredComponent(true);
+		} else if (props.onChange && props.updateControl) {
+			console.error('You should not use both onChange and updateControl on the same Select component.');
+			setIsErroredComponent(true);
+		} else if (props.options && isGroupOption(props.options)) {
+			let existingIds: string[] | number[] = [];
+			let isValid = true;
+
+			for (let i = 0; i < props.options.length; i++) {
+				let group: Group = props.options[i];
+				for (let x = 0; x < group.options.length; x++) {
+					let option: Option = group.options[x];
+					//@ts-ignore
+					if (existingIds.includes(option.value)) {
+						isValid = false;
+						break;
+					}
+					//@ts-ignore
+					existingIds.push(option.value);
+				}
+				if (!isValid) break;
+			}
+			if (!isValid) {
+				console.error('You have options with the same value');
+				setIsErroredComponent(true);
+			}
+		}
 	}
 
 	useEffect(() => {
 		if (!control || !props.options) return;
 
-		// Todo: We don't handle groups at this time, if we were to we would recurse through all groups selecting the options
-		if (isGroupOption(props.options)) return;
+		if (isGroupOption(props.options)) {
+			let groupOptions: Group[] = cloneDeep(props.options);
+			let optionsFound: Option[] = [];
+			groupOptions.forEach((group) => {
+				let filteredOptions = group.options.filter((options) => {
+					//@ts-ignore
+					return control.value.includes(options.value);
+				});
+				optionsFound.push(...filteredOptions);
+			});
+			setInternalValue(optionsFound);
+			return;
+		}
 
 		if (Array.isArray(control.value)) {
 			let optionsFound = props.options.filter((item) => {
@@ -198,6 +238,13 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 			/>
 		);
 	}
+
+	if (isErroredComponent)
+		return (
+			<Label variant={'body1'} weight={'extraBold'} color={'red'}>
+				Broken component props. Check console error
+			</Label>
+		);
 
 	return (
 		<Box id={id} className={classNames('rsSelect', className)} {...boxMarginProps}>

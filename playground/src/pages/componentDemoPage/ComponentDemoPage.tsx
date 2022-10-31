@@ -28,6 +28,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
+import { Calendar } from 'primereact';
 
 enum FormKeys {
 	TEXT_AREA_TEST = 'textAreaTest',
@@ -36,7 +37,8 @@ enum FormKeys {
 	EMAIL_IMMEDIATE_CHECK = 'emailImmediateCheck',
 	NUMBER = 'number',
 	SELECT = 'select',
-	SELECT2 = 'select2'
+	SELECT2 = 'select2',
+	MULTI_SELECT_GROUP = 'multiSelectGroup'
 }
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
@@ -72,7 +74,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 						return (control.value as number[]).length > 1;
 					})
 				]
-			)
+			),
+			new RsFormControl<number[]>(FormKeys.MULTI_SELECT_GROUP, [1, 2, 6], [])
 		])
 	);
 	const [multiSelectValue, setMultiSelectValue] = useState<{ label: string; value: number }[]>([
@@ -83,6 +86,27 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 		label: 'Option 1',
 		value: 1
 	});
+
+	let options = [
+		{ label: 'item1', value: 1 },
+		{ label: 'item2', value: 2 },
+		{ label: 'item3', value: 3 }
+	];
+
+	let groupedOptions = [
+		{
+			label: 'Group One',
+			options
+		},
+		{
+			label: 'Group Two',
+			options: [
+				{ label: 'item4', value: 4 },
+				{ label: 'item5', value: 5 },
+				{ label: 'item6', value: 6 }
+			]
+		}
+	];
 
 	return (
 		<Page className={'rsComponentDemoPage'} {...componentDemoPageData}>
@@ -435,6 +459,30 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					setFormGroup(formGroup.clone().update(control));
 				}}
 			/>
+			<Label variant={'h6'} weight={'regular'}>
+				Multi Group Option Select
+			</Label>
+			<Select
+				isMulti
+				mt={8}
+				options={groupedOptions}
+				control={formGroup.getClone<number[]>(FormKeys.MULTI_SELECT_GROUP)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.clone().update(control));
+				}}
+			/>
+			{console.log(formGroup.get(FormKeys.MULTI_SELECT_GROUP).value)}
+			<Button
+				look={'containedPrimary'}
+				mt={8}
+				onClick={() => {
+					let multiSelect = formGroup.getClone(FormKeys.MULTI_SELECT_GROUP);
+					multiSelect.value = [];
+					setFormGroup(formGroup.clone().update(multiSelect));
+				}}
+			>
+				Clear Multi Grouped Option Select
+			</Button>
 
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Textarea
