@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import './Select.scss';
 import { Box } from '../box/Box';
 import classNames from 'classnames';
-import { RsFormControl } from '../form/FormControl';
+import { IRsFormControl, RsFormControl } from '../form/FormControl';
 import {
 	ActionMeta,
 	default as ReactSelect,
@@ -31,8 +31,8 @@ export interface SelectProps<
 	Group extends GroupBase<Option> = GroupBase<Option>
 > extends Props<Option, IsMulti, Group>,
 		ICommon.MarginProps {
-	control?: RsFormControl<number | string | number[] | string[]>;
-	updateControl?: (control: RsFormControl<number | string | number[] | string[]>) => void;
+	control?: RsFormControl<IRsFormControl>;
+	updateControl?: (control: RsFormControl<IRsFormControl>) => void;
 	isCreatable?: boolean;
 	createOptionPosition?: 'first' | 'last';
 	onCreateOption?: (inputValue: string) => void;
