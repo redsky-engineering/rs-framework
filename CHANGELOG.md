@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.13.0](https://gitlab.com/redsky_public/framework/compare/v0.11.7...v0.13.0) (2022-11-02)
+
+### Features
+
+-   **996:** You can now call changeView to set the view ([a1f54c4](https://gitlab.com/redsky_public/framework/commit/a1f54c41927dda31903d54ccff859991a5efb8fe))
+-   **hook:** Added a couple more hooks used with 996 ([918caf7](https://gitlab.com/redsky_public/framework/commit/918caf74d2785a9646275889fe684efaf2f37bef))
+
 ## [0.12.0](https://gitlab.com/redsky_public/framework/compare/v0.11.7...v0.12.0) (2022-11-02)
 
 ### Features
