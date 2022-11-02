@@ -165,7 +165,7 @@ class Router {
 
 		events.on('activeViewChange', async (viewName: string) => {
 			if (this.currentViewName === viewName) {
-				await this.forceHome(viewName);
+				await this.forceHome();
 				return;
 			}
 
@@ -349,12 +349,24 @@ class Router {
 
 	/**
 	 * Force current view to initialPath specified when view was added
-	 * @param viewName - Name of the view to load, the id given
 	 */
-	forceHome(viewName: string) {
-		this.setActiveView(viewName);
+	forceHome() {
 		let path = this.views[this.currentViewName as string].getInitialPath();
-		return this.navigate(path, {});
+		return this.navigate(path);
+	}
+
+	/**
+	 * Changes the current view to the given view name
+	 * @param {string} viewName - The name of the view to change to
+	 */
+	async changeView(viewName: string) {
+		let foundView = this.views[viewName];
+		if (!foundView) {
+			console.error(`View ${viewName} not found`);
+			return;
+		}
+		let path = foundView.getPath();
+		await this.navigate(path, { view: viewName });
 	}
 
 	/**
@@ -624,7 +636,7 @@ class Router {
 
 		// Check for exact matches first
 		let foundRoute = this.routes.find((route) => {
-			if (route.options?.view && !viewNames.includes(route.options?.view as string)) return false;
+			if (route.options?.view && !viewNames.includes(route.options?.view)) return false;
 			return route.path === pathNoQueryNoHash;
 		});
 
@@ -633,7 +645,7 @@ class Router {
 		if (!foundRoute) {
 			// Check for router with path parameters
 			foundRoute = this.routes.find((route) => {
-				if (route.options?.view && !viewNames.includes(route.options?.view as string)) return false;
+				if (route.options?.view && !viewNames.includes(route.options?.view)) return false;
 
 				if (!route.path.includes(':')) return false;
 

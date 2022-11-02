@@ -3,7 +3,7 @@ import { IconProps, AvatarProps, LabelProps } from '../ui';
 
 export namespace I996 {
 	export interface NavigateOptions {
-		view?: string | string[]; // The view in which to load the new page into. This would override the router' definition. If no view is specified in either then it loads in current view
+		view?: string; // The view in which to load the new page into. This would override the router' definition. If no view is specified in either then it loads in current view
 	}
 
 	/**
