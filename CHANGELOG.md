@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.7](https://gitlab.com/redsky_public/framework/compare/v0.11.6...v0.11.7) (2022-11-02)
+
+### Features
+
+-   **select:** Added boolean to the RsSelect as a value that can be taken in. ([d5870e5](https://gitlab.com/redsky_public/framework/commit/d5870e5705d9a33ef9c238ca52ffa8181d832c81))
+
 ### [0.11.6](https://gitlab.com/redsky_public/framework/compare/v0.11.5...v0.11.6) (2022-10-31)
 
 ### Features
