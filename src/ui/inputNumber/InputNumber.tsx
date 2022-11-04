@@ -45,7 +45,7 @@ interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'>, IC
 	onKeyDown?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | null;
 	onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
 	onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | null;
-	onChange?: ((value: number, event: React.UIEvent) => void) | null;
+	onChange?: ((value: number | null, event: React.UIEvent) => void) | null;
 	onValueChange?:
 		| ((data: {
 				originalEvent: React.UIEvent | null;
@@ -166,12 +166,12 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 	const [hasBeenBlurred, setHasBeenBlurred] = useState<boolean>(immediateValidate || false);
 
-	const [formControl, setFormControl] = React.useState<RsFormControl<number> | undefined>(
+	const [formControl, setFormControl] = React.useState<RsFormControl<number> | null>(
 		control as RsFormControl<number>
 	);
 
 	useEffect(() => {
-		setFormControl(control);
+		setFormControl(control || null);
 	}, [control]);
 
 	function getOptions(): InputNumberFormatOptions {
@@ -294,7 +294,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return new RegExp(`${escapeRegExp(suffixChar.current || '')}`, 'g');
 	}
 
-	function formatValue(value: string | number) {
+	function formatValue(value: string | number | null): string {
 		if (value != null) {
 			if (value === '-') {
 				// Minus sign
@@ -922,17 +922,17 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		}
 	}
 
-	function evaluateEmpty(newValue: number) {
+	function evaluateEmpty(newValue: number | null): number | null {
 		return !newValue && !props.allowEmpty ? props.min || 0 : newValue;
 	}
 
-	function handleOnChange(event: React.UIEvent, currentValue: string, newValue: number) {
+	function handleOnChange(event: React.UIEvent, currentValue: string, newValue: number | null) {
 		if (props.onChange && isValueChanged(currentValue, newValue)) {
 			props.onChange(newValue, event);
 		}
 	}
 
-	function isValueChanged(currentValue: string | number, newValue: number) {
+	function isValueChanged(currentValue: string | number | null, newValue: number | null): boolean {
 		if (newValue === null && currentValue !== null) {
 			return true;
 		}
@@ -961,7 +961,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return value;
 	}
 
-	function updateInput(value: number, insertedValueStr: string | null, operation: string, valueStr?: string) {
+	function updateInput(value: number | null, insertedValueStr: string | null, operation: string, valueStr?: string) {
 		insertedValueStr = insertedValueStr || '';
 
 		let inputEl = inputRef.current;
@@ -1033,7 +1033,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		inputEl.setAttribute('aria-valuenow', value + '');
 	}
 
-	function updateInputValue(newValue: number) {
+	function updateInputValue(newValue: number | null) {
 		newValue = evaluateEmpty(newValue);
 
 		const inputEl = inputRef.current;
@@ -1046,7 +1046,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		}
 	}
 
-	function formattedValue(val: number) {
+	function formattedValue(val: number | null): string {
 		return formatValue(evaluateEmpty(val));
 	}
 
@@ -1180,7 +1180,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 
 	function createInputElement() {
 		const className = classNames('rsInputNumber', props.inputClassName);
-		const valueToRender = formattedValue(!!formControl ? formControl.value : (props.value as number));
+		const valueToRender = formattedValue(!!formControl ? formControl.value : (props.value as number | null));
 
 		return (
 			<input

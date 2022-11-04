@@ -89,7 +89,7 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 				className={classNames('checkbox', className)}
 				ref={elementRef}
 				onChange={changeHandler}
-				checked={!!formControl ? formControl.value : checked}
+				checked={!!formControl?.value ? formControl.value : checked}
 				disabled={disabled}
 				{...checkboxProps}
 			/>

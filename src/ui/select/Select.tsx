@@ -196,7 +196,8 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 		const updated = clone(control);
 
 		if (action.action === 'clear') {
-			if (typeof updated.value === 'number') updated.value = Date.now();
+			if (typeof updated.value === 'number') updated.value = null;
+			if (typeof updated.value === 'boolean') updated.value = null;
 			else if (typeof updated.value === 'string') updated.value = '';
 			else if (Array.isArray(updated.value)) updated.value = [];
 			updated.clearErrors();
