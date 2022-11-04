@@ -203,9 +203,13 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		return filterString;
 	}
 
+	function calculatePage(): number {
+		return Math.ceil(tableState.first / tableState.rows);
+	}
+
 	function handleEvent(event?: DataTablePFSEvent): void {
 		getData({
-			page: event?.page ? event.page + 1 : 1,
+			page: event?.page ? event.page + 1 : calculatePage(),
 			perPage: event?.rows || tableState.rows,
 			sortBy: event?.sortField || tableState.sortField || undefined,
 			sortOrder: getSortOrder(event?.sortOrder || tableState.sortOrder),
