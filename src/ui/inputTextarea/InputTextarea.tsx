@@ -144,7 +144,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 			<textarea
 				ref={textareaRef}
 				onChange={changeHandler}
-				value={!!formControl ? formControl.value : value}
+				value={!!formControl?.value ? formControl.value : value}
 				autoComplete={getAutocompleteType()}
 				onFocus={props.onFocus}
 				onBlur={handleBlur}

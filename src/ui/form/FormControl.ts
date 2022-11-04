@@ -7,33 +7,34 @@ export type IRsFormControl = string | number | boolean | string[] | number[];
 export class RsFormControl<T extends IRsFormControl> {
 	/** @internal */
 	private _errors: number[] = [];
-	private _initialValue: T;
+	private _initialValue: T | null;
 	/**
 	 * Creates a new `RsFormControl` instance.
 	 * @param _key Form control key which should match your form model property.
 	 * @param _value Initializes the control with an initial value.
 	 * @param _validators Array of validators applied to this form control
 	 */
-	constructor(private _key: string, private _value: T, private _validators?: RsValidator[]) {
+	constructor(private _key: string, private _value: T | null, private _validators?: RsValidator[]) {
 		this._initialValue = _value;
+		this._value = _value;
 	}
 
-	get key() {
+	get key(): string {
 		return this._key;
 	}
 
-	get value() {
+	get value(): T | null {
 		return this._value;
 	}
-	set value(value: T) {
+	set value(value: T | null) {
 		this._value = value;
 	}
 
-	get errors() {
+	get errors(): number[] {
 		return this._errors;
 	}
 
-	resetToInitial() {
+	resetToInitial(): void {
 		this._value = this._initialValue;
 		this._errors = [];
 	}
@@ -50,7 +51,7 @@ export class RsFormControl<T extends IRsFormControl> {
 	 * @param index
 	 * @returns {string}
 	 */
-	getErrorMessage(index: number) {
+	getErrorMessage(index: number): string {
 		if (!this._validators) return '';
 		return this._validators[index].errorMessage;
 	}
@@ -58,14 +59,14 @@ export class RsFormControl<T extends IRsFormControl> {
 	/**
 	 * Updates the initial value with the current value
 	 */
-	updateInitialValue() {
+	updateInitialValue(): void {
 		this._initialValue = this._value;
 	}
 
 	/**
 	 * Used to clear the error fields. Should only be called if you know what you are doing
 	 */
-	clearErrors() {
+	clearErrors(): void {
 		this._errors = [];
 	}
 
@@ -121,7 +122,7 @@ export class RsFormControl<T extends IRsFormControl> {
 						// be considered dangerous. See this site for recommended values to allow.
 						// https://www.jochentopf.com/email/chars.html
 						// domain names can have: letters, numbers, and hyphens
-						const isEmail = StringUtils.validateEmail(this._value.toString());
+						const isEmail = StringUtils.validateEmail(this._value?.toString() || '');
 						if (!isEmail) {
 							this._errors.push(index);
 							continue;

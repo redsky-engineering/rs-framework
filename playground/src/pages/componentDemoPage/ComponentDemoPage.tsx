@@ -38,6 +38,7 @@ enum FormKeys {
 	NUMBER = 'number',
 	SELECT = 'select',
 	SELECT2 = 'select2',
+	NUMBER_SELECT = 'numberSelect',
 	MULTI_SELECT_GROUP = 'multiSelectGroup'
 }
 
@@ -64,6 +65,11 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			new RsFormControl<number>(FormKeys.SELECT, 2, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Invalid Selection', (control) => {
 					return control.value == 2;
+				})
+			]),
+			new RsFormControl<number>(FormKeys.NUMBER_SELECT, null, [
+				new RsValidator(RsValidatorEnum.CUSTOM, 'Nothing selected', (control) => {
+					return control.value != null;
 				})
 			]),
 			new RsFormControl<number[]>(
@@ -372,6 +378,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				isClearable
 			/>
+
 			<Button
 				look={'containedPrimary'}
 				onClick={() => {
@@ -380,6 +387,38 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				mb={16}
 			>
 				Reset Form To Option 2
+			</Button>
+			<Label variant={'h6'} weight={'regular'}>
+				Select with nullable value
+			</Label>
+			<Select
+				mt={8}
+				mb={16}
+				control={formGroup.get<number>(FormKeys.NUMBER_SELECT)}
+				updateControl={(control) => {
+					console.log(control);
+					setFormGroup(formGroup.clone().update(control));
+				}}
+				options={[
+					{
+						label: 'Number 1',
+						value: 1
+					},
+					{
+						label: 'Number 2',
+						value: 2
+					}
+				]}
+				isClearable
+			/>
+			<Button
+				look={'containedPrimary'}
+				onClick={() => {
+					formGroup.get<number>(FormKeys.NUMBER_SELECT).setValue(null);
+				}}
+				mb={16}
+			>
+				Reset Form To nullable value
 			</Button>
 			<Label variant={'h6'} weight={'regular'}>
 				Creatable Select
