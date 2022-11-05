@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.13.2](https://gitlab.com/redsky_public/framework/compare/v0.13.1...v0.13.2) (2022-11-05)
+
+### Bug Fixes
+
+-   **datatable:** fixes issue with incorrect page on table data update ([5af72c1](https://gitlab.com/redsky_public/framework/commit/5af72c109ba7d83f034b9a2799aaac56391fe36f))
+-   Made form control/input values nullable ([158638d](https://gitlab.com/redsky_public/framework/commit/158638d0fe501eec1742ee7c167209e79fbd04aa))
+
 ### [0.13.1](https://gitlab.com/redsky_public/framework/compare/v0.11.7...v0.13.1) (2022-11-02)
 
 ### Features
