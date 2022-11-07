@@ -46,7 +46,12 @@ export class StringUtils {
 				return '';
 			}
 		}
-		if (sanitizedTime.toString().length === 3) {
+		if (sanitizedTime.toString().length < 3) {
+			let minute = sanitizedTime.toString();
+			if (minute.length === 1) minute = '0' + minute;
+			let hour = '12';
+			return `${hour}:${minute} AM`;
+		} else if (sanitizedTime.toString().length === 3) {
 			let minutes = sanitizedTime.toString().slice(-2);
 			let hour = sanitizedTime.toString().slice(0, 1);
 			return `${hour}:${minutes} AM`;
