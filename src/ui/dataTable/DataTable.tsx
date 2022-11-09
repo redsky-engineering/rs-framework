@@ -14,6 +14,7 @@ import {
 } from 'primereact/datatable';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import { FilterMatchMode } from 'primereact';
 
 export enum RsSortOrder {
 	'ASC' = 1,
@@ -30,6 +31,19 @@ export interface PageQuery {
 	sortOrder?: StandardOrderTypes;
 	filter?: string;
 }
+
+export type FilterMatchModes = DataTableFilterMatchModeType | 'isNull' | 'isNotNull';
+
+export interface DataTableFilters {
+	[key: string]: { operator: string; constraints: { value: any; matchMode: FilterMatchModes }[] };
+}
+
+enum NullFilterMatchModes {
+	IS_NULL = 'isNull',
+	IS_NOT_NULL = 'isNotNull'
+}
+
+export const MatchModeType = { ...FilterMatchMode, ...NullFilterMatchModes };
 
 interface TableState<T> {
 	tableData: T[];
@@ -125,7 +139,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		return 'NONE';
 	}
 
-	function getMatchType(matchType: DataTableFilterMatchModeType): {
+	function getMatchType(matchType: FilterMatchModes): {
 		negate: boolean;
 		matchType:
 			| 'startsWith'
@@ -135,7 +149,8 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 			| 'greaterThanEqual'
 			| 'greaterThan'
 			| 'lessThanEqual'
-			| 'lessThan';
+			| 'lessThan'
+			| 'isNull';
 	} {
 		switch (matchType) {
 			case 'startsWith':
@@ -159,8 +174,12 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				return { negate: false, matchType: 'greaterThan' };
 			case 'gte':
 				return { negate: false, matchType: 'greaterThanEqual' };
-			case 'between':
+			case 'isNull':
+				return { negate: false, matchType: 'isNull' };
+			case 'isNotNull':
+				return { negate: true, matchType: 'isNull' };
 			case 'custom':
+			case 'between':
 			case 'dateIs':
 			case 'equals':
 			default:
@@ -193,11 +212,13 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				continue;
 			}
 			currentFilter.constraints.forEach((constraint: DataTableFilterMetaData) => {
-				if (!constraint.value) return;
 				const matchType = getMatchType(constraint.matchMode);
+				if (matchType.matchType !== 'isNull' && !constraint.value) return;
 				filterString += `${filterString.length ? currentFilter?.operator || '' : ''}${
 					matchType.negate ? '!' : ''
-				}(column:${column},value:${constraint.value},type:${matchType.matchType})`;
+				}(column:${column},value:${matchType.matchType === 'isNull' ? null : constraint.value},type:${
+					matchType.matchType
+				})`;
 			});
 		}
 		return filterString;
