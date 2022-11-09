@@ -441,6 +441,19 @@ export class StringUtils {
 		let gigaBytes = megaBytes / 1024;
 		return `${gigaBytes.toFixed(digits)} GB`;
 	}
+
+	/**
+	 * Converts the incoming snake or kebab case string to Pascal Case
+	 * @param inputString
+	 * @returns {string} - Pascal Case string
+	 */
+	static toPascalCasing(inputString: string): string {
+		const regex = /((\_|-)\w)/;
+		const convert = function (matches: string) {
+			return matches[1].toUpperCase();
+		};
+		return StringUtils.capitalizeFirst(inputString.replace(regex, convert));
+	}
 }
 
 /** Number related utilities */
@@ -497,6 +510,27 @@ export class NumberUtils {
 			return num;
 		}
 		return sign * (num - mod + significance);
+	}
+
+	/**
+	 * Returns a random number within the range of 0 and your input value
+	 * @param {number} value - Max range input (not inclusive)
+	 * @returns {number} a random number between 0 and your max input value (not inclusive)
+	 */
+	static randomNumberInRange(maxLimit: number): number {
+		return Math.floor(Math.random() * Math.floor(maxLimit));
+	}
+
+	/**
+	 * randomInclusiveInRange - Gets a random inclusive number in a range
+	 * @param {number} min - minimum number in the range (default 0)
+	 * @param {number} max - maximum number in the range (default 9999999999)
+	 * @returns {number} a random number up to a max value
+	 */
+	static randomInclusiveInRange(min: number = 0, max: number = 9999999999) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1) + min);
 	}
 }
 
@@ -580,6 +614,37 @@ export class ObjectUtils {
 			return JSON.parse(json);
 		} catch (e) {
 			return this.clone(json);
+		}
+	}
+
+	/**
+	 * Returns a data structure that is parsed and retains the original object
+	 * @name deepSafeParse
+	 * @param json - any data structure
+	 * @returns - Returns a fully parsed data structure
+	 */
+	static deepSafeParse(json: any): object | any {
+		const isNumString = (str: string) => !isNaN(Number(str));
+		if (typeof json === 'string') {
+			if (isNumString(json)) {
+				return json;
+			}
+			try {
+				return ObjectUtils.deepSafeParse(JSON.parse(json));
+			} catch (err) {
+				return json;
+			}
+		} else if (Array.isArray(json)) {
+			return json.map((val) => ObjectUtils.deepSafeParse(val));
+		} else if (typeof json === 'object' && json !== null) {
+			return Object.keys(json).reduce((obj, key) => {
+				const val = json[key];
+				// @ts-ignore
+				obj[key] = isNumString(val) ? val : ObjectUtils.deepSafeParse(val);
+				return obj;
+			}, {});
+		} else {
+			return json;
 		}
 	}
 
@@ -1030,15 +1095,6 @@ export class WebUtils {
 	}
 
 	/**
-	 * Returns a random number within the range of 0 and your input value
-	 * @param {number} value - Max range input
-	 * @returns {number} a random number between 0 and your max input value
-	 */
-	static randomNumberInRange(maxLimit: number): number {
-		return Math.floor(Math.random() * Math.floor(maxLimit));
-	}
-
-	/**
 	 * Get axios error message properly based on error type
 	 * @param error - the axios error from the catch()
 	 */
@@ -1208,12 +1264,72 @@ export class DateUtils {
 	/**
 	 * Format a date for email templates
 	 * @param {Date | string} date
-	 * @returns {string} - Returns a string
+	 * @returns {string} - Returns a string such as 10-25-2019 (MM-DD-YYYY)
 	 */
 	static formatDateForUser(date: string | Date) {
 		if (date === 'N/A') return date;
 		let newDate = new Date(`${date}`);
 		return `${(newDate.getMonth() + 1).toString()}-${newDate.getDate()}-${newDate.getFullYear()}`;
+	}
+
+	/**
+	 * Returns a friendly string of the difference between two dates
+	 * @param endDate
+	 * @param startDate
+	 * @returns Friendly string Example: 1 day, 2 hours, 3 minutes, 4 seconds
+	 */
+	static getDateDifferenceFriendly(endDate: Date, startDate: Date, showNegative = true): string {
+		let isNegative = endDate < startDate;
+		let diff = Math.abs(endDate.getTime() - startDate.getTime());
+		let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+		diff -= days * (1000 * 60 * 60 * 24);
+		let hours = Math.floor(diff / (1000 * 60 * 60));
+		diff -= hours * (1000 * 60 * 60);
+		let minutes = Math.floor(diff / (1000 * 60));
+		diff -= minutes * (1000 * 60);
+		let seconds = Math.floor(diff / 1000);
+
+		if (days > 0) return `${showNegative && isNegative ? '-' : ''}${days} day${days > 1 ? 's' : ''}`;
+		if (hours > 0) return `${showNegative && isNegative ? '-' : ''}${hours} hour${hours > 1 ? 's' : ''}`;
+		if (minutes > 0) return `${showNegative && isNegative ? '-' : ''}${minutes} minute${minutes > 1 ? 's' : ''}`;
+		return `${showNegative && isNegative ? '-' : ''}${seconds} second${seconds > 1 ? 's' : ''}`;
+	}
+
+	/**
+	 * Returns the month name for a date object
+	 * @param date
+	 * @param format - Describes how the text format should be returned. Defaults to long
+	 * @returns Month name
+	 */
+	static getMonthName(
+		date: Date,
+		format: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined = 'long'
+	): string {
+		return date.toLocaleString('default', { month: format });
+	}
+
+	/**
+	 * Returns the date in a friendly format
+	 * @param date
+	 * @returns Date Time in format of Today, Yesterday, or Month Day at Time
+	 */
+	static displayFriendlyDateTime(date: string | Date): string {
+		let displayDate: Date;
+		if (typeof date === 'string') displayDate = new Date(date);
+		else displayDate = date;
+
+		if (DateUtils.isSameDayAsCurrent(displayDate)) return `Today at ${DateUtils.displayTime(displayDate)}`;
+		else if (DateUtils.isYesterday(displayDate)) return `Yesterday at ${DateUtils.displayTime(displayDate)}`;
+		else return `${DateUtils.displayFriendlyDate(displayDate)}, at ${DateUtils.displayTime(displayDate)}`;
+	}
+
+	/**
+	 * Returns the date in a friendly format with short month name
+	 * @param date
+	 * @returns Date in format of Short Month Day Year
+	 */
+	static displayFriendlyDate(date: Date): string {
+		return `${DateUtils.getMonthName(date).substr(0, 3)} ${date.getDate()} ${date.getFullYear()}`;
 	}
 
 	/**
@@ -1275,6 +1391,17 @@ export class DateUtils {
 		date.setDate(date.getDate() + days);
 		return date;
 	}
+
+	/**
+	 * Adds a number of seconds to a date
+	 * @param date - The date to add seconds to
+	 * @param seconds - Number of seconds to add
+	 * @returns {Date} - Returns a date with augmented time
+	 */
+	static addSeconds(date: Date, seconds: number): Date {
+		return new Date(date.getTime() + seconds * 1000);
+	}
+
 	/**
 	 * Get a range of dates inclusive between a start and end date
 	 * @param {Date | string} startDate
