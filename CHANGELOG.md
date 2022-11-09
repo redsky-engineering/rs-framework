@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.14.0](https://gitlab.com/redsky_public/framework/compare/v0.13.2...v0.14.0) (2022-11-09)
+
+### Features
+
+-   **utils:** Added a number of new util methods ([2de57a5](https://gitlab.com/redsky_public/framework/commit/2de57a5a64be2f8354d57f2b8345bdcedf5e0d53))
+-   **utils:** Fixed the convertTwentyFourHourTime issue for times that are 00:59 and less. ([2e16106](https://gitlab.com/redsky_public/framework/commit/2e1610613173e2db769b0b25235c3b80a9fb6e2a))
+
+### Bug Fixes
+
+-   **datatable:** adds isNull match types for filtering ([5406dc6](https://gitlab.com/redsky_public/framework/commit/5406dc623685b0fd8dcca6592d68269bf6cc1462))
+
 ### [0.13.2](https://gitlab.com/redsky_public/framework/compare/v0.13.1...v0.13.2) (2022-11-05)
 
 ### Bug Fixes
