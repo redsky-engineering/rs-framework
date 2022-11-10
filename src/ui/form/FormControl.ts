@@ -1,13 +1,10 @@
 import { RsValidator, RsValidatorEnum } from './Validator';
 import { StringUtils } from '../../utils';
 
-export type IRsFormControl = string | number | boolean | string[] | number[];
+export type IRsFormControl = string | number | boolean | string[] | number[] | null;
 
 /** Tracks the value and validation status of an individual form control. */
-export class RsFormControl<
-	T extends NULLABLE extends true ? IRsFormControl | null : IRsFormControl,
-	NULLABLE extends boolean = false
-> {
+export class RsFormControl<T extends IRsFormControl> {
 	/** @internal */
 	private _errors: number[] = [];
 	private _initialValue: T;
@@ -139,7 +136,7 @@ export class RsFormControl<
 						break;
 					case RsValidatorEnum.CUSTOM:
 						const result = await (
-							validator.value as (control: RsFormControl<T, NULLABLE>) => boolean | Promise<boolean>
+							validator.value as (control: RsFormControl<T>) => boolean | Promise<boolean>
 						)(this);
 						if (!result) {
 							this._errors.push(index);

@@ -31,8 +31,8 @@ export interface SelectProps<
 	Group extends GroupBase<Option> = GroupBase<Option>
 > extends Props<Option, IsMulti, Group>,
 		ICommon.MarginProps {
-	control?: RsFormControl<IRsFormControl | null, true>;
-	updateControl?: (control: RsFormControl<IRsFormControl | null, true>) => void;
+	control?: RsFormControl<IRsFormControl>;
+	updateControl?: (control: RsFormControl<IRsFormControl>) => void;
 	isCreatable?: boolean;
 	createOptionPosition?: 'first' | 'last';
 	onCreateOption?: (inputValue: string) => void;

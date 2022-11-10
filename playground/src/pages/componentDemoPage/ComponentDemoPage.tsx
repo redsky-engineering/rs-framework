@@ -43,8 +43,8 @@ enum FormKeys {
 }
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
-	const [formGroup, setFormGroup] = useState<RsFormGroup<IRsFormControl | null, true>>(
-		new RsFormGroup<IRsFormControl | null, true>([
+	const [formGroup, setFormGroup] = useState<RsFormGroup>(
+		new RsFormGroup([
 			new RsFormControl<string>(FormKeys.TEXT_AREA_TEST, '', [
 				new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')
 			]),
@@ -67,7 +67,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					return control.value == 2;
 				})
 			]),
-			new RsFormControl<number | null, true>(FormKeys.NUMBER_SELECT, null, [
+			new RsFormControl<number | null>(FormKeys.NUMBER_SELECT, 0, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Nothing selected', (control) => {
 					return control.value != null;
 				})
