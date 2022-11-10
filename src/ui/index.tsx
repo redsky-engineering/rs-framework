@@ -61,4 +61,4 @@ export { AnimateOnScroll, useInitAnimateOnScroll } from './animateOnScroll/Anima
 export type { AnimateOnScrollProps } from './animateOnScroll/AnimateOnScroll';
 
 export { RsDataTable } from './dataTable/DataTable';
-export type { RsDataTableProps } from './dataTable/DataTable';
+export type { RsDataTableProps, MatchModeType, DataTableFilters } from './dataTable/DataTable';

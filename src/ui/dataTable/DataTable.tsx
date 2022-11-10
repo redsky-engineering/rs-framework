@@ -230,7 +230,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 
 	function handleEvent(event?: DataTablePFSEvent): void {
 		getData({
-			page: event?.page ? event.page + 1 : calculatePage() || 1,
+			page: event?.page !== undefined ? event.page + 1 : calculatePage() || 1,
 			perPage: event?.rows || tableState.rows,
 			sortBy: event?.sortField || tableState.sortField || undefined,
 			sortOrder: getSortOrder(event?.sortOrder || tableState.sortOrder),
