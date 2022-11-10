@@ -93,8 +93,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 		value: 1
 	});
 
-	const [nullableSelectValue, setNullableSelectValue] = useState<{ label: string; value: number } | null>(null);
-
 	let options = [
 		{ label: 'item1', value: 1 },
 		{ label: 'item2', value: 2 },
@@ -410,13 +408,15 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 						value: 2
 					}
 				]}
-				value={nullableSelectValue}
 				isClearable
 			/>
 			<Button
 				look={'containedPrimary'}
 				onClick={() => {
-					setNullableSelectValue(null);
+					const updatedForm = formGroup.cloneDeep();
+					updatedForm.get<number | null>(FormKeys.NUMBER_SELECT).value = null;
+					updatedForm.get<number | null>(FormKeys.NUMBER_SELECT).validate();
+					setFormGroup(updatedForm);
 				}}
 				mb={16}
 			>
