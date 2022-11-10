@@ -4,7 +4,9 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import { PageQuery, RsDataTable, RsSortOrder } from '../../../../src/ui/dataTable/DataTable';
 import { Box, InputText, Label, RsFormControl, RsFormGroup, Select, Button } from '../../../../src/ui';
-import { Column, DataTable, DataTableFilterMeta, FilterMatchMode, FilterOperator } from 'primereact';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 const DataTableDemoPage: React.FC = () => {
 	const [tableData, setTableData] = useState<any>({ data: [], total: 0 });
@@ -129,7 +131,7 @@ const DataTableDemoPage: React.FC = () => {
 					field={'role'}
 					header={'Role'}
 					filter
-					onFilterApplyClick={(e) =>
+					onFilterApplyClick={(e: any) =>
 						setFilters({
 							...filters,
 							role: {
