@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.14.1](https://gitlab.com/redsky_public/framework/compare/v0.14.0...v0.14.1) (2022-11-10)
+
+### Bug Fixes
+
+-   **InputText:** Fixed issue when using a date for the InputType and a control. Dates do not support setSelectionRange ([5b7b752](https://gitlab.com/redsky_public/framework/commit/5b7b75289e2bf29ded4dd9d57eda83487d327a21))
+
 ## [0.14.0](https://gitlab.com/redsky_public/framework/compare/v0.13.2...v0.14.0) (2022-11-09)
 
 ### Features
