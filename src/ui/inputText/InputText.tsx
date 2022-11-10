@@ -126,7 +126,8 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(updated);
 		if (updateControl) updateControl(updated);
 
-		target.setSelectionRange(startPosition, endPosition);
+		// Date does not support selectionStart and selectionEnd
+		if (props.type !== 'date') target.setSelectionRange(startPosition, endPosition);
 	}
 
 	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {

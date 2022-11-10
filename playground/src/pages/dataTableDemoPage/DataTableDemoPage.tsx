@@ -96,7 +96,7 @@ const DataTableDemoPage: React.FC = () => {
 							control={formGroup.get('searchTerm')}
 							updateControl={(control) => {
 								setFormGroup(formGroup.clone().update(control));
-								setSearchTerm(control.value.toString());
+								setSearchTerm(control.value!.toString());
 							}}
 						/>
 						<Box display={'flex'} gap={8}>
