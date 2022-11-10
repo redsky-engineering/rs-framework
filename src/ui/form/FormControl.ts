@@ -4,17 +4,20 @@ import { StringUtils } from '../../utils';
 export type IRsFormControl = string | number | boolean | string[] | number[];
 
 /** Tracks the value and validation status of an individual form control. */
-export class RsFormControl<T extends IRsFormControl> {
+export class RsFormControl<
+	T extends NULLABLE extends true ? IRsFormControl | null : IRsFormControl,
+	NULLABLE extends boolean = false
+> {
 	/** @internal */
 	private _errors: number[] = [];
-	private _initialValue: T | null;
+	private _initialValue: T;
 	/**
 	 * Creates a new `RsFormControl` instance.
 	 * @param _key Form control key which should match your form model property.
 	 * @param _value Initializes the control with an initial value.
 	 * @param _validators Array of validators applied to this form control
 	 */
-	constructor(private _key: string, private _value: T | null, private _validators?: RsValidator[]) {
+	constructor(private _key: string, private _value: T, private _validators?: RsValidator[]) {
 		this._initialValue = _value;
 		this._value = _value;
 	}
@@ -23,10 +26,10 @@ export class RsFormControl<T extends IRsFormControl> {
 		return this._key;
 	}
 
-	get value(): T | null {
+	get value(): T {
 		return this._value;
 	}
-	set value(value: T | null) {
+	set value(value: T) {
 		this._value = value;
 	}
 
@@ -136,7 +139,7 @@ export class RsFormControl<T extends IRsFormControl> {
 						break;
 					case RsValidatorEnum.CUSTOM:
 						const result = await (
-							validator.value as (control: RsFormControl<T>) => boolean | Promise<boolean>
+							validator.value as (control: RsFormControl<T, NULLABLE>) => boolean | Promise<boolean>
 						)(this);
 						if (!result) {
 							this._errors.push(index);

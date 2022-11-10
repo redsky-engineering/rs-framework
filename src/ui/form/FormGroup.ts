@@ -3,20 +3,23 @@ import clone from 'lodash.clone';
 import { IRsFormControl, RsFormControl } from './FormControl';
 
 /** Tracks the value and validity state of a group of RsFormControl instances. */
-export class RsFormGroup {
+export class RsFormGroup<
+	T extends NULLABLE extends true ? IRsFormControl | null : IRsFormControl = IRsFormControl,
+	NULLABLE extends boolean = false
+> {
 	/**
 	 * Creates a new `RsFormGroup` instance.
 	 * @param _controls Array of 'RsFormControl' objects.
 	 */
-	constructor(private _controls: RsFormControl<IRsFormControl>[]) {}
+	constructor(private _controls: RsFormControl<T, NULLABLE>[]) {}
 
 	/**
 	 * Get one form control object by searching the key.
 	 * @param key Key of form control
 	 * @returns {RsFormControl}
 	 */
-	get<T extends IRsFormControl>(key: string): RsFormControl<T> {
-		return this._controls.find((c) => c.key === key) as RsFormControl<T>;
+	get<U extends T>(key: string): RsFormControl<U, NULLABLE> {
+		return this._controls.find((c) => c.key === key) as RsFormControl<U, NULLABLE>;
 	}
 
 	/**
@@ -35,8 +38,8 @@ export class RsFormGroup {
 	 * @param key Key of form control
 	 * @returns {RsFormControl}
 	 */
-	getClone<T extends IRsFormControl>(key: string): RsFormControl<T> {
-		return clone(this._controls.find((c) => c.key === key) as RsFormControl<T>);
+	getClone<U extends T>(key: string): RsFormControl<U, NULLABLE> {
+		return clone(this._controls.find((c) => c.key === key) as RsFormControl<U, NULLABLE>);
 	}
 
 	/**
@@ -44,15 +47,15 @@ export class RsFormGroup {
 	 * @param key Key of form control
 	 * @returns {RsFormControl}
 	 */
-	getCloneDeep<T extends IRsFormControl>(key: string): RsFormControl<T> {
-		return cloneDeep(this._controls.find((c) => c.key === key) as RsFormControl<T>);
+	getCloneDeep<U extends T>(key: string): RsFormControl<U, NULLABLE> {
+		return cloneDeep(this._controls.find((c) => c.key === key) as RsFormControl<U, NULLABLE>);
 	}
 
 	/**
 	 * Update one form control object in current array.
 	 * @param updated
 	 */
-	update(updated: RsFormControl<IRsFormControl>): RsFormGroup {
+	update(updated: RsFormControl<T, NULLABLE>): RsFormGroup<T, NULLABLE> {
 		const index = this._controls.findIndex((c) => c.key === updated.key);
 		this._controls.splice(index, 1, updated);
 		return this;
@@ -105,7 +108,7 @@ export class RsFormGroup {
 	/**
 	 * Resets all controls of the group to their initial values
 	 */
-	resetToInitialValue(): RsFormGroup {
+	resetToInitialValue(): RsFormGroup<T, NULLABLE> {
 		for (let control of this._controls) {
 			control.resetToInitial();
 		}
@@ -139,7 +142,7 @@ export class RsFormGroup {
 	 * Takes all the current form values and updates the initial value to the current values, make it so no changes are
 	 * present. Thus, isModified() should return false.
 	 */
-	updateInitialValues(): RsFormGroup {
+	updateInitialValues(): RsFormGroup<T, NULLABLE> {
 		for (let control of this._controls) {
 			control.updateInitialValue();
 		}

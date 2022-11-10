@@ -28,7 +28,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
-import { Calendar } from 'primereact';
+import { IRsFormControl } from '../../../../src/ui/form/FormControl.js';
 
 enum FormKeys {
 	TEXT_AREA_TEST = 'textAreaTest',
@@ -43,8 +43,8 @@ enum FormKeys {
 }
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
-	const [formGroup, setFormGroup] = useState<RsFormGroup>(
-		new RsFormGroup([
+	const [formGroup, setFormGroup] = useState<RsFormGroup<IRsFormControl | null, true>>(
+		new RsFormGroup<IRsFormControl | null, true>([
 			new RsFormControl<string>(FormKeys.TEXT_AREA_TEST, '', [
 				new RsValidator(RsValidatorEnum.REQ, 'Required Textarea')
 			]),
@@ -67,7 +67,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					return control.value == 2;
 				})
 			]),
-			new RsFormControl<number>(FormKeys.NUMBER_SELECT, null, [
+			new RsFormControl<number | null, true>(FormKeys.NUMBER_SELECT, null, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Nothing selected', (control) => {
 					return control.value != null;
 				})
@@ -92,6 +92,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 		label: 'Option 1',
 		value: 1
 	});
+
+	const [nullableSelectValue, setNullableSelectValue] = useState<{ label: string; value: number } | null>(null);
 
 	let options = [
 		{ label: 'item1', value: 1 },
@@ -394,9 +396,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Select
 				mt={8}
 				mb={16}
-				control={formGroup.get<number>(FormKeys.NUMBER_SELECT)}
+				control={formGroup.get<number | null>(FormKeys.NUMBER_SELECT)}
 				updateControl={(control) => {
-					console.log(control);
 					setFormGroup(formGroup.clone().update(control));
 				}}
 				options={[
@@ -409,12 +410,13 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 						value: 2
 					}
 				]}
+				value={nullableSelectValue}
 				isClearable
 			/>
 			<Button
 				look={'containedPrimary'}
 				onClick={() => {
-					formGroup.get<number>(FormKeys.NUMBER_SELECT).setValue(null);
+					setNullableSelectValue(null);
 				}}
 				mb={16}
 			>
