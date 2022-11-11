@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.15.0](https://gitlab.com/redsky_public/framework/compare/v0.14.1...v0.15.0) (2022-11-11)
+
+### Bug Fixes
+
+-   **datatable:** adds new datatable interfaces to export and fixes incorrect page bug ([639fd32](https://gitlab.com/redsky_public/framework/commit/639fd32995ad44db3cc3f7e9b2a0a204a0bc36da))
+-   **datatable:** adds page 1 as default for page query ([e27e075](https://gitlab.com/redsky_public/framework/commit/e27e075ec32fc99938a128b585fe4b90869acfd3))
+-   Fixing Alex's code ([e023fd0](https://gitlab.com/redsky_public/framework/commit/e023fd0cdad4cec50b1b915b76ccf5a734d88370))
+-   **form:** Fixed Spencer's code for the form control and reverted the select component. ([ef9d674](https://gitlab.com/redsky_public/framework/commit/ef9d67484661236619bf10d7dedcf59c943d394d))
+-   **form:** Undoing Spencer's fix of my code because mine was correct from the start. ([b2ba737](https://gitlab.com/redsky_public/framework/commit/b2ba737611a5fdc51735ad6a327b69579f604c7d))
+-   **form:** Undoing Spencer's fix of my code because mine was correct from the start. ([c1e2582](https://gitlab.com/redsky_public/framework/commit/c1e25823e701a1e03c212877c5db44f6d2b0a4dc))
+-   got clearing of the nullable select working with the validation working ([0f8a25b](https://gitlab.com/redsky_public/framework/commit/0f8a25be777dc4757de65a020a5ecdd2e73e039e))
+-   I want the last word ([bacd94e](https://gitlab.com/redsky_public/framework/commit/bacd94e17cb6c77055572852b2987d4f05e27b34))
+-   Made form control less opinionated ([4c89f44](https://gitlab.com/redsky_public/framework/commit/4c89f446495cec29a2b7c8a05487651519b9f621))
+-   **package.json:** put back package json to original ([73a452f](https://gitlab.com/redsky_public/framework/commit/73a452f0e609c0b78d29ff65c98bc4efeabcab74))
+-   Reverted unneed changes ([1906275](https://gitlab.com/redsky_public/framework/commit/19062750d3129e0a63385033596c306dc07b4e4c))
+-   Your mother was a hamster, and your father smelt of elderberries ([760827e](https://gitlab.com/redsky_public/framework/commit/760827e14a7ebb9509773a3a67798fb1faa69fdf))
+
 ### [0.14.1](https://gitlab.com/redsky_public/framework/compare/v0.14.0...v0.14.1) (2022-11-10)
 
 ### Bug Fixes
