@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.1](https://gitlab.com/redsky_public/framework/compare/v0.15.0...v0.15.1) (2022-11-11)
+
+### Bug Fixes
+
+-   **rollup:** Added primereact/api as an external library ([f18611f](https://gitlab.com/redsky_public/framework/commit/f18611fd596ddace36d40d15079a76a44ff68a92))
+
 ## [0.15.0](https://gitlab.com/redsky_public/framework/compare/v0.14.1...v0.15.0) (2022-11-11)
 
 ### Bug Fixes
