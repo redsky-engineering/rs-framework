@@ -161,7 +161,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 			if (!optionFound) setInternalValue(null);
 			else setInternalValue(optionFound);
 		}
-	}, [control]);
+	}, [control, props.options]);
 
 	function isMultiValue(value: MultiValue<any> | SingleValue<any>): value is MultiValue<any> {
 		return !!value && Array.isArray(value);
