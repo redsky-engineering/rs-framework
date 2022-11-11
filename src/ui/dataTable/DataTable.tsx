@@ -14,7 +14,7 @@ import {
 } from 'primereact/datatable';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import { FilterMatchMode } from 'primereact';
+import { FilterMatchMode } from 'primereact/api';
 
 export enum RsSortOrder {
 	'ASC' = 1,

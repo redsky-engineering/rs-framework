@@ -161,7 +161,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 				inputMode={inputMode}
 				ref={inputRef}
 				onChange={changeHandler}
-				value={!!formControl?.value ? formControl.value : value}
+				value={!!formControl ? formControl.value : value}
 				autoComplete={getAutocompleteType()}
 				onFocus={props.onFocus}
 				onBlur={handleBlur}

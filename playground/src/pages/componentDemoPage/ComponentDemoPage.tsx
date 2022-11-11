@@ -28,7 +28,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
-import { Calendar } from 'primereact';
+import { IRsFormControl } from '../../../../src/ui/form/FormControl.js';
 
 enum FormKeys {
 	TEXT_AREA_TEST = 'textAreaTest',
@@ -67,7 +67,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					return control.value == 2;
 				})
 			]),
-			new RsFormControl<number>(FormKeys.NUMBER_SELECT, null, [
+			new RsFormControl<number | null>(FormKeys.NUMBER_SELECT, 0, [
 				new RsValidator(RsValidatorEnum.CUSTOM, 'Nothing selected', (control) => {
 					return control.value != null;
 				})
@@ -394,9 +394,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Select
 				mt={8}
 				mb={16}
-				control={formGroup.get<number>(FormKeys.NUMBER_SELECT)}
+				control={formGroup.get<number | null>(FormKeys.NUMBER_SELECT)}
 				updateControl={(control) => {
-					console.log(control);
 					setFormGroup(formGroup.clone().update(control));
 				}}
 				options={[
@@ -414,7 +413,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Button
 				look={'containedPrimary'}
 				onClick={() => {
-					formGroup.get<number>(FormKeys.NUMBER_SELECT).setValue(null);
+					const updatedForm = formGroup.cloneDeep();
+					updatedForm.get<number | null>(FormKeys.NUMBER_SELECT).value = null;
+					updatedForm.get<number | null>(FormKeys.NUMBER_SELECT).validate();
+					setFormGroup(updatedForm);
 				}}
 				mb={16}
 			>
