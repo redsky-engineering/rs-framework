@@ -53,6 +53,7 @@ export default {
 		'primereact/datatable',
 		'primereact/resources/primereact.min.css',
 		'primeicons/primeicons.css',
+		'primereact/api',
 		'chart.js',
 		'quill'
 	]
