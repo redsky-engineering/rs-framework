@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.3](https://gitlab.com/redsky_public/framework/compare/v0.15.2...v0.15.3) (2022-11-15)
+
+### Bug Fixes
+
+-   **InputTextarea:** Made input text area more consistent for default ([5d819a5](https://gitlab.com/redsky_public/framework/commit/5d819a5155983c0d343687b8e30188eaafe808f5))
+-   **popup:** Fixed issue with popups sometimes not animating in ([4a52141](https://gitlab.com/redsky_public/framework/commit/4a5214135ea85144614128c0231266779a09361b))
+
 ### [0.15.2](https://gitlab.com/redsky_public/framework/compare/v0.15.1...v0.15.2) (2022-11-11)
 
 ### Bug Fixes
