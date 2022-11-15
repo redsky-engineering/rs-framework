@@ -55,8 +55,15 @@ const Popup: React.FC<PopupProps> = (props) => {
 	const [isShown, setIsShown] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (fullProps.opened) {
-			setIsShown(true);
+		if (fullProps.opened && !fullProps.destroy) {
+			if (fullProps.animateDurationMs) {
+				// Sometimes react updates too fast and the animation doesn't play, delay a bit so we can show off screen
+				setTimeout(() => {
+					setIsShown(true);
+				}, 10);
+			} else {
+				setIsShown(true);
+			}
 		} else {
 			setIsShown(false);
 

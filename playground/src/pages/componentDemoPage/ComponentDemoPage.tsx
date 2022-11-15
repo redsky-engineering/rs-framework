@@ -713,14 +713,43 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				look={'containedPrimary'}
 				onClick={() => {
 					popupController.open<TestPopupProps>(TestPopup, {
-						animateDurationMs: 3000,
+						animateDurationMs: 1500,
 						onRemoved: () => {
 							console.log('I am gone!!!');
 						}
 					});
 				}}
 			>
-				Click Me for popup
+				Click Me for Slow popup from bottom
+			</Button>
+			<Button
+				mt={32}
+				look={'containedPrimary'}
+				onClick={() => {
+					popupController.open<TestPopupProps>(TestPopup, {
+						animateDurationMs: 100,
+						animateDirection: 'right',
+						onRemoved: () => {
+							console.log('I am gone!!!');
+						}
+					});
+				}}
+			>
+				Click Me for Fast popup right
+			</Button>
+			<Button
+				mt={32}
+				look={'containedPrimary'}
+				onClick={() => {
+					popupController.open<TestPopupProps>(TestPopup, {
+						animateType: 'fade',
+						onRemoved: () => {
+							console.log('I am gone!!!');
+						}
+					});
+				}}
+			>
+				Click Me for Fade In Animation
 			</Button>
 		</Page>
 	);
