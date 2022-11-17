@@ -39,7 +39,8 @@ enum FormKeys {
 	SELECT = 'select',
 	SELECT2 = 'select2',
 	NUMBER_SELECT = 'numberSelect',
-	MULTI_SELECT_GROUP = 'multiSelectGroup'
+	MULTI_SELECT_GROUP = 'multiSelectGroup',
+	SINGLE_SELECT_GROUP = 'singleSelectGroup'
 }
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
@@ -81,7 +82,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					})
 				]
 			),
-			new RsFormControl<number[]>(FormKeys.MULTI_SELECT_GROUP, [1, 2, 6], [])
+			new RsFormControl<number[]>(FormKeys.MULTI_SELECT_GROUP, [1, 2, 6], []),
+			new RsFormControl<number | null>(FormKeys.SINGLE_SELECT_GROUP, null, [])
 		])
 	);
 	const [multiSelectValue, setMultiSelectValue] = useState<{ label: string; value: number }[]>([
@@ -513,6 +515,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 			{console.log(formGroup.get(FormKeys.MULTI_SELECT_GROUP).value)}
+
 			<Button
 				look={'containedPrimary'}
 				mt={8}
@@ -524,7 +527,29 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			>
 				Clear Multi Grouped Option Select
 			</Button>
-
+			<Label variant={'h6'} weight={'regular'}>
+				Single Group Option Select
+			</Label>
+			<Select
+				mt={8}
+				options={groupedOptions}
+				control={formGroup.getClone<number>(FormKeys.SINGLE_SELECT_GROUP)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.cloneDeep().update(control));
+				}}
+			/>
+			{console.log(formGroup.get(FormKeys.SINGLE_SELECT_GROUP).value)}
+			<Button
+				look={'containedPrimary'}
+				mt={8}
+				onClick={() => {
+					let multiSelect = formGroup.getClone(FormKeys.SINGLE_SELECT_GROUP);
+					multiSelect.value = null;
+					setFormGroup(formGroup.clone().update(multiSelect));
+				}}
+			>
+				Clear Single Grouped Option Select
+			</Button>
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Textarea
 			</Label>

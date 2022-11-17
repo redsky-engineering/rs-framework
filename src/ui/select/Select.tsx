@@ -131,29 +131,22 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 	useEffect(() => {
 		if (!control || !props.options) return;
 
-		if (isGroupOption(props.options)) {
-			let groupOptions: Group[] = cloneDeep(props.options);
-			let optionsFound: Option[] = [];
-			groupOptions.forEach((group) => {
-				let filteredOptions = group.options.filter((options) => {
-					//@ts-ignore
-					return control.value.includes(options.value);
-				});
-				optionsFound.push(...filteredOptions);
-			});
-			setInternalValue(optionsFound);
-			return;
+		let optionsToSearch = cloneDeep(props.options);
+		if (isGroupOption(optionsToSearch)) {
+			optionsToSearch = optionsToSearch.reduce((options: Option[], group: Group) => {
+				return [...options, ...group.options];
+			}, []);
 		}
 
 		if (Array.isArray(control.value)) {
-			let optionsFound = props.options.filter((item) => {
+			let optionsFound = optionsToSearch.filter((item) => {
 				// @ts-ignore
 				return control.value.includes(item.value);
 			}) as Option[];
 			if (!optionsFound.length) setInternalValue(null);
 			else setInternalValue(optionsFound);
 		} else {
-			let optionFound = props.options.find((item) => {
+			let optionFound = optionsToSearch.find((item) => {
 				// @ts-ignore
 				return item.value === control.value;
 			}) as Option;
