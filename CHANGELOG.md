@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.4](https://gitlab.com/redsky_public/framework/compare/v0.15.3...v0.15.4) (2022-11-17)
+
+### Bug Fixes
+
+-   **select:** allow for a single select on grouped options ([c42a735](https://gitlab.com/redsky_public/framework/commit/c42a735b89b309851f8c7892f36e52fcf7418694))
+
 ### [0.15.3](https://gitlab.com/redsky_public/framework/compare/v0.15.2...v0.15.3) (2022-11-15)
 
 ### Bug Fixes
