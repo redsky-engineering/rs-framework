@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.5](https://gitlab.com/redsky_public/framework/compare/v0.15.4...v0.15.5) (2022-11-21)
+
+### Features
+
+-   **cli:** Added first draft of CLI ([4f6183f](https://gitlab.com/redsky_public/framework/commit/4f6183f0c17dc9cce7581aa60f12b9da9503ee76))
+
 ### [0.15.4](https://gitlab.com/redsky_public/framework/compare/v0.15.3...v0.15.4) (2022-11-17)
 
 ### Bug Fixes
