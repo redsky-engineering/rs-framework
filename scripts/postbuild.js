@@ -16,10 +16,22 @@ console.log(
 	path.join(__dirname, '../dist/', 'package.json (modified)')
 );
 
-function copyFileToDist(rootPath) {
-	fs.copyFileSync(path.join(__dirname, '../', rootPath), path.join(__dirname, '../dist/', rootPath));
-	console.log(path.join(__dirname, '../', rootPath), '->', path.join(__dirname, '../dist/', rootPath));
+function copyFileToDist(fileRelativePath) {
+	const dirRelative = path.dirname(fileRelativePath);
+	const destinationFolder = path.join(__dirname, '../dist', dirRelative);
+
+	if (!fs.existsSync(destinationFolder)) {
+		fs.mkdirSync(destinationFolder, { recursive: true });
+	}
+
+	fs.copyFileSync(path.join(__dirname, '../', fileRelativePath), path.join(__dirname, '../dist/', fileRelativePath));
+	console.log(
+		path.join(__dirname, '../', fileRelativePath),
+		'->',
+		path.join(__dirname, '../dist/', fileRelativePath)
+	);
 }
 
 copyFileToDist('CHANGELOG.md');
 copyFileToDist('README.md');
+copyFileToDist('./cli/cli.mjs');
