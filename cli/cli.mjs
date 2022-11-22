@@ -3,7 +3,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-
+import { getComponentScssTemplate, getComponentTsxTemplate } from './templates.mjs';
 
 console.log('\n');
 console.log(chalk.red('-'.repeat(80)));
@@ -68,31 +68,10 @@ async function createComponent() {
 	let directoryName = name.charAt(0).toLowerCase() + name.slice(1);
 	fs.mkdirSync(path.join(process.cwd(), 'src/components', directoryName));
 
-	const tsxFileContents = `import * as React from 'react';
-import './${name}.scss';
-import { Box } from '@redskytech/framework/ui';
-						
-interface ${name}Props {
-}
-						
-const ${name} : React.FC<${name}Props> = (props) => {
-	return (
-		<Box className={'rs${name}'}>
-						            			
-		</Box>
-	)
-};
-						
-export default ${name};
-`
+	const tsxFileContents = getComponentTsxTemplate(name);
 	fs.writeFileSync(path.join(process.cwd(), 'src/components', directoryName, `${name}.tsx`), tsxFileContents);
 
-	const scssFileContents = `@import "src/themes/themes";
-
-.rs${name} {
-    
-}
-`
+	const scssFileContents = getComponentScssTemplate(name);
 	fs.writeFileSync(path.join(process.cwd(), 'src/components', directoryName, `${name}.scss`), scssFileContents);
 
 	console.log(chalk.green(`Component ${name}.{tsx,scss} created`));

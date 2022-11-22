@@ -35,3 +35,4 @@ function copyFileToDist(fileRelativePath) {
 copyFileToDist('CHANGELOG.md');
 copyFileToDist('README.md');
 copyFileToDist('./cli/cli.mjs');
+copyFileToDist('./cli/templates.mjs');
