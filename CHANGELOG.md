@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.6](https://gitlab.com/redsky_public/framework/compare/v0.15.5...v0.15.6) (2022-11-28)
+
+### Features
+
+-   **cli:** Cleaned up templates for cli ([a3c79b2](https://gitlab.com/redsky_public/framework/commit/a3c79b2fdfbc099ed5d6dced8554246ca2fc209a))
+
+### Bug Fixes
+
+-   datatable was fetching wrong page number based on calculate page. ([e3df542](https://gitlab.com/redsky_public/framework/commit/e3df542ee2d04b08a85f8143aaa8400c78ab9fad))
+-   datatable was fetching wrong page number based on calculate page. ([87980ea](https://gitlab.com/redsky_public/framework/commit/87980ea808edf9a55a1423bfddc5479e6831df4d))
+
 ### [0.15.5](https://gitlab.com/redsky_public/framework/compare/v0.15.4...v0.15.5) (2022-11-21)
 
 ### Features
