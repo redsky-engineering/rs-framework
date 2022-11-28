@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.15.7](https://gitlab.com/redsky_public/framework/compare/v0.15.6...v0.15.7) (2022-11-28)
+
+### Bug Fixes
+
+-   **inputText:** Fixed the issue with setting cursor position when doing an onBlur event. Before this would cause the user to get locked up inside the input. ([eb12aa8](https://gitlab.com/redsky_public/framework/commit/eb12aa89e1643740bed21781ad4e76dd7ffdd4d0))
+
 ### [0.15.6](https://gitlab.com/redsky_public/framework/compare/v0.15.5...v0.15.6) (2022-11-28)
 
 ### Features
