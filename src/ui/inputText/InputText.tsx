@@ -110,7 +110,11 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(control);
 	}, [control]);
 
-	async function validateTarget(target: HTMLInputElement, forceValidate: boolean = false) {
+	async function validateTarget(
+		target: HTMLInputElement,
+		forceValidate: boolean = false,
+		ignoreCursorPosition: boolean = false
+	) {
 		if (!control) return;
 		const startPosition = target.selectionStart || 0;
 		const endPosition = target.selectionEnd || 0;
@@ -126,8 +130,8 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(updated);
 		if (updateControl) updateControl(updated);
 
-		// Date does not support selectionStart and selectionEnd
-		if (props.type !== 'date') target.setSelectionRange(startPosition, endPosition);
+		// Date does not support selectionStart and selectionEnd, onBlur we don't want to do this either - safari bug
+		if (props.type !== 'date' && !ignoreCursorPosition) target.setSelectionRange(startPosition, endPosition);
 	}
 
 	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -143,7 +147,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 	function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
 		setHasBeenBlurred(true);
 
-		validateTarget(event.target, true).catch(console.error);
+		validateTarget(event.target, true, true).catch(console.error);
 		if (onBlur) onBlur(event);
 	}
 
