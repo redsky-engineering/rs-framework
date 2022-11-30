@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0](https://gitlab.com/redsky_public/framework/compare/v0.15.7...v0.16.0) (2022-11-30)
+
+### Features
+
+-   **cli:** Auto-add file to git repo ([6840abc](https://gitlab.com/redsky_public/framework/commit/6840abcec3a745315f300e3661ff2d7b6aa7c961))
+-   **cli:** Updated to add in pages and popups ([70e1bb9](https://gitlab.com/redsky_public/framework/commit/70e1bb9274e1e6e84e7a44c02325e1be3d3e27ae))
+-   **input:** We now support datetime-local, month, time input types ([9f6b888](https://gitlab.com/redsky_public/framework/commit/9f6b88897869aee7cab8f4ea8fce8f6547b9f445))
+
 ### [0.15.7](https://gitlab.com/redsky_public/framework/compare/v0.15.6...v0.15.7) (2022-11-28)
 
 ### Bug Fixes
