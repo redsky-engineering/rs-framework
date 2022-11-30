@@ -43,7 +43,7 @@ const ${name} : React.FC<${name}Props> = (props) => {
 	)
 };
 
-export default ${name}};
+export default ${name};
 `;
 }
 
@@ -58,29 +58,29 @@ export function getPageScssTemplate(name) {
 
 export function getPopupTsxTemplate(name) {
 	return `import * as React from 'react';
-import './${name}Popup.scss';
+import './${name}.scss';
 import { Box, Popup, PopupProps } from '@redskytech/framework/ui';
 
-export interface ${name}PopupProps extends PopupProps {}
+export interface ${name}Props extends PopupProps {}
 
-const ${name}Popup: React.FC<${name}PopupProps> = (props) => {
+const ${name}: React.FC<${name}Props> = (props) => {
 	return (
-		<Popup {...props} preventCloseByBackgroundClick className={'rs${name}PopupContainer'}>
-			<Box className={'rs${name}Popup'}>
+		<Popup {...props} preventCloseByBackgroundClick className={'rs${name}Container'}>
+			<Box className={'rs${name}'}>
 				
 			</Box>
 		</Popup>
 	);
 };
 
-export default ${name}Popup;
+export default ${name};
 `;
 }
 
 export function getPopupScssTemplate(name) {
 	return `@import 'src/themes/themes';
 
-.rs${name}Popup {
+.rs${name} {
 	width: 100%;
 	max-width: 744px;
 	position: absolute;
