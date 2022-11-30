@@ -18,7 +18,7 @@ export interface InputTextProps
 	inputMode: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 	elementRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
-	type?: 'text' | 'password' | 'tel' | 'hidden' | 'date';
+	type?: 'text' | 'password' | 'tel' | 'hidden' | 'date' | 'datetime-local' | 'month' | 'time';
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
 	value?: string | number | readonly string[] | undefined;
@@ -130,8 +130,11 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(updated);
 		if (updateControl) updateControl(updated);
 
-		// Date does not support selectionStart and selectionEnd, onBlur we don't want to do this either - safari bug
-		if (props.type !== 'date' && !ignoreCursorPosition) target.setSelectionRange(startPosition, endPosition);
+		// MDN lists that text, search, URL, tel and password are the only types that support selectionStart and selectionEnd
+		// See - https://html.spec.whatwg.org/multipage/forms.html#concept-input-apply
+		// Also onBlur we don't want to adjust the cursor either - safari bug
+		if (['text', 'search', 'url', 'tel', 'password'].includes(props.type || '') && !ignoreCursorPosition)
+			target.setSelectionRange(startPosition, endPosition);
 	}
 
 	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
