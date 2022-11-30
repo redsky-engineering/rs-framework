@@ -82,7 +82,16 @@ async function createPage() {
 
 	let name = await getName('Page');
 
-	console.log(name);
+	let directoryName = name.charAt(0).toLowerCase() + name.slice(1);
+	fs.mkdirSync(path.join(process.cwd(), 'src/pages', directoryName));
+
+	const tsxFileContents = getPageTsxTemplate(name);
+	fs.writeFileSync(path.join(process.cwd(), 'src/pages', directoryName, `${name}.tsx`), tsxFileContents);
+
+	const scssFileContents = getPageScssTemplate(name);
+	fs.writeFileSync(path.join(process.cwd(), 'src/pages', directoryName, `${name}.scss`), scssFileContents);
+
+	console.log(chalk.green(`Page ${name}.{tsx,scss} created`));
 }
 
 async function createPopup() {
@@ -90,5 +99,14 @@ async function createPopup() {
 
 	let name = await getName('Popup');
 
-	console.log(name);
+	let directoryName = name.charAt(0).toLowerCase() + name.slice(1);
+	fs.mkdirSync(path.join(process.cwd(), 'src/popups', directoryName));
+
+	const tsxFileContents = getPopupTsxTemplate(name);
+	fs.writeFileSync(path.join(process.cwd(), 'src/popups', directoryName, `${name}.tsx`), tsxFileContents);
+
+	const scssFileContents = getPopupScssTemplate(name);
+	fs.writeFileSync(path.join(process.cwd(), 'src/popups', directoryName, `${name}.scss`), scssFileContents);
+
+	console.log(chalk.green(`Popup ${name}.{tsx,scss} created`));
 }
