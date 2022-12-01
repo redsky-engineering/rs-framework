@@ -562,6 +562,37 @@ export class ObjectUtils {
 	}
 
 	/**
+	 * Convert an array of objects to a csv format
+	 * @param rows - an array of objects for each row
+	 * @param headers - dictionary with the key being the objects key and the value being what you want it called in the csv file
+	 * @returns string - csv formatted string of object
+	 */
+	static convertToCSV<T extends {}>(rows: T[], headers?: { [Property in keyof Partial<T>]: string }): string {
+		type keys = keyof T;
+		const csvKeys: keys[] = (headers ? Object.keys(headers) : Object.keys(rows[0])) as keys[];
+		let stringBuilder = (headers ? Object.values(headers) : csvKeys).join(',');
+		stringBuilder += '\r\n';
+		for (let row of rows) {
+			let stringArray: string[] = [];
+			for (let key of csvKeys) {
+				const value: any = row[key];
+				if (!value && value !== 0) {
+					stringArray.push('');
+					continue;
+				}
+				if (value instanceof Date) {
+					stringArray.push(DateUtils.formatDateForUser(value));
+				} else {
+					stringArray.push(value.toString().replace(/,/gi, ' '));
+				}
+			}
+			stringBuilder += stringArray.join(',');
+			stringBuilder += '\r\n';
+		}
+		return stringBuilder;
+	}
+
+	/**
 	 *
 	 * @param data - the array to paginate
 	 * @param page - which page of data to return
