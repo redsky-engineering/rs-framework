@@ -15,8 +15,8 @@ interface RsResponseData<T> {
 
 // eslint-disable-next-line no-extend-native
 Date.prototype.getWeekOfMonth = function () {
-	var firstWeekday = new Date(this.getFullYear(), this.getMonth(), 1).getDay();
-	var offsetDate = this.getDate() + firstWeekday - 1;
+	const firstWeekday = new Date(this.getFullYear(), this.getMonth(), 1).getDay();
+	const offsetDate = this.getDate() + firstWeekday - 1;
 	return Math.floor(offsetDate / 7);
 };
 export const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -197,7 +197,7 @@ export class StringUtils {
 	 * isValidUrl("https://www.google.com") true
 	 * isValidUrl("I am an invalid URL string.") false
 	 */
-	static isValidUrl(test: string) {
+	static isValidUrl(test: string): boolean {
 		try {
 			new URL(test);
 			return true;
@@ -214,7 +214,7 @@ export class StringUtils {
 	 * @example
 	 * const resilt = intToBase36(10);
 	 */
-	static intToBase36(int: number) {
+	static intToBase36(int: number): string {
 		return int.toString(36).padStart(8, '0').toUpperCase();
 	}
 
@@ -224,7 +224,7 @@ export class StringUtils {
 	 * @param {number} money
 	 * @returns {string}
 	 */
-	static formatMoney(money: number) {
+	static formatMoney(money: number): string {
 		var n: any = money / 100,
 			c = 2,
 			d = '.',
@@ -245,12 +245,12 @@ export class StringUtils {
 	}
 
 	/**
-	 * Copy HTML input text
-	 * @name copyText
+	 * Copies the given element by id text to the clipboard
+	 * @name copyElementToClipboard
 	 * @param {string} id
 	 * @returns {void}
 	 */
-	static copyText(id: string) {
+	static copyElementToClipboard(id: string): void {
 		let copyText = document.getElementById(id) as HTMLInputElement;
 		copyText.select();
 		document.execCommand('Copy');
@@ -262,7 +262,7 @@ export class StringUtils {
 	 * @param {string} value
 	 * @returns {void}
 	 */
-	static copyToClipboard(value: string) {
+	static copyToClipboard(value: string): void {
 		if (
 			WebUtils.isCordova() &&
 			window.cordova.plugins &&
@@ -286,7 +286,7 @@ export class StringUtils {
 	 * @param {string} value
 	 * @returns {boolean}
 	 */
-	static isEmpty(value: string) {
+	static isEmpty(value: string): boolean {
 		if (value === null) return true;
 		if (value === undefined) return true;
 		if (value === '') return true;
@@ -299,7 +299,7 @@ export class StringUtils {
 	 * @param {string} input
 	 * @returns {string}
 	 */
-	static formatPriceRange(input: string) {
+	static formatPriceRange(input: string): string {
 		if (!input) return '-';
 		let start = parseInt(input.split('-')[0]) / 100 || '';
 		let end = parseInt(input.split('-')[1]) / 100 || '';
@@ -315,7 +315,7 @@ export class StringUtils {
 	 * @param {any} bool
 	 * @returns {boolean}
 	 */
-	static isBoolean(bool: any) {
+	static isBoolean(bool: any): boolean {
 		if (bool === !!bool) return true;
 		return false;
 	}
@@ -333,7 +333,7 @@ export class StringUtils {
 	}
 
 	/**
-	 * Generate a unique GUID
+	 * Generate a unique GUID. It is a compatibility function for crypto.randomUUID() as not all browsers support it.
 	 * @name generateGuid
 	 * @returns {string} - Returns a string unique GUID
 	 * */
@@ -350,7 +350,7 @@ export class StringUtils {
 	 * @param {string} snakeCase
 	 * @returns {string}
 	 */
-	static snakeCaseToHuman(snakeCase: string) {
+	static snakeCaseToHuman(snakeCase: string): string {
 		if (snakeCase.constructor !== String || snakeCase === '') return '';
 		let humanize = snakeCase.split('_');
 		for (let i = 0; i < humanize.length; i++) {
@@ -527,7 +527,7 @@ export class NumberUtils {
 	 * @param {number} max - maximum number in the range (default 9999999999)
 	 * @returns {number} a random number up to a max value
 	 */
-	static randomInclusiveInRange(min: number = 0, max: number = 9999999999) {
+	static randomInclusiveInRange(min: number = 0, max: number = 9999999999): number {
 		min = Math.ceil(min);
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min + 1) + min);
@@ -611,10 +611,11 @@ export class ObjectUtils {
 	static safeParse(json: any): object | any {
 		if (!json) return {};
 		try {
-			return JSON.parse(json);
-		} catch (e) {
-			return this.clone(json);
-		}
+			if (typeof json === 'string') {
+				return JSON.parse(json);
+			}
+		} catch (e) {}
+		return this.clone(json);
 	}
 
 	/**
@@ -662,15 +663,15 @@ export class ObjectUtils {
 	 *  "yellow"
 	 * )
 	 */
-	static deepValueReplace(entity: any, search: string, replacement: string) {
-		var newEntity: typeof entity = {},
+	static deepValueReplace<T extends object>(entity: T, search: string, replacement: string): T {
+		const newEntity: any = {},
 			regExp = new RegExp(search, 'g');
-		for (var property in entity) {
+		for (const property in entity) {
 			if (!entity.hasOwnProperty(property)) {
 				continue;
 			}
 
-			var value = entity[property],
+			let value: any = entity[property],
 				newProperty = property;
 			if (typeof value === 'object') {
 				value = ObjectUtils.deepValueReplace(value, search, replacement);
@@ -690,7 +691,7 @@ export class ObjectUtils {
 	 * @param {object} obj
 	 * @returns {boolean}
 	 */
-	static isEmptyObject(obj: object) {
+	static isEmptyObject(obj: object): boolean {
 		for (let key in obj) {
 			if (obj.hasOwnProperty(key)) return false;
 		}
@@ -711,7 +712,7 @@ export class ObjectUtils {
 	 * @param {any} obj
 	 * @returns {string}
 	 */
-	static serialize(obj: any) {
+	static serialize(obj: any): string {
 		let str = [];
 		for (let p in obj)
 			if (obj.hasOwnProperty(p)) {
@@ -738,7 +739,7 @@ export class ObjectUtils {
 	 * @param {any} metadata
 	 * @returns {any}
 	 */
-	static serverToClientObj(object: any, metadata: any) {
+	static serverToClientObj<T extends Object>(object: any, metadata: any): T {
 		const meta = metadata ?? null;
 		const obj = cloneDeep(object);
 		if (obj && Array.isArray(obj)) {
@@ -977,7 +978,7 @@ export class ObjectUtils {
 	 * @param {Object} obj - Any object you wish to have a deep copy of
 	 * @returns {Object}
 	 * */
-	static copy(obj: any) {
+	static copy<T>(obj: T): T {
 		return cloneDeep(obj);
 	}
 
@@ -986,7 +987,7 @@ export class ObjectUtils {
 	 * @param {Object} obj - Any object you wish to have a deep copy of
 	 * @returns {Object}
 	 * */
-	static clone(obj: any) {
+	static clone<T>(obj: T): T {
 		return cloneDeep(obj);
 	}
 
@@ -995,8 +996,8 @@ export class ObjectUtils {
 	 * @param data - Any value that you want to actually evaluate to a boolean value
 	 * @return {boolean}
 	 */
-	static toBoolean(data: any) {
-		return !!!(data === 'false' || !data);
+	static toBoolean(data: any): boolean {
+		return !(data === 'false' || !data);
 	}
 
 	/**
@@ -1005,7 +1006,7 @@ export class ObjectUtils {
 	 * @param {string} property - property string you wish to dedupe on
 	 * @returns {any[]} - Deduped version of the original dataset
 	 */
-	static dedupe(dataset: any[], property: string) {
+	static dedupe(dataset: any[], property: string): any {
 		const res = [];
 		const existsValue: any[] = [];
 		for (let data of dataset) {
@@ -1021,16 +1022,16 @@ export class ObjectUtils {
 	 * @param {any} dataset - any singular object
 	 * @returns {any} - Returns the given object with values sorted ASC order
 	 */
-	static simpleSort(dataset: any) {
+	static simpleSort<T>(dataset: T): T {
 		return Object.keys(dataset)
 			.sort()
 			.reduce(
 				(accumulator, key) => ({
 					...accumulator,
-					[key]: dataset[key]
+					[key]: (dataset as any)[key]
 				}),
 				{}
-			);
+			) as T;
 	}
 
 	/**
