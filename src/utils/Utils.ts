@@ -1386,10 +1386,10 @@ export class DateUtils {
 	 * @param {number} days
 	 * @returns {Date} - Returns a new date with days incremented
 	 */
-	static addDays(date: Date | string, days: number) {
-		if (typeof date == 'string') date = new Date(date);
-		date.setDate(date.getDate() + days);
-		return date;
+	static addDays(date: Date | string, days: number): Date {
+		const returnDate: Date = new Date(date);
+		returnDate.setDate(returnDate.getDate() + days);
+		return returnDate;
 	}
 
 	/**
