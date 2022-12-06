@@ -611,11 +611,10 @@ export class ObjectUtils {
 	static safeParse(json: any): object | any {
 		if (!json) return {};
 		try {
-			if (typeof json === 'string') {
-				return JSON.parse(json);
-			}
-		} catch (e) {}
-		return this.clone(json);
+			if (typeof json === 'string') return JSON.parse(json);
+		} catch (e) {
+			return this.clone(json);
+		}
 	}
 
 	/**
