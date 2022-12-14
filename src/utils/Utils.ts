@@ -612,9 +612,8 @@ export class ObjectUtils {
 		if (!json) return {};
 		try {
 			if (typeof json === 'string') return JSON.parse(json);
-		} catch (e) {
-			return this.clone(json);
-		}
+		} catch (e) {}
+		return this.clone(json);
 	}
 
 	/**
