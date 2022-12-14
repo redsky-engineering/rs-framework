@@ -18,7 +18,7 @@ export interface InputTextProps
 	inputMode: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 	elementRef?: React.RefObject<HTMLDivElement>;
 	look?: 'standard' | 'filled' | 'outlined' | string;
-	type?: 'text' | 'password' | 'tel' | 'hidden' | 'date';
+	type?: 'text' | 'password' | 'tel' | 'hidden' | 'date' | 'datetime-local' | 'month' | 'time';
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
 	value?: string | number | readonly string[] | undefined;
@@ -110,7 +110,11 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(control);
 	}, [control]);
 
-	async function validateTarget(target: HTMLInputElement, forceValidate: boolean = false) {
+	async function validateTarget(
+		target: HTMLInputElement,
+		forceValidate: boolean = false,
+		ignoreCursorPosition: boolean = false
+	) {
 		if (!control) return;
 		const startPosition = target.selectionStart || 0;
 		const endPosition = target.selectionEnd || 0;
@@ -126,8 +130,11 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		setFormControl(updated);
 		if (updateControl) updateControl(updated);
 
-		// Date does not support selectionStart and selectionEnd
-		if (props.type !== 'date') target.setSelectionRange(startPosition, endPosition);
+		// MDN lists that text, search, URL, tel and password are the only types that support selectionStart and selectionEnd
+		// See - https://html.spec.whatwg.org/multipage/forms.html#concept-input-apply
+		// Also onBlur we don't want to adjust the cursor either - safari bug
+		if (['text', 'search', 'url', 'tel', 'password'].includes(props.type || '') && !ignoreCursorPosition)
+			target.setSelectionRange(startPosition, endPosition);
 	}
 
 	async function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -143,7 +150,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 	function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
 		setHasBeenBlurred(true);
 
-		validateTarget(event.target, true).catch(console.error);
+		validateTarget(event.target, true, true).catch(console.error);
 		if (onBlur) onBlur(event);
 	}
 

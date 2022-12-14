@@ -1,6 +1,6 @@
 {
 	"name": "@redskytech/framework",
-	"version": "0.14.1",
+	"version": "0.16.0",
 	"description": "RedSky Framework V2",
 	"module": "index.js",
 	"repository": "https://gitlab.com/redsky_public/framework",
@@ -52,8 +52,8 @@
 		"webpack": "5"
 	},
 	"peerDependencies": {
-		"react": "17.0.2",
-		"react-dom": "17.0.2"
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
 	},
 	"dependencies": {
 		"@capacitor/core": "^4.2.0",
@@ -61,8 +61,10 @@
 		"@lottiefiles/lottie-player": "^1.5.7",
 		"aos": "^2.3.4",
 		"axios": "^0.27.2",
+		"chalk": "^5.1.2",
 		"chart.js": "^3.9.1",
 		"classnames": "^2.3.1",
+		"inquirer": "^9.1.4",
 		"lodash.clone": "^4.5.0",
 		"lodash.clonedeep": "^4.5.0",
 		"primeicons": "^6.0.1",
@@ -92,6 +94,9 @@
 		"release:major": "standard-version --release-as major",
 		"release:pre:alpha": "standard-version --prerelease alpha",
 		"prepare": "husky install"
+	},
+	"bin": {
+		"rsf": "cli/cli.mjs"
 	},
 	"types": "index.d.ts",
 	"publishConfig": {

@@ -2,6 +2,79 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0](https://gitlab.com/redsky_public/framework/compare/v0.15.7...v0.16.0) (2022-11-30)
+
+### Features
+
+-   **cli:** Auto-add file to git repo ([6840abc](https://gitlab.com/redsky_public/framework/commit/6840abcec3a745315f300e3661ff2d7b6aa7c961))
+-   **cli:** Updated to add in pages and popups ([70e1bb9](https://gitlab.com/redsky_public/framework/commit/70e1bb9274e1e6e84e7a44c02325e1be3d3e27ae))
+-   **input:** We now support datetime-local, month, time input types ([9f6b888](https://gitlab.com/redsky_public/framework/commit/9f6b88897869aee7cab8f4ea8fce8f6547b9f445))
+
+### [0.15.7](https://gitlab.com/redsky_public/framework/compare/v0.15.6...v0.15.7) (2022-11-28)
+
+### Bug Fixes
+
+-   **inputText:** Fixed the issue with setting cursor position when doing an onBlur event. Before this would cause the user to get locked up inside the input. ([eb12aa8](https://gitlab.com/redsky_public/framework/commit/eb12aa89e1643740bed21781ad4e76dd7ffdd4d0))
+
+### [0.15.6](https://gitlab.com/redsky_public/framework/compare/v0.15.5...v0.15.6) (2022-11-28)
+
+### Features
+
+-   **cli:** Cleaned up templates for cli ([a3c79b2](https://gitlab.com/redsky_public/framework/commit/a3c79b2fdfbc099ed5d6dced8554246ca2fc209a))
+
+### Bug Fixes
+
+-   datatable was fetching wrong page number based on calculate page. ([e3df542](https://gitlab.com/redsky_public/framework/commit/e3df542ee2d04b08a85f8143aaa8400c78ab9fad))
+-   datatable was fetching wrong page number based on calculate page. ([87980ea](https://gitlab.com/redsky_public/framework/commit/87980ea808edf9a55a1423bfddc5479e6831df4d))
+
+### [0.15.5](https://gitlab.com/redsky_public/framework/compare/v0.15.4...v0.15.5) (2022-11-21)
+
+### Features
+
+-   **cli:** Added first draft of CLI ([4f6183f](https://gitlab.com/redsky_public/framework/commit/4f6183f0c17dc9cce7581aa60f12b9da9503ee76))
+
+### [0.15.4](https://gitlab.com/redsky_public/framework/compare/v0.15.3...v0.15.4) (2022-11-17)
+
+### Bug Fixes
+
+-   **select:** allow for a single select on grouped options ([c42a735](https://gitlab.com/redsky_public/framework/commit/c42a735b89b309851f8c7892f36e52fcf7418694))
+
+### [0.15.3](https://gitlab.com/redsky_public/framework/compare/v0.15.2...v0.15.3) (2022-11-15)
+
+### Bug Fixes
+
+-   **InputTextarea:** Made input text area more consistent for default ([5d819a5](https://gitlab.com/redsky_public/framework/commit/5d819a5155983c0d343687b8e30188eaafe808f5))
+-   **popup:** Fixed issue with popups sometimes not animating in ([4a52141](https://gitlab.com/redsky_public/framework/commit/4a5214135ea85144614128c0231266779a09361b))
+
+### [0.15.2](https://gitlab.com/redsky_public/framework/compare/v0.15.1...v0.15.2) (2022-11-11)
+
+### Bug Fixes
+
+-   **Select:** Fixed issue when options change for controlled inputs and they were not re-rendering ([aa8f2c0](https://gitlab.com/redsky_public/framework/commit/aa8f2c0c3721ffbbc8d7df41659e47625934f2f6))
+
+### [0.15.1](https://gitlab.com/redsky_public/framework/compare/v0.15.0...v0.15.1) (2022-11-11)
+
+### Bug Fixes
+
+-   **rollup:** Added primereact/api as an external library ([f18611f](https://gitlab.com/redsky_public/framework/commit/f18611fd596ddace36d40d15079a76a44ff68a92))
+
+## [0.15.0](https://gitlab.com/redsky_public/framework/compare/v0.14.1...v0.15.0) (2022-11-11)
+
+### Bug Fixes
+
+-   **datatable:** adds new datatable interfaces to export and fixes incorrect page bug ([639fd32](https://gitlab.com/redsky_public/framework/commit/639fd32995ad44db3cc3f7e9b2a0a204a0bc36da))
+-   **datatable:** adds page 1 as default for page query ([e27e075](https://gitlab.com/redsky_public/framework/commit/e27e075ec32fc99938a128b585fe4b90869acfd3))
+-   Fixing Alex's code ([e023fd0](https://gitlab.com/redsky_public/framework/commit/e023fd0cdad4cec50b1b915b76ccf5a734d88370))
+-   **form:** Fixed Spencer's code for the form control and reverted the select component. ([ef9d674](https://gitlab.com/redsky_public/framework/commit/ef9d67484661236619bf10d7dedcf59c943d394d))
+-   **form:** Undoing Spencer's fix of my code because mine was correct from the start. ([b2ba737](https://gitlab.com/redsky_public/framework/commit/b2ba737611a5fdc51735ad6a327b69579f604c7d))
+-   **form:** Undoing Spencer's fix of my code because mine was correct from the start. ([c1e2582](https://gitlab.com/redsky_public/framework/commit/c1e25823e701a1e03c212877c5db44f6d2b0a4dc))
+-   got clearing of the nullable select working with the validation working ([0f8a25b](https://gitlab.com/redsky_public/framework/commit/0f8a25be777dc4757de65a020a5ecdd2e73e039e))
+-   I want the last word ([bacd94e](https://gitlab.com/redsky_public/framework/commit/bacd94e17cb6c77055572852b2987d4f05e27b34))
+-   Made form control less opinionated ([4c89f44](https://gitlab.com/redsky_public/framework/commit/4c89f446495cec29a2b7c8a05487651519b9f621))
+-   **package.json:** put back package json to original ([73a452f](https://gitlab.com/redsky_public/framework/commit/73a452f0e609c0b78d29ff65c98bc4efeabcab74))
+-   Reverted unneed changes ([1906275](https://gitlab.com/redsky_public/framework/commit/19062750d3129e0a63385033596c306dc07b4e4c))
+-   Your mother was a hamster, and your father smelt of elderberries ([760827e](https://gitlab.com/redsky_public/framework/commit/760827e14a7ebb9509773a3a67798fb1faa69fdf))
+
 ### [0.14.1](https://gitlab.com/redsky_public/framework/compare/v0.14.0...v0.14.1) (2022-11-10)
 
 ### Bug Fixes
