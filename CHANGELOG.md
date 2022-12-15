@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.16.1](https://gitlab.com/redsky_public/framework/compare/v0.16.0...v0.16.1) (2022-12-15)
+
+### Features
+
+-   **useMultiClickRef:** Added a new custom hook that allows you to set a callback function on an element when it is clicked x amount of times in z seconds. ([8880a81](https://gitlab.com/redsky_public/framework/commit/8880a816a5971abf598cf01614176bb8fea628ad))
+-   **util:** add convert csv function to Utils.ts ([598a558](https://gitlab.com/redsky_public/framework/commit/598a558f73b91bfe2e819dc2d70bf5fb6214407c))
+
+### Bug Fixes
+
+-   Code review change so safe parse always returns ([bec5fb7](https://gitlab.com/redsky_public/framework/commit/bec5fb756416adf17d9a6a71998bc747c42fee90))
+-   **datatable:** calculate page was having issues because of order of operations, fix for that to be handled properly ([b6d01b3](https://gitlab.com/redsky_public/framework/commit/b6d01b3c57a280b30de11a6f16f47a6cd435f051))
+-   Modified addDays to not modify input date ([93b0077](https://gitlab.com/redsky_public/framework/commit/93b0077a8d249237b48173296fe4d08b28fe89cf))
+
 ## [0.16.0](https://gitlab.com/redsky_public/framework/compare/v0.15.7...v0.16.0) (2022-11-30)
 
 ### Features
