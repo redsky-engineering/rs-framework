@@ -1,15 +1,15 @@
 import * as React from 'react';
-import './LabelInputText.scss';
+import './LabelInputTextarea.scss';
 import { Box } from '../box/Box';
+import { ICommon } from '../../common/Interfaces';
 import { Label, LabelProps } from '../label/Label';
 import classNames from 'classnames';
-import { InputText, InputTextProps } from '../inputText/InputText';
-import { ICommon } from '../../common/Interfaces';
+import { InputTextarea, InputTextareaProps } from '../inputTextarea/InputTextarea';
 
-export interface LabelInputTextProps
+export interface LabelInputTextareaProps
 	extends ICommon.MarginProps,
 		Omit<
-			InputTextProps,
+			InputTextareaProps,
 			| 'children'
 			| 'm'
 			| 'mt'
@@ -30,13 +30,13 @@ export interface LabelInputTextProps
 	isRequired?: boolean;
 }
 
-let rsLabelInputTextLabelProps: Omit<LabelProps, 'children'> = {
+let rsLabelInputTextareaLabelProps: Omit<LabelProps, 'children'> = {
 	variant: 'body1',
 	weight: 'regular',
 	mb: 4
 };
 
-const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
+const LabelInputTextarea: React.FC<LabelInputTextareaProps> = (props) => {
 	const {
 		labelTitle,
 		isRequired,
@@ -54,7 +54,7 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 		marginLeft,
 		marginX,
 		marginY,
-		...inputProps
+		...inputTextareaProps
 	} = props;
 
 	const boxMarginProps = {
@@ -74,10 +74,10 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
-	let { variant, weight, className, ...otherLabelProps } = rsLabelInputTextLabelProps;
+	let { variant, weight, className, ...otherLabelProps } = rsLabelInputTextareaLabelProps;
 
 	return (
-		<Box className={'rsLabelInputText'} {...boxMarginProps}>
+		<Box className={'rsLabelInputTextarea'} {...boxMarginProps}>
 			<Label
 				className={classNames({ required: isRequired, className })}
 				variant={variant}
@@ -86,15 +86,15 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 			>
 				{labelTitle}
 			</Label>
-			<InputText {...inputProps} />
+			<InputTextarea {...inputTextareaProps} />
 		</Box>
 	);
 };
 
-export { LabelInputText };
+export { LabelInputTextarea };
 
-export const rsLabelInputText = {
+export const rsLabelInputTextarea = {
 	setLabelProps: (props: Omit<LabelProps, 'children'>) => {
-		rsLabelInputTextLabelProps = { ...rsLabelInputTextLabelProps, ...props };
+		rsLabelInputTextareaLabelProps = { ...rsLabelInputTextareaLabelProps, ...props };
 	}
 };

@@ -1,0 +1,46 @@
+@import 'src/themes/themes';
+
+.rsInputTextarea {
+	.inputTextareaContainer {
+		border: 1px solid grey;
+		border-radius: 20px;
+
+		&:hover {
+			border: 1px solid pink;
+		}
+
+		&:focus-within {
+			color: black;
+			border: 2px solid pink;
+		}
+
+		textarea {
+			font-size: 16px;
+			color: black;
+			padding: 8px 16px;
+			border-radius: 20px;
+			letter-spacing: -0.32px;
+			box-sizing: border-box;
+			height: 40px;
+			&::placeholder {
+				color: darkgray;
+			}
+		}
+
+		textarea {
+			resize: none;
+			&:focus-visible {
+				border: unset;
+				outline: unset;
+			}
+		}
+	}
+
+	.rsInputErrorMessage {
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: normal;
+		color: red;
+		margin-left: 8px;
+	}
+}

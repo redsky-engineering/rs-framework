@@ -1,42 +1,23 @@
 import * as React from 'react';
-import './LabelInputText.scss';
+import './LabelSelect.scss';
 import { Box } from '../box/Box';
+import { ICommon } from '../../common/Interfaces';
 import { Label, LabelProps } from '../label/Label';
 import classNames from 'classnames';
-import { InputText, InputTextProps } from '../inputText/InputText';
-import { ICommon } from '../../common/Interfaces';
+import { Select, SelectProps } from '../select/Select';
 
-export interface LabelInputTextProps
-	extends ICommon.MarginProps,
-		Omit<
-			InputTextProps,
-			| 'children'
-			| 'm'
-			| 'mt'
-			| 'mr'
-			| 'mb'
-			| 'ml'
-			| 'mx'
-			| 'my'
-			| 'margin'
-			| 'marginTop'
-			| 'marginRight'
-			| 'marginBottom'
-			| 'marginLeft'
-			| 'marginX'
-			| 'marginY'
-		> {
+export interface LabelSelectProps extends ICommon.MarginProps, SelectProps<any> {
 	labelTitle: string | React.ReactNode;
 	isRequired?: boolean;
 }
 
-let rsLabelInputTextLabelProps: Omit<LabelProps, 'children'> = {
+let rsLabelSelectLabelDefaultProps: Omit<LabelProps, 'children'> = {
 	variant: 'body1',
 	weight: 'regular',
 	mb: 4
 };
 
-const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
+const LabelSelect: React.FC<LabelSelectProps> = (props) => {
 	const {
 		labelTitle,
 		isRequired,
@@ -54,7 +35,7 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 		marginLeft,
 		marginX,
 		marginY,
-		...inputProps
+		...selectProps
 	} = props;
 
 	const boxMarginProps = {
@@ -74,7 +55,7 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
-	let { variant, weight, className, ...otherLabelProps } = rsLabelInputTextLabelProps;
+	let { variant, weight, className, ...otherLabelProps } = rsLabelSelectLabelDefaultProps;
 
 	return (
 		<Box className={'rsLabelInputText'} {...boxMarginProps}>
@@ -86,15 +67,15 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 			>
 				{labelTitle}
 			</Label>
-			<InputText {...inputProps} />
+			<Select {...selectProps} />
 		</Box>
 	);
 };
 
-export { LabelInputText };
+export { LabelSelect };
 
-export const rsLabelInputText = {
+export const rsLabelSelect = {
 	setLabelProps: (props: Omit<LabelProps, 'children'>) => {
-		rsLabelInputTextLabelProps = { ...rsLabelInputTextLabelProps, ...props };
+		rsLabelSelectLabelDefaultProps = { ...rsLabelSelectLabelDefaultProps, ...props };
 	}
 };

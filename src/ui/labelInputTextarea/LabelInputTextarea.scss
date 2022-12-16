@@ -1,4 +1,4 @@
-.rsLabelInputText {
+.rsLabelInputTextarea {
 	.rsLabel {
 		&.required:after {
 			content: '*';
@@ -6,19 +6,18 @@
 		}
 	}
 
-	.rsInputText {
-		.inputContainer {
-			.rsIcon {
-			}
-
-			input {
+	.rsInputTextarea {
+		.inputTextareaContainer {
+			textarea {
+				&:focus-visible {
+				}
 			}
 
 			.floatingPlaceholder {
 				label {
 				}
 				&:focus-within label,
-				input:not(:placeholder-shown) + label {
+				textarea:not(:placeholder-shown) + label {
 				}
 			}
 		}

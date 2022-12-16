@@ -6,6 +6,15 @@ export type { AccordionProps } from './accordion/Accordion';
 export { Label } from './label/Label';
 export type { LabelProps } from './label/Label';
 
+export { LabelInputText } from './labelInputText/LabelInputText';
+export type { LabelInputTextProps } from './labelInputText/LabelInputText';
+
+export { LabelInputTextarea } from './labelInputTextarea/LabelInputTextarea';
+export type { LabelInputTextareaProps } from './labelInputTextarea/LabelInputTextarea';
+
+export { LabelSelect } from './labelSelect/LabelSelect';
+export type { LabelSelectProps } from './labelSelect/LabelSelect';
+
 export { Button } from './button/Button';
 export type { ButtonProps } from './button/Button';
 

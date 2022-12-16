@@ -22,6 +22,7 @@ export interface InputTextProps
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
 	value?: string | number | readonly string[] | undefined;
+	helperText?: string | React.ReactNode;
 
 	//Form Control
 	control?: RsFormControl<string | string[] | number>;
@@ -230,6 +231,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 			<Box className={'inputContainer'} onClick={focusInput}>
 				{renderInput()}
 			</Box>
+			{!!props.helperText && <Box className={'helperText'}>{props.helperText}</Box>}
 			{renderErrors(props.control)}
 		</Box>
 	);
