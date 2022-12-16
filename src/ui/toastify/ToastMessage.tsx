@@ -8,7 +8,7 @@ import { Box } from '../box/Box';
 import { Label, LabelProps } from '../label/Label';
 import { ToastProps } from 'react-toastify/dist/types';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
 
 export enum ToastifyType {
 	ERROR = 'error',
@@ -25,20 +25,11 @@ export interface ToastMessageProps {
 	toastProps?: ToastProps;
 }
 
-let icons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: string } = {
-	error: 'icon-warning',
-	info: 'icon-information',
-	success: 'icon-checkmark',
-	warning: 'icon-warning',
-	custom: 'icon-flag'
-};
-
-let labelVariants = {
-	title: 'subtitle1',
-	message: 'body1'
-};
-
 const ToastMessage: React.FC<ToastMessageProps> = (props) => {
+	const { toasts } = React.useContext(FrameworkContext);
+	const { icons, labelVariants } = toasts;
+	const { title, message } = labelVariants;
+
 	function renderIconAndTitle() {
 		let icon: React.ReactNode;
 		let messageTitle = '';
@@ -64,7 +55,7 @@ const ToastMessage: React.FC<ToastMessageProps> = (props) => {
 				icon = <Icon iconImg={icons.custom} fontSize={21} />;
 				break;
 		}
-		const { title, message } = labelVariants;
+
 		return (
 			<>
 				{icon}
@@ -103,13 +94,6 @@ export const rsToastify = {
 	},
 	custom: (message: string, title?: string, toastOptions?: ToastOptions) => {
 		toast(<ToastMessage message={message} title={title} type={ToastifyType.CUSTOM} />, toastOptions);
-	},
-	setIcons: (newIcons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: string }) => {
-		icons = newIcons;
-	},
-	setLabelVariants: (title: LabelProps['variant'], message: LabelProps['variant']) => {
-		labelVariants.title = title;
-		labelVariants.message = message;
 	}
 };
 

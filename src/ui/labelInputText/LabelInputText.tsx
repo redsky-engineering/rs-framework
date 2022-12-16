@@ -5,6 +5,8 @@ import { Label, LabelProps } from '../label/Label';
 import classNames from 'classnames';
 import { InputText, InputTextProps } from '../inputText/InputText';
 import { ICommon } from '../../common/Interfaces';
+import { useContext } from 'react';
+import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
 
 export interface LabelInputTextProps
 	extends ICommon.MarginProps,
@@ -29,12 +31,6 @@ export interface LabelInputTextProps
 	labelTitle: string | React.ReactNode;
 	isRequired?: boolean;
 }
-
-let rsLabelInputTextLabelProps: Omit<LabelProps, 'children'> = {
-	variant: 'body1',
-	weight: 'regular',
-	mb: 4
-};
 
 const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 	const {
@@ -74,7 +70,8 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
-	let { variant, weight, className, ...otherLabelProps } = rsLabelInputTextLabelProps;
+	const { labelInputText } = useContext(FrameworkContext);
+	let { variant, weight, className, ...otherLabelProps } = labelInputText;
 
 	return (
 		<Box className={'rsLabelInputText'} {...boxMarginProps}>
@@ -92,9 +89,3 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 };
 
 export { LabelInputText };
-
-export const rsLabelInputText = {
-	setLabelProps: (props: Omit<LabelProps, 'children'>) => {
-		rsLabelInputTextLabelProps = { ...rsLabelInputTextLabelProps, ...props };
-	}
-};

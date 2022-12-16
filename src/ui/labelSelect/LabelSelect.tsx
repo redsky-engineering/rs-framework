@@ -2,20 +2,16 @@ import * as React from 'react';
 import './LabelSelect.scss';
 import { Box } from '../box/Box';
 import { ICommon } from '../../common/Interfaces';
-import { Label, LabelProps } from '../label/Label';
+import { Label } from '../label/Label';
 import classNames from 'classnames';
 import { Select, SelectProps } from '../select/Select';
+import { useContext } from 'react';
+import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
 
 export interface LabelSelectProps extends ICommon.MarginProps, SelectProps<any> {
 	labelTitle: string | React.ReactNode;
 	isRequired?: boolean;
 }
-
-let rsLabelSelectLabelDefaultProps: Omit<LabelProps, 'children'> = {
-	variant: 'body1',
-	weight: 'regular',
-	mb: 4
-};
 
 const LabelSelect: React.FC<LabelSelectProps> = (props) => {
 	const {
@@ -55,7 +51,8 @@ const LabelSelect: React.FC<LabelSelectProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
-	let { variant, weight, className, ...otherLabelProps } = rsLabelSelectLabelDefaultProps;
+	const { labelSelect } = useContext(FrameworkContext);
+	let { variant, weight, className, ...otherLabelProps } = labelSelect;
 
 	return (
 		<Box className={'rsLabelInputText'} {...boxMarginProps}>
@@ -73,9 +70,3 @@ const LabelSelect: React.FC<LabelSelectProps> = (props) => {
 };
 
 export { LabelSelect };
-
-export const rsLabelSelect = {
-	setLabelProps: (props: Omit<LabelProps, 'children'>) => {
-		rsLabelSelectLabelDefaultProps = { ...rsLabelSelectLabelDefaultProps, ...props };
-	}
-};

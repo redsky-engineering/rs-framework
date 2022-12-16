@@ -5,6 +5,8 @@ import { ICommon } from '../../common/Interfaces';
 import { Label, LabelProps } from '../label/Label';
 import classNames from 'classnames';
 import { InputTextarea, InputTextareaProps } from '../inputTextarea/InputTextarea';
+import { useContext } from 'react';
+import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
 
 export interface LabelInputTextareaProps
 	extends ICommon.MarginProps,
@@ -29,12 +31,6 @@ export interface LabelInputTextareaProps
 	labelTitle: string | React.ReactNode;
 	isRequired?: boolean;
 }
-
-let rsLabelInputTextareaLabelProps: Omit<LabelProps, 'children'> = {
-	variant: 'body1',
-	weight: 'regular',
-	mb: 4
-};
 
 const LabelInputTextarea: React.FC<LabelInputTextareaProps> = (props) => {
 	const {
@@ -74,7 +70,8 @@ const LabelInputTextarea: React.FC<LabelInputTextareaProps> = (props) => {
 		...(marginY && { marginY })
 	};
 
-	let { variant, weight, className, ...otherLabelProps } = rsLabelInputTextareaLabelProps;
+	const { labelInputTextArea } = useContext(FrameworkContext);
+	let { variant, weight, className, ...otherLabelProps } = labelInputTextArea;
 
 	return (
 		<Box className={'rsLabelInputTextarea'} {...boxMarginProps}>
@@ -92,9 +89,3 @@ const LabelInputTextarea: React.FC<LabelInputTextareaProps> = (props) => {
 };
 
 export { LabelInputTextarea };
-
-export const rsLabelInputTextarea = {
-	setLabelProps: (props: Omit<LabelProps, 'children'>) => {
-		rsLabelInputTextareaLabelProps = { ...rsLabelInputTextareaLabelProps, ...props };
-	}
-};
