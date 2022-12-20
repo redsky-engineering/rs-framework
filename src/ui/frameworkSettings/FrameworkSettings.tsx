@@ -8,10 +8,10 @@ const defaultSettings: IFrameworkSettings = {
 	labelSelect: { variant: 'body1', weight: 'regular', mb: 4 },
 	toasts: {
 		icons: {
-			error: 'icon-warning',
-			info: 'icon-information',
-			success: 'icon-checkmark',
-			warning: 'icon-warning',
+			error: 'icon-exclamation-circle',
+			info: 'icon-solid-info-circle',
+			success: 'icon-check',
+			warning: 'icon-exclamation-circle',
 			custom: 'icon-flag'
 		},
 		labelVariants: {
@@ -59,4 +59,4 @@ const FrameworkSettings: React.FC<FrameworkSettingsProps> = (props) => {
 	return <FrameworkContext.Provider value={settings}>{props.children}</FrameworkContext.Provider>;
 };
 
-export default FrameworkSettings;
+export { FrameworkSettings };

@@ -71,3 +71,6 @@ export type { AnimateOnScrollProps } from './animateOnScroll/AnimateOnScroll';
 
 export { RsDataTable } from './dataTable/DataTable';
 export type { RsDataTableProps, MatchModeType, DataTableFilters } from './dataTable/DataTable';
+
+export { FrameworkSettings } from './frameworkSettings/FrameworkSettings';
+export type { IFrameworkSettings } from './frameworkSettings/FrameworkSettings';

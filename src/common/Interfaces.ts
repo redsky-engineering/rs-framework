@@ -101,36 +101,7 @@ export namespace ICommon {
 	];
 
 	export interface SpacingProps extends PaddingProps, MarginProps {}
-	export const SpacingPropsKeys: (keyof SpacingProps)[] = [
-		'm',
-		'mt',
-		'mr',
-		'mb',
-		'ml',
-		'mx',
-		'my',
-		'margin',
-		'marginTop',
-		'marginRight',
-		'marginBottom',
-		'marginLeft',
-		'marginX',
-		'marginY',
-		'p',
-		'pt',
-		'pr',
-		'pb',
-		'pl',
-		'px',
-		'py',
-		'padding',
-		'paddingTop',
-		'paddingRight',
-		'paddingBottom',
-		'paddingLeft',
-		'paddingX',
-		'paddingY'
-	];
+	export const SpacingPropsKeys: (keyof SpacingProps)[] = [...MarginPropsKeys, ...PaddingPropsKeys];
 
 	export interface BorderProps {
 		border?: string | number;

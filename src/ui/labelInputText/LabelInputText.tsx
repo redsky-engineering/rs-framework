@@ -41,7 +41,6 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 		ICommon.HtmlElementPropsKeys
 	);
 
-	debugger;
 	const { labelInputText } = useContext(FrameworkContext);
 	let { variant, weight, ...otherLabelProps } = labelInputText;
 
