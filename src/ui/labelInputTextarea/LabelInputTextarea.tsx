@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { InputTextarea, InputTextareaProps } from '../inputTextarea/InputTextarea';
 import { useContext } from 'react';
 import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
+import { extractPropsFromKeys } from '../../utils/internal';
 
 export interface LabelInputTextareaProps
 	extends ICommon.MarginProps,
@@ -29,54 +30,24 @@ export interface LabelInputTextareaProps
 			| 'marginY'
 		> {
 	labelTitle: string | React.ReactNode;
-	isRequired?: boolean;
 }
 
 const LabelInputTextarea: React.FC<LabelInputTextareaProps> = (props) => {
-	const {
-		labelTitle,
-		isRequired,
-		m,
-		mt,
-		mr,
-		mb,
-		ml,
-		mx,
-		my,
-		margin,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		marginX,
-		marginY,
-		...inputTextareaProps
-	} = props;
+	const { labelTitle, ...inputTextareaProps } = props;
 
-	const boxMarginProps = {
-		...(m && { m }),
-		...(mt && { mt }),
-		...(mr && { mr }),
-		...(mb && { mb }),
-		...(ml && { ml }),
-		...(mx && { mx }),
-		...(my && { my }),
-		...(margin && { margin }),
-		...(marginTop && { marginTop }),
-		...(marginRight && { marginRight }),
-		...(marginBottom && { marginBottom }),
-		...(marginLeft && { marginLeft }),
-		...(marginX && { marginX }),
-		...(marginY && { marginY })
-	};
+	const boxMarginProps = extractPropsFromKeys<ICommon.MarginProps>(props, ICommon.MarginPropsKeys);
+	const { className, ...htmlProps } = extractPropsFromKeys<ICommon.HtmlElementProps>(
+		props,
+		ICommon.HtmlElementPropsKeys
+	);
 
 	const { labelInputTextArea } = useContext(FrameworkContext);
-	let { variant, weight, className, ...otherLabelProps } = labelInputTextArea;
+	let { variant, weight, ...otherLabelProps } = labelInputTextArea;
 
 	return (
-		<Box className={'rsLabelInputTextarea'} {...boxMarginProps}>
+		<Box className={classNames('rsLabelInputTextarea', className)} {...boxMarginProps} {...htmlProps}>
 			<Label
-				className={classNames({ required: isRequired, className })}
+				className={classNames({ required: inputTextareaProps.required })}
 				variant={variant}
 				weight={weight}
 				{...otherLabelProps}

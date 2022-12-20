@@ -23,10 +23,12 @@ const defaultSettings: IFrameworkSettings = {
 
 export const FrameworkContext = createContext<IFrameworkSettings>(defaultSettings);
 
+export interface ILabelSettingsProps extends Omit<LabelProps, 'children' | 'className' | 'id'> {}
+
 export interface IFrameworkSettings {
-	labelInputText: Omit<LabelProps, 'children'>;
-	labelInputTextArea: Omit<LabelProps, 'children'>;
-	labelSelect: Omit<LabelProps, 'children'>;
+	labelInputText: ILabelSettingsProps;
+	labelInputTextArea: ILabelSettingsProps;
+	labelSelect: ILabelSettingsProps;
 	toasts: {
 		icons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: string };
 		labelVariants: { title: 'subtitle1'; message: 'body1' };
@@ -41,7 +43,7 @@ const FrameworkSettings: React.FC<FrameworkSettingsProps> = (props) => {
 	let settings = defaultSettings;
 	let key: keyof IFrameworkSettings;
 	for (key in props.overrides) {
-		if (props.overrides.hasOwnProperty(key)) {
+		if (Object.hasOwn(props.overrides, key)) {
 			if (key !== 'toasts') {
 				settings[key] = { ...settings[key], ...props.overrides[key] };
 			} else {

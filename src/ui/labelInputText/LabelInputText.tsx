@@ -7,6 +7,7 @@ import { InputText, InputTextProps } from '../inputText/InputText';
 import { ICommon } from '../../common/Interfaces';
 import { useContext } from 'react';
 import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
+import { extractPropsFromKeys } from '../../utils/internal';
 
 export interface LabelInputTextProps
 	extends ICommon.MarginProps,
@@ -29,54 +30,25 @@ export interface LabelInputTextProps
 			| 'marginY'
 		> {
 	labelTitle: string | React.ReactNode;
-	isRequired?: boolean;
 }
 
 const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
-	const {
-		labelTitle,
-		isRequired,
-		m,
-		mt,
-		mr,
-		mb,
-		ml,
-		mx,
-		my,
-		margin,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		marginX,
-		marginY,
-		...inputProps
-	} = props;
+	const { labelTitle, elementRef, ...inputProps } = props;
 
-	const boxMarginProps = {
-		...(m && { m }),
-		...(mt && { mt }),
-		...(mr && { mr }),
-		...(mb && { mb }),
-		...(ml && { ml }),
-		...(mx && { mx }),
-		...(my && { my }),
-		...(margin && { margin }),
-		...(marginTop && { marginTop }),
-		...(marginRight && { marginRight }),
-		...(marginBottom && { marginBottom }),
-		...(marginLeft && { marginLeft }),
-		...(marginX && { marginX }),
-		...(marginY && { marginY })
-	};
+	const boxMarginProps = extractPropsFromKeys<ICommon.MarginProps>(props, ICommon.MarginPropsKeys);
+	const { className, ...htmlProps } = extractPropsFromKeys<ICommon.HtmlElementProps>(
+		props,
+		ICommon.HtmlElementPropsKeys
+	);
 
+	debugger;
 	const { labelInputText } = useContext(FrameworkContext);
-	let { variant, weight, className, ...otherLabelProps } = labelInputText;
+	let { variant, weight, ...otherLabelProps } = labelInputText;
 
 	return (
-		<Box className={'rsLabelInputText'} {...boxMarginProps}>
+		<Box className={classNames('rsLabelInputText', className)} {...boxMarginProps} {...htmlProps}>
 			<Label
-				className={classNames({ required: isRequired, className })}
+				className={classNames({ required: inputProps.required })}
 				variant={variant}
 				weight={weight}
 				{...otherLabelProps}

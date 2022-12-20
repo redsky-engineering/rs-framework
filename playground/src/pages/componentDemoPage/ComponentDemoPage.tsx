@@ -644,6 +644,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				Label Input Text
 			</Label>
 			<LabelInputText
+				id={'Hello2'}
+				className={'hello'}
 				labelTitle={'Label Input Text'}
 				inputMode={'text'}
 				onChange={(value) => {
@@ -657,7 +659,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				onChange={(value) => {
 					console.log(value);
 				}}
-				isRequired
+				required
 			/>
 
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
@@ -673,7 +675,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			/>
 			<LabelSelect
 				labelTitle={'Label Select'}
-				isRequired
+				required
 				options={options}
 				onChange={(value) => {
 					console.log(value);

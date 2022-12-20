@@ -80,6 +80,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 		marginY,
 		immediateValidate,
 		onBlur,
+		helperText,
 		...inputProps
 	} = props;
 
@@ -231,7 +232,7 @@ const InputText: React.FC<InputTextProps> = (props) => {
 			<Box className={'inputContainer'} onClick={focusInput}>
 				{renderInput()}
 			</Box>
-			{!!props.helperText && <Box className={'helperText'}>{props.helperText}</Box>}
+			{!!helperText && <Box className={'helperText'}>{helperText}</Box>}
 			{renderErrors(props.control)}
 		</Box>
 	);

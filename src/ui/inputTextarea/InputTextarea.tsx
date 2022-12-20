@@ -20,6 +20,7 @@ export interface InputTextareaProps
 	noAutocomplete?: boolean;
 	autocompleteType?: ICommon.AutoCompleteType | string; // Defaults to "on"
 	value?: string | readonly string[] | undefined;
+	helperText?: string | React.ReactNode;
 
 	//Textarea properties
 	minLength?: number;
@@ -68,6 +69,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		marginX,
 		marginY,
 		immediateValidate,
+		helperText,
 		...textareaProps
 	} = props;
 
@@ -179,6 +181,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 			<Box className={'inputTextareaContainer'} onClick={focusInput}>
 				{renderTextarea()}
 			</Box>
+			{!!helperText && <Box className={'helperText'}>{helperText}</Box>}
 			{renderErrors(props.control)}
 		</Box>
 	);
