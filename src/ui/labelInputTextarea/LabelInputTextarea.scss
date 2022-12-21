@@ -1,0 +1,28 @@
+.rsLabelInputTextarea {
+	.rsLabel {
+		&.required:after {
+			content: '*';
+			color: red;
+		}
+	}
+
+	.rsInputTextarea {
+		.inputTextareaContainer {
+			textarea {
+				&:focus-visible {
+				}
+			}
+
+			.floatingPlaceholder {
+				label {
+				}
+				&:focus-within label,
+				textarea:not(:placeholder-shown) + label {
+				}
+			}
+		}
+
+		.rsInputErrorMessage {
+		}
+	}
+}

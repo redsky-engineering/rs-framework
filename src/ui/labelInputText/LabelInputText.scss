@@ -1,0 +1,29 @@
+.rsLabelInputText {
+	.rsLabel {
+		&.required:after {
+			content: '*';
+			color: red;
+		}
+	}
+
+	.rsInputText {
+		.inputContainer {
+			.rsIcon {
+			}
+
+			input {
+			}
+
+			.floatingPlaceholder {
+				label {
+				}
+				&:focus-within label,
+				input:not(:placeholder-shown) + label {
+				}
+			}
+		}
+
+		.rsInputErrorMessage {
+		}
+	}
+}

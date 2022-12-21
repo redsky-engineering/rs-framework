@@ -27,6 +27,7 @@ export namespace ICommon {
 		display?: 'initial' | 'block' | 'inline' | 'flex' | 'grid' | string;
 		className?: string;
 	}
+	export const HtmlElementPropsKeys: (keyof HtmlElementProps)[] = ['id', 'display', 'className'];
 
 	export interface InteractProps<T> {
 		onClick?: React.MouseEventHandler;
@@ -49,6 +50,22 @@ export namespace ICommon {
 		marginX?: string | number;
 		marginY?: string | number;
 	}
+	export const MarginPropsKeys: (keyof MarginProps)[] = [
+		'm',
+		'mt',
+		'mr',
+		'mb',
+		'ml',
+		'mx',
+		'my',
+		'margin',
+		'marginTop',
+		'marginRight',
+		'marginBottom',
+		'marginLeft',
+		'marginX',
+		'marginY'
+	];
 
 	export interface PaddingProps {
 		p?: string | number;
@@ -66,7 +83,25 @@ export namespace ICommon {
 		paddingX?: string | number;
 		paddingY?: string | number;
 	}
+	export const PaddingPropsKeys: (keyof PaddingProps)[] = [
+		'p',
+		'pt',
+		'pr',
+		'pb',
+		'pl',
+		'px',
+		'py',
+		'padding',
+		'paddingTop',
+		'paddingRight',
+		'paddingBottom',
+		'paddingLeft',
+		'paddingX',
+		'paddingY'
+	];
+
 	export interface SpacingProps extends PaddingProps, MarginProps {}
+	export const SpacingPropsKeys: (keyof SpacingProps)[] = [...MarginPropsKeys, ...PaddingPropsKeys];
 
 	export interface BorderProps {
 		border?: string | number;

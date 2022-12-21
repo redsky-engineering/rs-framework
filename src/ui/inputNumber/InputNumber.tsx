@@ -35,6 +35,7 @@ interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'>, IC
 	prefix?: string | null;
 	suffix?: string | null;
 	ariaLabelledBy?: string | null;
+	helperText?: string | React.ReactNode;
 
 	//Form Control
 	control?: RsFormControl<number>;
@@ -122,6 +123,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		marginX,
 		marginY,
 		immediateValidate,
+		helperText,
 		...inputProps
 	} = props;
 
@@ -1286,6 +1288,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 				{inputElement}
 				{buttonGroup}
 			</span>
+			{!!helperText && <Box className={'helperText'}>{helperText}</Box>}
 			{errors}
 		</Box>
 	);

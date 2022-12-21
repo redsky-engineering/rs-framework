@@ -217,3 +217,18 @@ export function extractMarginProps(props: ICommon.MarginProps): { marginProps: I
 
 	return { marginProps, remaining };
 }
+
+/**
+ * This method is used to help shorthand extracting keys from props. a good example of this is done on the LabelInputText
+ * @param object
+ * @param properties
+ */
+export function extractPropsFromKeys<T>(object: { [key: string]: any }, properties: string[]): Partial<T> {
+	let extractedObject = {} as any;
+	properties.forEach((item) => {
+		if (Object.hasOwn(object, item)) {
+			extractedObject[item] = object[item];
+		}
+	});
+	return extractedObject;
+}

@@ -1,0 +1,48 @@
+@import 'src/themes/themes';
+.App .rsInputText {
+	.inputContainer {
+		border: 1px solid gray;
+		border-radius: 20px;
+		padding: 8px 16px;
+		background-color: #ffffff;
+		&:hover {
+			border: 1px solid pink;
+		}
+
+		&:focus-within {
+			color: black;
+			border: 2px solid pink;
+		}
+
+		input {
+			color: black;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: -2%;
+			&::placeholder {
+				color: grey;
+			}
+		}
+	}
+
+	.helperText {
+		font-size: 12px;
+		margin-top: 4px;
+		color: grey;
+	}
+
+	.rsInputErrorMessage {
+		font-size: 12px;
+		line-height: 16px;
+		color: red;
+		margin-left: 8px;
+	}
+	.floatingPlaceholder {
+		& label {
+			color: black;
+			font-weight: 400;
+			font-size: 16px;
+		}
+	}
+}

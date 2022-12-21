@@ -36,6 +36,7 @@ export interface SelectProps<
 	isCreatable?: boolean;
 	createOptionPosition?: 'first' | 'last';
 	onCreateOption?: (inputValue: string) => void;
+	helperText?: string | React.ReactNode;
 }
 
 function Select<Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(
@@ -65,6 +66,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 		createOptionPosition,
 		onCreateOption,
 		value, // Remove the value from selectProps
+		helperText,
 		...selectProps
 	} = props;
 
@@ -243,6 +245,7 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 	return (
 		<Box id={id} className={classNames('rsSelect', className)} {...boxMarginProps}>
 			{renderSelectOrCreateSelect()}
+			{!!helperText && <Box className={'helperText'}>{helperText}</Box>}
 			{renderErrors(props.control)}
 		</Box>
 	);

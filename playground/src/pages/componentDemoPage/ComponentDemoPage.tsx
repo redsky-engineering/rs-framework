@@ -21,14 +21,16 @@ import {
 	StarRating,
 	LabelRadioButton,
 	AnimateOnScroll,
-	popupController
+	popupController,
+	LabelInputText,
+	LabelSelect,
+	LabelInputTextarea
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
-import { IRsFormControl } from '../../../../src/ui/form/FormControl.js';
 
 enum FormKeys {
 	TEXT_AREA_TEST = 'textAreaTest',
@@ -189,7 +191,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'subtitle1'} weight={'regular'} mb={16} mt={32}>
 				External Disabled ImageKit
 			</Label>
-			<Img src={'https://www.placecage.com/128/128'} alt={'Nic Cage'} width={128} height={128} disableImageKit />
+			<Img src={'https://picsum.photos/128/128'} alt={'Nic Cage'} width={128} height={128} disableImageKit />
 			<Label variant={'subtitle1'} weight={'regular'} mb={16} mt={32}>
 				Error loading image (show default missing image)
 			</Label>
@@ -213,7 +215,7 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				height={128}
 				onError={(event) => {
 					console.log('Error loading image', event);
-					return 'https://www.placecage.com/200/200';
+					return 'https://picsum.photos/200/200';
 				}}
 			/>
 
@@ -619,8 +621,72 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				Password
 			</Label>
 			<InputText
+				mb={16}
 				type={'password'}
 				inputMode={'text'}
+				onChange={(value) => {
+					console.log(value);
+				}}
+			/>
+
+			<Label variant={'h6'} weight={'regular'}>
+				Input with Helper Text!
+			</Label>
+			<InputText
+				mb={16}
+				inputMode={'text'}
+				helperText={'Max Length 12 Characters'}
+				maxLength={12}
+				onChange={(value) => console.log(value)}
+			/>
+
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Label Input Text
+			</Label>
+			<LabelInputText
+				id={'Hello2'}
+				className={'hello'}
+				labelTitle={'Label Input Text'}
+				inputMode={'text'}
+				onChange={(value) => {
+					console.log(value);
+				}}
+			/>
+
+			<LabelInputText
+				labelTitle={'Label Input Text'}
+				inputMode={'text'}
+				onChange={(value) => {
+					console.log(value);
+				}}
+				required
+			/>
+
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Label Select
+			</Label>
+			<LabelSelect
+				labelTitle={'Label Select'}
+				options={options}
+				mb={16}
+				onChange={(value) => {
+					console.log(value);
+				}}
+			/>
+			<LabelSelect
+				labelTitle={'Label Select'}
+				required
+				options={options}
+				onChange={(value) => {
+					console.log(value);
+				}}
+			/>
+
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Label Input Textarea
+			</Label>
+			<LabelInputTextarea
+				labelTitle={'Label Input Textarea'}
 				onChange={(value) => {
 					console.log(value);
 				}}
