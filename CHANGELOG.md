@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://gitlab.com/redsky_public/framework/compare/v0.16.1...v1.0.0) (2022-12-21)
+
+### Features
+
+-   **context:** Added theme provider context ([2046f8b](https://gitlab.com/redsky_public/framework/commit/2046f8bb1e3dac72ecb61d45a875a4cce10c8b34))
+-   **labelinputtext:** Added LabelInputText to the framework. ([defb005](https://gitlab.com/redsky_public/framework/commit/defb0059559a9997e9e38401fc392dd8fc65285a))
+-   **labelInputText:** Added LabelInputText to the framework. ([aec1cc4](https://gitlab.com/redsky_public/framework/commit/aec1cc49b55b5df7e1804d9d350fce28335c20aa))
+-   **labelInputText:** Added LabelInputText to the framework. ([c1246cb](https://gitlab.com/redsky_public/framework/commit/c1246cb888cf7e09289327fd220a24f86202d72b))
+-   **labelInputText:** Added LabelInputText to the framework. ([e782650](https://gitlab.com/redsky_public/framework/commit/e78265062376507362b6c5bb44c14d59e9f739a5))
+-   **labelInputText:** Added LabelInputText to the framework. ([b8dcdcf](https://gitlab.com/redsky_public/framework/commit/b8dcdcfa7180770ac6066b5b6cecf3c4b67aed54))
+
 ### [0.16.1](https://gitlab.com/redsky_public/framework/compare/v0.16.0...v0.16.1) (2022-12-15)
 
 ### Features
