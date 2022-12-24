@@ -26,6 +26,8 @@ export interface BoxProps
 
 	// Events
 	// Mouse Events (mouse)
+	onMouseDown?: (event: MouseEvent) => void;
+	onMouseUp?: (event: MouseEvent) => void;
 	onMouseEnter?: (event: MouseEvent) => void;
 	onMouseLeave?: (event: MouseEvent) => void;
 	onMouseMove?: (event: MouseEvent) => void;
@@ -33,6 +35,7 @@ export interface BoxProps
 	onTouchStart?: (event: TouchEvent) => void;
 	onTouchEnd?: (event: TouchEvent) => void;
 	onTouchCancel?: (event: TouchEvent) => void;
+	onTouchMove?: (event: TouchEvent) => void;
 	// Pointer events (mouse and touch and pen)
 	onPointerDown?: (event: PointerEvent) => void;
 	onPointerUp?: (event: PointerEvent) => void;
@@ -47,12 +50,15 @@ const Box: React.FC<BoxProps> = (props) => {
 		elementRef,
 		className,
 		onClick,
+		onMouseDown,
+		onMouseUp,
 		onMouseEnter,
 		onMouseLeave,
 		onMouseMove,
 		onTouchStart,
 		onTouchEnd,
 		onTouchCancel,
+		onTouchMove,
 		onPointerDown,
 		onPointerUp,
 		onPointerCancel,
@@ -73,12 +79,15 @@ const Box: React.FC<BoxProps> = (props) => {
 			className={classNames('rsBox', className)}
 			style={cssProperties}
 			onClick={onClick}
+			onMouseDown={onMouseDown}
+			onMouseUp={onMouseUp}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
 			onTouchStart={onTouchStart}
 			onTouchEnd={onTouchEnd}
 			onTouchCancel={onTouchCancel}
+			onTouchMove={onTouchMove}
 			onPointerDown={onPointerDown}
 			onPointerUp={onPointerUp}
 			onPointerCancel={onPointerCancel}
