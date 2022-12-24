@@ -36,22 +36,27 @@ export interface IFrameworkSettings {
 }
 
 interface FrameworkSettingsProps {
-	overrides: Partial<IFrameworkSettings>;
+	overrides?: Partial<IFrameworkSettings>;
 }
 
 const FrameworkSettings: React.FC<FrameworkSettingsProps> = (props) => {
 	let settings = defaultSettings;
-	let key: keyof IFrameworkSettings;
-	for (key in props.overrides) {
-		if (Object.hasOwn(props.overrides, key)) {
-			if (key !== 'toasts') {
-				settings[key] = { ...settings[key], ...props.overrides[key] };
-			} else {
-				let toastKey: keyof IFrameworkSettings['toasts'];
-				for (toastKey in props.overrides.toasts) {
-					if (!props.overrides.toasts) continue;
-					// @ts-ignore
-					settings.toasts[toastKey] = { ...settings.toasts[toastKey], ...props.overrides.toasts[toastKey] };
+	if (props.overrides) {
+		let key: keyof IFrameworkSettings;
+		for (key in props.overrides) {
+			if (Object.hasOwn(props.overrides, key)) {
+				if (key !== 'toasts') {
+					settings[key] = { ...settings[key], ...props.overrides[key] };
+				} else {
+					let toastKey: keyof IFrameworkSettings['toasts'];
+					for (toastKey in props.overrides.toasts) {
+						if (!props.overrides.toasts) continue;
+						// @ts-ignore
+						settings.toasts[toastKey] = {
+							...settings.toasts[toastKey],
+							...props.overrides.toasts[toastKey]
+						};
+					}
 				}
 			}
 		}
