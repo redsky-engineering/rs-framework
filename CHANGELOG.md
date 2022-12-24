@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://gitlab.com/redsky_public/framework/compare/v1.1.1...v1.1.2) (2022-12-24)
+
+### Bug Fixes
+
+-   **box:** Added other missing events ([1e1d455](https://gitlab.com/redsky_public/framework/commit/1e1d455eaf49ba6804e9f165a041c807694b8feb))
+
 ### [1.1.1](https://gitlab.com/redsky_public/framework/compare/v1.1.0...v1.1.1) (2022-12-24)
 
 ### Bug Fixes
