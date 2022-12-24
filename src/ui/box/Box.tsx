@@ -1,4 +1,4 @@
-import React, { CSSProperties, PropsWithChildren, MouseEvent } from 'react';
+import React, { CSSProperties, TouchEvent, MouseEvent, PointerEvent } from 'react';
 import { transformProps } from '../../utils/internal';
 import { ICommon } from '../../common/Interfaces';
 import classNames from 'classnames';
@@ -14,23 +14,55 @@ export interface BoxProps
 		ICommon.InteractProps<HTMLDivElement>,
 		ICommon.HtmlElementProps {
 	style?: CSSProperties;
+
 	// Spacing props
-	boxSizing?: string;
+	boxSizing?: 'border-box' | 'content-box' | string;
 
 	// Display properties
-
-	overflow?: string;
+	overflow?: 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' | 'hidden visible' | string;
 	textOverflow?: 'clip' | 'ellipsis' | string | 'initial' | 'inherit';
 	visibility?: 'visible' | 'hidden' | 'collapse' | 'initial' | 'inherit';
-	whiteSpace?: string;
+	whiteSpace?: 'normal' | 'nowrap' | 'pre' | 'pre-wrap' | 'pre-line' | 'break-spaces' | string;
 
 	// Events
+	// Mouse Events (mouse)
 	onMouseEnter?: (event: MouseEvent) => void;
 	onMouseLeave?: (event: MouseEvent) => void;
+	onMouseMove?: (event: MouseEvent) => void;
+	// Touch events (trackpad/touch)
+	onTouchStart?: (event: TouchEvent) => void;
+	onTouchEnd?: (event: TouchEvent) => void;
+	onTouchCancel?: (event: TouchEvent) => void;
+	// Pointer events (mouse and touch and pen)
+	onPointerDown?: (event: PointerEvent) => void;
+	onPointerUp?: (event: PointerEvent) => void;
+	onPointerCancel?: (event: PointerEvent) => void;
+	onPointerMove?: (event: PointerEvent) => void;
+	onPointerEnter?: (event: PointerEvent) => void;
+	onPointerLeave?: (event: PointerEvent) => void;
 }
 
 const Box: React.FC<BoxProps> = (props) => {
-	const { elementRef, className, onClick, onMouseEnter, onMouseLeave, id, style, ...other } = props;
+	const {
+		elementRef,
+		className,
+		onClick,
+		onMouseEnter,
+		onMouseLeave,
+		onMouseMove,
+		onTouchStart,
+		onTouchEnd,
+		onTouchCancel,
+		onPointerDown,
+		onPointerUp,
+		onPointerCancel,
+		onPointerMove,
+		onPointerEnter,
+		onPointerLeave,
+		id,
+		style,
+		...other
+	} = props;
 	let cssProperties = transformProps(other);
 	if (style) cssProperties = { ...cssProperties, ...style };
 
@@ -40,9 +72,19 @@ const Box: React.FC<BoxProps> = (props) => {
 			ref={elementRef}
 			className={classNames('rsBox', className)}
 			style={cssProperties}
-			onClick={onClick || undefined}
-			onMouseEnter={props.onMouseEnter}
-			onMouseLeave={props.onMouseLeave}
+			onClick={onClick}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+			onMouseMove={onMouseMove}
+			onTouchStart={onTouchStart}
+			onTouchEnd={onTouchEnd}
+			onTouchCancel={onTouchCancel}
+			onPointerDown={onPointerDown}
+			onPointerUp={onPointerUp}
+			onPointerCancel={onPointerCancel}
+			onPointerMove={onPointerMove}
+			onPointerEnter={onPointerEnter}
+			onPointerLeave={onPointerLeave}
 		>
 			{props.children}
 		</div>

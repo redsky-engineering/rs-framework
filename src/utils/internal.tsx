@@ -219,7 +219,7 @@ export function extractMarginProps(props: ICommon.MarginProps): { marginProps: I
 }
 
 /**
- * This method is used to help shorthand extracting keys from props. a good example of this is done on the LabelInputText
+ * This method is used to help shorthand extracting keys from props. A good example of this is done on the LabelInputText
  * @param object
  * @param properties
  */
