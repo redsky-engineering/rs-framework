@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://gitlab.com/redsky_public/framework/compare/v1.1.0...v1.1.1) (2022-12-24)
+
+### Bug Fixes
+
+-   **framework-settings:** Made overrides optional ([c361ae8](https://gitlab.com/redsky_public/framework/commit/c361ae8a54689582d1ee63fd25da128bf60b0362))
+
 ## [1.1.0](https://gitlab.com/redsky_public/framework/compare/v1.0.0...v1.1.0) (2022-12-24)
 
 ### Features
