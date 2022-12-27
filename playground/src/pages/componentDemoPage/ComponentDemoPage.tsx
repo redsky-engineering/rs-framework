@@ -24,7 +24,8 @@ import {
 	popupController,
 	LabelInputText,
 	LabelSelect,
-	LabelInputTextarea
+	LabelInputTextarea,
+	Paper
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
@@ -797,6 +798,10 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				<Box bgColor={'green'} width={200} height={200} mb={200} />
 			</AnimateOnScroll>
 
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Paper
+			</Label>
+			<Paper>Hello World!!!! I am inside a paper</Paper>
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Popup Test
 			</Label>
