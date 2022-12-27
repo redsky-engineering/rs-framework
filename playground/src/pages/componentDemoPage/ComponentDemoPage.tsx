@@ -853,12 +853,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					currentPage={1}
 					pageTabsToDisplay={5}
 					totalContent={100}
-					// hidePrevButton
-					// hideNextButton
-					// hideFirstPageTab
-					// hideLastPageTab
-					// showLastButton
-					// showFirstButton
 					onPageSelect={(value) => {
 						console.log(value);
 					}}
