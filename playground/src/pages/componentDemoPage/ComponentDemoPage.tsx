@@ -851,7 +851,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				<Pagination
 					contentPerPage={10}
 					currentPage={1}
-					pageTabsToDisplay={5}
 					totalContent={100}
 					onPageSelect={(value) => {
 						console.log(value);
@@ -860,7 +859,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				<Pagination
 					contentPerPage={10}
 					currentPage={1}
-					pageTabsToDisplay={5}
 					totalContent={100}
 					hidePrevButton
 					hideNextButton
@@ -871,7 +869,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				<Pagination
 					contentPerPage={10}
 					currentPage={1}
-					pageTabsToDisplay={5}
 					totalContent={100}
 					hideFirstPageTab
 					hideLastPageTab
@@ -882,7 +879,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				<Pagination
 					contentPerPage={10}
 					currentPage={1}
-					pageTabsToDisplay={5}
 					totalContent={100}
 					showLastButton
 					showFirstButton

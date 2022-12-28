@@ -12,7 +12,6 @@ export interface PaginationProps {
 	totalContent: number; //The total number of items in the database
 	contentPerPage: number; // How many items you will show per page
 	currentPage: number; //Active Page in view;
-	pageTabsToDisplay: number;
 	onPageSelect: (currentPage: number) => void;
 	hidePrevButton?: boolean;
 	hideNextButton?: boolean;

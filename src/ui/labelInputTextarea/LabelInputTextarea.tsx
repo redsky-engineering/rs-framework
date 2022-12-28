@@ -42,16 +42,10 @@ const LabelInputTextarea: React.FC<LabelInputTextareaProps> = (props) => {
 	);
 
 	const { labelInputTextArea } = useContext(FrameworkContext);
-	let { variant, weight, ...otherLabelProps } = labelInputTextArea;
 
 	return (
 		<Box className={classNames('rsLabelInputTextarea', className)} {...boxMarginProps} {...htmlProps}>
-			<Label
-				className={classNames({ required: inputTextareaProps.required })}
-				variant={variant}
-				weight={weight}
-				{...otherLabelProps}
-			>
+			<Label className={classNames({ required: inputTextareaProps.required })} {...labelInputTextArea}>
 				{labelTitle}
 			</Label>
 			<InputTextarea {...inputTextareaProps} />
