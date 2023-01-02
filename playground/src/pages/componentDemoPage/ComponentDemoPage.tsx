@@ -24,7 +24,8 @@ import {
 	popupController,
 	LabelInputText,
 	LabelSelect,
-	LabelInputTextarea
+	LabelInputTextarea,
+	Pagination
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
@@ -842,6 +843,50 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			>
 				Click Me for Fade In Animation
 			</Button>
+
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Pagination
+			</Label>
+			<Box display={'grid'} gap={16}>
+				<Pagination
+					contentPerPage={10}
+					currentPage={1}
+					totalContent={100}
+					onPageSelect={(value) => {
+						console.log(value);
+					}}
+				/>
+				<Pagination
+					contentPerPage={10}
+					currentPage={1}
+					totalContent={100}
+					hidePrevButton
+					hideNextButton
+					onPageSelect={(value) => {
+						console.log(value);
+					}}
+				/>
+				<Pagination
+					contentPerPage={10}
+					currentPage={1}
+					totalContent={100}
+					hideFirstPageTab
+					hideLastPageTab
+					onPageSelect={(value) => {
+						console.log(value);
+					}}
+				/>
+				<Pagination
+					contentPerPage={10}
+					currentPage={1}
+					totalContent={100}
+					showLastButton
+					showFirstButton
+					onPageSelect={(value) => {
+						console.log(value);
+					}}
+				/>
+			</Box>
 		</Page>
 	);
 };

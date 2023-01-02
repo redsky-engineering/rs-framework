@@ -42,16 +42,10 @@ const LabelInputText: React.FC<LabelInputTextProps> = (props) => {
 	);
 
 	const { labelInputText } = useContext(FrameworkContext);
-	let { variant, weight, ...otherLabelProps } = labelInputText;
 
 	return (
 		<Box className={classNames('rsLabelInputText', className)} {...boxMarginProps} {...htmlProps}>
-			<Label
-				className={classNames({ required: inputProps.required })}
-				variant={variant}
-				weight={weight}
-				{...otherLabelProps}
-			>
+			<Label className={classNames({ required: inputProps.required })} {...labelInputText}>
 				{labelTitle}
 			</Label>
 			<InputText {...inputProps} />
