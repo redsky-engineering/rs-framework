@@ -33,11 +33,10 @@ function LabelSelect<Option, IsMulti extends boolean = false, Group extends Grou
 	);
 
 	const { labelSelect } = useContext(FrameworkContext);
-	let { variant, weight, ...otherLabelProps } = labelSelect;
 
 	return (
 		<Box className={classNames('rsLabelInputText', className)} {...boxMarginProps} {...htmlProps}>
-			<Label className={classNames({ required })} variant={variant} weight={weight} {...otherLabelProps}>
+			<Label className={classNames({ required })} {...labelSelect}>
 				{labelTitle}
 			</Label>
 			<Select {...selectProps} />

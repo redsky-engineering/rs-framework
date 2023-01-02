@@ -1,0 +1,80 @@
+@font-face {
+	font-family: 'pagination';
+	src: url('data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBccAAAC8AAAAYGNtYXAXVtKKAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZgvryDsAAAF4AAAB2GhlYWQitK2HAAADUAAAADZoaGVhB8IDyQAAA4gAAAAkaG10eBYAAdgAAAOsAAAAIGxvY2EBigEQAAADzAAAABJtYXhwAAsAJAAAA+AAAAAgbmFtZeXGbLQAAAQAAAABqnBvc3QAAwAAAAAFrAAAACAAAwOaAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpAwPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg6QP//f//AAAAAAAg6QD//f//AAH/4xcEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABANL/2wMTA6UAFgAANwkBLgE1NDY3NjIXARYUBwEGIicuATftAWT+nA0ODg0bTBoBpRsb/lsaTBsaARtdAWMBZA0hExIhDRsb/lwbTBv+XBsbG0wbAAAAAQDt/9sDEwPAABYAACUJATY0Jy4BIyIGBwEGFBcBFjI3PgEnAxP+nAFkGxsNIhISIQ3+WxsbAaUbSxsaARtdAWMBZBtLGw0ODg3+XBtMG/5cGxsbTBsAAAIAAP/AA+cDwAATACEAACUJATY0JyYiBwEGFBcBFjI3NjQnATIWFREUBiMiJjURNDYD5v61AUwZGRlGGf54GRkBiBlGGRgZ/G8kMjIkIzIydAFMAUwZRhkZGf55GUcZ/nkZGRhHGANMMiP8qiMyMiMDViMyAAAAAAIAGf/ABAADwAATACEAABMJAQYUFxYyNwE2NCcBJiIHBhQXJTIWFREUBiMiJjURNDYZAUz+tBkZGUYZAYgZGf54GUYZGBgDkiMyMiMkMjIDDP60/rQZRhkZGQGHGUcZAYgZGRlHGLQyI/yqIzIyIwNWIzIAAQAAAAEAAInikK1fDzz1AAsEAAAAAADfyrSFAAAAAN/KtIUAAP/ABAADwAAAAAgAAgAAAAAAAAABAAADwP/AAAAEAAAAAAAEAAABAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAAAAAAAIAAAAEAADSBAAA7QQAAAAEAAAZAAAAAAAKABQAHgBKAHYAsgDsAAAAAQAAAAgAIgACAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAoAAAABAAAAAAACAAcAewABAAAAAAADAAoAPwABAAAAAAAEAAoAkAABAAAAAAAFAAsAHgABAAAAAAAGAAoAXQABAAAAAAAKABoArgADAAEECQABABQACgADAAEECQACAA4AggADAAEECQADABQASQADAAEECQAEABQAmgADAAEECQAFABYAKQADAAEECQAGABQAZwADAAEECQAKADQAyHBhZ2luYXRpb24AcABhAGcAaQBuAGEAdABpAG8AblZlcnNpb24gMS4wAFYAZQByAHMAaQBvAG4AIAAxAC4AMHBhZ2luYXRpb24AcABhAGcAaQBuAGEAdABpAG8AbnBhZ2luYXRpb24AcABhAGcAaQBuAGEAdABpAG8AblJlZ3VsYXIAUgBlAGcAdQBsAGEAcnBhZ2luYXRpb24AcABhAGcAaQBuAGEAdABpAG8AbkZvbnQgZ2VuZXJhdGVkIGJ5IEljb01vb24uAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=')
+		format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+.rsPagination {
+	$icomoon-font-family: 'pagination' !default;
+
+	$pagination-first_page: '\e902';
+	$pagination-last_page: '\e903';
+	$pagination-chevron-right: '\e900';
+	$pagination-chevron-left: '\e901';
+
+	[class^='pagination-'],
+	[class*=' pagination-'] {
+		/* use !important to prevent issues with browser extensions that change fonts */
+		font-family: '#{$icomoon-font-family}' !important;
+		speak: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+
+		/* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.pagination-first-page {
+		&:before {
+			content: $pagination-first-page;
+		}
+	}
+	.pagination-last-page {
+		&:before {
+			content: $pagination-last-page;
+		}
+	}
+	.pagination-chevron-right {
+		&:before {
+			content: $pagination-chevron-right;
+		}
+	}
+	.pagination-chevron-left {
+		&:before {
+			content: $pagination-chevron-left;
+		}
+	}
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+
+	.rsIcon {
+		-webkit-tap-highlight-color: transparent;
+		&.disabled {
+			color: grey;
+			cursor: default !important;
+		}
+	}
+
+	.selectedPageTab {
+		background: red;
+	}
+	.notSelectedPageTab {
+		background: white;
+		&:hover {
+			background: pink;
+		}
+	}
+	.ellipsesDots {
+		cursor: default;
+	}
+}

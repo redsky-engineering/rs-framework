@@ -18,6 +18,14 @@ const defaultSettings: IFrameworkSettings = {
 			title: 'subtitle1',
 			message: 'body1'
 		}
+	},
+	pagination: {
+		icons: {
+			firstButton: 'pagination-first-page',
+			prevButton: 'pagination-chevron-left',
+			nextButton: 'pagination-chevron-right',
+			lastButton: 'pagination-last-page'
+		}
 	}
 };
 
@@ -33,6 +41,9 @@ export interface IFrameworkSettings {
 		icons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: string };
 		labelVariants: { title: 'subtitle1'; message: 'body1' };
 	};
+	pagination: {
+		icons: { [key in 'prevButton' | 'nextButton' | 'firstButton' | 'lastButton']: string };
+	};
 }
 
 interface FrameworkSettingsProps {
@@ -41,22 +52,18 @@ interface FrameworkSettingsProps {
 
 const FrameworkSettings: React.FC<FrameworkSettingsProps> = (props) => {
 	let settings = defaultSettings;
+	let key: keyof IFrameworkSettings;
 	if (props.overrides) {
-		let key: keyof IFrameworkSettings;
 		for (key in props.overrides) {
 			if (Object.hasOwn(props.overrides, key)) {
-				if (key !== 'toasts') {
-					settings[key] = { ...settings[key], ...props.overrides[key] };
-				} else {
-					let toastKey: keyof IFrameworkSettings['toasts'];
-					for (toastKey in props.overrides.toasts) {
-						if (!props.overrides.toasts) continue;
-						// @ts-ignore
-						settings.toasts[toastKey] = {
-							...settings.toasts[toastKey],
-							...props.overrides.toasts[toastKey]
-						};
+				if (key === 'toasts' || key === 'pagination') {
+					let indexKey: keyof IFrameworkSettings[typeof key];
+					for (indexKey in props.overrides[key]) {
+						if (!props.overrides[key]) continue;
+						settings[key][indexKey] = { ...settings[key][indexKey], ...props.overrides[key]![indexKey] };
 					}
+				} else {
+					settings[key] = { ...settings[key], ...props.overrides[key] };
 				}
 			}
 		}

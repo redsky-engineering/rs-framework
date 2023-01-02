@@ -69,6 +69,9 @@ export { RsValidator, RsValidatorEnum } from './form/Validator';
 export { AnimateOnScroll, useInitAnimateOnScroll } from './animateOnScroll/AnimateOnScroll';
 export type { AnimateOnScrollProps } from './animateOnScroll/AnimateOnScroll';
 
+export { Pagination } from './pagination/Pagination';
+export type { PaginationProps } from './pagination/Pagination';
+
 export { RsDataTable } from './dataTable/DataTable';
 export type { RsDataTableProps, MatchModeType, DataTableFilters } from './dataTable/DataTable';
 
