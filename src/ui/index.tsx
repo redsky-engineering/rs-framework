@@ -75,5 +75,8 @@ export type { PaginationProps } from './pagination/Pagination';
 export { RsDataTable } from './dataTable/DataTable';
 export type { RsDataTableProps, MatchModeType, DataTableFilters } from './dataTable/DataTable';
 
+export { Paper } from './paper/Paper';
+export type { PaperProps } from './paper/Paper';
+
 export { FrameworkSettings } from './frameworkSettings/FrameworkSettings';
 export type { IFrameworkSettings } from './frameworkSettings/FrameworkSettings';
