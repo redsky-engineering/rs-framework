@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://gitlab.com/redsky_public/framework/compare/v1.1.2...v1.2.0) (2023-01-02)
+
+### Features
+
+-   **pagination:** - Cleaned up Pagination, and some other misc code on the LabelInputText.tsx, LabelInputTextarea.tsx, and LabelSelect.tsx. ([0ef8aef](https://gitlab.com/redsky_public/framework/commit/0ef8aef11f5517edbe730b99866f0c48568e0125))
+-   **Pagination:** Added a Pagination component to the framework. ([1376a08](https://gitlab.com/redsky_public/framework/commit/1376a08db167749c43f1f04908d965ed19a493e2))
+-   **paper:** Created a rsPaper component. ([486f076](https://gitlab.com/redsky_public/framework/commit/486f07645280b21e27189c0f63a878aea2d82d6a))
+
+### Bug Fixes
+
+-   Merged Master into my branch. ([d5baf92](https://gitlab.com/redsky_public/framework/commit/d5baf923968bb5d7fe97cf1b7bf7203d6ca598c9))
+-   Removed commented out code from demo page. ([4410a98](https://gitlab.com/redsky_public/framework/commit/4410a983940524ed26f9f1a2d933a6178290fbce))
+
 ### [1.1.2](https://gitlab.com/redsky_public/framework/compare/v1.1.1...v1.1.2) (2022-12-24)
 
 ### Bug Fixes
