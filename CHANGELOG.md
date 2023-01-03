@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://gitlab.com/redsky_public/framework/compare/v1.2.0...v1.2.1) (2023-01-03)
+
+### Bug Fixes
+
+-   **hook:** Fixed initial use of useCurrentPath() ([62eddec](https://gitlab.com/redsky_public/framework/commit/62eddec35835a46056bc0e6bdd3e10c508f9da88))
+
 ## [1.2.0](https://gitlab.com/redsky_public/framework/compare/v1.1.2...v1.2.0) (2023-01-02)
 
 ### Features
