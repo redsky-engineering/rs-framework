@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Page.scss';
-import { Box } from '../../ui';
+import { Box } from '../../ui/box/Box';
 import classNames from 'classnames';
 import { useEffect } from 'react';
 import { Router } from '../Router';
