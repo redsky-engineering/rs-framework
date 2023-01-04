@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://gitlab.com/redsky_public/framework/compare/v1.3.0...v1.3.1) (2023-01-04)
+
+### Bug Fixes
+
+-   **page:** Fix circular include ([8efc6cf](https://gitlab.com/redsky_public/framework/commit/8efc6cf49473d6b0c11fbfb257f9a1eb0bd5c312))
+
 ## [1.3.0](https://gitlab.com/redsky_public/framework/compare/v1.2.1...v1.3.0) (2023-01-04)
 
 ### Features
