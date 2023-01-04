@@ -25,7 +25,7 @@ import {
 	LabelInputText,
 	LabelSelect,
 	LabelInputTextarea,
-	Paper
+	Paper,
 	Pagination
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
@@ -882,6 +882,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					}}
 				/>
 				<Pagination
+					isLinkButton
+					linkPrefix={'/test/'}
 					contentPerPage={10}
 					currentPage={1}
 					totalContent={100}

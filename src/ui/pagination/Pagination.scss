@@ -60,18 +60,14 @@
 	.rsIcon {
 		-webkit-tap-highlight-color: transparent;
 		&.disabled {
-			color: grey;
-			cursor: default !important;
+			cursor: default;
 		}
 	}
 
 	.selectedPageTab {
-		background: red;
 	}
 	.notSelectedPageTab {
-		background: white;
 		&:hover {
-			background: pink;
 		}
 	}
 	.ellipsesDots {

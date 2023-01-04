@@ -1,0 +1,51 @@
+@import 'src/themes/themes';
+
+.App .rsPagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+
+	.rsButton.iconNone {
+		border-radius: 0;
+		background: transparent;
+		padding: 8px;
+
+		&:disabled {
+			cursor: not-allowed;
+			.rsIcon {
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	.rsIcon {
+		-webkit-tap-highlight-color: transparent;
+		color: theme-var($mediumGray);
+		&.disabled {
+			color: theme-var($lighterGray);
+		}
+	}
+
+	.selectedPageTab {
+		border-radius: 0;
+		background: transparent;
+		color: orange;
+		border-bottom: 1px solid orange;
+		padding: 8px;
+	}
+
+	.notSelectedPageTab {
+		border-radius: 0;
+		color: theme-var($mediumGray);
+		background: transparent;
+		&:hover {
+			background: transparent;
+		}
+	}
+
+	.ellipsesDots {
+		cursor: default;
+		color: theme-var($mediumGray);
+	}
+}

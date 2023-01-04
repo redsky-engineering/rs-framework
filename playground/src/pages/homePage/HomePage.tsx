@@ -16,21 +16,15 @@ const HomePage: React.FC<{}> = (props) => {
 			<Label variant={'h3'} weight={'medium'}>
 				Click a button to go to the sandbox pages
 			</Label>
-			<Link path={'/component-demo'}>
-				<Button mt={24} look={'containedPrimary'}>
-					Components Sandbox
-				</Button>
-			</Link>
-			<Link path={'/router'}>
-				<Button mt={24} look={'containedPrimary'}>
-					Router (996) Sandbox
-				</Button>
-			</Link>
-			<Link path={'/data-table'}>
-				<Button mt={24} look={'containedPrimary'}>
-					RsDataTable
-				</Button>
-			</Link>
+			<Button path={'/component-demo'} mt={24} look={'containedPrimary'}>
+				Components Sandbox
+			</Button>
+			<Button path={'/router'} mt={24} look={'containedPrimary'}>
+				Router (996) Sandbox
+			</Button>
+			<Button path={'/data-table'} mt={24} look={'containedPrimary'}>
+				RsDataTable
+			</Button>
 		</Page>
 	);
 };

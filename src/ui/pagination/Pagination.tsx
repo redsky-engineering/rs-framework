@@ -7,6 +7,7 @@ import { AppUtils } from '../../utils';
 import { Icon } from '../icon/Icon';
 import classNames from 'classnames';
 import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
+import { Link } from '../../996';
 
 export interface PaginationProps {
 	totalContent: number; //The total number of items in the database
@@ -19,6 +20,8 @@ export interface PaginationProps {
 	hideLastPageTab?: boolean;
 	showFirstButton?: boolean;
 	showLastButton?: boolean;
+	isLinkButton?: boolean;
+	linkPrefix?: string;
 	//Needs to be implemented
 	//viewRange: number
 }
@@ -70,11 +73,21 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
 		return [
 			...(!totalPagesToView.includes(1) && !props.hideFirstPageTab
-				? [renderTab(1), <span className={'ellipsesDots'}>...</span>]
+				? [
+						renderTab(1),
+						<span key={'ellipsesLeft'} className={'ellipsesDots'}>
+							...
+						</span>
+				  ]
 				: []),
 			...pageTabs,
 			...(!totalPagesToView.includes(totalPages) && !props.hideLastPageTab
-				? [<span className={'ellipsesDots'}>...</span>, renderTab(totalPages)]
+				? [
+						<span key={'ellipsesRight'} className={'ellipsesDots'}>
+							...
+						</span>,
+						renderTab(totalPages)
+				  ]
 				: [])
 		];
 	}
@@ -82,6 +95,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 	function renderTab(value: number): ReactNode {
 		return (
 			<Button
+				path={props.isLinkButton ? `${props.linkPrefix || '/'}${value}` : undefined}
 				key={value}
 				className={classNames(currentPage === value ? 'selectedPageTab' : 'notSelectedPageTab')}
 				look={'none'}
@@ -108,21 +122,40 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 						setCurrentPage(1);
 						props.onPageSelect(1);
 					}}
-					cursorPointer
+					cursorPointer={currentPage !== 1}
 				/>
 			)}
 			{!!getTotalPageCount() && !props.hidePrevButton && (
-				<Icon
-					className={classNames({ disabled: currentPage === 1 })}
-					iconImg={icons.prevButton}
+				<Button
+					disabled={currentPage === 1}
+					path={props.isLinkButton ? `${props.linkPrefix || '/'}${currentPage - 1}` : undefined}
+					look={'iconNone'}
 					onClick={() => {
 						if (currentPage === 1) return;
 						let nextPage = currentPage - 1 < 1 ? 1 : currentPage - 1;
 						setCurrentPage(nextPage);
 						props.onPageSelect(nextPage);
 					}}
-					cursorPointer
+					icon={[
+						{
+							position: 'LEFT',
+							className: classNames({ disabled: currentPage === 1 }),
+							iconImg: icons.prevButton,
+							cursorPointer: false
+						}
+					]}
 				/>
+				// <Icon
+				// 	className={classNames({ disabled: currentPage === 1 })}
+				// 	iconImg={icons.prevButton}
+				// 	onClick={() => {
+				// 		if (currentPage === 1) return;
+				// 		let nextPage = currentPage - 1 < 1 ? 1 : currentPage - 1;
+				// 		setCurrentPage(nextPage);
+				// 		props.onPageSelect(nextPage);
+				// 	}}
+				// 	cursorPointer
+				// />
 			)}
 			{renderPageTabs()}
 			{!!getTotalPageCount() && !props.hideNextButton && (
