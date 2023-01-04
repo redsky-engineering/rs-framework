@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://gitlab.com/redsky_public/framework/compare/v1.2.1...v1.3.0) (2023-01-04)
+
+### Features
+
+-   **pagination:** Added link buttons to pagination ([8acdab1](https://gitlab.com/redsky_public/framework/commit/8acdab14aee5a3743fcfb33a33d17a376f401402))
+
 ### [1.2.1](https://gitlab.com/redsky_public/framework/compare/v1.2.0...v1.2.1) (2023-01-03)
 
 ### Bug Fixes
