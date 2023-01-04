@@ -4,10 +4,8 @@ import { Box } from '../box/Box';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 import { Button } from '../button/Button';
 import { AppUtils } from '../../utils';
-import { Icon } from '../icon/Icon';
 import classNames from 'classnames';
 import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
-import { Link } from '../../996';
 
 export interface PaginationProps {
 	totalContent: number; //The total number of items in the database
@@ -114,15 +112,22 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 	return (
 		<Box className={'rsPagination'}>
 			{!!getTotalPageCount() && props.showFirstButton && (
-				<Icon
-					className={classNames({ disabled: currentPage === 1 })}
-					iconImg={icons.firstButton}
+				<Button
+					disabled={currentPage === 1}
+					path={props.isLinkButton ? `${props.linkPrefix || '/'}1` : undefined}
+					look={'iconNone'}
 					onClick={() => {
 						if (currentPage === 1) return;
 						setCurrentPage(1);
 						props.onPageSelect(1);
 					}}
-					cursorPointer={currentPage !== 1}
+					icon={[
+						{
+							position: 'LEFT',
+							className: classNames({ disabled: currentPage === 1 }),
+							iconImg: icons.firstButton
+						}
+					]}
 				/>
 			)}
 			{!!getTotalPageCount() && !props.hidePrevButton && (
@@ -140,47 +145,49 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 						{
 							position: 'LEFT',
 							className: classNames({ disabled: currentPage === 1 }),
-							iconImg: icons.prevButton,
-							cursorPointer: false
+							iconImg: icons.prevButton
 						}
 					]}
 				/>
-				// <Icon
-				// 	className={classNames({ disabled: currentPage === 1 })}
-				// 	iconImg={icons.prevButton}
-				// 	onClick={() => {
-				// 		if (currentPage === 1) return;
-				// 		let nextPage = currentPage - 1 < 1 ? 1 : currentPage - 1;
-				// 		setCurrentPage(nextPage);
-				// 		props.onPageSelect(nextPage);
-				// 	}}
-				// 	cursorPointer
-				// />
 			)}
 			{renderPageTabs()}
 			{!!getTotalPageCount() && !props.hideNextButton && (
-				<Icon
-					className={classNames({ disabled: currentPage === getTotalPageCount() })}
-					iconImg={icons.nextButton}
+				<Button
+					disabled={currentPage === getTotalPageCount()}
+					path={props.isLinkButton ? `${props.linkPrefix || '/'}${currentPage + 1}` : undefined}
+					look={'iconNone'}
 					onClick={() => {
 						if (currentPage === getTotalPageCount()) return;
 						let nextPage = getTotalPageCount() < currentPage + 1 ? getTotalPageCount() : currentPage + 1;
 						setCurrentPage(nextPage);
 						props.onPageSelect(nextPage);
 					}}
-					cursorPointer
+					icon={[
+						{
+							position: 'LEFT',
+							className: classNames({ disabled: currentPage === getTotalPageCount() }),
+							iconImg: icons.nextButton
+						}
+					]}
 				/>
 			)}
 			{!!getTotalPageCount() && props.showLastButton && (
-				<Icon
-					className={classNames({ disabled: currentPage === getTotalPageCount() })}
-					iconImg={icons.lastButton}
+				<Button
+					disabled={currentPage === getTotalPageCount()}
+					path={props.isLinkButton ? `${props.linkPrefix || '/'}${getTotalPageCount()}` : undefined}
+					look={'iconNone'}
 					onClick={() => {
 						if (currentPage === getTotalPageCount()) return;
 						setCurrentPage(getTotalPageCount);
 						props.onPageSelect(getTotalPageCount());
 					}}
-					cursorPointer
+					icon={[
+						{
+							position: 'LEFT',
+							className: classNames({ disabled: currentPage === getTotalPageCount() }),
+							iconImg: icons.lastButton
+						}
+					]}
 				/>
 			)}
 		</Box>

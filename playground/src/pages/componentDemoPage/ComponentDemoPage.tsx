@@ -3,7 +3,6 @@ import { Page } from '../../../../src/996';
 import {
 	Button,
 	Chip,
-	Icon,
 	Label,
 	rsToastify,
 	Box,
