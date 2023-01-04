@@ -11,7 +11,7 @@ export interface PaginationProps {
 	totalContent: number; //The total number of items in the database
 	contentPerPage: number; // How many items you will show per page
 	currentPage: number; //Active Page in view;
-	onPageSelect: (currentPage: number) => void;
+	onPageSelect?: (currentPage: number) => void;
 	hidePrevButton?: boolean;
 	hideNextButton?: boolean;
 	hideFirstPageTab?: boolean;
@@ -63,6 +63,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 	}
 
 	function renderPageTabs() {
+		if (!totalPagesToView.length) return null;
 		const pageTabs: React.ReactNode[] = totalPagesToView.map((item) => {
 			return renderTab(item);
 		});
@@ -101,7 +102,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 				onClick={() => {
 					AppUtils.hapticFeedBack('Light');
 					setCurrentPage(value);
-					props.onPageSelect(value);
+					props.onPageSelect?.(value);
 				}}
 			>
 				{value}
@@ -119,7 +120,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 					onClick={() => {
 						if (currentPage === 1) return;
 						setCurrentPage(1);
-						props.onPageSelect(1);
+						props.onPageSelect?.(1);
 					}}
 					icon={[
 						{
@@ -139,7 +140,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 						if (currentPage === 1) return;
 						let nextPage = currentPage - 1 < 1 ? 1 : currentPage - 1;
 						setCurrentPage(nextPage);
-						props.onPageSelect(nextPage);
+						props.onPageSelect?.(nextPage);
 					}}
 					icon={[
 						{
@@ -160,7 +161,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 						if (currentPage === getTotalPageCount()) return;
 						let nextPage = getTotalPageCount() < currentPage + 1 ? getTotalPageCount() : currentPage + 1;
 						setCurrentPage(nextPage);
-						props.onPageSelect(nextPage);
+						props.onPageSelect?.(nextPage);
 					}}
 					icon={[
 						{
@@ -179,7 +180,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 					onClick={() => {
 						if (currentPage === getTotalPageCount()) return;
 						setCurrentPage(getTotalPageCount);
-						props.onPageSelect(getTotalPageCount());
+						props.onPageSelect?.(getTotalPageCount());
 					}}
 					icon={[
 						{
