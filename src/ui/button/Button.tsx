@@ -5,6 +5,7 @@ import { rippleEffect, transformProps } from '../../utils/internal';
 import { ICommon } from '../../common/Interfaces';
 import { Icon, IconProps } from '../icon/Icon';
 import { ObjectUtils } from '../../utils';
+import { Link, LinkProps } from '../../996';
 
 export interface ButtonProps
 	extends ICommon.PaletteProps,
@@ -12,6 +13,7 @@ export interface ButtonProps
 		ICommon.SpacingProps,
 		ICommon.BorderProps,
 		ICommon.InteractProps<HTMLButtonElement>,
+		Partial<Pick<LinkProps, 'path' | 'external' | 'target'>>,
 		Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
 	look:
 		| 'containedPrimary'
@@ -23,6 +25,7 @@ export interface ButtonProps
 		| 'textPrimary'
 		| 'textSecondary'
 		| 'textTertiary'
+		| 'iconNone'
 		| 'iconPrimary'
 		| 'iconSecondary'
 		| string;
@@ -90,22 +93,34 @@ const Button: React.FC<ButtonProps> = (props) => {
 		return iconButton;
 	}
 
-	return (
-		<button
-			id={id}
-			className={classNames('rsButton', className, look, { small })}
-			type={type || 'button'}
-			onClick={(event) => {
-				if (!disableRipple) rippleEffect(event);
-				if (onClick) onClick(event);
-			}}
-			ref={elementRef}
-			style={transformProps(styleProps)}
-			{...buttonProps}
-		>
-			{renderChildren()}
-		</button>
-	);
+	function renderButton() {
+		return (
+			<button
+				id={id}
+				className={classNames('rsButton', className, look, { small })}
+				type={type || 'button'}
+				onClick={(event) => {
+					if (!disableRipple) rippleEffect(event);
+					if (onClick) onClick(event);
+				}}
+				ref={elementRef}
+				style={transformProps(styleProps)}
+				{...buttonProps}
+			>
+				{renderChildren()}
+				{props.path && !props.disabled && (
+					<Link
+						className={'rsButtonLink'}
+						path={props.path}
+						external={props.external}
+						target={props.target}
+					/>
+				)}
+			</button>
+		);
+	}
+
+	return renderButton();
 };
 
 export { Button };

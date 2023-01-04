@@ -1,0 +1,28 @@
+@import 'src/themes/themes';
+
+.App .rsPagination {
+	gap: 16px;
+
+	.rsIcon {
+		color: theme-var($mediumGray);
+		&.disabled {
+			color: theme-var($lighterGray);
+		}
+	}
+
+	.selectedPageTab {
+		color: orange;
+		border-bottom: 1px solid orange;
+	}
+
+	.notSelectedPageTab {
+		color: theme-var($mediumGray);
+		&:hover {
+			background: transparent;
+		}
+	}
+
+	.ellipsesDots {
+		color: theme-var($mediumGray);
+	}
+}

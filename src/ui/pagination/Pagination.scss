@@ -8,6 +8,11 @@
 }
 
 .rsPagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+
 	$icomoon-font-family: 'pagination' !default;
 
 	$pagination-first_page: '\e902';
@@ -52,28 +57,36 @@
 		}
 	}
 
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
+	.rsButton.iconNone {
+		border-radius: 0;
+		background: transparent;
+		padding: 8px;
+
+		&:disabled {
+			cursor: not-allowed;
+			.rsIcon {
+				cursor: not-allowed;
+			}
+		}
+	}
 
 	.rsIcon {
 		-webkit-tap-highlight-color: transparent;
-		&.disabled {
-			color: grey;
-			cursor: default !important;
-		}
 	}
 
 	.selectedPageTab {
-		background: red;
+		border-radius: 0;
+		background: transparent;
+		padding: 8px;
 	}
+
 	.notSelectedPageTab {
-		background: white;
+		border-radius: 0;
+		background: transparent;
 		&:hover {
-			background: pink;
 		}
 	}
+
 	.ellipsesDots {
 		cursor: default;
 	}
