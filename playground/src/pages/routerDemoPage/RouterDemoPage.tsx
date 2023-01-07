@@ -33,11 +33,11 @@ const RouterDemoPage: React.FC<{}> = (props) => {
 	]);
 	return (
 		<Page className={'rsRouterDemoPage'}>
-			<Label variant={'h4'} mb={8}>
+			<Label variant={'h4'} weight={'regular'} mb={8}>
 				Path Params
 			</Label>
 			{JSON.stringify(pathParams)}
-			<Label variant={'h4'} mt={16} mb={8}>
+			<Label variant={'h4'} weight={'regular'} mt={16} mb={8}>
 				Query Params
 			</Label>
 			{JSON.stringify(queryParams)}

@@ -18,6 +18,18 @@ const frameworkSettings: Partial<IFrameworkSettings> = {
 			title: 'subtitle1',
 			message: 'body1'
 		}
+	},
+	opg: {
+		title: 'RedSky Playground',
+		type: 'website',
+		image: '',
+		url: 'https://redskyeng.com'
+	},
+	structuredDataJsonLd: {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		url: 'https://redskyeng.com',
+		logo: 'https://redskyeng.com/logo.png'
 	}
 };
 

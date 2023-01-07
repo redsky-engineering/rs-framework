@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createContext } from 'react';
 import { LabelProps } from '../label/Label';
+import { PageProps } from '../../996';
 
 const defaultSettings: IFrameworkSettings = {
 	labelInputText: { variant: 'body1', weight: 'regular', mb: 4 },
@@ -44,6 +45,8 @@ export interface IFrameworkSettings {
 	pagination: {
 		icons: { [key in 'prevButton' | 'nextButton' | 'firstButton' | 'lastButton']: string };
 	};
+	opg?: PageProps['opg'];
+	structuredDataJsonLd?: object;
 }
 
 interface FrameworkSettingsProps {
@@ -57,12 +60,16 @@ const FrameworkSettings: React.FC<FrameworkSettingsProps> = (props) => {
 		for (key in props.overrides) {
 			if (Object.hasOwn(props.overrides, key)) {
 				if (key === 'toasts' || key === 'pagination') {
+					// These are nested objects, so we need to merge them instead of just overwriting them
 					let indexKey: keyof IFrameworkSettings[typeof key];
 					for (indexKey in props.overrides[key]) {
 						if (!props.overrides[key]) continue;
 						settings[key][indexKey] = { ...settings[key][indexKey], ...props.overrides[key]![indexKey] };
 					}
 				} else {
+					// These are not nested objects, so we can just overwrite them.
+					// Since typescript thinks they might be different types we have to ts-ignore
+					// @ts-ignore
 					settings[key] = { ...settings[key], ...props.overrides[key] };
 				}
 			}

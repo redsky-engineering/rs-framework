@@ -9,9 +9,19 @@ const HomePage: React.FC<{}> = (props) => {
 			className={'rsHomePage'}
 			title={'Framework - Home Page'}
 			description={'A nice long SEO description about this page specific page.'}
-			ogTitle={'Fancy Title'}
-			ogDescription={'A nice description'}
-			ogImage={'https://www.placecage.com/c/200/200'}
+			opg={{
+				title: 'Framework - Home Page',
+				type: 'website',
+				image: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+				url: 'https://www.google.com',
+				'video.movie': 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+			}}
+			structuredDataJsonLd={{
+				'@context': 'https://schema.org',
+				'@type': 'Organization',
+				url: 'https://wow.com',
+				logo: 'https://wow.com/logo.png'
+			}}
 		>
 			<Label variant={'h3'} weight={'medium'}>
 				Click a button to go to the sandbox pages

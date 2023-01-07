@@ -73,9 +73,6 @@ const DataTableDemoPage: React.FC = () => {
 			className={'rsDataTableDemoPage'}
 			title={'Framework - Home Page'}
 			description={'A nice long SEO description about this page specific page.'}
-			ogTitle={'Fancy Title'}
-			ogDescription={'A nice description'}
-			ogImage={'https://www.placecage.com/c/200/200'}
 		>
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				RsDataTable Component
