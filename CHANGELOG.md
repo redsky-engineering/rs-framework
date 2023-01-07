@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://gitlab.com/redsky_public/framework/compare/v1.3.1...v1.4.0) (2023-01-07)
+
+### Features
+
+-   **page:** Added better opengraph and structured data support ([d03b0d1](https://gitlab.com/redsky_public/framework/commit/d03b0d1ddf4081bfea3a29b6cfaf095917adb84f))
+
 ### [1.3.1](https://gitlab.com/redsky_public/framework/compare/v1.3.0...v1.3.1) (2023-01-04)
 
 ### Bug Fixes
