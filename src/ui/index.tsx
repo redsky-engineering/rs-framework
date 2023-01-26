@@ -30,6 +30,9 @@ export type { InputTextProps } from './inputText/InputText';
 export { InputTextarea } from './inputTextarea/InputTextarea';
 export type { InputTextareaProps } from './inputTextarea/InputTextarea';
 
+export { InputPhone } from './inputPhone/InputPhone';
+export type { InputPhoneProps } from './inputPhone/InputPhone';
+
 export { Chip } from './chip/Chip';
 export { InputNumber } from './inputNumber/InputNumber';
 export type { ChipProps } from './chip/Chip';

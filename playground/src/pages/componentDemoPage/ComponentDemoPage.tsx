@@ -25,7 +25,8 @@ import {
 	LabelSelect,
 	LabelInputTextarea,
 	Paper,
-	Pagination
+	Pagination,
+	InputPhone
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
 import { useState } from 'react';
@@ -43,7 +44,8 @@ enum FormKeys {
 	SELECT2 = 'select2',
 	NUMBER_SELECT = 'numberSelect',
 	MULTI_SELECT_GROUP = 'multiSelectGroup',
-	SINGLE_SELECT_GROUP = 'singleSelectGroup'
+	SINGLE_SELECT_GROUP = 'singleSelectGroup',
+	PHONE_INPUT = 'phoneInput'
 }
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
@@ -86,7 +88,12 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]
 			),
 			new RsFormControl<number[]>(FormKeys.MULTI_SELECT_GROUP, [1, 2, 6], []),
-			new RsFormControl<number | null>(FormKeys.SINGLE_SELECT_GROUP, null, [])
+			new RsFormControl<number | null>(FormKeys.SINGLE_SELECT_GROUP, null, []),
+			new RsFormControl<string>(FormKeys.PHONE_INPUT, '', [
+				new RsValidator(RsValidatorEnum.CUSTOM, 'Woah there buddy getting a bit long arnt we?', (control) => {
+					return (control.value as string).length > 10;
+				})
+			])
 		])
 	);
 	const [multiSelectValue, setMultiSelectValue] = useState<{ label: string; value: number }[]>([
@@ -121,6 +128,16 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 
 	return (
 		<Page className={'rsComponentDemoPage'} {...componentDemoPageData}>
+			<InputPhone
+				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.cloneDeep().update(control));
+				}}
+				country={'US'}
+				m={24}
+				maxLength={14}
+			/>
+
 			<Label
 				elementType={'p'}
 				variant={'h5'}
@@ -640,6 +657,9 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				maxLength={12}
 				onChange={(value) => console.log(value)}
 			/>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Phone
+			</Label>
 
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Input Text
