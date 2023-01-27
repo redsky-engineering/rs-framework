@@ -1,8 +1,25 @@
 .rsInputPhone {
 	input {
+	}
+}
+.rsInputPhone {
+	.inputContainer {
 		border-radius: 20px;
 		background: #3c3c3c;
 		border: 2px solid #449fdb;
-		color: lightgrey;
+		padding: 4px 8px;
+
+		.rsIcon {
+			color: lightgrey;
+		}
+
+		input {
+			color: lightgrey;
+		}
+	}
+	.helperText {
+	}
+
+	.rsInputErrorMessage {
 	}
 }

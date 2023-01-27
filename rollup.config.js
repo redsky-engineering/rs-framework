@@ -55,6 +55,7 @@ export default {
 		'primeicons/primeicons.css',
 		'primereact/api',
 		'chart.js',
-		'quill'
+		'quill',
+		'react-phone-number-input/input'
 	]
 };
