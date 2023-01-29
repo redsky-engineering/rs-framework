@@ -33,6 +33,7 @@ export interface ButtonProps
 	small?: boolean;
 	fullWidth?: boolean;
 	disableRipple?: boolean;
+	children?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -56,6 +57,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 		type,
 		value,
 		icon,
+		children,
 		...styleProps
 	} = props;
 

@@ -43,6 +43,8 @@ export interface BoxProps
 	onPointerMove?: (event: PointerEvent) => void;
 	onPointerEnter?: (event: PointerEvent) => void;
 	onPointerLeave?: (event: PointerEvent) => void;
+
+	children?: React.ReactNode;
 }
 
 const Box: React.FC<BoxProps> = (props) => {
@@ -67,6 +69,7 @@ const Box: React.FC<BoxProps> = (props) => {
 		onPointerLeave,
 		id,
 		style,
+		children,
 		...other
 	} = props;
 	let cssProperties = transformProps(other);

@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
 import { extractPropsFromKeys, transformProps } from '../../utils/internal';
-import MarginPropsKeys = ICommon.MarginPropsKeys;
 
 export interface ImgProps
 	extends Omit<ICommon.InteractProps<HTMLImageElement>, 'elementRef'>,

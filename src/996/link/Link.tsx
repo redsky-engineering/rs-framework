@@ -11,6 +11,7 @@ export interface LinkProps {
 	noPointer?: boolean;
 	external?: boolean;
 	target?: 'blank' | 'self';
+	children?: React.ReactNode;
 }
 
 const Link: React.FC<LinkProps> = (props) => {

@@ -41,6 +41,7 @@ export interface AnimateOnScrollProps {
 	anchorPlacement?: Aos.anchorPlacementOptions; // Anchor placement - which one position of element on the screen should trigger animation
 	once?: boolean; // Choose whether animation should fire once, or every time you scroll up/down to element
 	style?: React.CSSProperties;
+	children: React.ReactNode;
 }
 
 export const AnimateOnScroll: React.FC<AnimateOnScrollProps> = (props) => {

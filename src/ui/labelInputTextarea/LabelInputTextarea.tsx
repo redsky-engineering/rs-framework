@@ -13,7 +13,6 @@ export interface LabelInputTextareaProps
 	extends ICommon.MarginProps,
 		Omit<
 			InputTextareaProps,
-			| 'children'
 			| 'm'
 			| 'mt'
 			| 'mr'

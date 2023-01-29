@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, PropsWithChildren } from 'react';
 import './Label.scss';
 import { ICommon } from '../../common/Interfaces';
 import { transformProps } from '../../utils/internal';
@@ -52,7 +52,7 @@ export interface LabelProps
 const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 const Label: React.FC<LabelProps> = (props) => {
-	const { className, onClick, variant, id, elementRef, ...other } = props;
+	const { className, onClick, variant, id, elementRef, children, ...other } = props;
 	let styleValues = transformProps(other);
 
 	let ElementType: TagType = 'p';

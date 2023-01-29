@@ -6,7 +6,6 @@ import { ICommon } from '../../common/Interfaces';
 import { RsFormControl, IRsFormControl } from '../form/FormControl';
 
 import { Box } from '../box/Box';
-import { Label } from '../label/Label';
 import clone from 'lodash.clone';
 
 export interface CheckboxProps

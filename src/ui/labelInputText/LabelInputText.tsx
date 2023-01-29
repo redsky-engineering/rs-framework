@@ -13,7 +13,6 @@ export interface LabelInputTextProps
 	extends ICommon.MarginProps,
 		Omit<
 			InputTextProps,
-			| 'children'
 			| 'm'
 			| 'mt'
 			| 'mr'

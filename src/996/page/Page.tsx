@@ -19,6 +19,7 @@ export interface PageProps {
 		[key: 'description' | 'audio' | 'video' | string]: string;
 	};
 	structuredDataJsonLd?: Object | string;
+	children: React.ReactNode;
 }
 
 const Page: React.FC<PageProps> = (props) => {
