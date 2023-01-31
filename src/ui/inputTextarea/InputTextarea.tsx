@@ -4,7 +4,6 @@ import { TextareaHTMLAttributes, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { ICommon } from '../../common/Interfaces';
 import { RsFormControl } from '../form/FormControl';
-import { IRsFormControl } from '../form/FormControl';
 
 import { Box } from '../box/Box';
 import clone from 'lodash.clone';
@@ -69,6 +68,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		marginX,
 		marginY,
 		immediateValidate,
+		onBlur,
 		helperText,
 		...textareaProps
 	} = props;
@@ -119,7 +119,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 	}
 
 	async function changeHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
-		// Required to persist in React 16.X but not 17.X. Otherwise the await() will lose the object
+		// Required to persist in React 16.X but not 17.X. Otherwise, the await() will lose the object
 		event.persist();
 
 		if (onChange) onChange(event.target.value, event);
@@ -132,7 +132,7 @@ const InputTextarea: React.FC<InputTextareaProps> = (props) => {
 		setHasBeenBlurred(true);
 
 		validateTarget(event.target, true).catch(console.error);
-		if (props.onBlur) props.onBlur(event);
+		if (onBlur) onBlur(event);
 	}
 
 	function getAutocompleteType(): string {
