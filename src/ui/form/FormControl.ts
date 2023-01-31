@@ -72,10 +72,12 @@ export class RsFormControl<T extends IRsFormControl> {
 
 	/**
 	 * Validates current value of control, based on the validators applied.
+	 * @param validateOnly If true, will not update the error array, but will return true or false based on validation
 	 * @returns {boolean} True if control passes all validation test, false otherwise.
 	 */
-	async validate(): Promise<boolean> {
-		this._errors = [];
+	async validate(validateOnly: boolean = false): Promise<boolean> {
+		if (!validateOnly) this._errors = [];
+		let hasError = false;
 		if (this._validators) {
 			for (let index = 0; index < this._validators.length; index++) {
 				const validator: RsValidator = this._validators[index];
@@ -83,37 +85,43 @@ export class RsFormControl<T extends IRsFormControl> {
 				switch (validatorRule) {
 					case RsValidatorEnum.REQ:
 						if (this._value === undefined || this._value === null) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 
 						if (typeof this._value === 'string' && this._value.trim() === '') {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 
 						if (Array.isArray(this._value) && this._value.length === 0) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
 					case RsValidatorEnum.MIN_LENGTH:
 						const min = parseInt(validator.value as string) || 0;
 						if ((this._value as string).length < min) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
 					case RsValidatorEnum.MAX_LENGTH:
 						const max = parseInt(validator.value as string) || 0;
 						if ((this._value as string).length > max) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
 					case RsValidatorEnum.NUM:
 						if (isNaN(Number(this._value))) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
@@ -124,13 +132,15 @@ export class RsFormControl<T extends IRsFormControl> {
 						// domain names can have: letters, numbers, and hyphens
 						const isEmail = StringUtils.validateEmail(this._value?.toString() || '');
 						if (!isEmail) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
 					case RsValidatorEnum.REG:
 						if (!(validator.value as RegExp).test(this._value as string)) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
@@ -139,13 +149,15 @@ export class RsFormControl<T extends IRsFormControl> {
 							validator.value as (control: RsFormControl<T>) => boolean | Promise<boolean>
 						)(this);
 						if (!result) {
-							this._errors.push(index);
+							if (validateOnly) hasError = true;
+							else this._errors.push(index);
 							continue;
 						}
 						break;
 				}
 			}
 		}
-		return this._errors.length === 0;
+
+		return !hasError;
 	}
 }

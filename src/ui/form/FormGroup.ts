@@ -64,13 +64,14 @@ export class RsFormGroup {
 	 * copy of itself. This will make it so all controls will then appropriately show their own
 	 * error codes from the validation check.
 	 * e.x. setFormGroup(formGroup.clone())
+	 * @param validateOnly If true, only validate the form control, do not update the error codes.
 	 * @returns {boolean} True if all form controls pass validation test, false otherwise.
 	 */
-	async isValid(): Promise<boolean> {
+	async isValid(validateOnly: boolean = false): Promise<boolean> {
 		let valid = true;
 		for (let index = 0; index < this._controls.length; index++) {
 			const control = this._controls[index];
-			valid = (await control.validate()) && valid;
+			valid = (await control.validate(validateOnly)) && valid;
 		}
 		return valid;
 	}
