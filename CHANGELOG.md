@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://gitlab.com/redsky_public/framework/compare/v1.4.1...v1.5.0) (2023-01-31)
+
+### Features
+
+-   **Form:** isValid method now takes argument to not update the error states ([0379ed6](https://gitlab.com/redsky_public/framework/commit/0379ed63af853e2a624bcfbfa402b41453105678))
+
+### Bug Fixes
+
+-   **InputTextArea:** Issue when onBlur is passed in, validation would not run ([1b0db7c](https://gitlab.com/redsky_public/framework/commit/1b0db7c153d0569851c9bc789a3b67b17f82508d))
+
 ### [1.4.1](https://gitlab.com/redsky_public/framework/compare/v1.4.0...v1.4.1) (2023-01-29)
 
 ### Bug Fixes
