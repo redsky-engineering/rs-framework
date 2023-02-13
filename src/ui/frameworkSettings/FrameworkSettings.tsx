@@ -51,6 +51,7 @@ export interface IFrameworkSettings {
 
 interface FrameworkSettingsProps {
 	overrides?: Partial<IFrameworkSettings>;
+	children: React.ReactNode;
 }
 
 const FrameworkSettings: React.FC<FrameworkSettingsProps> = (props) => {
