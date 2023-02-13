@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://gitlab.com/redsky_public/framework/compare/v1.5.0...v1.5.1) (2023-02-13)
+
+### Bug Fixes
+
+-   **settings:** Added children requirement to FrameworkSettings ([7389b7b](https://gitlab.com/redsky_public/framework/commit/7389b7ba45b6521e4176855c5944c7bdafd12931))
+
 ## [1.5.0](https://gitlab.com/redsky_public/framework/compare/v1.4.1...v1.5.0) (2023-01-31)
 
 ### Features
