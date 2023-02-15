@@ -1,8 +1,17 @@
 .rsInputPhone {
-	input {
+	.inputContainer {
+		border: 1px solid gray;
 		border-radius: 20px;
-		background: #3c3c3c;
-		border: 2px solid #449fdb;
-		color: lightgrey;
+		padding: 8px 16px;
+		background-color: #ffffff;
+		&:hover {
+			border: 1px solid pink;
+		}
+		&:focus-within {
+			color: black;
+			border: 2px solid pink;
+		}
+	}
+	input {
 	}
 }

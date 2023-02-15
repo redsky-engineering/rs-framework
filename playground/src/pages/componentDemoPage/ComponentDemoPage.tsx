@@ -1,35 +1,35 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Page } from '../../../../src/996';
 import {
-	Button,
-	Chip,
-	Label,
-	rsToastify,
-	Box,
 	Accordion,
+	AnimateOnScroll,
+	Box,
+	Button,
 	Checkbox,
-	RsFormGroup,
+	Chip,
+	Img,
+	InputNumber,
+	InputPhone,
+	InputText,
+	InputTextarea,
+	Label,
+	LabelInputText,
+	LabelInputTextarea,
+	LabelRadioButton,
+	LabelSelect,
+	Pagination,
+	Paper,
+	popupController,
 	RsFormControl,
+	RsFormGroup,
+	rsToastify,
 	RsValidator,
 	RsValidatorEnum,
-	Img,
 	Select,
-	InputText,
-	InputNumber,
-	InputTextarea,
-	StarRating,
-	LabelRadioButton,
-	AnimateOnScroll,
-	popupController,
-	LabelInputText,
-	LabelSelect,
-	LabelInputTextarea,
-	Paper,
-	Pagination,
-	InputPhone
+	StarRating
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
-import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
@@ -90,9 +90,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			new RsFormControl<number[]>(FormKeys.MULTI_SELECT_GROUP, [1, 2, 6], []),
 			new RsFormControl<number | null>(FormKeys.SINGLE_SELECT_GROUP, null, []),
 			new RsFormControl<string>(FormKeys.PHONE_INPUT, '', [
-				new RsValidator(RsValidatorEnum.CUSTOM, 'Woah there buddy getting a bit long arnt we?', (control) => {
-					return (control.value as string).length > 10;
-				})
+				new RsValidator(RsValidatorEnum.REQ, 'Hey, this is required!'),
+				new RsValidator(RsValidatorEnum.MIN_LENGTH, 'Hey, this is required!', 7)
 			])
 		])
 	);
@@ -128,16 +127,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 
 	return (
 		<Page className={'rsComponentDemoPage'} {...componentDemoPageData}>
-			<InputPhone
-				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
-				updateControl={(control) => {
-					setFormGroup(formGroup.cloneDeep().update(control));
-				}}
-				country={'US'}
-				m={24}
-				maxLength={14}
-			/>
-
 			<Label
 				elementType={'p'}
 				variant={'h5'}
@@ -626,14 +615,31 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h6'} weight={'regular'}>
 				Phone
 			</Label>
-			<InputText
-				mb={16}
-				prefix={'Tel: '}
-				inputMode={'tel'}
-				placeholder={'(###) ###-####'}
-				onChange={(value) => {
-					console.log(value);
+			<InputPhone
+				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.cloneDeep().update(control));
 				}}
+				country={'US'}
+				placeholder={'(###) ###-####'}
+				mb={16}
+				maxLength={14}
+				icon={[
+					{
+						iconImg: 'icon-phone',
+						position: 'LEFT'
+					}
+				]}
+			/>
+			<InputPhone
+				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.cloneDeep().update(control));
+				}}
+				country={'US'}
+				placeholder={'(###) ###-####'}
+				mb={16}
+				maxLength={14}
 			/>
 			<Label variant={'h6'} weight={'regular'}>
 				Password

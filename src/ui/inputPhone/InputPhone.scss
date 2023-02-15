@@ -1,9 +1,19 @@
 .rsInputPhone {
-	input {
-		width: 100%;
-		height: 100%;
-		padding: 4px 8px;
+	.inputContainer {
+		display: flex;
+		align-items: center;
+
+		.rsIcon {
+			-webkit-tap-highlight-color: transparent;
+		}
+		input {
+			width: 100%;
+			height: 100%;
+			padding: 4px 8px;
+			background: inherit;
+		}
 	}
+
 	.helperText {
 	}
 
