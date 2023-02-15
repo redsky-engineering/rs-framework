@@ -609,31 +609,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h6'} weight={'regular'}>
 				Phone
 			</Label>
-			<InputPhone
-				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
-				updateControl={(control) => {
-					setFormGroup(formGroup.cloneDeep().update(control));
-				}}
-				country={'US'}
-				placeholder={'(###) ###-####'}
-				mb={16}
-				maxLength={14}
-				icon={[
-					{
-						iconImg: 'icon-phone',
-						position: 'LEFT'
-					}
-				]}
-			/>
-			<InputPhone
-				onChange={(value) => {
-					console.log('Phone Input value: ', value);
-				}}
-				country={'US'}
-				placeholder={'(###) ###-####'}
-				mb={16}
-				maxLength={14}
-			/>
 			<Label variant={'h6'} weight={'regular'}>
 				Password
 			</Label>
@@ -658,12 +633,32 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Phone
 			</Label>
+			<InputPhone m={'24px 0'} showFlags />
 			<InputPhone
-				icon={[{ iconImg: 'icon-phone', position: 'LEFT', marginRight: '16px' }]}
-				country={'US'}
-				m={'24px 0'}
-				maxLength={14}
+				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.cloneDeep().update(control));
+				}}
+				countries={['DE', 'AC', 'AI']}
+				addInternationalOption={false}
+				showFlags
+				placeholder={'(###) ###-####'}
+				mb={16}
 			/>
+			<InputPhone
+				onChange={(value) => {
+					console.log('Phone Input value: ', value);
+				}}
+				placeholder={'(###) ###-####'}
+				mb={16}
+				icon={[
+					{
+						iconImg: 'icon-phone',
+						position: 'LEFT'
+					}
+				]}
+			/>
+
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Input Text
 			</Label>

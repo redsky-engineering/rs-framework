@@ -5,25 +5,27 @@ import { ICommon } from '../../common/Interfaces';
 import { extractMarginProps, renderErrors } from '../../utils/internal';
 import classNames from 'classnames';
 import { RsFormControl } from '../form/FormControl';
-import { useEffect, useRef, useState } from 'react';
-import PhoneInput, { Props as PhoneInputProps } from 'react-phone-number-input/input';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import PhoneInput, { Props as PhoneInputProps } from 'react-phone-number-input';
 import clone from 'lodash.clone';
 import { Icon } from '../icon/Icon';
 import { getCountryCallingCode } from 'react-phone-number-input';
 import { CountryCode } from 'libphonenumber-js/core';
-import { StringUtils } from '../../utils';
+import { ObjectUtils, StringUtils } from '../../utils';
+
+import 'react-phone-number-input/style.css';
 
 //github docs: https://www.npmjs.com/package/react-phone-number-input
 
 export interface InputPhoneProps
-	extends Omit<PhoneInputProps<Partial<HTMLInputElement>>, 'onChange' | 'country'>,
+	extends Omit<PhoneInputProps<Partial<HTMLInputElement>>, 'onChange'>,
 		ICommon.MarginProps {
 	control?: RsFormControl<string>;
 	updateControl?: (control: RsFormControl<string>) => void;
 	immediateValidate?: boolean; // Begins checking the input as soon as it changes
+	showFlags?: boolean;
 	onChange?: (value: string) => void;
 	helperText?: string | React.ReactNode;
-	country: CountryCode;
 	icon?: ICommon.NewIconProps[];
 }
 
@@ -36,38 +38,31 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 		value,
 		onChange,
 		updateControl,
+		onBlur,
 		immediateValidate,
 		helperText,
 		icon,
+		showFlags,
 		...phoneProps
 	} = remaining;
+
+	const UniqueSelectId = useMemo(() => {
+		return `PhoneInputFlagSelect-${Math.round(Math.random() * 10000)}`;
+	}, []);
+
 	const [hasBeenBlurred, setHasBeenBlurred] = useState<boolean>(immediateValidate || false);
 	const [formControl, setFormControl] = useState<RsFormControl<string> | undefined>(control);
+	const [countryCode, setCountryCode] = useState<CountryCode>(
+		phoneProps.defaultCountry || ObjectUtils.isArrayWithData(phoneProps.countries) ? phoneProps.countries![0] : 'US'
+	);
 	const boxRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		if (!boxRef.current) return;
-		let element = boxRef.current;
-		element.addEventListener('focusout', focusOutEvent);
-
-		function focusOutEvent(value: FocusEvent) {
-			let phoneNumber = `+${getCountryCallingCode(phoneProps.country)}${StringUtils.removeAllExceptNumbers(
-				(value.target as HTMLInputElement).value
-			)}`;
-			validateTarget(phoneNumber, true, true).catch(console.error);
-			setHasBeenBlurred(true);
-		}
-
-		return () => {
-			element.removeEventListener('focusout', focusOutEvent);
-		};
-	}, [boxRef]);
 
 	useEffect(() => {
 		setFormControl(control);
 	}, [control]);
 
 	async function changeHandler(value: string) {
+		setCountryCode((document.getElementById(UniqueSelectId) as HTMLSelectElement).value as CountryCode);
 		if (onChange) onChange(value);
 		if (!control) return;
 
@@ -83,7 +78,7 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 		const updated = clone(control);
 
 		updated.value = value;
-		if (updated.value.length === 0) {
+		if (!updated.value || updated.value.length === 0) {
 			updated.clearErrors();
 		} else if (hasBeenBlurred || forceValidate) {
 			await updated.validate();
@@ -93,9 +88,43 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 		if (updateControl) updateControl(updated);
 	}
 
+	function focusInput(event: React.MouseEvent<HTMLElement>) {
+		if (boxRef && boxRef.current) {
+			//@ts-ignore
+			if (event.target.id === UniqueSelectId) return;
+
+			(boxRef.current?.querySelector('.rsBox.inputContainer input') as HTMLInputElement).focus();
+		}
+	}
+
+	function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+		setHasBeenBlurred(true);
+		let country: CountryCode = countryCode;
+		let value = StringUtils.removeAllExceptNumbers(event.target.value);
+
+		if (value) {
+			let code = getCountryCallingCode(country);
+			//Check to see if country code is already there.
+			if (value.slice(0, code.length) === code) value += '+';
+			else value = `+${getCountryCallingCode(country)}${value}`;
+		}
+		validateTarget(value, true, true).catch(console.error);
+		if (onBlur) onBlur(event);
+	}
+
 	function renderInput() {
 		let inputStyled = (
-			<PhoneInput {...phoneProps} onChange={changeHandler} value={!!formControl ? formControl.value : value} />
+			<PhoneInput
+				className={classNames({ showFlags })}
+				defaultCountry={countryCode}
+				onBlur={handleBlur}
+				onChange={changeHandler}
+				value={!!formControl ? formControl.value : value}
+				countrySelectProps={{
+					id: UniqueSelectId
+				}}
+				{...phoneProps}
+			/>
 		);
 
 		if (!icon) return inputStyled;
@@ -114,14 +143,8 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 		return iconInput;
 	}
 
-	function focusInput() {
-		if (boxRef && boxRef.current) {
-			(boxRef.current?.querySelector('.rsBox.inputContainer input') as HTMLInputElement).focus();
-		}
-	}
-
 	return (
-		<Box id={id} className={classNames('rsInputPhone')} {...marginProps} elementRef={boxRef}>
+		<Box id={id} className={classNames('rsInputPhone', className)} {...marginProps} elementRef={boxRef}>
 			<Box className={'inputContainer'} onClick={focusInput}>
 				{renderInput()}
 			</Box>
