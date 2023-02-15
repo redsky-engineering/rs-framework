@@ -46,7 +46,7 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 		...phoneProps
 	} = remaining;
 
-	const UniqueSelectId = useMemo(() => {
+	const uniqueSelectId = useMemo(() => {
 		return `PhoneInputFlagSelect-${Math.round(Math.random() * 10000)}`;
 	}, []);
 
@@ -62,7 +62,7 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 	}, [control]);
 
 	async function changeHandler(value: string) {
-		setCountryCode((document.getElementById(UniqueSelectId) as HTMLSelectElement).value as CountryCode);
+		setCountryCode((document.getElementById(uniqueSelectId) as HTMLSelectElement).value as CountryCode);
 		if (onChange) onChange(value);
 		if (!control) return;
 
@@ -91,7 +91,7 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 	function focusInput(event: React.MouseEvent<HTMLElement>) {
 		if (boxRef && boxRef.current) {
 			//@ts-ignore
-			if (event.target.id === UniqueSelectId) return;
+			if (event.target.id === uniqueSelectId) return;
 
 			(boxRef.current?.querySelector('.rsBox.inputContainer input') as HTMLInputElement).focus();
 		}
@@ -121,7 +121,7 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 				onChange={changeHandler}
 				value={!!formControl ? formControl.value : value}
 				countrySelectProps={{
-					id: UniqueSelectId
+					id: uniqueSelectId
 				}}
 				{...phoneProps}
 			/>
