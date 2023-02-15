@@ -172,7 +172,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Button look={'containedPrimary'} icon={[{ iconImg: 'icon-edit', position: 'RIGHT', ml: 8 }]}>
 				Click to Edit
 			</Button>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Checkbox Component
 			</Label>
@@ -182,7 +181,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				labelText={'This is another checkbox'}
 				look={'containedPrimary'}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Img Component
 			</Label>
@@ -225,7 +223,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					return 'https://picsum.photos/200/200';
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Accordion Component
 			</Label>
@@ -389,7 +386,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				isClearable
 			/>
-
 			<Button
 				look={'containedPrimary'}
 				onClick={() => {
@@ -524,7 +520,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 			{console.log(formGroup.get(FormKeys.MULTI_SELECT_GROUP).value)}
-
 			<Button
 				look={'containedPrimary'}
 				mt={8}
@@ -569,7 +564,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Text
 			</Label>
@@ -632,9 +626,8 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 			/>
 			<InputPhone
-				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
-				updateControl={(control) => {
-					setFormGroup(formGroup.cloneDeep().update(control));
+				onChange={(value) => {
+					console.log('Phone Input value: ', value);
 				}}
 				country={'US'}
 				placeholder={'(###) ###-####'}
@@ -652,7 +645,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h6'} weight={'regular'}>
 				Input with Helper Text!
 			</Label>
@@ -666,7 +658,12 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Phone
 			</Label>
-
+			<InputPhone
+				icon={[{ iconImg: 'icon-phone', position: 'LEFT', marginRight: '16px' }]}
+				country={'US'}
+				m={'24px 0'}
+				maxLength={14}
+			/>
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Input Text
 			</Label>
@@ -679,7 +676,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<LabelInputText
 				labelTitle={'Label Input Text'}
 				inputMode={'text'}
@@ -688,7 +684,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 				required
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Select
 			</Label>
@@ -708,7 +703,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Input Textarea
 			</Label>
@@ -718,7 +712,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Number
 			</Label>
@@ -823,7 +816,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<AnimateOnScroll animationType={'fade-down'}>
 				<Box bgColor={'green'} width={200} height={200} mb={200} />
 			</AnimateOnScroll>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Paper
 			</Label>
@@ -873,7 +865,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			>
 				Click Me for Fade In Animation
 			</Button>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Pagination
 			</Label>
