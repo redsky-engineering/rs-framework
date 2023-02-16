@@ -1,0 +1,37 @@
+.rsInputPhone {
+	.inputContainer {
+		display: flex;
+		align-items: center;
+
+		.rsIcon {
+			-webkit-tap-highlight-color: transparent;
+		}
+		.PhoneInput {
+			width: 100%;
+			height: 100%;
+			.PhoneInputCountry {
+				display: none;
+			}
+			&.showFlags {
+				.PhoneInputCountry {
+					display: flex;
+				}
+			}
+
+			input {
+				width: 100%;
+				height: 100%;
+				background: inherit;
+			}
+		}
+	}
+
+	.helperText {
+	}
+
+	.rsInputErrorMessage {
+		text-align: left;
+		color: #f44336;
+		margin-top: 4px;
+	}
+}

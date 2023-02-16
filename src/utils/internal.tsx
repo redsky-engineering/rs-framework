@@ -179,7 +179,9 @@ export function renderErrors(control: RsFormControl<any> | undefined): React.Rea
  * @param props that includes MarginProps
  * @returns returns an object that has marginProps seperated from remaining
  */
-export function extractMarginProps(props: ICommon.MarginProps): { marginProps: ICommon.MarginProps; remaining: any } {
+export function extractMarginProps<T extends ICommon.MarginProps>(
+	props: T
+): { marginProps: ICommon.MarginProps; remaining: Omit<T, keyof ICommon.MarginProps> } {
 	const {
 		m,
 		mt,

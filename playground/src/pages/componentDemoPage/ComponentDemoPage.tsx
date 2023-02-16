@@ -1,34 +1,35 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Page } from '../../../../src/996';
 import {
-	Button,
-	Chip,
-	Label,
-	rsToastify,
-	Box,
 	Accordion,
+	AnimateOnScroll,
+	Box,
+	Button,
 	Checkbox,
-	RsFormGroup,
+	Chip,
+	Img,
+	InputNumber,
+	InputPhone,
+	InputText,
+	InputTextarea,
+	Label,
+	LabelInputText,
+	LabelInputTextarea,
+	LabelRadioButton,
+	LabelSelect,
+	Pagination,
+	Paper,
+	popupController,
 	RsFormControl,
+	RsFormGroup,
+	rsToastify,
 	RsValidator,
 	RsValidatorEnum,
-	Img,
 	Select,
-	InputText,
-	InputNumber,
-	InputTextarea,
-	StarRating,
-	LabelRadioButton,
-	AnimateOnScroll,
-	popupController,
-	LabelInputText,
-	LabelSelect,
-	LabelInputTextarea,
-	Paper,
-	Pagination
+	StarRating
 } from '../../../../src/ui';
 import router, { RoutePaths } from '../../router';
-import { useState } from 'react';
 import classNames from 'classnames';
 import { componentDemoPageData } from './ComponentDemoPage.data';
 import TestPopup, { TestPopupProps } from '../../popups/testPopup/TestPopup';
@@ -43,7 +44,8 @@ enum FormKeys {
 	SELECT2 = 'select2',
 	NUMBER_SELECT = 'numberSelect',
 	MULTI_SELECT_GROUP = 'multiSelectGroup',
-	SINGLE_SELECT_GROUP = 'singleSelectGroup'
+	SINGLE_SELECT_GROUP = 'singleSelectGroup',
+	PHONE_INPUT = 'phoneInput'
 }
 
 const ComponentDemoPage: React.FC<{}> = (props) => {
@@ -86,7 +88,11 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]
 			),
 			new RsFormControl<number[]>(FormKeys.MULTI_SELECT_GROUP, [1, 2, 6], []),
-			new RsFormControl<number | null>(FormKeys.SINGLE_SELECT_GROUP, null, [])
+			new RsFormControl<number | null>(FormKeys.SINGLE_SELECT_GROUP, null, []),
+			new RsFormControl<string>(FormKeys.PHONE_INPUT, '', [
+				new RsValidator(RsValidatorEnum.REQ, 'Hey, this is required!'),
+				new RsValidator(RsValidatorEnum.MIN_LENGTH, 'Hey, this is required!', 7)
+			])
 		])
 	);
 	const [multiSelectValue, setMultiSelectValue] = useState<{ label: string; value: number }[]>([
@@ -166,7 +172,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Button look={'containedPrimary'} icon={[{ iconImg: 'icon-edit', position: 'RIGHT', ml: 8 }]}>
 				Click to Edit
 			</Button>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Checkbox Component
 			</Label>
@@ -176,7 +181,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				labelText={'This is another checkbox'}
 				look={'containedPrimary'}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Img Component
 			</Label>
@@ -219,7 +223,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					return 'https://picsum.photos/200/200';
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Accordion Component
 			</Label>
@@ -383,7 +386,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				]}
 				isClearable
 			/>
-
 			<Button
 				look={'containedPrimary'}
 				onClick={() => {
@@ -518,7 +520,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 			/>
 			{console.log(formGroup.get(FormKeys.MULTI_SELECT_GROUP).value)}
-
 			<Button
 				look={'containedPrimary'}
 				mt={8}
@@ -563,7 +564,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Text
 			</Label>
@@ -609,15 +609,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<Label variant={'h6'} weight={'regular'}>
 				Phone
 			</Label>
-			<InputText
-				mb={16}
-				prefix={'Tel: '}
-				inputMode={'tel'}
-				placeholder={'(###) ###-####'}
-				onChange={(value) => {
-					console.log(value);
-				}}
-			/>
 			<Label variant={'h6'} weight={'regular'}>
 				Password
 			</Label>
@@ -629,7 +620,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h6'} weight={'regular'}>
 				Input with Helper Text!
 			</Label>
@@ -639,6 +629,34 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				helperText={'Max Length 12 Characters'}
 				maxLength={12}
 				onChange={(value) => console.log(value)}
+			/>
+			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
+				Input Phone
+			</Label>
+			<InputPhone m={'24px 0'} showFlags />
+			<InputPhone
+				control={formGroup.getClone(FormKeys.PHONE_INPUT)}
+				updateControl={(control) => {
+					setFormGroup(formGroup.cloneDeep().update(control));
+				}}
+				countries={['DE', 'AC', 'AI']}
+				addInternationalOption={false}
+				showFlags
+				placeholder={'(###) ###-####'}
+				mb={16}
+			/>
+			<InputPhone
+				onChange={(value) => {
+					console.log('Phone Input value: ', value);
+				}}
+				placeholder={'(###) ###-####'}
+				mb={16}
+				icon={[
+					{
+						iconImg: 'icon-phone',
+						position: 'LEFT'
+					}
+				]}
 			/>
 
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
@@ -653,7 +671,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<LabelInputText
 				labelTitle={'Label Input Text'}
 				inputMode={'text'}
@@ -662,7 +679,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 				}}
 				required
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Select
 			</Label>
@@ -682,7 +698,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Label Input Textarea
 			</Label>
@@ -692,7 +707,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 					console.log(value);
 				}}
 			/>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Input Number
 			</Label>
@@ -797,7 +811,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			<AnimateOnScroll animationType={'fade-down'}>
 				<Box bgColor={'green'} width={200} height={200} mb={200} />
 			</AnimateOnScroll>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Paper
 			</Label>
@@ -847,7 +860,6 @@ const ComponentDemoPage: React.FC<{}> = (props) => {
 			>
 				Click Me for Fade In Animation
 			</Button>
-
 			<Label variant={'h5'} weight={'regular'} mb={16} mt={32} bgColor={'#099109'} color={'white'} p={16}>
 				Pagination
 			</Label>
