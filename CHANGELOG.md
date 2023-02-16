@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://gitlab.com/redsky_public/framework/compare/v1.5.1...v1.6.0) (2023-02-16)
+
+### Features
+
+-   InputPhone work in progress ([9b7ec93](https://gitlab.com/redsky_public/framework/commit/9b7ec934a69fc553b550d15d58cae0735ea3774e))
+-   InputPhone work in progress ([215843b](https://gitlab.com/redsky_public/framework/commit/215843b0e8b0b4d62810cf439725f589fe20e1c8))
+-   **inputPhone:** - Added InputPhone.tsx to the framework. ([614f220](https://gitlab.com/redsky_public/framework/commit/614f22020b817a1cee93e5ee5040b443b8ce50d3))
+-   **inputPhone:** - Added InputPhone.tsx to the framework. ([88e1da0](https://gitlab.com/redsky_public/framework/commit/88e1da0ce0796e39823465272733a292e630db3c))
+-   **inputPhone:** - Added InputPhone.tsx to the framework. ([f1f6a24](https://gitlab.com/redsky_public/framework/commit/f1f6a24785b0e6e75feb83d240852379f1400bff))
+-   **inputPhone:** - Added InputPhone.tsx to the framework. ([e9610df](https://gitlab.com/redsky_public/framework/commit/e9610df14b9a5e2cb9626f2dd190246f0ceee042))
+-   **inputPhone:** - Work in progress inputPhone ([ac4bcc6](https://gitlab.com/redsky_public/framework/commit/ac4bcc693bd51dc72c7a5fc484422edff9188195))
+
 ### [1.5.1](https://gitlab.com/redsky_public/framework/compare/v1.5.0...v1.5.1) (2023-02-13)
 
 ### Bug Fixes
