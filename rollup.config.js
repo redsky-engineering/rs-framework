@@ -56,7 +56,6 @@ export default {
 		'primereact/api',
 		'chart.js',
 		'quill',
-		'react-phone-number-input/input',
 		'react-phone-number-input',
 		'libphonenumber-js/core'
 	]
