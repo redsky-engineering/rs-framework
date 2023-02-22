@@ -15,7 +15,7 @@ export interface PopupProps {
 	backgroundColor?: string;
 	enableBodyScrollLock?: boolean;
 	onRemoved?: () => void;
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 export interface FullPopupProps extends PopupProps {
