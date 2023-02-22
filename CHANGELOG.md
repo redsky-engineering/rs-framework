@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://gitlab.com/redsky_public/framework/compare/v1.6.0...v1.6.1) (2023-02-22)
+
+### Bug Fixes
+
+-   **FormControl:** - Handling both cases for checking validation on a form control. ([939e121](https://gitlab.com/redsky_public/framework/commit/939e1217534a5b22233bbc684d3cf23a6021786f))
+-   **Popup:** Made children props optional again. ([98fbbf9](https://gitlab.com/redsky_public/framework/commit/98fbbf9bd58535307a800e964504de125ff94cb0))
+-   **Popup:** Made children props optional again. ([9f329ab](https://gitlab.com/redsky_public/framework/commit/9f329ab9d5d14fcdb1366825dc4572f213e3edb8))
+
 ## [1.6.0](https://gitlab.com/redsky_public/framework/compare/v1.5.1...v1.6.0) (2023-02-16)
 
 ### Features
