@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://gitlab.com/redsky_public/framework/compare/v1.6.1...v1.6.2) (2023-04-25)
+
+### Bug Fixes
+
+-   **datatable:** adds correct parenthesis for OR operators on filter ([4c4aad5](https://gitlab.com/redsky_public/framework/commit/4c4aad53f5c59c4aa53640530cda4e34b6c99779))
+
 ### [1.6.1](https://gitlab.com/redsky_public/framework/compare/v1.6.0...v1.6.1) (2023-02-22)
 
 ### Bug Fixes
