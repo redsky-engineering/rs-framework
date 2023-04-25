@@ -221,7 +221,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				})`;
 			});
 		}
-		return filterString;
+		return filterString.replace(/\(([^)]*?)\)OR\(([^)]*?)\)/gm, '($&)');
 	}
 
 	function calculatePage(): number {
