@@ -40,7 +40,7 @@ export interface IFrameworkSettings {
 	labelSelect: ILabelSettingsProps;
 	toasts: {
 		icons: { [key in 'error' | 'info' | 'success' | 'warning' | 'custom']: string };
-		labelVariants: { title: 'subtitle1'; message: 'body1' };
+		labelVariants: { title: string; message: string };
 	};
 	pagination: {
 		icons: { [key in 'prevButton' | 'nextButton' | 'firstButton' | 'lastButton']: string };
