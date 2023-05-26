@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.3](https://gitlab.com/redsky_public/framework/compare/v1.6.2...v1.6.3) (2023-05-26)
+
+### Bug Fixes
+
+-   **settings:** fixed label variants for toasts ([936d4bc](https://gitlab.com/redsky_public/framework/commit/936d4bc69bdb70870e1f0c55f02386513c9cfcc9))
+
 ### [1.6.2](https://gitlab.com/redsky_public/framework/compare/v1.6.1...v1.6.2) (2023-04-25)
 
 ### Bug Fixes
