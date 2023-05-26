@@ -36,34 +36,34 @@ const ToastMessage: React.FC<ToastMessageProps> = (props) => {
 
 		switch (props.type) {
 			case ToastifyType.ERROR:
-				icon = <Icon iconImg={icons.error} fontSize={21} />;
+				icon = <Icon iconImg={icons.error} />;
 				messageTitle = 'Uh oh, something went wrong.';
 				break;
 			case ToastifyType.SUCCESS:
-				icon = <Icon iconImg={icons.success} fontSize={21} />;
+				icon = <Icon iconImg={icons.success} />;
 				messageTitle = 'Success!';
 				break;
 			case ToastifyType.INFO:
-				icon = <Icon iconImg={icons.info} fontSize={21} />;
+				icon = <Icon iconImg={icons.info} />;
 				messageTitle = 'Did you know?';
 				break;
 			case ToastifyType.WARNING:
-				icon = <Icon iconImg={icons.warning} fontSize={21} />;
+				icon = <Icon iconImg={icons.warning} />;
 				messageTitle = 'Warning';
 				break;
 			default:
-				icon = <Icon iconImg={icons.custom} fontSize={21} />;
+				icon = <Icon iconImg={icons.custom} />;
 				break;
 		}
 
 		return (
 			<>
 				{icon}
-				<Box marginLeft={16}>
-					<Label variant={title} weight={'regular'}>
+				<Box className={'titleMessage'}>
+					<Label variant={title} weight={'regular'} className={'title'}>
 						{props.title || messageTitle}
 					</Label>
-					<Label variant={message} weight={'regular'}>
+					<Label variant={message} weight={'regular'} className={'message'}>
 						{props.message}
 					</Label>
 				</Box>
