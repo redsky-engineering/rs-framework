@@ -15,6 +15,7 @@ import {
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { FilterMatchMode } from 'primereact/api';
+import classNames from 'classnames';
 
 export enum RsSortOrder {
 	'ASC' = 1,
@@ -70,7 +71,7 @@ export interface RsDataTableProps<T> extends PrimeReactDataTableProps {
 let debounceTimeout: any;
 
 const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>) => {
-	const { getData, globalFilterDebounceMs, elementRef, ...baseProps } = props;
+	const { getData, globalFilterDebounceMs, elementRef, className, ...baseProps } = props;
 	const [globalFilter, setGlobalFilter] = useState<DataTableGlobalFilterType>(props.globalFilter);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [tableState, setTableState] = useState<TableState<T>>({
@@ -281,7 +282,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 	}
 
 	return (
-		<div className={'rsDataTable'}>
+		<div className={classNames('rsDataTable', className)}>
 			<DataTable
 				{...baseProps}
 				loading={loading}
