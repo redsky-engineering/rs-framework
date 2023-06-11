@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.5](https://gitlab.com/redsky_public/framework/compare/v1.6.4...v1.6.5) (2023-06-11)
+
+### Bug Fixes
+
+-   **DataTable:** added ability to have classname on table ([0a62d1f](https://gitlab.com/redsky_public/framework/commit/0a62d1f5c67715284c6252d62a26112fbeb78371))
+
 ### [1.6.4](https://gitlab.com/redsky_public/framework/compare/v1.6.3...v1.6.4) (2023-05-26)
 
 ### Bug Fixes
