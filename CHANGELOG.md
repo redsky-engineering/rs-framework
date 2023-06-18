@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.6](https://gitlab.com/redsky_public/framework/compare/v1.6.5...v1.6.6) (2023-06-18)
+
+### Features
+
+-   **FormGroup:** added ability to get all the controls from a form group ([f892983](https://gitlab.com/redsky_public/framework/commit/f892983ff050965b4f6b83f34203b8997bc85851))
+
 ### [1.6.5](https://gitlab.com/redsky_public/framework/compare/v1.6.4...v1.6.5) (2023-06-11)
 
 ### Bug Fixes
