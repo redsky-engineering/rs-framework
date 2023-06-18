@@ -31,6 +31,13 @@ export class RsFormGroup {
 	}
 
 	/**
+	 * Returns all the controls in the group
+	 */
+	getControls(): RsFormControl<IRsFormControl>[] {
+		return this._controls;
+	}
+
+	/**
 	 * Get a shallow clone of one form control object by searching the key.
 	 * @param key Key of form control
 	 * @returns {RsFormControl}
