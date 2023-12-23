@@ -66,19 +66,20 @@ export interface RsDataTableProps<T> extends PrimeReactDataTableProps {
 	sortOrder?: RsSortOrder;
 	globalFilterDebounceMs?: number;
 	elementRef?: React.RefObject<any>;
+	initialRowsPerPage?: number;
 }
 
 let debounceTimeout: any;
 
 const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>) => {
-	const { getData, globalFilterDebounceMs, elementRef, className, ...baseProps } = props;
+	const { getData, globalFilterDebounceMs, elementRef, className, initialRowsPerPage, ...baseProps } = props;
 	const [globalFilter, setGlobalFilter] = useState<DataTableGlobalFilterType>(props.globalFilter);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [tableState, setTableState] = useState<TableState<T>>({
 		tableData: props.data.data,
 		total: props.data.total || props.data.data.length,
 		first: props.first || 0,
-		rows: props.rowsPerPageOptions?.[0] || 10,
+		rows: props.initialRowsPerPage || props.rowsPerPageOptions?.[0] || 10,
 		sortField: props.sortField,
 		sortOrder: props.sortOrder,
 		filters: props.filters,
@@ -101,15 +102,13 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 			filters: { ...tableState.filters, ...props.filters }
 		});
 		handleEvent({
-			filters: { ...tableState.filters, ...props.filters }
+			filters: {
+				...tableState.filters,
+				...props.filters,
+				global: { value: tableState.globalFilter, matchMode: 'contains' }
+			}
 		} as unknown as DataTablePFSEvent);
-	}, [props.filters]);
-
-	useEffect(() => {
-		handleEvent({
-			filters: { ...tableState.filters, global: { value: tableState.globalFilter, matchMode: 'contains' } }
-		} as unknown as DataTablePFSEvent);
-	}, [tableState.globalFilter]);
+	}, [props.filters, tableState.globalFilter]);
 
 	useEffect(() => {
 		if (globalFilter !== props.globalFilter) {
@@ -125,11 +124,11 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 			setTableState({ ...tableState, globalFilter: '', filters: filters });
 		} else {
 			debounceTimeout = setTimeout(() => {
-				setTableState({
-					...tableState,
+				setTableState((prevState) => ({
+					...prevState,
 					globalFilter: globalFilter,
 					filters: { ...tableState.filters, global: { value: globalFilter, matchMode: 'contains' } }
-				});
+				}));
 			}, globalFilterDebounceMs || 0);
 		}
 	}, [globalFilter]);
