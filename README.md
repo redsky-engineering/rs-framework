@@ -41,9 +41,9 @@ This will output a self-contained publishable folder in the root/dist folder.
 
 ## Publishing
 
-**_Make sure your build is working first_**
+**_FIRST: Make sure your build is working and you have committed all your changes to master and pushed them up to remote._**
 
-You first need to be a member of the @redskytech organization with publishing capability. Then you need to run the
+You need to be a member of the @redskytech organization with publishing capability. Then you need to run the
 following command:
 
 `yarn release:xxx` - where xxx is either (major, minor, patch, pre:alpha)
