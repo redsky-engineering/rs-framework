@@ -3,7 +3,7 @@
 	"version": "2.0.0",
 	"description": "RedSky Framework V2",
 	"module": "index.js",
-	"repository": "https://gitlab.com/redsky_public/framework",
+	"repository": "https://github.com/redsky-engineering/rs-framework",
 	"author": "Joshua Hintze",
 	"license": "MIT",
 	"packageManager": "pnpm@11.1.0",
