@@ -18,8 +18,7 @@ import 'react-phone-number-input/style.css';
 //github docs: https://www.npmjs.com/package/react-phone-number-input
 
 export interface InputPhoneProps
-	extends Omit<PhoneInputProps<Partial<HTMLInputElement>>, 'onChange'>,
-		ICommon.MarginProps {
+	extends Omit<PhoneInputProps<Partial<HTMLInputElement>>, 'onChange'>, ICommon.MarginProps {
 	control?: RsFormControl<string>;
 	updateControl?: (control: RsFormControl<string>) => void;
 	immediateValidate?: boolean; // Begins checking the input as soon as it changes
@@ -61,12 +60,13 @@ const InputPhone: React.FC<InputPhoneProps> = (props) => {
 		setFormControl(control);
 	}, [control]);
 
-	async function changeHandler(value: string) {
+	async function changeHandler(value?: string) {
+		const nextValue = value ?? '';
 		setCountryCode((document.getElementById(uniqueSelectId) as HTMLSelectElement).value as CountryCode);
-		if (onChange) onChange(value);
+		if (onChange) onChange(nextValue);
 		if (!control) return;
 
-		validateTarget(value).catch(console.error);
+		validateTarget(nextValue).catch(console.error);
 	}
 
 	async function validateTarget(

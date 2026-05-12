@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { ObjectUtils } from './Utils';
 
 /** HTTP client performs HTTP requests */
@@ -25,7 +25,9 @@ export class HttpClient {
 	 * @returns An intercepter id that can be removed in the future
 	 */
 	addRequestIntercepter(
-		onFulfilled: (value: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
+		onFulfilled: (
+			value: InternalAxiosRequestConfig
+		) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>,
 		onRejected?: (error: any) => any
 	): number {
 		return this.axiosInstance.interceptors.request.use(onFulfilled, onRejected);
@@ -177,7 +179,7 @@ export class HttpClient {
 		updatedConfig.headers!['Content-Type'] = 'multipart/form-data';
 		if (progress)
 			updatedConfig.onUploadProgress = (progressEvent) => {
-				progress(Math.round((progressEvent.loaded * 100) / progressEvent.total));
+				progress(Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0)));
 			};
 		formData.append('file', file, file.name);
 		return this.axiosInstance.post<T>(url, formData, updatedConfig);

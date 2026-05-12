@@ -6,7 +6,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDeps from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import visualizer from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default {
 	input: './src/index.ts',
@@ -41,11 +41,10 @@ export default {
 		'lodash.clonedeep',
 		'lodash.clone',
 		'react-select',
+		'react-select/creatable',
 		'react-toastify',
 		'axios',
 		'aos',
-		'react-select',
-		'react-select/creatable/dist/react-select.esm.js',
 		'@lottiefiles/lottie-player',
 		'@capacitor/core',
 		'@capacitor/haptics',
@@ -54,8 +53,6 @@ export default {
 		'primereact/resources/primereact.min.css',
 		'primeicons/primeicons.css',
 		'primereact/api',
-		'chart.js',
-		'quill',
 		'react-phone-number-input',
 		'libphonenumber-js/core'
 	]

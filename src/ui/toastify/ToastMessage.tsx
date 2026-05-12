@@ -1,12 +1,12 @@
 import * as React from 'react';
 import './ToastMessage.scss';
 import { toast, ToastOptions } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Icon } from '../icon/Icon';
 import { Box } from '../box/Box';
 import { Label, LabelProps } from '../label/Label';
-import { ToastProps } from 'react-toastify/dist/types';
+import { ToastContainerProps } from 'react-toastify';
 import classNames from 'classnames';
 import { FrameworkContext } from '../frameworkSettings/FrameworkSettings';
 
@@ -22,7 +22,7 @@ export interface ToastMessageProps {
 	message: string;
 	title?: string;
 	type: ToastifyType;
-	toastProps?: ToastProps;
+	toastProps?: ToastContainerProps;
 }
 
 const ToastMessage: React.FC<ToastMessageProps> = (props) => {

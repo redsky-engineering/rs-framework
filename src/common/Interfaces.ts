@@ -31,7 +31,7 @@ export namespace ICommon {
 
 	export interface InteractProps<T> {
 		onClick?: React.MouseEventHandler;
-		elementRef?: React.RefObject<T>;
+		elementRef?: React.RefObject<T | null>;
 	}
 
 	export interface MarginProps {

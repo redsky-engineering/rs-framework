@@ -871,6 +871,7 @@ export class ObjectUtils {
 		let res: any = {};
 		for (let i in array) {
 			if (array[i] === null) continue;
+			if (array[i] === undefined) continue;
 			res[array[i][property]] = array[i];
 		}
 		return res;
@@ -1052,7 +1053,7 @@ export class ObjectUtils {
 	 * @returns {any} - Returns the given object with values sorted ASC order
 	 */
 	static simpleSort<T>(dataset: T): T {
-		return Object.keys(dataset)
+		return Object.keys(dataset as object)
 			.sort()
 			.reduce(
 				(accumulator, key) => ({

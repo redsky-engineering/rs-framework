@@ -1,0 +1,12 @@
+# Native-binding deps (Storybook/webpack toolchain only): their postinstall
+# build scripts are intentionally skipped — they ship prebuilt platform binaries
+# as optional deps, so they work fine without running scripts.
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': false
+  esbuild: false
+
+# Force-patch a transitive advisory: `yaml` <1.10.3 is reached only via
+# react-select → @emotion → babel-plugin-macros → cosmiconfig → yaml.
+overrides:
+  yaml: '^1.10.3'

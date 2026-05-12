@@ -62,7 +62,10 @@ interface InputNumberProps extends Omit<ICommon.HtmlElementProps, 'display'>, IC
 		| null;
 }
 
-interface InputNumberFormatOptions extends Intl.NumberFormatOptions {
+// Loose internal shape — cast to Intl.NumberFormatOptions at each call site. The standard lib's
+// type uses string-literal unions for `style`/`currencyDisplay`/etc., so the values we collect
+// from props can't satisfy it without per-field casts.
+interface InputNumberFormatOptions {
 	localeMatcher: any;
 	style: string;
 	currency: string;
@@ -72,7 +75,47 @@ interface InputNumberFormatOptions extends Intl.NumberFormatOptions {
 	maximumFractionDigits: number;
 }
 
+// React 19 dropped support for `Component.defaultProps` on function components, so defaults are
+// merged manually below and this object is also used by `ObjectUtils.findDiffKeys`.
+const inputNumberDefaultProps: Partial<InputNumberProps> = {
+	value: null,
+	format: true,
+	showButtons: false,
+	buttonLayout: 'stacked',
+	locale: undefined,
+	localeMatcher: undefined,
+	mode: 'decimal',
+	suffix: null,
+	prefix: null,
+	currency: undefined,
+	currencyDisplay: undefined,
+	useGrouping: true,
+	minFractionDigits: undefined,
+	maxFractionDigits: undefined,
+	id: undefined,
+	name: null,
+	allowEmpty: true,
+	step: 1,
+	min: null,
+	max: null,
+	disabled: false,
+	inputMode: null,
+	readOnly: false,
+	className: '',
+	autoFocus: false,
+	inputClassName: null,
+	ariaLabelledBy: null,
+	control: undefined,
+	updateControl: undefined,
+	onValueChange: null,
+	onChange: null,
+	onBlur: null,
+	onFocus: null,
+	onKeyDown: null
+};
+
 const InputNumber: React.FC<InputNumberProps> = (props) => {
+	props = { ...inputNumberDefaultProps, ...props };
 	const {
 		id,
 		name,
@@ -189,7 +232,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	}
 
 	function constructParser() {
-		numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
+		numberFormat.current = new Intl.NumberFormat(props.locale, getOptions() as Intl.NumberFormatOptions);
 		const numerals = new Intl.NumberFormat(props.locale, { useGrouping: false })
 			.format(9876543210)
 			.split('')
@@ -210,7 +253,10 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 	}
 
 	function getDecimalExpression() {
-		const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+		const formatter = new Intl.NumberFormat(props.locale, {
+			...getOptions(),
+			useGrouping: false
+		} as Intl.NumberFormatOptions);
 		return new RegExp(
 			`[${formatter
 				.format(1.1)
@@ -250,7 +296,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 				currencyDisplay: props.currencyDisplay,
 				minimumFractionDigits: 0,
 				maximumFractionDigits: 0
-			});
+			} as Intl.NumberFormatOptions);
 			return new RegExp(
 				`[${formatter
 					.format(1)
@@ -269,9 +315,9 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 			prefixChar.current = props.prefix;
 		} else {
 			const formatter = new Intl.NumberFormat(props.locale, {
-				style: props.mode,
-				currency: props.currency,
-				currencyDisplay: props.currencyDisplay
+				style: props.mode as keyof Intl.NumberFormatOptionsStyleRegistry,
+				currency: props.currency as keyof Intl.NumberFormatOptionsCurrencyDisplayRegistry,
+				currencyDisplay: props.currencyDisplay as keyof Intl.NumberFormatOptionsCurrencyDisplayRegistry
 			});
 			prefixChar.current = formatter.format(1).split('1')[0];
 		}
@@ -284,9 +330,9 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 			suffixChar.current = props.suffix;
 		} else {
 			const formatter = new Intl.NumberFormat(props.locale, {
-				style: props.mode,
+				style: props.mode as keyof Intl.NumberFormatOptionsStyleRegistry,
 				currency: props.currency,
-				currencyDisplay: props.currencyDisplay,
+				currencyDisplay: props.currencyDisplay as keyof Intl.NumberFormatOptionsCurrencyDisplayRegistry,
 				minimumFractionDigits: 0,
 				maximumFractionDigits: 0
 			});
@@ -304,7 +350,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 			}
 
 			if (props.format) {
-				let formatter = new Intl.NumberFormat(props.locale, getOptions());
+				let formatter = new Intl.NumberFormat(props.locale, getOptions() as Intl.NumberFormatOptions);
 				let _formattedValue = formatter.format(value as number);
 				if (props.prefix) {
 					_formattedValue = props.prefix + _formattedValue;
@@ -465,7 +511,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		}
 	}
 
-	function onInput(event: React.KeyboardEvent<HTMLInputElement>) {
+	function onInput(event: React.FormEvent<HTMLInputElement>) {
 		if (props.disabled || props.readOnly) {
 			return;
 		}
@@ -771,8 +817,8 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 						currencyCharIndex >= selectionStart
 							? currencyCharIndex - 1
 							: suffixCharIndex >= selectionStart
-							? suffixCharIndex
-							: inputValue.length;
+								? suffixCharIndex
+								: inputValue.length;
 
 					newValueStr =
 						inputValue.slice(0, selectionStart) +
@@ -952,11 +998,11 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 			return null;
 		}
 
-		if (props.min !== null && value < (props.min as number)) {
+		if (props.min !== null && Number(value) < (props.min as number)) {
 			return props.min;
 		}
 
-		if (props.max !== null && value > (props.max as number)) {
+		if (props.max !== null && Number(value) > (props.max as number)) {
 			return props.max;
 		}
 
@@ -1081,7 +1127,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return 0;
 	}
 
-	function updateModel(event: React.UIEvent | null, value: string | number | null) {
+	function updateModel(event: React.UIEvent<Element, UIEvent> | null, value: string | number | null) {
 		if (props.onValueChange) {
 			props.onValueChange({
 				originalEvent: event,
@@ -1277,7 +1323,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 		return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || (navigator as any).msMaxTouchPoints > 0;
 	};
 
-	const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
+	const otherProps = ObjectUtils.findDiffKeys(props, inputNumberDefaultProps);
 	const inputElement = createInputElement();
 	const buttonGroup = createButtonGroup();
 	const errors = renderErrors(props.control);
@@ -1295,41 +1341,5 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
 };
 
 InputNumber.displayName = 'InputNumber';
-InputNumber.defaultProps = {
-	value: null,
-	format: true,
-	showButtons: false,
-	buttonLayout: 'stacked',
-	locale: undefined,
-	localeMatcher: undefined,
-	mode: 'decimal',
-	suffix: null,
-	prefix: null,
-	currency: undefined,
-	currencyDisplay: undefined,
-	useGrouping: true,
-	minFractionDigits: undefined,
-	maxFractionDigits: undefined,
-	id: undefined,
-	name: null,
-	allowEmpty: true,
-	step: 1,
-	min: null,
-	max: null,
-	disabled: false,
-	inputMode: null,
-	readOnly: false,
-	className: '',
-	autoFocus: false,
-	inputClassName: null,
-	ariaLabelledBy: null,
-	control: undefined,
-	updateControl: undefined,
-	onValueChange: null,
-	onChange: null,
-	onBlur: null,
-	onFocus: null,
-	onKeyDown: null
-};
 
 export { InputNumber };

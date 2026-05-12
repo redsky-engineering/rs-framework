@@ -31,7 +31,10 @@ yarn-error.log*
 /ios
 /release
 package-lock.json
+yarn.lock
 /phpstorm/
 /dist/
 /bundle-analysis.html
+*.tgz
+storybook-static/
 

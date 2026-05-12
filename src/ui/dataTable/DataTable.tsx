@@ -3,14 +3,12 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import './DataTable.scss';
 import {
 	DataTable,
-	DataTableFilterMatchModeType,
 	DataTableFilterMeta,
 	DataTableFilterMetaData,
-	DataTableGlobalFilterType,
-	DataTableMultiSortMetaType,
-	DataTablePFSEvent,
 	DataTableProps as PrimeReactDataTableProps,
-	DataTableSortOrderType
+	DataTableSortMeta,
+	DataTableStateEvent,
+	SortOrder
 } from 'primereact/datatable';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -33,7 +31,7 @@ export interface PageQuery {
 	filter?: string;
 }
 
-export type FilterMatchModes = DataTableFilterMatchModeType | 'isNull' | 'isNotNull';
+export type FilterMatchModes = `${FilterMatchMode}` | 'isNull' | 'isNotNull';
 
 export interface DataTableFilters {
 	[key: string]: { operator: string; constraints: { value: any; matchMode: FilterMatchModes }[] };
@@ -54,12 +52,16 @@ interface TableState<T> {
 	sortField?: string;
 	sortOrder?: RsSortOrder;
 	filters?: DataTableFilterMeta;
-	multiSortMeta?: DataTableMultiSortMetaType;
+	multiSortMeta?: DataTableSortMeta[] | null;
 	globalFilter?: string;
 	globalFilterFields?: string[];
 }
 
-export interface RsDataTableProps<T> extends PrimeReactDataTableProps {
+// PrimeReact 10 made `DataTableProps` a union of selection-mode variants, which a plain `interface`
+// cannot `extends`. Use a distributive intersection so all variant props remain available.
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
+
+export type RsDataTableProps<T> = DistributiveOmit<PrimeReactDataTableProps<any[]>, 'value' | 'sortOrder' | 'ref'> & {
 	data: { data: T[]; total: number };
 	getData: (pageQuery: PageQuery) => void;
 	globalSearchPlaceholder?: string;
@@ -67,13 +69,13 @@ export interface RsDataTableProps<T> extends PrimeReactDataTableProps {
 	globalFilterDebounceMs?: number;
 	elementRef?: React.RefObject<any>;
 	initialRowsPerPage?: number;
-}
+};
 
 let debounceTimeout: any;
 
 const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>) => {
 	const { getData, globalFilterDebounceMs, elementRef, className, initialRowsPerPage, ...baseProps } = props;
-	const [globalFilter, setGlobalFilter] = useState<DataTableGlobalFilterType>(props.globalFilter);
+	const [globalFilter, setGlobalFilter] = useState<string | null | undefined>(props.globalFilter);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [tableState, setTableState] = useState<TableState<T>>({
 		tableData: props.data.data,
@@ -107,7 +109,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				...props.filters,
 				global: { value: tableState.globalFilter, matchMode: 'contains' }
 			}
-		} as unknown as DataTablePFSEvent);
+		} as unknown as DataTableStateEvent);
 	}, [props.filters, tableState.globalFilter]);
 
 	useEffect(() => {
@@ -133,7 +135,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		}
 	}, [globalFilter]);
 
-	function getSortOrder(sortOrder: DataTableSortOrderType) {
+	function getSortOrder(sortOrder: SortOrder) {
 		if (sortOrder === 1) return 'ASC';
 		if (sortOrder === -1) return 'DESC';
 		return 'NONE';
@@ -212,7 +214,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 				continue;
 			}
 			currentFilter.constraints.forEach((constraint: DataTableFilterMetaData) => {
-				const matchType = getMatchType(constraint.matchMode);
+				const matchType = getMatchType(constraint.matchMode as FilterMatchModes);
 				if (matchType.matchType !== 'isNull' && !constraint.value) return;
 				filterString += `${filterString.length ? currentFilter?.operator || '' : ''}${
 					matchType.negate ? '!' : ''
@@ -228,7 +230,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		return Math.ceil((tableState.first + 1) / tableState.rows);
 	}
 
-	function handleEvent(event?: DataTablePFSEvent): void {
+	function handleEvent(event?: DataTableStateEvent): void {
 		getData({
 			page: event?.page !== undefined ? event.page + 1 : calculatePage(),
 			perPage: event?.rows || tableState.rows,
@@ -238,7 +240,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		});
 	}
 
-	function handleSort(event: DataTablePFSEvent): void {
+	function handleSort(event: DataTableStateEvent): void {
 		setLoading(true);
 		handleEvent(event);
 		props.onSort?.(event);
@@ -252,7 +254,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		setLoading(false);
 	}
 
-	function handleFilter(event: DataTablePFSEvent): void {
+	function handleFilter(event: DataTableStateEvent): void {
 		setLoading(true);
 		handleEvent(event);
 		props.onFilter?.(event);
@@ -267,7 +269,7 @@ const RsDataTable = <T extends {}>(props: PropsWithChildren<RsDataTableProps<T>>
 		setLoading(false);
 	}
 
-	function handlePage(event: DataTablePFSEvent): void {
+	function handlePage(event: DataTableStateEvent): void {
 		setLoading(true);
 		handleEvent(event);
 		props.onPage?.(event);

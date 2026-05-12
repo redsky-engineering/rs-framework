@@ -208,7 +208,13 @@ let popupController: PopupControllerInterface = {
 	numberOfPopupsOpened: () => {
 		return popupControllerRef.numberOfPopupsOpened();
 	},
-	instance: <PopupController ref={(ref) => (popupControllerRef = ref)} />
+	instance: (
+		<PopupController
+			ref={(ref) => {
+				popupControllerRef = ref;
+			}}
+		/>
+	)
 };
 
 export { popupController };

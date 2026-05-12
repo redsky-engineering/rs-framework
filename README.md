@@ -1,65 +1,112 @@
 # RedSky Framework
 
-A UI component kit for building React projects. Includes React components, custom hooks, and utilities functions.
+A UI component kit for building React projects. It includes React components, custom hooks, and utility helpers. The component layer is built on **PrimeReact** (with **PrimeIcons**).
 
-## Usage
+## Requirements
 
-In order to be able to use this framework in your projects you will need to install the peer dependencies. This includes
+- **Node.js** 18 or newer
+- **pnpm** (the repo pins a version in `packageManager` in `package.json`; enable [Corepack](https://nodejs.org/api/corepack.html) or install that pnpm so installs stay reproducible)
 
--   react@17
--   react-dom@17
+## Usage in an application
 
-In addition to peer dependencies you will also need to import the compiled CSS used throughout the framework into your project just once.
-You can do this by putting the following in your App.tsx
+Install the package from npm (or link / `file:` a local build; see **Building** below).
 
-`import "@redskytech/framework/index.css"`
+Notice: Starting with v2.0.0, the framework only provides ES module support.
 
-Some components might require extra integration. For example if you make use of the popupController you will need to add the
-`popupController.instance` to your App.tsx. See the individual stories for examples.
+### Peer dependencies
+
+Your app must provide **React** and **React DOM** versions compatible with the framework’s peer range:
+
+- `react` **^18.3.1** or **^19.0.0**
+- `react-dom` **^18.3.1** or **^19.0.0**
+
+Example:
+
+```bash
+pnpm add react react-dom
+pnpm add @redskytech/framework
+```
+
+### PrimeReact and icons
+
+The framework ships with **PrimeReact** and **PrimeIcons** as its own dependencies. You do not need to add them only to satisfy the framework. If your app also imports **PrimeReact** or themes directly, keep versions aligned with what the framework uses (see `dependencies` in `package.json`) to avoid duplicate incompatible copies.
+
+### Styles
+
+Import the bundled framework stylesheet once (for example in your root `App.tsx`):
+
+```ts
+import '@redskytech/framework/index.css';
+```
+
+Some components need extra wiring. For example, **popupController** expects `popupController.instance` in your app tree. See Storybook stories for examples.
 
 ### Animate on scroll
 
-To initialize AoS component you need to import the custom hook useInitAnimateOnScroll and call it once in App.tsx
+To initialize AoS, import the `useInitAnimateOnScroll` hook and call it once in your app shell (for example `App.tsx`).
 
-## Demo
+## Demo (Storybook)
 
-RedSky Framework utilizes storybook to demonstrate available components. Please make sure to adequately document your components
-in storybook mdx files.
+Storybook documents and demonstrates components. From the repository root:
+
+```bash
+pnpm install
+pnpm run storybook
+```
 
 ## Playground
 
-When working on the framework it is often useful to quickly fire up a simple structured playground. You can do so by navigating
-to the /playground folder and running the simple Vite project with `yarn dev`
+For a small Vite app while working on the framework, use the `playground` package:
+
+```bash
+cd playground
+pnpm install
+pnpm start
+```
 
 ## Building
 
-To build run the following command
+From the repository root:
 
-`yarn build`
+```bash
+pnpm install
+pnpm run build
+```
 
-This will output a self-contained publishable folder in the root/dist folder.
+Output is a publishable package under **`dist/`** (ES modules, `package.json` adjusted in postbuild).
+
+To produce a tarball for testing in another project without publishing:
+
+```bash
+pnpm run build:local
+```
+
+That writes a `.tgz` next to `package.json`. In the consumer project you can install it with `pnpm add /absolute/path/to/redskytech-framework-*.tgz`, or point `dependencies` at `file:../path/to/framework/dist`.
 
 ## Publishing
 
-**_FIRST: Make sure your build is working and you have committed all your changes to master and pushed them up to remote._**
+First confirm the build passes, then commit and push your changes on the branch you release from (for example `master`).
 
-You need to be a member of the @redskytech organization with publishing capability. Then you need to run the
-following command:
+Publishing requires membership in the **@redskytech** organization with publish rights.
 
-`yarn release:xxx` - where xxx is either (major, minor, patch, pre:alpha)
+1. Bump version and changelog (uses **commit-and-tag-version**):
 
-This uses the npm package standard-version which will automatically increment the package.json version
-as well as git tag the commit and put all commit notes into the CHANGELOG.md
+    ```bash
+    pnpm run release:patch   # or release:minor, release:major, release:pre:alpha
+    ```
 
-Push up the changes and tags to master branch on remote, make sure to include tags
+2. Push commits and tags:
 
-`git push --follow-tags origin master`
+    ```bash
+    git push --follow-tags origin master
+    ```
 
-Finally, publish to npmjs.org with the command
+3. Publish the contents of `dist` to npm:
 
-`yarn build:publish`
+    ```bash
+    pnpm run build:publish
+    ```
 
-## Commit Messages
+## Commit messages
 
-Commit messages should follow guidelines specified at [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
-This helps with auto changelog generated file.
+Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) so release tooling can update `CHANGELOG.md` automatically.

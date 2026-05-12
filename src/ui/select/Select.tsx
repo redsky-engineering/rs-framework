@@ -16,21 +16,21 @@ import {
 } from 'react-select';
 import { ICommon } from '../../common/Interfaces';
 import { renderErrors } from '../../utils/internal';
-import clone from 'lodash.clone';
 
-// For webpack to work I had to import CreatableSelect with full qualified path, which means we lose on the types. Ts-ignore for now
-// @ts-ignore
-import CreatableSelect from 'react-select/creatable/dist/react-select.esm.js';
-import { PropsValue } from 'react-select/dist/declarations/src/types';
+import CreatableSelect from 'react-select/creatable';
+// `PropsValue` isn't re-exported from the package entry, so inline its definition rather than
+// reach into the package's internal `dist/declarations/...` (blocked by react-select's `exports`).
+type PropsValue<Option> = MultiValue<Option> | SingleValue<Option>;
 import cloneDeep from 'lodash.clonedeep';
+import clone from 'lodash.clone';
 import { Label } from '../label/Label';
 
 export interface SelectProps<
 	Option,
 	IsMulti extends boolean = false,
 	Group extends GroupBase<Option> = GroupBase<Option>
-> extends Props<Option, IsMulti, Group>,
-		ICommon.MarginProps {
+>
+	extends Props<Option, IsMulti, Group>, ICommon.MarginProps {
 	control?: RsFormControl<IRsFormControl>;
 	updateControl?: (control: RsFormControl<IRsFormControl>) => void;
 	isCreatable?: boolean;
@@ -215,9 +215,9 @@ function Select<Option, IsMulti extends boolean = false, Group extends GroupBase
 		return !isCreatable ? (
 			<ReactSelect
 				{...selectProps}
-				onChange={(value, action) => {
+				onChange={(value: OnChangeValue<Option, IsMulti>, action: ActionMeta<Option>) => {
 					if (onChange) onChange(value, action);
-					handleChange(value, action);
+					handleChange(value as OnChangeValue<Option, IsMulti>, action);
 				}}
 				value={internalValue}
 			/>
